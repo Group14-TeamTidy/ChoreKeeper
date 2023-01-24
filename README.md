@@ -1,5 +1,13 @@
 # ChoreKeeper
-Team: Group 14
+
+## Team
+Team Name: Group 14
+
+Members:
+- Joshua Dueck, dueckj1@myumanitoba.ca
+- Syed Ali Jafry, aliahses@myumanitoba.ca
+- Kimberly Wills, willsk@myumanitoba.ca
+- Abdulraheem Tiamiyu, tiamiyao@myumanitoba.ca
 
 ## Project Summary and Vision
 
