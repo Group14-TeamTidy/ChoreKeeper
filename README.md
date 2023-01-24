@@ -6,3 +6,9 @@ An application to stay on-top of the daily, monthly, and yearly routines!
 - Chore notifications.
 - Chore points.
 - Efficiency tracking.
+
+## Maintainers
+Joshua Dueck
+Kim Wells
+Syed Ali Ahsen
+Raheem Tiamiyu
