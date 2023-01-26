@@ -24,7 +24,7 @@ We want our application to be a vehicle for behavior change. Many people find it
 - Create, update, and delete chores
 - View and manage a list of chores
 - Receive notifications regarding chores
-- Can response x users with y requests per minute concurrently
+- Can response 100 users with 1000 requests per minute concurrently
 
 ## Technologies
 #### Frontend:
