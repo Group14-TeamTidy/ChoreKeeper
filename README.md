@@ -29,25 +29,20 @@ We want our application to be a vehicle for behavior change. Many people find it
 ## Technologies
 #### Frontend:
 - React.js
-<br/>
 
 #### Backend: 
 - Express.js
-<br/>
 
 #### Database:
 - MongoDB
-<br/>
 
 #### Docs and Ticket Tracking:
 - [Jira](https://keepers.atlassian.net/jira/software/projects/CK/boards/1)
 - [Confluence](https://keepers.atlassian.net/wiki/spaces/CK/pages/524292/Meeting+Notes)
-<br/>
 
 #### Version Control and CI/CD
 - [Github](https://github.com/JoshuaDueck/ChoreKeeper)
 - Github Actions
-<br/>
 
 ## User Stories
 
