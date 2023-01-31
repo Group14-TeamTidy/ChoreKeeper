@@ -14,7 +14,7 @@ function App() {
 const TestData = () => {
   const { isLoading, error, data } = useQuery('repoData', () =>
     fetch('http://localhost:4000/api').then(res =>
-      res.text() // This could also (and likely will be .json() once the API is implemented)
+      res.text() // This could also be, and likely will be, .json() once the API is implemented
     )
   )
 
