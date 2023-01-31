@@ -4,10 +4,10 @@
 Team Name: Group 14
 
 Members:
-- Joshua Dueck, dueckj1@myumanitoba.ca
-- Syed Ali Jafry, aliahses@myumanitoba.ca
-- Kimberly Wills, willsk@myumanitoba.ca
-- Abdulraheem Tiamiyu, tiamiyao@myumanitoba.ca
+- Joshua Dueck, dueckj1@myumanitoba.ca, JoshuaDueck
+- Syed Ali Jafry, aliahses@myumanitoba.ca, Ahsen19
+- Kimberly Wills, willsk@myumanitoba.ca, Amikz
+- Abdulraheem Tiamiyu, tiamiyao@myumanitoba.ca, Tosvng
 
 ## Project Summary and Vision
 Our vision is to provide an organized and user-friendly solution that helps people efficiently manage their responsibilities.
