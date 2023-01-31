@@ -23,6 +23,7 @@ We want our application to be a vehicle for behavior change. Many people find it
 ## Core Features
 - Create, update, and delete chores
 - View and manage a list of chores
+- Create and manage account
 - Receive notifications regarding chores
 - Can response 100 users with 1000 requests per minute concurrently
 
@@ -76,6 +77,19 @@ We want our application to be a vehicle for behavior change. Many people find it
     then the list of chores is filtered\
     when I complete a chore and click the box next to it\
     then the chore is "checked off" and marked as completed in the system
+
+### Create and manage account
+- As a busy person, I want to be able to create an account so that I can access my schedule from anywhere
+- Scenario: User creates and manages an account
+
+    Given that I would like to manage my chores\
+    when I click the "create account" button and complete the information\
+    then my account is created in the system\
+    and I will be logged in for the first time\
+    when I click on my account details\
+    then I can view and edit my account information\
+    when I click the logout button\
+    then I will be logged out of my account
 
 ### Receive notifications regarding chores
 - As a signed-in user, I want to be able to get notifications about upcoming chores so that I do not forget to complete them
