@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+ import { QueryClientProvider, QueryClient, useQuery } from 'react-query';
 import './App.css';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
+      <TestData />
+    </QueryClientProvider>
+  );
+}
+
+const TestData = () => {
+  const { isLoading, error, data } = useQuery('repoData', () =>
+    fetch('http://localhost:4000/api').then(res =>
+      res.text() // This could also be, and likely will be, .json() once the API is implemented
+    )
+  )
+
+  if (isLoading) return 'Loading...';
+  if (error) return 'An error has occurred: ' + error.message;
+
+  return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{ data }</p>
     </div>
   );
 }
