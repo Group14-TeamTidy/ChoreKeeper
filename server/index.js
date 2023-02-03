@@ -27,7 +27,13 @@ export default function makeApp(database) {
     res.status(200).send("Lorem Ipsum");
   });
 
-  //DB CONNECTION
+  //DB CONNECTION -- for testing purposes, db can be disconnected by passing no arguments to makeApp
+  if (database != undefined)
+    database.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  database.set("strictQuery", true);
 
   return app;
 }
