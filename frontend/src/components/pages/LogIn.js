@@ -1,12 +1,17 @@
 import React from "react";
-import { useQuery } from "react-query";
 import { Link } from "@tanstack/react-location";
+import axios from "axios";
 
 const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const username = e.target.username.value;
+    const email = e.target.email.value;
     const password = e.target.password.value;
+
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/login`, {
+      email: email,
+      password: password,
+    });
   };
 
   console.log("Re-rendered login");
@@ -19,13 +24,17 @@ const LogIn = () => {
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
           <label>
-            Username:
-            <input type="text" name="username" />
+            Email:
+            <input type="email" name="email" />
           </label>
           <br />
           <label>
             Password:
-            <input type="text" name="password" />
+            <input
+              type="password"
+              name="password"
+              autoComplete="new-password"
+            />
           </label>
           <br />
           <label>
