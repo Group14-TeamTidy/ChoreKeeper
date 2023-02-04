@@ -1,10 +1,17 @@
 import { React } from "react";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const username = e.target.username.value;
     const password = e.target.password.value;
+
+    axios.post("http://localhost:4000/api/signup", {
+      username: username,
+      password: password,
+    });
   };
 
   return (
@@ -24,7 +31,7 @@ const SignUp = () => {
             <input type="text" name="password" />
           </label>
           <br />
-          <input type="submit">Sign Up!</input>
+          <input type="submit" value="Sign Up!" />
         </form>
       </div>
     </>

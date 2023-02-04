@@ -2,6 +2,7 @@ import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
 import { QueryClientProvider, QueryClient, useQuery } from "react-query";
 import "./App.css";
 import LogIn from "./components/pages/LogIn";
+import SignUp from "./components/pages/SignUp";
 import ChoresPage from "./components/pages/ChoresPage";
 
 const queryClient = new QueryClient();
@@ -15,10 +16,8 @@ function App() {
         routes={[
           { path: "/", element: <ChoresPage /> },
           { path: "chores", element: <ChoresPage /> },
-          {
-            path: "login",
-            element: <LogIn />,
-          },
+          { path: "login", element: <LogIn /> },
+          { path: "signup", element: <SignUp /> },
         ]}
       >
         <Outlet />
