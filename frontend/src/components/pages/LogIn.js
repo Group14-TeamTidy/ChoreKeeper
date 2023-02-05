@@ -33,7 +33,7 @@ const LogIn = () => {
             <input
               type="password"
               name="password"
-              autoComplete="new-password"
+              autoComplete="current-password"
             />
           </label>
           <br />

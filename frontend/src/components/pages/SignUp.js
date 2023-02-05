@@ -32,7 +32,7 @@ const SignUp = () => {
             <input
               type="password"
               name="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
             />
           </label>
           <br />
