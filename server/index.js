@@ -2,13 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
-import hello from "./routes/hello.js";
+import user from "./routes/user.js";
+import chore from "./routes/chore.js";
+import { register, login } from "./controller/user.js";
 
 /*
-@params database: the database the application will connect to
-
-This function connects the appalication to the database specified
-*/
+ ** @params database: the database the application will connect to
+ ** This function connects the appalication to the database specified
+ */
 export default function makeApp(database) {
   // CONFIGURATIONS
   const app = express();
@@ -20,20 +21,28 @@ export default function makeApp(database) {
 
   // ROUTES
   // add routes here
+  app.use("/api/user", user);
+  app.use("/api/chore", chore);
+  app.post("/api/login", login);
+  app.post("/api/signup", register);
 
-  app.use("/api", hello);
+  app.use("/api", (req, res) => {
+    console.log(req.url);
+    res.status(200).send("Hello");
+  });
   app.use("/", (req, res) => {
     console.log(req.url);
     res.status(200).send("Lorem Ipsum");
   });
 
   //DB CONNECTION -- for testing purposes, db can be disconnected by passing no arguments to makeApp
-  if (database != undefined)
+  if (database != undefined) {
     database.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-  database.set("strictQuery", true);
+    database.set("strictQuery", true);
+  }
 
   return app;
 }

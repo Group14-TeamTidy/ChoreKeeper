@@ -1,8 +1,6 @@
 import express from "express";
-import { sayHello } from "../controller/hello.js";
+import { body } from "express-validator";
 
 const router = express.Router();
-
-router.get("/", sayHello);
 
 export default router;
