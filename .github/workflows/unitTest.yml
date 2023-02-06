@@ -22,6 +22,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install
-        run: npm ci --package-lock-only --prefix server
+        run: npm ci --prefix server
       - name: tests
         run: npm test
