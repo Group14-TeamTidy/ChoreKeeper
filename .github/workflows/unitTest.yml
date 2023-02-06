@@ -14,6 +14,9 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+    defaults:
+      run:
+        working-directory: ./server
 
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +24,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: cd ./server
       - name: npm install
         run: npm install
       - name: tests
