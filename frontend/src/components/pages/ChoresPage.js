@@ -1,27 +1,34 @@
 import { React } from "react";
-import { Navigate } from "@tanstack/react-location";
-import { useQuery } from "react-query";
-import axios from "axios";
+import { Navigate, useNavigate } from "@tanstack/react-location";
+// import { useQuery } from "react-query";
+import AuthService from "../../services/AuthService";
+// import axios from "axios";
 
 const ChoresPage = () => {
-  const { isLoading, error, data } = useQuery("repoData", () =>
-    axios.get(`${process.env.REACT_APP_API_BASE_URL}`).then((res) => res.data)
-  );
+  const navigate = useNavigate();
+  // Saved for future reference
+  // const { isLoading, error, data } = useQuery("repoData", () =>
+  //   axios.get(`${process.env.REACT_APP_API_BASE_URL}`).then((res) => res.data)
+  // );
 
-  // This is where we check authentication
-  if (false) {
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate({ to: "/login", replace: true });
+  };
+
+  const currentUser = AuthService.getCurrentUser();
+  const token = AuthService.getToken();
+
+  if (!currentUser || !token) {
     return <Navigate to="/login" />;
   } else {
     return (
       <div className="App">
         <p>Chores Page</p>
-        <p>Hi</p>
+        <p>Hello, {currentUser.email}</p>
+        <p>Your token is: {JSON.stringify(token)}</p>
         <p>
-          {isLoading
-            ? "Loading..."
-            : error
-            ? `Error: ${error}`
-            : `Data: ${data}`}
+          <button onClick={handleLogout}>Log Out</button>
         </p>
       </div>
     );
