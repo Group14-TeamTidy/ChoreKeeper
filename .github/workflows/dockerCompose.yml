@@ -15,8 +15,8 @@ jobs:
           username: "chorekeeper" # ${{ secrets.DOCKER_USERNAME }}
           password: "team14chorekeeper" # ${{ secrets.DOCKER_PASSWORD }}
 
-      # - name: Build docker compose
-      #   run: docker-compose build
+      - name: Build docker compose
+        run: docker-compose build
 
       - name: Push images to dockerhub
         run: docker-compose push
