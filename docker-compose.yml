@@ -6,7 +6,8 @@ services:
     build:
       context: ./server
       dockerfile: ./Dockerfile
-    image: "chorekeeper/chorekeeper-express-backend"
+    # image: "chorekeeper/chorekeeper-express-backend"
+    image: "chorekeeper-express-backend"
     ports:
       - "4000:4000"
 
@@ -14,6 +15,7 @@ services:
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
-    image: "chorekeeper/chorekeeper-react-frontend"
+    # image: "chorekeeper/chorekeeper-react-frontend"
+    image: "chorekeeper-react-frontend"
     ports:
       - "3000:3000"
