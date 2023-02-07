@@ -40,5 +40,5 @@ jobs:
           context: .
           file: ${{ matrix.dockerfile }}
           push: true
-          tags: ${{ steps.meta.outputs.tags }} # chorekeeper/chorekeeper-react-frontend:latest
+          tags: latest # ${{ steps.meta.outputs.tags }} # chorekeeper/chorekeeper-react-frontend:latest
           # labels: ${{ steps.meta.outputs.labels }}
