@@ -2,7 +2,7 @@ name: Publish Docker image
 
 on:
   push:
-    branches: [develop]
+    branches: [CK-49-docker-image-push, develop]
 
 jobs:
   push_to_registry:
