@@ -46,6 +46,10 @@ const ChoresPage = () => {
             </svg>
           </button>
           <div id="dropdownMenu">
+            <div>
+              <p>Account</p>
+              <p>{currentUser.email}</p>
+            </div>
             <DropdownMenuItem text={"Manage Account"}/>
             <DropdownMenuItem text={"Log Out"} handler={handleLogout}/>
           </div>
@@ -55,6 +59,8 @@ const ChoresPage = () => {
         <button>
           New Chore
         </button>
+
+        <div id="choresList"></div>
       </div>
     );
   }
