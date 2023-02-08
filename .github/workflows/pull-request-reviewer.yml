@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Add Reviewers
-      uses: madrapps/add-reviewers@v1
+      uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3 #madrapps/add-reviewers@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         reviewers: Ahsen19
