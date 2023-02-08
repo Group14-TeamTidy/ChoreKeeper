@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Add Reviewers
       uses: pullreminders/assignee-to-reviewer-action@v1.0.4 #AveryCameronUofR/add-reviewer-gh-action@1.0.3 #madrapps/add-reviewers@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        reviewers: Ahsen19
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # with:
+      #   token: ${{ secrets.GITHUB_TOKEN }}
+      #   reviewers: Ahsen19
