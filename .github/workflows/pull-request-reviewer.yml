@@ -3,19 +3,13 @@ run-name: Auto assign reviewers
 
 on:
   pull_request:
-    types: [assigned, unassigned]
 
 jobs:
-  assignee_to_reviewer:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Assignee to Reviewer
-        uses: pullreminders/assignee-to-reviewer-action@v1.0.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Add Pull Request Reviewer
-        uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
-        with: 
-          reviewers: "Ahsen19"
-          token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Add Reviewers
+      uses: madrapps/add-reviewers@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        reviewers: Ahsen19
