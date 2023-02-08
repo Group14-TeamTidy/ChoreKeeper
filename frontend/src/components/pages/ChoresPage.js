@@ -16,6 +16,14 @@ const ChoresPage = () => {
     navigate({ to: "/login", replace: true });
   };
 
+  const DropdownMenuItem = (props) => {
+    return (
+      <button className="dropdownItem" onClick={props.handler}>
+        {props.text}
+      </button>
+    );
+  };
+
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
 
@@ -23,13 +31,30 @@ const ChoresPage = () => {
     return <Navigate to="/login" />;
   } else {
     return (
-      <div className="App">
-        <p>Chores Page</p>
-        <p>Hello, {currentUser.email}</p>
-        <p>Your token is: {JSON.stringify(token)}</p>
-        <p>
-          <button onClick={handleLogout}>Log Out</button>
-        </p>
+      <div>
+        <div className="App">
+          <p>Chores Page</p>
+          <p>Hello, {currentUser.email}</p>
+          <p>Your token is: {JSON.stringify(token)}</p>
+        </div>
+
+        {/*TODO: Make the dropdown menu toggleable */}
+        <div id="menuContainer">
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+            </svg>
+          </button>
+          <div id="dropdownMenu">
+            <DropdownMenuItem text={"Manage Account"}/>
+            <DropdownMenuItem text={"Log Out"} handler={handleLogout}/>
+          </div>
+        </div>
+
+        <br/><br/> {/* TODO: remove these when I do the CSS */}
+        <button>
+          New Chore
+        </button>
       </div>
     );
   }
