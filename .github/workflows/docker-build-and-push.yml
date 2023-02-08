@@ -2,8 +2,10 @@ name: Docker Compose Actions Workflow
 run-name: Docker build & push
 
 on:
+  pull_request:
+    branches: [develop, main]
   push:
-    branches: [CK-49-docker-image-push, develop]
+    branches: [develop, main]
 
 jobs:
   test:
