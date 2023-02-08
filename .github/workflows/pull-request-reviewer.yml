@@ -1,4 +1,6 @@
-name: Assign reviewers to pull pull_request
+name: Assign reviewers to pull request
+run-name: Auto assign reviewers
+
 on:
   pull_request:
     types: [assigned, unassigned]
@@ -7,7 +9,13 @@ jobs:
   assignee_to_reviewer:
     runs-on: ubuntu-latest
     steps:
-      - name: Assignee to Reviewer
-        uses: pullreminders/assignee-to-reviewer-action@v1.0.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Assignee to Reviewer
+      #   uses: pullreminders/assignee-to-reviewer-action@v1.0.4
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add Pull Request Reviewer
+        uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
+        with: 
+          reviewers: "Ahsen19"
+          token: ${{ secrets.GITHUB_TOKEN }}
