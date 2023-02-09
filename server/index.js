@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
 import user from "./routes/user.js";
-import chore from "./routes/chore.js";
+import choreRoute from "./routes/chore.js";
 import { register, login } from "./controller/user.js";
 
 /*
@@ -22,9 +22,10 @@ export default function makeApp(database) {
   // ROUTES
   // add routes here
   app.use("/api/user", user);
-  app.use("/api/chore", chore);
+  app.use("/api/chore", choreRoute);
   app.post("/api/login", login);
   app.post("/api/signup", register);
+  
 
   app.use("/api", (req, res) => {
     console.log(req.url);
