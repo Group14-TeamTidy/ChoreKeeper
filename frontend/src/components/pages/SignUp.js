@@ -1,6 +1,8 @@
 import { React } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import AuthService from "../../services/AuthService";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -23,21 +25,18 @@ const SignUp = () => {
         </div>
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <label>
-              Email:
-              <input type="email" name="email" />
-            </label>
+            <InputText type="email" name="email" placeholder="Email" />
             <br />
-            <label>
-              Password:
-              <input
-                type="password"
-                name="password"
-                autoComplete="new-password"
-              />
-            </label>
+            <InputText
+              type="password"
+              name="password"
+              placeholder="Password"
+              autoComplete="new-password"
+            />
             <br />
-            <input type="submit" value="Sign Up!" />
+            <Button type="submit" value="Sign Up!">
+              Sign Up!
+            </Button>
           </form>
         </div>
       </>

@@ -2,6 +2,8 @@ import React from "react";
 import { Link, Navigate } from "@tanstack/react-location";
 import { useNavigate } from "@tanstack/react-location";
 import AuthService from "../../services/AuthService";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -31,23 +33,18 @@ const LogIn = () => {
         </div>
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <label>
-              Email:
-              <input type="email" name="email" />
-            </label>
+            <InputText type="email" name="email" placeholder="Email" />
             <br />
-            <label>
-              Password:
-              <input
-                type="password"
-                name="password"
-                autoComplete="current-password"
-              />
-            </label>
+            <InputText
+              type="password"
+              name="password"
+              placeholder="Password"
+              autoComplete="current-password"
+            />
             <br />
-            <label>
-              <input type="submit" value="Submit" />
-            </label>
+            <Button type="submit" value="Submit">
+              Submit
+            </Button>
           </form>
         </div>
         <div>
