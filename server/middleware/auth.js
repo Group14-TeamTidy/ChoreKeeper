@@ -12,8 +12,11 @@ export const verifyToken = async (req, res, next) => {
       token = token.slice(7, token.length).trimLeft();
     }
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verified;
+    //verify the request token and extract the user id from it
+    jwt.verify(token, process.env.JWT_SECRET, (err, id) => {
+      if (err) return res.sendStatus(403);
+      req.user = id;
+    });
     next();
   } catch (err) {
     res.status(500).json({ error: err.message });
