@@ -1,6 +1,8 @@
 import { React } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useState } from "react";
+import { useMemo } from "react";
+import { useTable } from "react-table";
 // import { useQuery } from "react-query";
 import AuthService from "../../services/AuthService";
 // import axios from "axios";
@@ -13,12 +15,6 @@ const ChoresPage = () => {
   // );
 
   const [open, setOpen] = useState(false);
-
-  const handleLogout = () => {
-    AuthService.logout();
-    navigate({ to: "/login", replace: true });
-  };
-
   const DropdownMenuItem = (props) => {
     return (
       <button className="dropdownItem" onClick={props.handler}>
@@ -26,6 +22,65 @@ const ChoresPage = () => {
       </button>
     );
   };
+
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate({ to: "/login", replace: true });
+  };
+
+  const columns = useMemo(() =>
+    [
+        {
+            Header: 'Name',
+            accessor: 'name',
+        },
+        {
+            Header: 'Frequency',
+            accessor: 'freq',
+        },
+        {
+            Header: 'Location',
+            accessor: 'loc',
+        },
+        {
+            Header: 'Duration',
+            accessor: 'dur',
+        },
+        {
+            Header: 'Preference',
+            accessor: 'pref',
+        },
+    ],
+    []
+  )
+
+  const data = useMemo(
+    () => [
+        {
+            name: 'Sweep',
+            freq: 'Every 1 week',
+            loc: 'Kitchen',
+            dur: '30 minutes',
+            pref: 'High',
+        },
+        {
+            name: 'Take Out Trash',
+            freq: 'Every 1 week',
+            loc: 'Kitchen',
+            dur: '5 minutes',
+            pref: 'Low',
+        },
+    ],
+    []
+  )
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns, data });
 
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
@@ -56,13 +111,40 @@ const ChoresPage = () => {
             <DropdownMenuItem text={"Log Out"} handler={handleLogout}/>
           </div>
         </div>
-
-        <br/> {/* TODO: remove when CSS is added */}
+        
         <button>
           New Chore
         </button>
 
-        <div id="choresList"></div>
+        <table id="choresList" {...getTableProps()}>
+            <thead>
+                {headerGroups.map(headerGroup => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map(column => (
+                            <th {...column.getHeaderProps()}>
+                                {column.render('Header')}
+                            </th>
+                        ))}
+                    </tr>
+                ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+                {rows.map(row => {
+                    prepareRow(row)
+                    return (
+                        <tr {...row.getRowProps()}>
+                            {row.cells.map(cell => {
+                                return (
+                                    <td {...cell.getCellProps()}>
+                                        {cell.render('Cell')}
+                                    </td>
+                                )
+                            })}
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
       </div>
     );
   }
