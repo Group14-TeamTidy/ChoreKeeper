@@ -1,7 +1,5 @@
-import { React } from "react";
+import { React, useState, useMemo } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
-import { useState } from "react";
-import { useMemo } from "react";
 import { useTable } from "react-table";
 // import { useQuery } from "react-query";
 import AuthService from "../../services/AuthService";
