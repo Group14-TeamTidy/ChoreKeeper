@@ -8,9 +8,9 @@ const router = express.Router();
 //ROUTES
 // router.get("/id", ); //get a single chore
 
-router.get("/chores", verifyToken, getAllChores); //get all chores for a user
+router.get("/", verifyToken, getAllChores); //get all chores for a user
 
-router.post("/create", createChore); //create a chore
+router.post("/", createChore); //create a chore
 
 // router.post("/id", ); //edit a chore
 
