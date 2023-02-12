@@ -23,7 +23,16 @@ export const createChore = async (req, res) => {
     );
 
     // check if this chore already exists
-    const existingChore = await Chore.findOne({ name });
+    const existingChore = await Chore.findOne({
+      name: name,
+      frequency: {
+        quantity: frequency.quantity,
+        interval: frequency.interval,
+      },
+      location: location,
+      duration: duration,
+      preference: preference,
+    });
     if (existingChore) {
       return res.status(409).json({
         message: `Chore: ${name} already exists. If you want to change somthing, please use the EDIT option.`,
