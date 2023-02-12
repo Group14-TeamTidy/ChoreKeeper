@@ -93,7 +93,7 @@ const ChoresPage = () => {
   } else {
     return (
       <div className="App">
-        <div class="header">
+        <div className="header">
           <div id="dropdownMenuContainer">
             <button onClick={() => setOpen(!open)}>
               <svg
@@ -101,7 +101,7 @@ const ChoresPage = () => {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-list"
+                className="bi bi-list"
                 viewBox="0 0 16 16"
               >
                 <path
