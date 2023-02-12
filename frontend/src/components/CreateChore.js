@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import Modal from 'react-bootstrap/Modal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { InputText } from "primereact/inputtext";
+import { Dropdown } from 'primereact/dropdown';
 
 const CreateChore = (props) => {
     const handleSave = (e) => {
@@ -10,6 +11,15 @@ const CreateChore = (props) => {
 
         props.onHide();
     }
+
+    const [selectedFrequency, setSelectedFrequency] = useState(null);
+    const frequencies = ["Days", "Weeks", "Months", "Years"];
+
+    const [selectedDuration, setSelectedDuration] = useState(null);
+    const durations = ["Minutes", "Hours"];
+
+    const [selectedPreference, setSelectedPreference] = useState(null);
+    const preferences = ["Low", "Medium", "High"];
 
     return (
         <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" scrollable>
@@ -20,40 +30,25 @@ const CreateChore = (props) => {
             <form onSubmit={(e) => handleSave(e)}>
                 <Modal.Body>
                         <label htmlFor="choreName">Name</label>
-                        <input type="text" id="choreName" name="choreName"></input>
+                        <InputText type="text" id="choreName" name="choreName" />
 
                         <fieldset>
                             <legend>Frequency</legend>
-                            <input type="number" id="frequencyQuantity" name="frequencyQuantity"></input>
-                            <select id="frequencyTimePeriod" name="frequencyTimePeriod">
-                                <option defaultValue disabled value="">Select</option>
-                                <option value="Days">Days</option>
-                                <option value="Weeks">Weeks</option>
-                                <option value="Months">Months</option>
-                                <option value="Years">Years</option>
-                            </select>
+                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" />
+                            <Dropdown value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} options={frequencies} placeholder="Select" className="w-full md:w-14rem"/>
                         </fieldset>
 
                         <label htmlFor="location">Location</label>
-                        <input type="text" id="location" name="location"></input>
+                        <InputText type="text" id="location" name="location" />
 
                         <fieldset>
                             <legend>Duration</legend>
-                            <input type="number" id="durationQuantity" name="durationQuantity"></input>
-                            <select id="durationTimePeriod" name="durationTimePeriod">
-                                <option defaultValue value="">Select</option>
-                                <option value="Minutes">Minutes</option>
-                                <option value="Hours">Hours</option>
-                            </select>
+                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" />
+                            <Dropdown value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} options={preferences} placeholder="Select" className="w-full md:w-14rem"/>
                         </fieldset>
 
                         <label htmlFor="preference">Preference</label>
-                        <select id="preference" name="preference">
-                            <option defaultValue disabled value="">Select</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                        </select>
+                        <Dropdown value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} options={durations} placeholder="Select" className="w-full md:w-14rem"/>
                 </Modal.Body>
 
                 <Modal.Footer>

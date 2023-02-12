@@ -47,6 +47,14 @@
   margin-right: auto;
 }
 
+form label {
+  display: block;
+}
+
+.p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
 #dropdownMenuContainer, #dropdownMenuContainer button {
   float: right;
 }
