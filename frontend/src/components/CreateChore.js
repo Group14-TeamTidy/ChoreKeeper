@@ -75,30 +75,39 @@ const CreateChore = (props) => {
       
             <form onSubmit={(e) => handleSave(e)}>
                 <Modal.Body>
-                        <label htmlFor="choreName">Name</label>
-                        <InputText type="text" id="choreName" name="choreName" />
+                        <div>
+                            <label htmlFor="choreName">Name</label>
+                            <InputText type="text" id="choreName" name="choreName" />
+                        </div>
 
                         <fieldset>
                             <legend>Frequency</legend>
                             <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" />
-                            <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} options={frequencies} optionLabel="name" optionValue="val" placeholder="Select" className="w-full md:w-14rem"/>
+                            <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} 
+                                options={frequencies} optionLabel="name" optionValue="val" placeholder="Select" className="w-full"/>
                         </fieldset>
 
-                        <label htmlFor="location">Location</label>
-                        <InputText type="text" id="location" name="location" />
+                        <div>
+                            <label htmlFor="location">Location</label>
+                            <InputText type="text" id="location" name="location" />
+                        </div>
 
                         <fieldset>
                             <legend>Duration</legend>
                             <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" />
-                            <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} options={durations} placeholder="Select" className="w-full md:w-14rem"/>
+                            <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} 
+                                options={durations} placeholder="Select" className="w-full"/>
                         </fieldset>
 
-                        <label htmlFor="preference">Preference</label>
-                        <Dropdown id="preference" name="preference" value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} options={preferences} placeholder="Select" optionLabel="name" optionValue="val" className="w-full md:w-14rem"/>
+                        <div>
+                            <label htmlFor="preference">Preference</label>
+                            <Dropdown id="preference" name="preference" value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} 
+                                options={preferences} placeholder="Select" optionLabel="name" optionValue="val" className="w-full"/>
+                        </div>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button type="button" onClick={handleClose}>Cancel</Button>
+                    <Button type="button" id="cancelButton" onClick={handleClose}>Cancel</Button>
                     <Button type="submit">Save</Button>
                 </Modal.Footer>
             </form>
