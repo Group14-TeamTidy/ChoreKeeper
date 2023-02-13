@@ -9,6 +9,23 @@ const CreateChore = (props) => {
     const handleSave = (e) => {
         e.preventDefault();
 
+        const choreName = e.target.choreName.value;
+        const freqQuantity = e.target.frequencyQuantity.value;
+        const freqTimePeriod = e.target.frequencyTimePeriod.value;
+        const location = e.target.location.value;
+        const durQuantity = e.target.durationQuantity.value;
+        const durTimePeriod = e.target.durationTimePeriod.value;
+        const preference = e.target.preference;
+
+        const minToSec = 60;
+        const hourToSec = 3600;
+        var duration;
+        if(durTimePeriod === durations[0]) {
+            duration = durQuantity * minToSec;
+        } else if(durTimePeriod === durations[1]) {
+            duration = durQuantity * hourToSec;
+        }
+
         props.onHide();
     }
 
@@ -35,7 +52,7 @@ const CreateChore = (props) => {
                         <fieldset>
                             <legend>Frequency</legend>
                             <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" />
-                            <Dropdown value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} options={frequencies} placeholder="Select" className="w-full md:w-14rem"/>
+                            <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} options={frequencies} placeholder="Select" className="w-full md:w-14rem"/>
                         </fieldset>
 
                         <label htmlFor="location">Location</label>
@@ -44,11 +61,11 @@ const CreateChore = (props) => {
                         <fieldset>
                             <legend>Duration</legend>
                             <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" />
-                            <Dropdown value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} options={preferences} placeholder="Select" className="w-full md:w-14rem"/>
+                            <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} options={preferences} placeholder="Select" className="w-full md:w-14rem"/>
                         </fieldset>
 
                         <label htmlFor="preference">Preference</label>
-                        <Dropdown value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} options={durations} placeholder="Select" className="w-full md:w-14rem"/>
+                        <Dropdown id="preference" name="preference" value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} options={durations} placeholder="Select" className="w-full md:w-14rem"/>
                 </Modal.Body>
 
                 <Modal.Footer>
