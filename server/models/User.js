@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import { mongoose, Schema } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     min: 5,
   },
+  chores: [{ type: Schema.Types.ObjectId, ref: "Chore" }],
 });
 
 const User = mongoose.model("User", UserSchema);
