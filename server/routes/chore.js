@@ -14,7 +14,7 @@ router.get("/id/:id", verifyToken, getSingleChore); //get a single chore
 
 router.get("/", verifyToken, getAllChores); //get all chores for a user
 
-router.post("/", createChore); //create a chore
+router.post("/create", createChore); //create a chore
 
 // router.post("/id", ); //edit a chore
 
