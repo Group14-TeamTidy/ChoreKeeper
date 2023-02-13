@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700;900&display=swap');
+
+/* All fonts should default to sans */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 .centered-block {
   position: absolute;
   top: 50%;
