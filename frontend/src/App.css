@@ -47,6 +47,44 @@
   margin-right: auto;
 }
 
+form label {
+  font-size: calc(1rem + .3vw);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+form legend {
+  font-size: calc(1rem + .3vw);
+}
+
+form div, form fieldset {
+  margin-bottom: 10px;
+}
+
+form .p-inputtext {
+  margin-right: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  form .p-dropdown {
+    width: 250px;
+  }
+}
+
+#cancelButton {
+  margin-right: 12px;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+#cancelButton:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6c757d, 0 1px 2px 0 rgb(0 0 0 / 0%);
+}
+
+.p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
 #dropdownMenuContainer, #dropdownMenuContainer button {
   float: right;
 }
