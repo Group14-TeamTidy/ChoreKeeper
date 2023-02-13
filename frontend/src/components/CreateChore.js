@@ -39,6 +39,13 @@ const CreateChore = (props) => {
             preference: preference
         });
 
+        handleClose();
+    }
+
+    const handleClose = () => {
+        setSelectedFrequency(null);
+        setSelectedDuration(null);
+        setSelectedPreference(null);
         props.onHide();
     }
 
@@ -91,7 +98,7 @@ const CreateChore = (props) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={props.onHide}>Cancel</Button>
+                    <Button type="button" onClick={handleClose}>Cancel</Button>
                     <Button type="submit">Save</Button>
                 </Modal.Footer>
             </form>
