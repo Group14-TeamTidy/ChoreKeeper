@@ -28,3 +28,10 @@ body {
   text-decoration: none;
   color: #4338CA;
 }
+
+.field-validation-note {
+  font-size: 12px;
+  margin-top: -10px;
+  text-align: left;
+  display: block;
+}
