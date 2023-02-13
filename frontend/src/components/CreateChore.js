@@ -6,7 +6,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
 import axios from "axios";
 
-const CreateChore = (props) => {
+const CreateChore = ({show, onHide, handleChores}) => {
     const handleSave = (e) => {
         e.preventDefault();
 
@@ -39,14 +39,15 @@ const CreateChore = (props) => {
             preference: preference
         });
 
-        handleClose();
+        handleClose(true);
     }
 
-    const handleClose = () => {
+    const handleClose = (isSave) => {
         setSelectedFrequency(null);
         setSelectedDuration(null);
         setSelectedPreference(null);
-        props.onHide();
+        handleChores(isSave);
+        onHide();
     }
 
     const [selectedFrequency, setSelectedFrequency] = useState(null);
@@ -68,7 +69,7 @@ const CreateChore = (props) => {
     ];
 
     return (
-        <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" scrollable>
+        <Modal show={show} size="lg" aria-labelledby="contained-modal-title-vcenter" scrollable={true} onHide={() => handleClose(false)}>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">New Chore</Modal.Title>
             </Modal.Header>
@@ -84,7 +85,7 @@ const CreateChore = (props) => {
                             <legend>Frequency</legend>
                             <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" />
                             <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} 
-                                options={frequencies} optionLabel="name" optionValue="val" placeholder="Select" className="w-full"/>
+                                options={frequencies} optionLabel="name" optionValue="val" placeholder="Select"/>
                         </fieldset>
 
                         <div>
@@ -96,18 +97,18 @@ const CreateChore = (props) => {
                             <legend>Duration</legend>
                             <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" />
                             <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} 
-                                options={durations} placeholder="Select" className="w-full"/>
+                                options={durations} placeholder="Select"/>
                         </fieldset>
 
                         <div>
                             <label htmlFor="preference">Preference</label>
                             <Dropdown id="preference" name="preference" value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} 
-                                options={preferences} placeholder="Select" optionLabel="name" optionValue="val" className="w-full"/>
+                                options={preferences} placeholder="Select" optionLabel="name" optionValue="val"/>
                         </div>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button type="button" id="cancelButton" onClick={handleClose}>Cancel</Button>
+                    <Button type="button" id="cancelButton" onClick={() => handleClose(false)}>Cancel</Button>
                     <Button type="submit">Save</Button>
                 </Modal.Footer>
             </form>

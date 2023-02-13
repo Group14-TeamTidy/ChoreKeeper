@@ -58,26 +58,79 @@ const ChoresPage = () => {
     []
   );
 
-  const data = useMemo(
-    () => [
-      {
-        name: "Sweep",
-        freq: "Every 1 week",
-        loc: "Kitchen",
-        dur: "30 minutes",
-        pref: "High",
+  const [chores, setChores] = useState([
+    {
+      name: "",
+      frequency: {
+        quantity: "",
+        interval: ""
       },
-      {
-        name: "Take Out Trash",
-        freq: "Every 1 week",
-        loc: "Kitchen",
-        dur: "5 minutes",
-        pref: "Low",
-      },
-    ],
-    []
-  );
+      location: "",
+      duration: "",
+      preference: ""
+    },
+  ]);
 
+  const handleChores = (newChores) => {
+    const chores = [
+      {
+          name: "Sweep",
+          frequency: {
+              quantity: 1,
+              interval: "weeks"
+          },
+          location: "Kitchen",
+          duration: 1800,
+          preference: "high"
+          },
+          {
+          name: "Take Out Trash",
+          frequency: {
+              quantity: 1,
+              interval: "weeks"
+          },
+          location: "Kitchen",
+          duration: 300,
+          preference: "low"
+      }
+  ];
+    if(newChores) {
+      setChores(chores)
+    }
+  }
+
+  const getChoreData = (chores) => {
+    const minToSec = 60;
+    const hourToSec = 3600;
+    let choreData = [];
+
+    chores.forEach((val, i, array) => {
+      let freqInterval = val.frequency.interval.charAt(0).toUpperCase() + val.frequency.interval.substring(1);
+      freqInterval = (val.frequency.quantity === 1) ? freqInterval.substring(0, freqInterval.length - 1) : freqInterval;
+      let frequency = (val.frequency.quantity && freqInterval) ? "Every" + val.frequency.quantity + " " + freqInterval : "";
+
+      let durQuantity = (val.duration < hourToSec) ? val.duration / minToSec : val.duration / hourToSec;
+      let durInterval = (val.duration < hourToSec) ? "minutes" : "hours";
+      durInterval = (durQuantity === 1) ? durInterval.substring(0, durInterval.length - 1) : durInterval;
+      let duration = (durQuantity && durInterval) ? durQuantity + " " + durInterval : "";
+
+      let preference = (val.preference) ? val.preference.charAt(0).toUpperCase() + val.preference.substring(1) : "";
+
+      choreData.push(
+        {
+          name: val.name,
+          freq: frequency,
+          loc: val.location,
+          dur: duration,
+          pref: preference,
+        }
+      );
+    });
+
+    return choreData;
+  }
+
+  const data = useMemo(() => getChoreData(chores), [chores]);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
   // Modal for creating/editing chores
@@ -123,7 +176,7 @@ const ChoresPage = () => {
         <div className="content">
           <Button variant="primary" onClick={handleShow}>New Chore</Button>
 
-          <CreateChore show={modalShow} onHide={handleClose} />
+          <CreateChore show={modalShow} onHide={handleClose} handleChores={handleChores} />
 
           <table id="choresList" className="center" {...getTableProps()}>
             <thead>

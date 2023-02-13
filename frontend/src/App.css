@@ -65,8 +65,12 @@ form .p-inputtext {
   margin-right: 12px;
 }
 
-@media screen and (min-width: 768px) {
-  form .p-dropdown {
+form .p-dropdown, form .p-inputtext {
+  width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+  form .p-dropdown, form .p-inputtext {
     width: 250px;
   }
 }
