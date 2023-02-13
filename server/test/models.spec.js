@@ -16,6 +16,7 @@ describe("Testing the User model", () => {
     const user = new User();
     expect(user).to.have.property("email");
     expect(user).to.have.property("password");
+    expect(user).to.have.property("chores");
   });
   it("`email` property should be 'testemail@chores.com'", () => {
     const user = new User({ email: "testemail@chores.com" });

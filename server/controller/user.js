@@ -104,13 +104,11 @@ export const getUser = async (req, res) => {
   }
 
   try {
-    const email = req.params.email;
-    const user = await User.findOne({ email }); // search for the user
+    const userID = req.user.id;
+    const user = await User.findOne({ _id: userID }); // search for the user
 
     if (!user) {
-      return res
-        .status(401)
-        .json({ message: `We couldn't find a User with email ${email}` });
+      return res.status(401).json({ message: `This User does not exist` });
     }
     // Don't send password
     delete user.password;
