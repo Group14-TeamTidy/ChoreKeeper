@@ -15,12 +15,12 @@ export const createChore = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  try {
-    const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
-    // console.log(req.body);
-    console.log(
-      `Task Name: ${name},\nFrequency Quantity & Interval: ${frequency.quantity} times every ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`
-    );
+
+    try {
+        const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
+        // console.log(req.body);
+        console.log(`Task Name: ${name},\nFrequency Quantity & Interval: Every ${frequency.quantity} ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`);
+
 
     // check if this chore already exists
     const existingChore = await Chore.findOne({

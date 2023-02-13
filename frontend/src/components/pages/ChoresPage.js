@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useTable } from "react-table";
 import { Button } from "primereact/button";
 // import { useQuery } from "react-query";
+import CreateChore from "../CreateChore";
 import AuthService from "../../services/AuthService";
 // import axios from "axios";
 
@@ -30,6 +31,7 @@ const ChoresPage = () => {
     navigate({ to: "/login", replace: true });
   };
 
+  //Chore Table
   const columns = useMemo(
     () => [
       {
@@ -76,8 +78,12 @@ const ChoresPage = () => {
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
+
+  // Modal for creating/editing chores
+  const [modalShow, setModalShow] = useState(false);
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
 
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
@@ -87,7 +93,7 @@ const ChoresPage = () => {
   } else {
     return (
       <div className="App">
-        <div class="header">
+        <div className="header">
           <div id="dropdownMenuContainer">
             <button onClick={() => setOpen(!open)}>
               <svg
@@ -95,7 +101,7 @@ const ChoresPage = () => {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-list"
+                className="bi bi-list"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -115,7 +121,9 @@ const ChoresPage = () => {
         </div>
 
         <div className="content">
-          <button>New Chore</button>
+          <Button variant="primary" onClick={handleShow}>New Chore</Button>
+
+          <CreateChore show={modalShow} onHide={handleClose} />
 
           <table id="choresList" className="center" {...getTableProps()}>
             <thead>
