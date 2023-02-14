@@ -7,7 +7,12 @@ import express from "express";
 import User from "../models/User.js";
 import Chore from "../models/Chore.js";
 import { register, login, getUser } from "../controller/User.js";
-import { getAllChores,createChore, editChore, getSingleChore } from "../controller/Chore.js";
+import {
+  getAllChores,
+  createChore,
+  editChore,
+  getSingleChore,
+} from "../controller/Chore.js";
 
 import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
@@ -208,17 +213,6 @@ describe("Testing Chores controllers", () => {
       sandbox.restore();
     });
 
-    it("returns 400 status code if validation errors exist", async () => {
-      // sandbox.stub(validationResult, "returns").returns({
-      //   isEmpty: sinon.stub().returns(false),
-      //   array: sinon.stub().returns([{ msg: "Validation error" }]),
-      // });
-      // await createChore(req, res);
-      // expect(res.status.calledWith(400)).to.be.true;
-      // expect(res.json.calledWith({ errors: [{ msg: "Validation error" }] })).to
-      //   .be.true;
-    });
-
     it("returns 409 status code if chore already exists", async () => {
       // stub the  mongoose findOne function to return a valid response
       sandbox.stub(Chore, "findOne").returns({});
@@ -366,11 +360,11 @@ describe("Testing Chores controllers", () => {
   describe("editChore", () => {
     let res, findByIdAndUpdateStub;
     beforeEach(() => {
-    res = {
+      res = {
         status: sinon.stub().returnsThis(),
         json: sinon.spy(),
       };
-     findByIdAndUpdateStub = sinon.stub(Chore, "findByIdAndUpdate");
+      findByIdAndUpdateStub = sinon.stub(Chore, "findByIdAndUpdate");
     });
 
     afterEach(() => {
@@ -439,7 +433,9 @@ describe("Testing Chores controllers", () => {
       expect(res.status.calledOnceWith(500)).to.be.true;
       expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to
         .be.true;
-    
+    });
+  });
+
   describe("getSingleChore", () => {
     let req, res;
 
@@ -448,7 +444,7 @@ describe("Testing Chores controllers", () => {
         params: {
           id: "someid",
         },
-      }; 
+      };
       res = {
         status: sinon.stub().returnsThis(),
         json: sinon.spy(),
