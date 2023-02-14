@@ -15,7 +15,6 @@ export const createChore = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-
     try {
         const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
         // console.log(req.body);
@@ -57,6 +56,7 @@ export const createChore = async (req, res) => {
 
     //add the new chore to the list of chores that the user has created
     user.chores.push(savedChore._id);
+
 
     return res.status(201).json({ Chore: savedChore });
   } catch (error) {
@@ -109,3 +109,25 @@ export const getAllChores = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }; //getAllChores
+
+/*
+ ** This function retrives a single chores for a user
+ ** @param {Object} req - The request object
+ ** @param {Object} res - The response object
+ */
+export const getSingleChore = async (req, res) => {
+  const choreId = req.params.id;
+  try {
+    // Retrieve the chore from the database
+    const chore = await Chore.findOne({ _id: choreId });
+    if (!chore) {
+      return res.status(404).json({ message: "Chore not found" });
+    }
+    // Return the chore in the response
+    return res.status(200).json(chore);
+  } catch (error) {
+    console.error(error);
+    // Return an error message in the response in case of any unexpected errors
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};

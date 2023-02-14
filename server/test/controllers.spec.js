@@ -7,9 +7,8 @@ import express from "express";
 import User from "../models/User.js";
 import Chore from "../models/Chore.js";
 import { register, login, getUser } from "../controller/User.js";
-import { getAllChores, createChore } from "../controller/Chore.js";
+import { getAllChores,createChore, getSingleChore } from "../controller/Chore.js";
 import { validationResult } from "express-validator";
-
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -393,6 +392,55 @@ describe("Testing Chores controllers", () => {
           preference: "morning",
         },
       ]);
+    });
+  });
+  describe("getSingleChore", () => {
+    let req, res;
+
+    beforeEach(() => {
+      req = {
+        params: {
+          id: "someid",
+        },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy(),
+      };
+    });
+
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("should return a 200 response with the chore if it is found", async () => {
+      const chore = { name: "Clean the dishes", location: "kitchen" };
+      sinon.stub(Chore, "findOne").resolves(chore);
+
+      await getSingleChore(req, res);
+
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(chore)).to.be.true;
+    });
+
+    it("should return a 404 response with an error message if the chore is not found", async () => {
+      sinon.stub(Chore, "findOne").resolves(null);
+
+      await getSingleChore(req, res);
+
+      expect(res.status.calledWith(404)).to.be.true;
+      expect(res.json.calledWith({ message: "Chore not found" })).to.be.true;
+    });
+
+    it("should return a 500 response with an error message if there is an unexpected error", async () => {
+      const error = new Error("Unexpected error");
+      sinon.stub(Chore, "findOne").rejects(error);
+
+      await getSingleChore(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWith({ message: "Internal Server Error" })).to.be
+        .true;
     });
   });
 });
