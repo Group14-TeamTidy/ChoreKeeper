@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
-import axios from "axios";
+import ChoreService from "../services/ChoreService";
 
 const CreateChore = ({show, onHide, handleChores}) => {
     const handleSave = (e) => {
@@ -28,16 +28,7 @@ const CreateChore = ({show, onHide, handleChores}) => {
         }
         const duration = dur;
 
-        axios.post(`${process.env.REACT_APP_API_BASE_URL}/chores`, {
-            name: choreName,
-            frequency: {
-                quantity: freqQuantity,
-                interval: freqTimePeriod
-            },
-            location: location,
-            duration: duration,
-            preference: preference
-        });
+        //ChoreService.createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference);
 
         handleClose(true);
     }

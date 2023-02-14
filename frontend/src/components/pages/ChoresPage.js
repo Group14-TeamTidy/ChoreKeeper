@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 // import { useQuery } from "react-query";
 import CreateChore from "../CreateChore";
 import AuthService from "../../services/AuthService";
-// import axios from "axios";
+import ChoreService from "../../services/ChoreService";
 
 const ChoresPage = () => {
   const navigate = useNavigate();
@@ -71,30 +71,31 @@ const ChoresPage = () => {
     },
   ]);
 
-  const handleChores = (newChores) => {
+  const handleChores = (newChore) => {
     const chores = [
       {
-          name: "Sweep",
-          frequency: {
-              quantity: 1,
-              interval: "weeks"
-          },
-          location: "Kitchen",
-          duration: 1800,
-          preference: "high"
-          },
-          {
-          name: "Take Out Trash",
-          frequency: {
-              quantity: 1,
-              interval: "weeks"
-          },
-          location: "Kitchen",
-          duration: 300,
-          preference: "low"
+        name: "Sweep",
+        frequency: {
+          quantity: 1,
+          interval: "weeks"
+        },
+        location: "Kitchen",
+        duration: 1800,
+        preference: "high"
+      },
+      {
+        name: "Take Out Trash",
+        frequency: {
+          quantity: 1,
+          interval: "weeks"
+        },
+        location: "Kitchen",
+        duration: 300,
+        preference: "low"
       }
-  ];
-    if(newChores) {
+    ];
+
+    if(newChore) {
       setChores(chores)
     }
   }
