@@ -3,9 +3,9 @@ name: Unit tests
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop,main]
   push:
-    branches: [develop]
+    branches: [develop,main]
 
 jobs:
   backend_unit_tests:
