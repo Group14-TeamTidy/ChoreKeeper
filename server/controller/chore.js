@@ -15,12 +15,12 @@ export const createChore = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-
-    try {
-        const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
-        // console.log(req.body);
-        console.log(`Task Name: ${name},\nFrequency Quantity & Interval: Every ${frequency.quantity} ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`);
-
+  try {
+    const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
+    // console.log(req.body);
+    console.log(
+      `Task Name: ${name},\nFrequency Quantity & Interval: Every ${frequency.quantity} ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`
+    );
 
     // check if this chore already exists
     const existingChore = await Chore.findOne({
@@ -109,3 +109,29 @@ export const getAllChores = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }; //getAllChores
+
+/*
+ ** This function edits the details of an existing chore
+ ** @param {Object} req - The request object
+ ** @param {Object} res - The response object
+ */
+export const editChore = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
+
+    const chore = await Chore.findByIdAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
+    if (chore === null) {
+      return res
+        .status(404)
+        .json({ message: `Chore with id ${id} was not found` });
+    }
+    return res.status(201).json(chore);
+  } catch (error) {
+    console.error(error);
+    // Return an error message in the response in case of any unexpected errors
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}; //editChore
