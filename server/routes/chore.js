@@ -12,7 +12,7 @@ import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
 
 //ROUTES
-router.get("/id/:id", verifyToken, getSingleChore); //get a single chore
+router.get("/:id", verifyToken, getSingleChore); //get a single chore
 
 router.get("/", verifyToken, getAllChores); //get all chores for a user
 
