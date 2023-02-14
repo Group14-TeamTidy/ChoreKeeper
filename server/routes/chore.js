@@ -15,7 +15,7 @@ const router = express.Router();
 //ROUTES
 // router.get("/id/:id", verifyToken, getSingleChore); //get a single chore
 
-router.patch("/id/:id", verifyToken, editChore); //edit a chore
+router.put("/:id", verifyToken, editChore); //edit a chore
 
 router.get("/", verifyToken, getAllChores); //get all chores for a user
 

@@ -118,7 +118,6 @@ export const getAllChores = async (req, res) => {
 export const editChore = async (req, res) => {
   try {
     const id = req.params.id;
-    const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
 
     const chore = await Chore.findByIdAndUpdate({ _id: id }, req.body, {
       new: true,
