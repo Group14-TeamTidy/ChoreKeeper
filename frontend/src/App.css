@@ -52,12 +52,24 @@
   max-width: 750px;
 }
 
+#choreListManipulation:after {
+  content: "";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+#newChore {
+  float: right;
+}
+
 #choresList {
+  text-align: center;
   border-collapse: collapse;
   border: 1px solid;
   margin: 20px auto;
   width: 100%;
-  text-align: center;
 }
 
 #choresList tr {

@@ -119,18 +119,13 @@ const ChoresPage = () => {
 
     const NUM_CHORES = choreData.length;
     for(let i = NUM_CHORES % PAGE_SIZE; i > 0 && i < PAGE_SIZE; i++) {
-      let chore = [
-        {
-          name: "",
-          frequency: {
-            quantity: "",
-            interval: ""
-          },
-          location: "",
-          duration: "",
-          preference: ""
-        },
-      ];
+      let chore = {
+        name: "\u00A0",
+        freq: "\u00A0",
+        loc: "\u00A0",
+        dur: "\u00A0",
+        pref: "\u00A0"
+      };
 
       choreData.push(chore);
     }
@@ -211,7 +206,9 @@ const ChoresPage = () => {
           <CreateChore show={modalShow} onHide={handleClose} onSave={handleChores}/>
 
           <div id="main-content">
-            <Button id="newChore" onClick={handleShow}>New Chore</Button>
+            <div id="choreListManipulation">
+              <Button id="newChore" onClick={handleShow}>New Chore</Button>
+            </div>
             <table id="choresList" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
