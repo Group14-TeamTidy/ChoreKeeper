@@ -73,7 +73,7 @@ const CreateChore = ({show, onHide, onSave}) => {
 
                         <fieldset>
                             <legend>Frequency</legend>
-                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" />
+                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" step="0.1" />
                             <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} 
                                 options={frequencies} optionLabel="name" optionValue="val" placeholder="Select"/>
                         </fieldset>
@@ -85,7 +85,7 @@ const CreateChore = ({show, onHide, onSave}) => {
 
                         <fieldset>
                             <legend>Duration</legend>
-                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" />
+                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" step="0.1" />
                             <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} 
                                 options={durations} placeholder="Select"/>
                         </fieldset>

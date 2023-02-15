@@ -75,6 +75,40 @@ form .p-dropdown, form .p-inputtext {
   }
 }
 
+#paginationButtons button:not(.currentPage) {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+#paginationButtons button:not(.currentPage):hover {
+  background-color: lightgray;
+  border-color: lightgray;
+}
+
+#paginationButtons button {
+  border: none;
+}
+
+#paginationButtons button:focus {
+  box-shadow: none;
+}
+
+/*#paginationButtons button.currentPage {
+  background-color: #6366F1;
+  border: 1px solid #6366F1;
+  color: white;
+}
+
+#paginationButtons button.currentPage:hover {
+  background-color: #4F46E5;
+  color: white;
+  border-color: #4F46E5;
+}*/
+
 #cancelButton {
   margin-right: 12px;
   background-color: #6c757d;
