@@ -23,7 +23,7 @@ export default function makeApp(database) {
   // add routes here
 
   app.use("/api/user", userRoute);
-  app.use("/api/chore", choreRoute);
+  app.use("/api/chores", choreRoute);
 
   app.post("/api/login", login);
   app.post("/api/signup", register);
