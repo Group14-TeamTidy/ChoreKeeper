@@ -170,7 +170,7 @@ export const deleteChore = async (req, res) => {
     // delete chore from chores database
     await Chore.findByIdAndDelete({ _id: choreId });
 
-    // get the user that is creating the chore
+    // get the user that is deleting the chore
     const userID = req.user.id;
     const user = await User.findOne({ _id: userID }); // search for the user
 
@@ -183,8 +183,7 @@ export const deleteChore = async (req, res) => {
       user.chores = userChores; 
       await user.save();
       return res.status(200).json({ message: `Chore with id ${choreId} deleted successfully!`});
-    }
-    else {
+    }else {
       console.log("Chore ID not found in user's chore list!")
       return res.status(500).json({ message: "Internal Server Error" });
     }
