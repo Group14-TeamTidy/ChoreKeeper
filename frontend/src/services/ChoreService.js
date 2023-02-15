@@ -1,8 +1,18 @@
 import axios from "axios";
+import AuthService from "./AuthService";
+
+const token = AuthService.getToken();
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: token,
+  }
+};
 
 const ChoreService = {
-  createChore: (choreName, freqQuantity, freqTimePeriod, location, duration, preference) => {
-    return axios
+  createChore: async (choreName, freqQuantity, freqTimePeriod, location, duration, preference) => {
+
+    return await axios
     .post(`${process.env.REACT_APP_API_BASE_URL}/chore/create`, {
         name: choreName,
         frequency: {
@@ -12,17 +22,12 @@ const ChoreService = {
         location: location,
         duration: duration,
         preference: preference
-    })
-    .then((res) => {
-        console.log(res.status);
-    });
+    }, config)
   },
 
-  getChores: () => {
-    return Promise.resolve(axios.get(`${process.env.REACT_APP_API_BASE_URL}/chore/`));
+  getChores: async () => {
+    return await axios.get(`${process.env.REACT_APP_API_BASE_URL}/chore/`, config);
   }
 };
-
-
 
 export default ChoreService;

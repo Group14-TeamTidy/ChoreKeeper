@@ -6,7 +6,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
 import ChoreService from "../services/ChoreService";
 
-const CreateChore = ({show, onHide, handleChores}) => {
+const CreateChore = ({show, onHide, onSave}) => {
     const handleSave = (e) => {
         e.preventDefault();
 
@@ -28,16 +28,15 @@ const CreateChore = ({show, onHide, handleChores}) => {
         }
         const duration = dur;
 
-        //ChoreService.createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference);
+        ChoreService.createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference).then(() => {onSave()});
 
-        handleClose(true);
+        handleClose();
     }
 
-    const handleClose = (isSave) => {
+    const handleClose = () => {
         setSelectedFrequency(null);
         setSelectedDuration(null);
         setSelectedPreference(null);
-        handleChores(isSave);
         onHide();
     }
 
@@ -60,13 +59,13 @@ const CreateChore = ({show, onHide, handleChores}) => {
     ];
 
     return (
-        <Modal show={show} size="lg" aria-labelledby="contained-modal-title-vcenter" scrollable={true} onHide={() => handleClose(false)}>
+        <Modal show={show} onHide={() => handleClose()} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">New Chore</Modal.Title>
             </Modal.Header>
       
             <form onSubmit={(e) => handleSave(e)}>
-                <Modal.Body>
+                <Modal.Body scrollable="true">
                         <div>
                             <label htmlFor="choreName">Name</label>
                             <InputText type="text" id="choreName" name="choreName" />
@@ -99,7 +98,7 @@ const CreateChore = ({show, onHide, handleChores}) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button type="button" id="cancelButton" onClick={() => handleClose(false)}>Cancel</Button>
+                    <Button type="button" id="cancelButton" onClick={() => handleClose()}>Cancel</Button>
                     <Button type="submit">Save</Button>
                 </Modal.Footer>
             </form>

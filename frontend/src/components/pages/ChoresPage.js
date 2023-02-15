@@ -1,4 +1,4 @@
-import { React, useState, useMemo } from "react";
+import { React, useState, useEffect, useMemo } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useTable } from "react-table";
 import { Button } from "primereact/button";
@@ -71,34 +71,13 @@ const ChoresPage = () => {
     },
   ]);
 
-  const handleChores = (newChore) => {
-    const chores = [
-      {
-        name: "Sweep",
-        frequency: {
-          quantity: 1,
-          interval: "weeks"
-        },
-        location: "Kitchen",
-        duration: 1800,
-        preference: "high"
-      },
-      {
-        name: "Take Out Trash",
-        frequency: {
-          quantity: 1,
-          interval: "weeks"
-        },
-        location: "Kitchen",
-        duration: 300,
-        preference: "low"
-      }
-    ];
-
-    if(newChore) {
-      setChores(chores)
-    }
+  const handleChores = () => {
+    ChoreService.getChores().then((res) => { setChores(res.data); });
   }
+
+  useEffect(() => {
+    handleChores();
+  }, []);
 
   const getChoreData = (chores) => {
     const minToSec = 60;
@@ -175,9 +154,9 @@ const ChoresPage = () => {
         </div>
 
         <div className="content">
-          <Button variant="primary" onClick={handleShow}>New Chore</Button>
+          <Button variant="primary" onClick={handleShow} >New Chore</Button>
 
-          <CreateChore show={modalShow} onHide={handleClose} handleChores={handleChores} />
+          <CreateChore show={modalShow} onHide={handleClose} onSave={handleChores}/>
 
           <table id="choresList" className="center" {...getTableProps()}>
             <thead>
