@@ -7,9 +7,14 @@ import express from "express";
 import User from "../models/User.js";
 import Chore from "../models/Chore.js";
 import { register, login, getUser } from "../controller/User.js";
-import { getAllChores, createChore } from "../controller/Chore.js";
-import { validationResult } from "express-validator";
+import {
+  getAllChores,
+  createChore,
+  editChore,
+  getSingleChore,
+} from "../controller/Chore.js";
 
+import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -208,17 +213,6 @@ describe("Testing Chores controllers", () => {
       sandbox.restore();
     });
 
-    it("returns 400 status code if validation errors exist", async () => {
-      // sandbox.stub(validationResult, "returns").returns({
-      //   isEmpty: sinon.stub().returns(false),
-      //   array: sinon.stub().returns([{ msg: "Validation error" }]),
-      // });
-      // await createChore(req, res);
-      // expect(res.status.calledWith(400)).to.be.true;
-      // expect(res.json.calledWith({ errors: [{ msg: "Validation error" }] })).to
-      //   .be.true;
-    });
-
     it("returns 409 status code if chore already exists", async () => {
       // stub the  mongoose findOne function to return a valid response
       sandbox.stub(Chore, "findOne").returns({});
@@ -250,7 +244,15 @@ describe("Testing Chores controllers", () => {
       // stub the  mongoose findOne function to return a valid null
 
       sandbox.stub(Chore, "findOne").returns(null);
-      sandbox.stub(User, "findOne").returns({ chores: [] });
+      sandbox
+        .stub(User, "findOne")
+        .returns({
+          email: "test@test.com",
+          password: "1234",
+          chores: [],
+          save: sandbox.stub().resolves(),
+        });
+
       sandbox.stub(Chore.prototype, "save").returns({
         _id: "chore123",
         name: "Clean the kitchen",
@@ -259,6 +261,7 @@ describe("Testing Chores controllers", () => {
         duration: 30,
         preference: "High",
       });
+
       await createChore(req, res);
       expect(res.status.calledWith(201)).to.be.true;
       expect(
@@ -287,45 +290,12 @@ describe("Testing Chores controllers", () => {
       };
       findOneStub = sinon.stub(User, "findOne");
       findByIdStub = sinon.stub(Chore, "findById");
-
-      // const errors = [{ msg: "error1" }, { msg: "error2" }];
-
-      // // Create a stub for validationResult
-      // const validationResultStub = sinon.stub(validationResult(req));
-
-      // // Return the errors when validationResult is called
-      // validationResultStub.returns({
-      //   isEmpty: () => false,
-      //   array: () => errors,
-      // });
     });
 
     afterEach(() => {
       findOneStub.restore();
       findByIdStub.restore();
       sinon.restore();
-    });
-
-    it("returns 400 Bad Request if there are validation errors", async () => {
-      const errors = [{ msg: "error1" }, { msg: "error2" }];
-
-      // // Create a stub for validationResult
-      // const validationResultStub = sinon.stub(validationResult);
-
-      // // Return the errors when validationResult is called
-      // validationResultStub.array().returns(errors);
-
-      // let validationResultStub = sinon
-      //   .stub(express - validator, "validationResult")
-      //   .resolves(errors);
-      await getAllChores(req, res);
-
-      expect(res.status.calledOnce).to.be.true;
-      // expect(res.status.firstCall.args[0]).to.equal(400); ***************Fix this, need to find out how to mock validationResult*******************
-      expect(res.status().json.calledOnce).to.be.true;
-      // expect(res.status().json.firstCall.args[0]).to.deep.equal({~
-      //   errors: [{ param: "name", msg: "Name is required" }],
-      // });
     });
 
     it("returns 500 Internal Server Error if an unexpected error occurs", async () => {
@@ -344,7 +314,7 @@ describe("Testing Chores controllers", () => {
     it("returns the list of chores for the user", async () => {
       const user = {
         _id: "123456",
-        choreList: ["abcdef", "ghijkl"],
+        chores: ["abcdef", "ghijkl"],
       };
       findOneStub.returns(user);
 
@@ -393,6 +363,135 @@ describe("Testing Chores controllers", () => {
           preference: "morning",
         },
       ]);
+    });
+  });
+
+  describe("editChore", () => {
+    let res, findByIdAndUpdateStub;
+    beforeEach(() => {
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy(),
+      };
+      findByIdAndUpdateStub = sinon.stub(Chore, "findByIdAndUpdate");
+    });
+
+    afterEach(() => {
+      findByIdAndUpdateStub.restore();
+      sinon.restore();
+    });
+    it("should return edited chore", async () => {
+      const id = "123";
+      const req = {
+        params: { id },
+        body: {
+          name: "Clean the kitchen",
+          location: "kitchen",
+          duration: "30",
+        },
+      };
+
+      findByIdAndUpdateStub.resolves(req.body);
+
+      await editChore(req, res);
+
+      expect(
+        findByIdAndUpdateStub.calledOnceWith({ _id: id }, req.body, {
+          new: true,
+        })
+      ).to.be.true;
+      expect(res.status.calledOnceWith(201)).to.be.true;
+      expect(res.json.calledOnceWith(req.body)).to.be.true;
+    });
+
+    it("should return 404 if chore is not found", async () => {
+      const id = "456";
+      const req = { params: { id }, body: {} };
+
+      findByIdAndUpdateStub.resolves(null);
+
+      await editChore(req, res);
+
+      expect(
+        findByIdAndUpdateStub.calledOnceWith({ _id: id }, req.body, {
+          new: true,
+        })
+      ).to.be.true;
+      expect(res.status.calledOnceWith(404)).to.be.true;
+      expect(
+        res.json.calledOnceWith({
+          message: `Chore with id ${id} was not found`,
+        })
+      ).to.be.true;
+    });
+
+    it("should return 500 if an unexpected error occurs", async () => {
+      const id = "789";
+      const req = { params: { id }, body: {} };
+
+      const error = new Error("Unexpected error");
+      findByIdAndUpdateStub.throws(error);
+
+      await editChore(req, res);
+
+      expect(
+        findByIdAndUpdateStub.calledOnceWith({ _id: id }, req.body, {
+          new: true,
+        })
+      ).to.be.true;
+      expect(res.status.calledOnceWith(500)).to.be.true;
+      expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to
+        .be.true;
+    });
+  });
+
+  describe("getSingleChore", () => {
+    let req, res;
+
+    beforeEach(() => {
+      req = {
+        params: {
+          id: "someid",
+        },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy(),
+      };
+    });
+
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("should return a 200 response with the chore if it is found", async () => {
+      const chore = { name: "Clean the dishes", location: "kitchen" };
+      sinon.stub(Chore, "findOne").resolves(chore);
+
+      await getSingleChore(req, res);
+
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(chore)).to.be.true;
+    });
+
+    it("should return a 404 response with an error message if the chore is not found", async () => {
+      sinon.stub(Chore, "findOne").resolves(null);
+
+      await getSingleChore(req, res);
+
+      expect(res.status.calledWith(404)).to.be.true;
+      expect(res.json.calledWith({ message: "Chore not found" })).to.be.true;
+    });
+
+    it("should return a 500 response with an error message if there is an unexpected error", async () => {
+      const error = new Error("Unexpected error");
+      sinon.stub(Chore, "findOne").rejects(error);
+
+      await getSingleChore(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWith({ message: "Internal Server Error" })).to.be
+        .true;
     });
   });
 });

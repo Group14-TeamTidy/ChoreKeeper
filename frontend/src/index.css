@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700;900&display=swap');
 
-/* All fonts should default to sans */
 body {
   font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
+
 .centered-block {
   position: absolute;
   top: 50%;
@@ -26,4 +27,11 @@ body {
   display: inline-block;
   text-decoration: none;
   color: #4338CA;
+}
+
+.field-validation-note {
+  font-size: 12px;
+  margin-top: -10px;
+  text-align: left;
+  display: block;
 }
