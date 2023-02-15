@@ -13,7 +13,7 @@ const ChoreService = {
   createChore: async (choreName, freqQuantity, freqTimePeriod, location, duration, preference) => {
 
     return await axios
-    .post(`${process.env.REACT_APP_API_BASE_URL}/chore/create`, {
+    .post(`${process.env.REACT_APP_API_BASE_URL}/chores/`, {
         name: choreName,
         frequency: {
             quantity: freqQuantity,
@@ -26,7 +26,7 @@ const ChoreService = {
   },
 
   getChores: async () => {
-    return await axios.get(`${process.env.REACT_APP_API_BASE_URL}/chore/`, config);
+    return await axios.get(`${process.env.REACT_APP_API_BASE_URL}/chores/`, config);
   }
 };
 
