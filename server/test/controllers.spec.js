@@ -249,7 +249,15 @@ describe("Testing Chores controllers", () => {
       // stub the  mongoose findOne function to return a valid null
 
       sandbox.stub(Chore, "findOne").returns(null);
-      sandbox.stub(User, "findOne").returns({ chores: [] });
+      sandbox
+        .stub(User, "findOne")
+        .returns({
+          email: "test@test.com",
+          password: "1234",
+          chores: [],
+          save: sandbox.stub().resolves(),
+        });
+
       sandbox.stub(Chore.prototype, "save").returns({
         _id: "chore123",
         name: "Clean the kitchen",
@@ -258,6 +266,7 @@ describe("Testing Chores controllers", () => {
         duration: 30,
         preference: "High",
       });
+
       await createChore(req, res);
       expect(res.status.calledWith(201)).to.be.true;
       expect(
@@ -343,7 +352,7 @@ describe("Testing Chores controllers", () => {
     it("returns the list of chores for the user", async () => {
       const user = {
         _id: "123456",
-        choreList: ["abcdef", "ghijkl"],
+        chores: ["abcdef", "ghijkl"],
       };
       findOneStub.returns(user);
 

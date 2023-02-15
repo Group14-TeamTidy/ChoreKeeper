@@ -4,9 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
-import axios from "axios";
+import ChoreService from "../services/ChoreService";
 
-const CreateChore = (props) => {
+const CreateChore = ({show, onHide, onSave}) => {
     const handleSave = (e) => {
         e.preventDefault();
 
@@ -18,26 +18,17 @@ const CreateChore = (props) => {
         const durTimePeriod = e.target.durationTimePeriod.value;
         const preference = e.target.preference.value;
 
-        const minToSec = 60;
-        const hourToSec = 3600;
+        const MIN_TO_SEC = 60;
+        const HOUR_TO_SEC = 3600;
         var dur;
         if(durTimePeriod === durations[0]) {
-            dur = durQuantity * minToSec;
+            dur = durQuantity * MIN_TO_SEC;
         } else if(durTimePeriod === durations[1]) {
-            dur = durQuantity * hourToSec;
+            dur = durQuantity * HOUR_TO_SEC;
         }
         const duration = dur;
 
-        axios.post(`${process.env.REACT_APP_API_BASE_URL}/chores`, {
-            name: choreName,
-            frequency: {
-                quantity: freqQuantity,
-                interval: freqTimePeriod
-            },
-            location: location,
-            duration: duration,
-            preference: preference
-        });
+        ChoreService.createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference).then(() => {onSave()});
 
         handleClose();
     }
@@ -46,7 +37,7 @@ const CreateChore = (props) => {
         setSelectedFrequency(null);
         setSelectedDuration(null);
         setSelectedPreference(null);
-        props.onHide();
+        onHide();
     }
 
     const [selectedFrequency, setSelectedFrequency] = useState(null);
@@ -68,13 +59,13 @@ const CreateChore = (props) => {
     ];
 
     return (
-        <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" scrollable>
+        <Modal show={show} onHide={() => handleClose()} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">New Chore</Modal.Title>
             </Modal.Header>
       
             <form onSubmit={(e) => handleSave(e)}>
-                <Modal.Body>
+                <Modal.Body scrollable="true">
                         <div>
                             <label htmlFor="choreName">Name</label>
                             <InputText type="text" id="choreName" name="choreName" />
@@ -82,9 +73,9 @@ const CreateChore = (props) => {
 
                         <fieldset>
                             <legend>Frequency</legend>
-                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" />
+                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" step="0.1" />
                             <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} 
-                                options={frequencies} optionLabel="name" optionValue="val" placeholder="Select" className="w-full"/>
+                                options={frequencies} optionLabel="name" optionValue="val" placeholder="Select"/>
                         </fieldset>
 
                         <div>
@@ -94,20 +85,20 @@ const CreateChore = (props) => {
 
                         <fieldset>
                             <legend>Duration</legend>
-                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" />
+                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" step="0.1" />
                             <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} 
-                                options={durations} placeholder="Select" className="w-full"/>
+                                options={durations} placeholder="Select"/>
                         </fieldset>
 
                         <div>
                             <label htmlFor="preference">Preference</label>
                             <Dropdown id="preference" name="preference" value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} 
-                                options={preferences} placeholder="Select" optionLabel="name" optionValue="val" className="w-full"/>
+                                options={preferences} placeholder="Select" optionLabel="name" optionValue="val"/>
                         </div>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button type="button" id="cancelButton" onClick={handleClose}>Cancel</Button>
+                    <Button type="button" id="cancelButton" onClick={() => handleClose()}>Cancel</Button>
                     <Button type="submit">Save</Button>
                 </Modal.Footer>
             </form>
