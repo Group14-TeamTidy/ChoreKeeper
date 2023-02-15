@@ -8,7 +8,9 @@
     "test": "mocha test",
     "coverage": "nyc --all  npm run test",
     "start": "nodemon server.js",
-    "dev": "nodemon --watch server server.js"
+    "build": "webpack --config webpack.config.js",
+    "dev": "nodemon --watch server server.js",
+    "prodStart": "node build/bundle.js"
   },
   "keywords": [],
   "author": "",
@@ -24,12 +26,18 @@
     "mongoose": "^6.9.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "nyc": "^15.1.0",
     "sinon": "^15.0.1",
-    "sinon-chai": "^3.7.0"
+    "sinon-chai": "^3.7.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
