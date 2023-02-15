@@ -6,13 +6,14 @@ import sinonChai from "sinon-chai";
 import express from "express";
 import User from "../models/User.js";
 import Chore from "../models/Chore.js";
-import { register, login, getUser } from "../controller/User.js";
+import { register, login, getUser } from "../controller/user.js";
 import {
   getAllChores,
   createChore,
   editChore,
   getSingleChore,
-} from "../controller/Chore.js";
+  deleteChore,
+} from "../controller/chore.js";
 
 import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
@@ -252,7 +253,6 @@ describe("Testing Chores controllers", () => {
           chores: [],
           save: sandbox.stub().resolves(),
         });
-
       sandbox.stub(Chore.prototype, "save").returns({
         _id: "chore123",
         name: "Clean the kitchen",
@@ -495,3 +495,54 @@ describe("Testing Chores controllers", () => {
     });
   });
 });
+
+//-------------------------------------------------------------TESTS FOR DELETE CHORE--------------------------------------------------------------------------------
+
+describe("deleteChore", () => {
+  let res, findByIdAndDelete;
+  beforeEach(() => {
+    res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.spy(),
+    };
+    findByIdAndDelete = sinon.stub(Chore, "findByIdAndDelete");
+  });
+
+  afterEach(() => {
+    findByIdAndDelete.restore();
+    sinon.restore();
+  });
+
+  // Test 1
+  it("should return message containing deleted chore id", async () => {
+    const id = "123";
+    const req = {
+      params: { id },
+      user: { id: "123456" },
+    };
+
+    findByIdAndDelete.resolves(req.params);
+
+    await deleteChore(req, res);
+
+    expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
+    expect(res.status.calledOnceWith(200)).to.be.true;
+    expect(res.json.calledOnceWith(req.body)).to.be.true;
+  });
+
+  // Test 2
+  it("should return 500 if an unexpected error occurs", async () => {
+    const id = "789";
+    const req = { params: { id }, user: { id: "123456" } };
+
+    const error = new Error("Unexpected error");
+    findByIdAndDelete.throws(error);
+
+    await deleteChore(req, res);
+
+    expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
+    expect(res.status.calledOnceWith(500)).to.be.true;
+    expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to.be.true;
+  });
+});
+//-------------------------------------------------------------TESTS FOR DELETE CHORE ENDED-----------------------------------------------------------------------------
