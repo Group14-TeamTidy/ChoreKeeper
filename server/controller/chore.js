@@ -57,6 +57,7 @@ export const createChore = async (req, res) => {
 
     //add the new chore to the list of chores that the user has created
     user.chores.push(savedChore._id);
+    await user.save();
 
     return res.status(201).json({ Chore: savedChore });
   } catch (error) {
@@ -86,7 +87,7 @@ export const getAllChores = async (req, res) => {
 
     // Get the list of chores for the user
     const chores = await Promise.all(
-      user.choreList.map((id) => Chore.findById(id))
+      user.chores.map((id) => Chore.findById(id))
     );
 
     // Format the chore list for the response
