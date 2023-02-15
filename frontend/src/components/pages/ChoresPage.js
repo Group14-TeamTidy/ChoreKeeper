@@ -86,10 +86,12 @@ const ChoresPage = () => {
     handleChores();
   }, []);
 
+  const PAGE_SIZE = 7; //Number of rows displayed in each page of the table, not including the header
+
   // Format the information for each chore in order to display in the table
   const getChoreData = (chores) => {
-    const minToSec = 60;
-    const hourToSec = 3600;
+    const MIN_TO_SEC = 60;
+    const HOUR_TO_SEC = 3600;
     let choreData = [];
 
     chores.forEach((val, i, array) => {
@@ -97,8 +99,8 @@ const ChoresPage = () => {
       freqInterval = (val.frequency.quantity === 1) ? freqInterval.substring(0, freqInterval.length - 1) : freqInterval;
       let frequency = (val.frequency.quantity && freqInterval) ? "Every " + val.frequency.quantity + " " + freqInterval : "";
 
-      let durQuantity = (val.duration < hourToSec) ? val.duration / minToSec : val.duration / hourToSec;
-      let durInterval = (val.duration < hourToSec) ? "minutes" : "hours";
+      let durQuantity = (val.duration < HOUR_TO_SEC) ? val.duration / MIN_TO_SEC : val.duration / HOUR_TO_SEC;
+      let durInterval = (val.duration < HOUR_TO_SEC) ? "minutes" : "hours";
       durInterval = (durQuantity === 1) ? durInterval.substring(0, durInterval.length - 1) : durInterval;
       let duration = (durQuantity && durInterval) ? durQuantity + " " + durInterval : "";
 
@@ -114,6 +116,24 @@ const ChoresPage = () => {
         }
       );
     });
+
+    const NUM_CHORES = choreData.length;
+    for(let i = NUM_CHORES % PAGE_SIZE; i > 0 && i < PAGE_SIZE; i++) {
+      let chore = [
+        {
+          name: "",
+          frequency: {
+            quantity: "",
+            interval: ""
+          },
+          location: "",
+          duration: "",
+          preference: ""
+        },
+      ];
+
+      choreData.push(chore);
+    }
 
     return choreData;
   }
@@ -137,14 +157,14 @@ const ChoresPage = () => {
     {
       columns,
       data,
-      initialState: { pageSize: 15 },
+      initialState: { pageSize: PAGE_SIZE },
     },
     usePagination
   );
 
   const setPageButton = (buttonNum, pageIndex) => {
-    const buttonRotationSize = 3;
-    return buttonNum + (pageIndex - (pageIndex % buttonRotationSize));
+    const BUTTON_ROTATION = 3;
+    return buttonNum + (pageIndex - (pageIndex % BUTTON_ROTATION));
   }
 
   // Modal for creating/editing chores
@@ -188,12 +208,11 @@ const ChoresPage = () => {
         </div>
 
         <div className="content">
-          <Button onClick={handleShow}>New Chore</Button>
-
           <CreateChore show={modalShow} onHide={handleClose} onSave={handleChores}/>
 
-          <div>
-            <table id="choresList" className="center" {...getTableProps()}>
+          <div id="main-content">
+            <Button id="newChore" onClick={handleShow}>New Chore</Button>
+            <table id="choresList" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>

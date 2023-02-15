@@ -33,18 +33,66 @@
   }
 }
 
-.content {
-  text-align: center;
-  margin-top: 50px;
-}
-
 .hidden {
   display: none;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
+.content {
+  margin: auto;
+  width: 100%;
+  max-width: 1024px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#main-content {
+  padding: 0px;
+  margin: 0px auto;
+  width: 100%;
+  max-width: 750px;
+}
+
+#choresList {
+  border-collapse: collapse;
+  border: 1px solid;
+  margin: 20px auto;
+  width: 100%;
+  text-align: center;
+}
+
+#choresList tr {
+  border-bottom: 1px solid;
+}
+
+#choresList td, th {
+  padding: 15px 5px;
+  height: 50px;
+}
+
+#paginationButtons {
+  text-align: center;
+}
+
+#paginationButtons button:not(.currentPage) {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+#paginationButtons button:not(.currentPage):hover {
+  background-color: lightgray;
+  border-color: lightgray;
+}
+
+#paginationButtons button {
+  border: none;
+}
+
+#paginationButtons button:focus {
+  box-shadow: none;
 }
 
 form label {
@@ -74,40 +122,6 @@ form .p-dropdown, form .p-inputtext {
     width: 250px;
   }
 }
-
-#paginationButtons button:not(.currentPage) {
-  background-color: white;
-  border: none;
-  color: black;
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  border-radius: 6px;
-}
-
-#paginationButtons button:not(.currentPage):hover {
-  background-color: lightgray;
-  border-color: lightgray;
-}
-
-#paginationButtons button {
-  border: none;
-}
-
-#paginationButtons button:focus {
-  box-shadow: none;
-}
-
-/*#paginationButtons button.currentPage {
-  background-color: #6366F1;
-  border: 1px solid #6366F1;
-  color: white;
-}
-
-#paginationButtons button.currentPage:hover {
-  background-color: #4F46E5;
-  color: white;
-  border-color: #4F46E5;
-}*/
 
 #cancelButton {
   margin-right: 12px;

@@ -18,13 +18,13 @@ const CreateChore = ({show, onHide, onSave}) => {
         const durTimePeriod = e.target.durationTimePeriod.value;
         const preference = e.target.preference.value;
 
-        const minToSec = 60;
-        const hourToSec = 3600;
+        const MIN_TO_SEC = 60;
+        const HOUR_TO_SEC = 3600;
         var dur;
         if(durTimePeriod === durations[0]) {
-            dur = durQuantity * minToSec;
+            dur = durQuantity * MIN_TO_SEC;
         } else if(durTimePeriod === durations[1]) {
-            dur = durQuantity * hourToSec;
+            dur = durQuantity * HOUR_TO_SEC;
         }
         const duration = dur;
 
