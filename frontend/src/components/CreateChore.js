@@ -6,7 +6,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
 import ChoreService from "../services/ChoreService";
 
-const CreateChore = ({show, onHide, onSave}) => {
+const CreateChore = ({show, onHide, onSave, currChore}) => {
     const handleSave = (e) => {
         e.preventDefault();
 
@@ -28,7 +28,11 @@ const CreateChore = ({show, onHide, onSave}) => {
         }
         const duration = dur;
 
-        ChoreService.createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference).then(() => {onSave()});
+        if(currChore != null && currChore._id !== -1) {
+            ChoreService.updateChore(currChore._id, choreName, freqQuantity, freqTimePeriod, location, duration, preference).then(() => {onSave()});
+        } else {
+            ChoreService.createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference).then(() => {onSave()});
+        }
 
         handleClose();
     }
@@ -58,8 +62,28 @@ const CreateChore = ({show, onHide, onSave}) => {
         { name: "High", val: "high"}
     ];
 
+    const handlePopulation = () => {
+        const MIN_TO_SEC = 60;
+        const HOUR_TO_SEC = 3600;
+
+        if(currChore != null && currChore._id !== -1) {
+            let durQuantity = (currChore.duration < HOUR_TO_SEC) ? currChore.duration / MIN_TO_SEC : currChore.duration / HOUR_TO_SEC;
+            let durInterval = (currChore.duration < HOUR_TO_SEC) ? "Minutes" : "Hours";
+
+            document.getElementById("choreName").value = currChore.name;
+            document.getElementById("frequencyQuantity").value = currChore.frequency.quantity;
+            setSelectedFrequency(currChore.frequency.interval);
+            document.getElementById("location").value = currChore.location;
+            document.getElementById("durationQuantity").value = durQuantity;
+            setSelectedDuration(durInterval);
+            setSelectedPreference(currChore.preference);
+
+            document.getElementById('contained-modal-title-vcenter').innerHTML = "Update Chore";
+        }
+    }
+
     return (
-        <Modal show={show} onHide={() => handleClose()} size="lg">
+        <Modal show={show} onHide={() => handleClose()} onShow={() => handlePopulation()} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">New Chore</Modal.Title>
             </Modal.Header>
@@ -73,7 +97,7 @@ const CreateChore = ({show, onHide, onSave}) => {
 
                         <fieldset>
                             <legend>Frequency</legend>
-                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" step="0.1" />
+                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" step="0.01" />
                             <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} 
                                 options={frequencies} optionLabel="name" optionValue="val" placeholder="Select"/>
                         </fieldset>
@@ -85,7 +109,7 @@ const CreateChore = ({show, onHide, onSave}) => {
 
                         <fieldset>
                             <legend>Duration</legend>
-                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" step="0.1" />
+                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" step="0.01" />
                             <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} 
                                 options={durations} placeholder="Select"/>
                         </fieldset>
