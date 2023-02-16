@@ -135,13 +135,13 @@ form .p-dropdown, form .p-inputtext {
   }
 }
 
-#cancelButton {
+#cancelButton, #declineButton {
   margin-right: 12px;
   background-color: #6c757d;
   border-color: #6c757d;
 }
 
-#cancelButton:focus {
+#cancelButton:focus, #declineButton:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6c757d, 0 1px 2px 0 rgb(0 0 0 / 0%);
 }
 

@@ -1,6 +1,8 @@
 import { React, useState, useEffect, useMemo } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useTable, usePagination } from "react-table";
+import Modal from 'react-bootstrap/Modal';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "primereact/button";
 // import { useQuery } from "react-query";
 import CreateChore from "../CreateChore";
@@ -35,13 +37,12 @@ const ChoresPage = () => {
   // Modal for creating/editing chores
   const [modalShow, setModalShow] = useState(false);
   const handleClose = () => setModalShow(false);
-  const handleShowNew = () => {
-    setModalShow(true);
-    setCurrChore(null);
-  }
-  const handleShowUpdate = () => {
-    setModalShow(true);
-  }
+  const handleShow = () => setModalShow(true);
+
+  // Modal for deleting chores
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
+  const handleDeleteModalClose = () => setDeleteModalShow(false);
+  const handleDeleteModalShow = () => setDeleteModalShow(true);
 
   // List of user's chores
   const [chores, setChores] = useState(() => {
@@ -157,9 +158,28 @@ const ChoresPage = () => {
               <button onClick={() => {
                 let chore = chores.find((val) => {return value === val._id});
                 setCurrChore(chore);
-                handleShowUpdate();
+                handleShow();
               }}>
                 Edit
+              </button>
+            )
+          } else {
+            return "";
+          }
+        },
+      },
+      {
+        id: "delete",
+        accessor: data => data.id,
+        Cell: ({value}) => {
+          if(value !== -1) {
+            return (
+              <button onClick={() => {
+                let chore = chores.find((val) => {return value === val._id});
+                setCurrChore(chore);
+                handleDeleteModalShow();
+              }}>
+                Delete
               </button>
             )
           } else {
@@ -237,10 +257,31 @@ const ChoresPage = () => {
 
         <div className="content">
           <CreateChore show={modalShow} onHide={handleClose} onSave={handleChores} currChore={currChore}/>
+          <Modal show={deleteModalShow} onHide={handleDeleteModalClose}>
+            <Modal.Body>
+              {currChore != null && <p>Are you sure you want to delete chore {currChore.name}?</p>}
+              <p>This action cannot be undone.</p>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button id="declineButton" onClick={handleDeleteModalClose}>No</Button>
+              <Button onClick={() => {
+                ChoreService.deleteChore(currChore._id).then(() => {
+                  handleChores();
+                  handleDeleteModalClose();
+                })
+              }}>Yes</Button>
+            </Modal.Footer>
+          </Modal>
 
           <div id="main-content">
             <div id="choreListManipulation">
-              <Button id="newChore" onClick={handleShowNew}>New Chore</Button>
+              <Button id="newChore"
+                onClick={() => {
+                  setCurrChore(null);
+                  handleShow();
+                }}
+              >New Chore</Button>
             </div>
             <table id="choresList" {...getTableProps()}>
               <thead>
