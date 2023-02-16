@@ -76,7 +76,7 @@ const ChoresPage = () => {
     handleChores();
   }, []);
 
-  const PAGE_SIZE = 7; //Number of rows displayed in each page of the table, not including the header
+  const PAGE_SIZE = 8; //Number of rows displayed in each page of the table, not including the header
 
   // Format the information for each chore in order to display in the table
   const getChoreData = (chores) => {
@@ -113,11 +113,11 @@ const ChoresPage = () => {
     for(let i = NUM_CHORES % PAGE_SIZE; i > 0 && i < PAGE_SIZE; i++) {
       let chore = {
         id: -1,
-        name: "\u00A0",
-        freq: "\u00A0",
-        loc: "\u00A0",
-        dur: "\u00A0",
-        pref: "\u00A0"
+        name: "",
+        freq: "",
+        loc: "",
+        dur: "",
+        pref: ""
       };
 
       choreData.push(chore);
@@ -257,7 +257,7 @@ const ChoresPage = () => {
 
         <div className="content">
           <CreateChore show={modalShow} onHide={handleClose} onSave={handleChores} currChore={currChore}/>
-          <Modal show={deleteModalShow} onHide={handleDeleteModalClose}>
+          <Modal show={deleteModalShow} onHide={handleDeleteModalClose} centered>
             <Modal.Body>
               {currChore != null && <p>Are you sure you want to delete chore {currChore.name}?</p>}
               <p>This action cannot be undone.</p>
