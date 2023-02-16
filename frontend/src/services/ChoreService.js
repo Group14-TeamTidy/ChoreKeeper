@@ -41,6 +41,14 @@ const ChoreService = {
       preference: preference
     }, config)
   },
+
+  deleteChore: async (id) => {
+    return await axios
+    .delete(`${process.env.REACT_APP_API_BASE_URL}/chores/${id}`, config)
+    .then((res) => {
+      console.log(res.data.message);
+    });
+  },
 };
 
 export default ChoreService;
