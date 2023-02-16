@@ -1,0 +1,30 @@
+# This workflow will run tests using node
+name: Build Express Server
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  backend_unit_tests:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        run: npm install
+      - name: Build server
+        run: npm run build

@@ -10,7 +10,7 @@
     "start": "nodemon server.js",
     "build": "webpack --config webpack.config.js",
     "dev": "nodemon --watch server server.js",
-    "prodStart": "node build/bundle.js"
+    "prodStart": "node ./build/bundle.cjs"
   },
   "keywords": [],
   "author": "",

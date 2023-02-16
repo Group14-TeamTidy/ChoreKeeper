@@ -8,7 +8,7 @@ export default {
   externals: [nodeExternals()],
   output: {
     path: path.resolve("build"),
-    filename: "bundle.js",
+    filename: "bundle.cjs",
     libraryTarget: "commonjs",
   },
   module: {
