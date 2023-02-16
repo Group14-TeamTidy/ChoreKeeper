@@ -42,7 +42,7 @@ html, html body {
 }
 
 .header {
-  padding: 16px 24px;
+  margin: 24px;
 }
 
 .content {
@@ -55,7 +55,15 @@ html, html body {
 #main-content {
   padding: 0px;
   margin: 0px auto;
-  width: 100%;
+  width: 90%;
+}
+
+#dropdownMenuContainer {
+  float: right;
+}
+
+.p-menu {
+  width: max-content !important;
 }
 
 #choreListManipulation:after {
@@ -173,6 +181,10 @@ form .p-dropdown, form .p-inputtext {
   width: 100%;
 }
 
+.p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
 @media screen and (min-width: 500px) {
   form .p-dropdown, form .p-inputtext {
     width: 250px;
@@ -187,16 +199,4 @@ form .p-dropdown, form .p-inputtext {
 
 #cancelButton:focus, #declineButton:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6c757d, 0 1px 2px 0 rgb(0 0 0 / 0%);
-}
-
-.p-dropdown-panel {
-  z-index: 9999 !important;
-}
-
-#dropdownMenuContainer, #dropdownMenuContainer button {
-  float: right;
-}
-
-#dropdownMenu {
-  list-style: none;
 }

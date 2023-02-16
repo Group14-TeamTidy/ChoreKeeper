@@ -1,9 +1,10 @@
-import { React, useState, useEffect, useMemo } from "react";
+import { React, useState, useEffect, useMemo, useRef } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useTable, usePagination } from "react-table";
 import Modal from 'react-bootstrap/Modal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "primereact/button";
+import { Menu } from 'primereact/menu';
 // import { useQuery } from "react-query";
 import CreateChore from "../CreateChore";
 import AuthService from "../../services/AuthService";
@@ -11,28 +12,43 @@ import ChoreService from "../../services/ChoreService";
 
 const ChoresPage = () => {
   const navigate = useNavigate();
+  const currentUser = AuthService.getCurrentUser();
+  const token = AuthService.getToken();
+
   // Saved for future reference
   // const { isLoading, error, data } = useQuery("repoData", () =>
   //   axios.get(`${process.env.REACT_APP_API_BASE_URL}`).then((res) => res.data)
   // );
-
-  // Dropdown menu
-  const [open, setOpen] = useState(false);
-  const DropdownMenuItem = (props) => {
-    return (
-      <li>
-        <button className="dropdownItem" onClick={props.handler}>
-          {props.text}
-        </button>
-      </li>
-    );
-  };
 
   // Logs out the user
   const handleLogout = () => {
     AuthService.logout();
     navigate({ to: "/login", replace: true });
   };
+
+  // Dropdown menu
+  const userEmail = currentUser !== null ? currentUser.email : "";
+  const menu = useRef(null);
+  const items = [
+    {
+      label: "Account",
+      items: [
+        {
+          label: userEmail,
+        },
+        /*{
+          label: "Manage Account",
+          icon: 'pi pi-fw pi-user'
+        }*/
+      ]
+    },
+    { separator: true},
+    {
+      label: 'Log Out',
+      icon: 'pi pi-sign-out',
+      command: () => {handleLogout()},
+    }
+  ];
 
   // Modal for creating/editing chores
   const [modalShow, setModalShow] = useState(false);
@@ -59,13 +75,19 @@ const ChoresPage = () => {
         preference: ""
       },
     ];
-    ChoreService.getChores().then((res) => { chore = res.data; });
+    ChoreService.getChores().then(
+      (res) => { chore = res.data; },
+      (error) => { console.log(error.message )}
+    );
     return chore;
   });
 
   // Get the user's chores
   const handleChores = () => {
-    ChoreService.getChores().then((res) => { setChores(res.data); });
+    ChoreService.getChores().then(
+      (res) => { setChores(res.data); },
+      (error) => { console.log(error.message )}
+    );
   }
 
   // Current chore being updated
@@ -225,9 +247,6 @@ const ChoresPage = () => {
     return buttonNum + (pageIndex - (pageIndex % BUTTON_ROTATION));
   }
 
-  const currentUser = AuthService.getCurrentUser();
-  const token = AuthService.getToken();
-
   if (!currentUser || !token) {
     return <Navigate to="/login" />;
   } else {
@@ -235,26 +254,8 @@ const ChoresPage = () => {
       <div className="App">
         <div className="header">
           <div id="dropdownMenuContainer">
-            <button onClick={() => setOpen(!open)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-list"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                ></path>
-              </svg>
-            </button>
-            <ul id="dropdownMenu" className={open ? "" : "hidden"}>
-              <li>{currentUser.email}</li>
-              <DropdownMenuItem text={"Manage Account"} />
-              <DropdownMenuItem text={"Log Out"} handler={handleLogout} />
-            </ul>
+            <Menu model={items} popup ref={menu} />
+            <Button icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
           </div>
 
           <h1>Chore Keeper</h1>
@@ -271,10 +272,13 @@ const ChoresPage = () => {
             <Modal.Footer>
               <Button id="declineButton" onClick={handleDeleteModalClose}>No</Button>
               <Button onClick={() => {
-                ChoreService.deleteChore(currChore._id).then(() => {
-                  handleChores();
-                  handleDeleteModalClose();
-                })
+                ChoreService.deleteChore(currChore._id).then(
+                  () => {
+                    handleChores();
+                    handleDeleteModalClose();
+                  },
+                  (error) => { console.log(error.message )}
+                )
               }}>Yes</Button>
             </Modal.Footer>
           </Modal>

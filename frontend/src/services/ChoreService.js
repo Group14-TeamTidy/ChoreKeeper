@@ -1,16 +1,18 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 
-const token = AuthService.getToken();
-const config = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: token,
+const setConfig = (token) => {
+  return {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    }
   }
 };
 
 const ChoreService = {
   createChore: async (choreName, freqQuantity, freqTimePeriod, location, duration, preference) => {
+    let config = setConfig(AuthService.getToken());
     return await axios
     .post(`${process.env.REACT_APP_API_BASE_URL}/chores/`, {
         name: choreName,
@@ -25,10 +27,12 @@ const ChoreService = {
   },
 
   getChores: async () => {
+    let config = setConfig(AuthService.getToken());
     return await axios.get(`${process.env.REACT_APP_API_BASE_URL}/chores/`, config);
   },
 
   updateChore: async (id, choreName, freqQuantity, freqTimePeriod, location, duration, preference) => {
+    let config = setConfig(AuthService.getToken());
     return await axios
     .put(`${process.env.REACT_APP_API_BASE_URL}/chores/${id}`, {
       name: choreName,
@@ -43,6 +47,7 @@ const ChoreService = {
   },
 
   deleteChore: async (id) => {
+    let config = setConfig(AuthService.getToken());
     return await axios
     .delete(`${process.env.REACT_APP_API_BASE_URL}/chores/${id}`, config)
     .then((res) => {
