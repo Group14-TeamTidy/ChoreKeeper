@@ -77,6 +77,8 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
             document.getElementById("durationQuantity").value = durQuantity;
             setSelectedDuration(durInterval);
             setSelectedPreference(currChore.preference);
+
+            document.getElementById('contained-modal-title-vcenter').innerHTML = "Update Chore";
         }
     }
 
