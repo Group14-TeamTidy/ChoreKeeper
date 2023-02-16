@@ -102,13 +102,26 @@ html, html body {
   padding-left: 24px;
 }
 
-#choresList td:last-child, #choresList th:last-child {
-  padding-right: 24px;
-}
-
-#choresList td:last-child, #choresList th:last-child, #choreList td:nth-last-child(2), #choresList th:nth-last-child(2) {
+#choresList td:last-child, #choresList th:last-child, #choresList td:nth-last-child(2), #choresList th:nth-last-child(2) {
   width: 1%;
   white-space: nowrap;
+  padding-left: 12px;
+}
+
+#choresList td:last-child, #choresList th:last-child {
+  padding-left: 0px;
+  padding-right: 12px;
+}
+
+.editButton, .deleteButton {
+  border: none;
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px 16px;
+}
+
+.editButton:hover, .deleteButton:hover {
+  background-color: #ededed;
 }
 
 #paginationButtons {
