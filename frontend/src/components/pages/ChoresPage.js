@@ -32,6 +32,99 @@ const ChoresPage = () => {
     navigate({ to: "/login", replace: true });
   };
 
+  // Modal for creating/editing chores
+  const [modalShow, setModalShow] = useState(false);
+  const handleClose = () => setModalShow(false);
+  const handleShowNew = () => {
+    setModalShow(true);
+    setCurrChore(null);
+  }
+  const handleShowUpdate = () => {
+    setModalShow(true);
+  }
+
+  // List of user's chores
+  const [chores, setChores] = useState(() => {
+    let chore = [
+      {
+        _id: -1,
+        name: "",
+        frequency: {
+          quantity: "",
+          interval: ""
+        },
+        location: "",
+        duration: "",
+        preference: ""
+      },
+    ];
+    ChoreService.getChores().then((res) => { chore = res.data; });
+    return chore;
+  });
+
+  // Get the user's chores
+  const handleChores = () => {
+    ChoreService.getChores().then((res) => { setChores(res.data); });
+  }
+
+  // Current chore being updated
+  const [currChore, setCurrChore] = useState(null);
+
+  // Fill the table initially
+  useEffect(() => {
+    handleChores();
+  }, []);
+
+  const PAGE_SIZE = 7; //Number of rows displayed in each page of the table, not including the header
+
+  // Format the information for each chore in order to display in the table
+  const getChoreData = (chores) => {
+    const MIN_TO_SEC = 60;
+    const HOUR_TO_SEC = 3600;
+    let choreData = [];
+
+    chores.forEach((val) => {
+      let freqInterval = val.frequency.interval.charAt(0).toUpperCase() + val.frequency.interval.substring(1);
+      freqInterval = (val.frequency.quantity === 1) ? freqInterval.substring(0, freqInterval.length - 1) : freqInterval;
+      let frequency = (val.frequency.quantity && freqInterval) ? "Every " + val.frequency.quantity + " " + freqInterval : "";
+
+      let durQuantity = (val.duration < HOUR_TO_SEC) ? val.duration / MIN_TO_SEC : val.duration / HOUR_TO_SEC;
+      let durInterval = (val.duration < HOUR_TO_SEC) ? "minutes" : "hours";
+      durInterval = (durQuantity === 1) ? durInterval.substring(0, durInterval.length - 1) : durInterval;
+      let duration = (durQuantity && durInterval) ? durQuantity + " " + durInterval : "";
+
+      let preference = (val.preference) ? val.preference.charAt(0).toUpperCase() + val.preference.substring(1) : "";
+
+      choreData.push(
+        {
+          id: val._id,
+          name: val.name,
+          freq: frequency,
+          loc: val.location,
+          dur: duration,
+          pref: preference,
+        }
+      );
+    });
+
+    // Pad table with empty data to keep consistent table size
+    const NUM_CHORES = choreData.length;
+    for(let i = NUM_CHORES % PAGE_SIZE; i > 0 && i < PAGE_SIZE; i++) {
+      let chore = {
+        id: -1,
+        name: "\u00A0",
+        freq: "\u00A0",
+        loc: "\u00A0",
+        dur: "\u00A0",
+        pref: "\u00A0"
+      };
+
+      choreData.push(chore);
+    }
+
+    return choreData;
+  }
+
   //Chore table header
   const columns = useMemo(
     () => [
@@ -55,83 +148,28 @@ const ChoresPage = () => {
         Header: "Preference",
         accessor: "pref",
       },
-    ],
-    []
-  );
-
-  // Chores
-  const [chores, setChores] = useState(() => {
-    let chore = [
       {
-        name: "",
-        frequency: {
-          quantity: "",
-          interval: ""
+        id: "edit",
+        accessor: data => data.id,
+        Cell: ({value}) => {
+          if(value !== -1) {
+            return (
+              <button onClick={() => {
+                let chore = chores.find((val) => {return value === val._id});
+                setCurrChore(chore);
+                handleShowUpdate();
+              }}>
+                Edit
+              </button>
+            )
+          } else {
+            return "";
+          }
         },
-        location: "",
-        duration: "",
-        preference: ""
-      },
-    ];
-    ChoreService.getChores().then((res) => { chore = res.data; });
-    return chore;
-  });
-
-  const handleChores = () => {
-    ChoreService.getChores().then((res) => { setChores(res.data); });
-  }
-
-  // Fill the table initially
-  useEffect(() => {
-    handleChores();
-  }, []);
-
-  const PAGE_SIZE = 7; //Number of rows displayed in each page of the table, not including the header
-
-  // Format the information for each chore in order to display in the table
-  const getChoreData = (chores) => {
-    const MIN_TO_SEC = 60;
-    const HOUR_TO_SEC = 3600;
-    let choreData = [];
-
-    chores.forEach((val, i, array) => {
-      let freqInterval = val.frequency.interval.charAt(0).toUpperCase() + val.frequency.interval.substring(1);
-      freqInterval = (val.frequency.quantity === 1) ? freqInterval.substring(0, freqInterval.length - 1) : freqInterval;
-      let frequency = (val.frequency.quantity && freqInterval) ? "Every " + val.frequency.quantity + " " + freqInterval : "";
-
-      let durQuantity = (val.duration < HOUR_TO_SEC) ? val.duration / MIN_TO_SEC : val.duration / HOUR_TO_SEC;
-      let durInterval = (val.duration < HOUR_TO_SEC) ? "minutes" : "hours";
-      durInterval = (durQuantity === 1) ? durInterval.substring(0, durInterval.length - 1) : durInterval;
-      let duration = (durQuantity && durInterval) ? durQuantity + " " + durInterval : "";
-
-      let preference = (val.preference) ? val.preference.charAt(0).toUpperCase() + val.preference.substring(1) : "";
-
-      choreData.push(
-        {
-          name: val.name,
-          freq: frequency,
-          loc: val.location,
-          dur: duration,
-          pref: preference,
-        }
-      );
-    });
-
-    const NUM_CHORES = choreData.length;
-    for(let i = NUM_CHORES % PAGE_SIZE; i > 0 && i < PAGE_SIZE; i++) {
-      let chore = {
-        name: "\u00A0",
-        freq: "\u00A0",
-        loc: "\u00A0",
-        dur: "\u00A0",
-        pref: "\u00A0"
-      };
-
-      choreData.push(chore);
-    }
-
-    return choreData;
-  }
+      }
+    ],
+    [chores]
+  );
 
   // Chore data and table setup
   const data = useMemo(() => getChoreData(chores), [chores]);
@@ -161,11 +199,6 @@ const ChoresPage = () => {
     const BUTTON_ROTATION = 3;
     return buttonNum + (pageIndex - (pageIndex % BUTTON_ROTATION));
   }
-
-  // Modal for creating/editing chores
-  const [modalShow, setModalShow] = useState(false);
-  const handleClose = () => setModalShow(false);
-  const handleShow = () => setModalShow(true);
 
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
@@ -203,11 +236,11 @@ const ChoresPage = () => {
         </div>
 
         <div className="content">
-          <CreateChore show={modalShow} onHide={handleClose} onSave={handleChores}/>
+          <CreateChore show={modalShow} onHide={handleClose} onSave={handleChores} currChore={currChore}/>
 
           <div id="main-content">
             <div id="choreListManipulation">
-              <Button id="newChore" onClick={handleShow}>New Chore</Button>
+              <Button id="newChore" onClick={handleShowNew}>New Chore</Button>
             </div>
             <table id="choresList" {...getTableProps()}>
               <thead>

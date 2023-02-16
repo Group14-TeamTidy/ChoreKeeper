@@ -17,3 +17,12 @@ Launches the test runner in the interactive watch mode.
 ### `npm coverage`
 
 Launches the test runner in the interactive watch mode with test coverage.
+
+### `npm run build`
+
+Builds the app and optimizes it for production to the `build` folder.
+
+### `npm run prodStart`
+
+Runs the app in the production mode.
+Open [http://localhost:4000](http://localhost:4000) to view it in your browser.
