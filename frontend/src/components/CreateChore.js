@@ -16,10 +16,10 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
   const formik = useFormik({
     initialValues: {
       choreName: "",
-      frequencyQuantity: "",
+      frequencyQuantity: null,
       frequencyTimePeriod: "",
       location: "",
-      durationQuantity: "",
+      durationQuantity: null,
       durationTimePeriod: "",
       preference: ""
 
@@ -30,14 +30,18 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
         errors.choreName = "Chore name is required.";
       }
 
-      if (values.frequencyQuantity <= 0 || values.frequencyTimePeriod === "") {
+      if (values.frequencyQuantity === null || values.frequencyTimePeriod === "") {
         errors.frequencyQuantity = "Chore frequency is required.";
         errors.frequencyTimePeriod = "Chore frequency is required.";
+      } else if (values.frequencyQuantity === 0) {
+        errors.frequencyQuantity = "Chore frequency cannot be 0.";
       }
 
-      if (values.durationQuantity <= 0 || values.durationTimePeriod === "") {
+      if (values.durationQuantity === null || values.durationTimePeriod === "") {
         errors.durationQuantity = "Chore duration is required.";
         errors.durationTimePeriod = "Chore duration is required.";
+      } else if (values.durationQuantity === 0) {
+        errors.durationQuantity = "Chore duration cannot be 0.";
       }
 
       if (values.preference === "") {
@@ -87,8 +91,8 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
         });
       }
     },
-    validateOnBlur: false,
-    validateOnChange: false,
+    validateOnBlur: true,
+    validateOnChange: true,
   });
 
   const showServerErrorsToast = (message) => {
@@ -128,13 +132,13 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
       let durQuantity = (currChore.duration < HOUR_TO_SEC) ? currChore.duration / MIN_TO_SEC : currChore.duration / HOUR_TO_SEC;
       let durInterval = (currChore.duration < HOUR_TO_SEC) ? "Minutes" : "Hours";
 
-      document.getElementById("choreName").value = currChore.name;
-      formik.setFieldValue('frequencyQuantity', currChore.frequency.quantity);
-      formik.setFieldValue('frequencyTimePeriod', currChore.frequency.interval);
-      document.getElementById("location").value = currChore.location;
-      formik.setFieldValue('durationQuantity', durQuantity);
-      formik.setFieldValue('durationTimePeriod', durInterval);
-      formik.setFieldValue('preference', currChore.preference);
+      formik.setFieldValue('choreName', currChore.name, false);
+      formik.setFieldValue('frequencyQuantity', currChore.frequency.quantity, false);
+      formik.setFieldValue('frequencyTimePeriod', currChore.frequency.interval, false);
+      formik.setFieldValue('location', currChore.location, false);
+      formik.setFieldValue('durationQuantity', durQuantity, false);
+      formik.setFieldValue('durationTimePeriod', durInterval, false);
+      formik.setFieldValue('preference', currChore.preference, false);
 
       document.getElementById('contained-modal-title-vcenter').innerHTML = "Edit Chore";
     }
