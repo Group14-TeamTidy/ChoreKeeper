@@ -1,133 +1,280 @@
-import { React, useState } from "react";
+import { React, useRef } from "react";
 import { Button } from "primereact/button";
 import Modal from 'react-bootstrap/Modal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { InputText } from "primereact/inputtext";
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
+import { useFormik } from "formik";
+import { Toast } from "primereact/toast";
+import { classNames } from "primereact/utils";
 import ChoreService from "../services/ChoreService";
 
 const CreateChore = ({show, onHide, onSave, currChore}) => {
-    const handleSave = (e) => {
-        e.preventDefault();
+  const serverErrorsToast = useRef(null);
 
-        const choreName = e.target.choreName.value;
-        const freqQuantity = e.target.frequencyQuantity.value;
-        const freqTimePeriod = e.target.frequencyTimePeriod.value;
-        const location = e.target.location.value;
-        const durQuantity = e.target.durationQuantity.value;
-        const durTimePeriod = e.target.durationTimePeriod.value;
-        const preference = e.target.preference.value;
+  const formik = useFormik({
+    initialValues: {
+      choreName: "",
+      frequencyQuantity: "",
+      frequencyTimePeriod: "",
+      location: "",
+      durationQuantity: "",
+      durationTimePeriod: "",
+      preference: ""
 
-        const MIN_TO_SEC = 60;
-        const HOUR_TO_SEC = 3600;
-        var dur;
-        if(durTimePeriod === durations[0]) {
-            dur = durQuantity * MIN_TO_SEC;
-        } else if(durTimePeriod === durations[1]) {
-            dur = durQuantity * HOUR_TO_SEC;
-        }
-        const duration = dur;
+    },
+    validate: (values) => {
+      const errors = {};
+      if (values.choreName === "") {
+        errors.choreName = "Chore name is required";
+      }
 
-        if(currChore != null && currChore._id !== -1) {
-            ChoreService.updateChore(currChore._id, choreName, freqQuantity, freqTimePeriod, location, duration, preference).then(() => {onSave()});
-        } else {
-            ChoreService.createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference).then(() => {onSave()});
-        }
+      if (values.frequencyQuantity === "" || values.frequencyTimePeriod === "") {
+        errors.frequencyQuantity = "Chore frequency is required";
+        errors.frequencyTimePeriod = "Chore frequency is required";
+      }
 
-        handleClose();
+      if (values.durationQuantity === "" || values.durationTimePeriod === "") {
+        errors.durationQuantity = "Chore duration is required";
+        errors.durationTimePeriod = "Chore duration is required";
+      }
+
+      if (values.preference === "") {
+        errors.preference = "Chore preference is required";
+      }
+
+      return errors;
+    },
+    onSubmit: (values) => {
+      const choreName = values.choreName;
+      const freqQuantity = values.frequencyQuantity;
+      const freqTimePeriod = values.frequencyTimePeriod;
+      const location = values.location;
+      const durQuantity = values.durationQuantity;
+      const durTimePeriod = values.durationTimePeriod;
+      const preference = values.preference;
+
+      const MIN_TO_SEC = 60;
+      const HOUR_TO_SEC = 3600;
+      var dur;
+      if(durTimePeriod === durations[0]) {
+        dur = durQuantity * MIN_TO_SEC;
+      } else if(durTimePeriod === durations[1]) {
+        dur = durQuantity * HOUR_TO_SEC;
+      }
+      const duration = dur;
+
+      if(currChore != null && currChore._id !== -1) {
+        ChoreService
+        .updateChore(currChore._id, choreName, freqQuantity, freqTimePeriod, location, duration, preference)
+        .then(() => {
+          onSave();
+          handleClose();
+        })
+        .catch((error) => {
+          showServerErrorsToast(error.response.data.message);
+        });
+      } else {
+        ChoreService
+        .createChore(choreName, freqQuantity, freqTimePeriod, location, duration, preference)
+        .then(() => {
+          onSave();
+          handleClose();
+        })
+        .catch((error) => {
+          showServerErrorsToast(error.response.data.message);
+        });
+      }
     }
+  });
 
-    const handleClose = () => {
-        setSelectedFrequency(null);
-        setSelectedDuration(null);
-        setSelectedPreference(null);
-        onHide();
+  const showServerErrorsToast = (message) => {
+    serverErrorsToast.current.show({
+      severity: "error",
+      summary: "Server Error",
+      detail: message,
+      life: 3000,
+    });
+  };
+
+  const handleClose = () => {
+    formik.setFieldValue('frequencyTimePeriod', '');
+    formik.setFieldValue('durationTimePeriod', '');
+    formik.setFieldValue('preference', '');
+    onHide();
+  }
+
+  const frequencies = [
+    { name: "Days", val: "days" },
+    { name: "Weeks", val: "weeks" },
+    { name: "Months", val: "months" },
+    { name: "Years", val: "years" }
+  ];
+
+  const durations = ["Minutes", "Hours"];
+
+  const preferences = [
+    { name: "Low", val: "low"},
+    { name: "Medium", val: "medium"},
+    { name: "High", val: "high"}
+  ];
+
+  const handlePopulation = () => {
+    const MIN_TO_SEC = 60;
+    const HOUR_TO_SEC = 3600;
+
+    if(currChore != null && currChore._id !== -1) {
+      let durQuantity = (currChore.duration < HOUR_TO_SEC) ? currChore.duration / MIN_TO_SEC : currChore.duration / HOUR_TO_SEC;
+      let durInterval = (currChore.duration < HOUR_TO_SEC) ? "Minutes" : "Hours";
+
+      document.getElementById("choreName").value = currChore.name;
+      document.getElementById("frequencyQuantity").value = currChore.frequency.quantity;
+      formik.setFieldValue('frequencyTimePeriod', currChore.frequency.interval);
+      document.getElementById("location").value = currChore.location;
+      document.getElementById("durationQuantity").value = durQuantity;
+      formik.setFieldValue('durationTimePeriod', durInterval);
+      formik.setFieldValue('preference', currChore.preference);
+
+      document.getElementById('contained-modal-title-vcenter').innerHTML = "Edit Chore";
     }
+  }
 
-    const [selectedFrequency, setSelectedFrequency] = useState(null);
-    const frequencies = [
-        { name: "Days", val: "days" },
-        { name: "Weeks", val: "weeks" },
-        { name: "Months", val: "months" },
-        { name: "Years", val: "years" }
-    ];
+  return (
+    <div>
+      <Toast ref={serverErrorsToast} />
+      <Modal show={show} onHide={() => handleClose()} onShow={() => handlePopulation()} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">New Chore</Modal.Title>
+        </Modal.Header>
 
-    const [selectedDuration, setSelectedDuration] = useState(null);
-    const durations = ["Minutes", "Hours"];
+        <form onSubmit={formik.handleSubmit}>
+          <Modal.Body scrollable="true">
+            <div>
+              <label htmlFor="choreName">Name</label>
+              <InputText
+                type="text" id="choreName" name="choreName"
+                className={classNames({
+                  "user-form-text-input": true,
+                  "p-invalid": formik.errors.choreName,
+                })}
+                value={formik.values.choreName}
+                onChange={formik.handleChange}
+              />
 
-    const [selectedPreference, setSelectedPreference] = useState(null);
-    const preferences = [
-        { name: "Low", val: "low"},
-        { name: "Medium", val: "medium"},
-        { name: "High", val: "high"}
-    ];
+              {formik.errors.choreName && (
+                <small className="p-error field-validation-note">
+                  {formik.errors.choreName}
+                </small>
+              )}
+            </div>
 
-    const handlePopulation = () => {
-        const MIN_TO_SEC = 60;
-        const HOUR_TO_SEC = 3600;
+            <fieldset>
+              <legend>Frequency</legend>
 
-        if(currChore != null && currChore._id !== -1) {
-            let durQuantity = (currChore.duration < HOUR_TO_SEC) ? currChore.duration / MIN_TO_SEC : currChore.duration / HOUR_TO_SEC;
-            let durInterval = (currChore.duration < HOUR_TO_SEC) ? "Minutes" : "Hours";
+              <InputText
+                type="number" min="0" step="0.01"
+                id="frequencyQuantity" name="frequencyQuantity"
+                className={classNames({
+                  "user-form-text-input": true,
+                  "p-invalid": formik.errors.frequencyQuantity,
+                })}
+                value={formik.values.frequencyQuantity}
+                onChange={formik.handleChange}
+              />
 
-            document.getElementById("choreName").value = currChore.name;
-            document.getElementById("frequencyQuantity").value = currChore.frequency.quantity;
-            setSelectedFrequency(currChore.frequency.interval);
-            document.getElementById("location").value = currChore.location;
-            document.getElementById("durationQuantity").value = durQuantity;
-            setSelectedDuration(durInterval);
-            setSelectedPreference(currChore.preference);
+              <Dropdown
+                name="frequencyTimePeriod"
+                options={frequencies} optionLabel="name" optionValue="val"
+                placeholder="Select"
+                className={classNames({
+                  "user-form-text-input": true,
+                  "p-invalid": formik.errors.frequencyTimePeriod,
+                })}
+                value={formik.values.frequencyTimePeriod}
+                onChange={(e) => {
+                  formik.setFieldValue('frequencyTimePeriod', e.value);
+                }}
+              />
 
-            document.getElementById('contained-modal-title-vcenter').innerHTML = "Edit Chore";
-        }
-    }
+              {formik.errors.frequencyQuantity && (
+                <small className="p-error field-validation-note">
+                  {formik.errors.frequencyQuantity}
+                </small>
+              )}
+            </fieldset>
 
-    return (
-        <Modal show={show} onHide={() => handleClose()} onShow={() => handlePopulation()} size="lg">
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">New Chore</Modal.Title>
-            </Modal.Header>
-      
-            <form onSubmit={(e) => handleSave(e)}>
-                <Modal.Body scrollable="true">
-                        <div>
-                            <label htmlFor="choreName">Name</label>
-                            <InputText type="text" id="choreName" name="choreName" />
-                        </div>
+            <div>
+              <label htmlFor="location">Location</label>
+              <InputText type="text" id="location" name="location" />
+            </div>
 
-                        <fieldset>
-                            <legend>Frequency</legend>
-                            <InputText type="number" id="frequencyQuantity" name="frequencyQuantity" min="0" step="0.01" />
-                            <Dropdown name="frequencyTimePeriod" value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.value)} 
-                                options={frequencies} optionLabel="name" optionValue="val" placeholder="Select"/>
-                        </fieldset>
+            <fieldset>
+              <legend>Duration</legend>
 
-                        <div>
-                            <label htmlFor="location">Location</label>
-                            <InputText type="text" id="location" name="location" />
-                        </div>
+              <InputText
+                type="number" min="0" step="0.01"
+                id="durationQuantity" name="durationQuantity"
+                className={classNames({
+                  "user-form-text-input": true,
+                  "p-invalid": formik.errors.durationQuantity,
+                })}
+                value={formik.values.durationQuantity}
+                onChange={formik.handleChange}
+              />
 
-                        <fieldset>
-                            <legend>Duration</legend>
-                            <InputText type="number" id="durationQuantity" name="durationQuantity" min="0" step="0.01" />
-                            <Dropdown name="durationTimePeriod" value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} 
-                                options={durations} placeholder="Select"/>
-                        </fieldset>
+              <Dropdown
+                name="durationTimePeriod"
+                options={durations} placeholder="Select"
+                className={classNames({
+                  "user-form-text-input": true,
+                  "p-invalid": formik.errors.durationTimePeriod,
+                })}
+                value={formik.values.durationTimePeriod}
+                onChange={(e) => {
+                  formik.setFieldValue('durationTimePeriod', e.value);
+                }}
+              />
 
-                        <div>
-                            <label htmlFor="preference">Preference</label>
-                            <Dropdown id="preference" name="preference" value={selectedPreference} onChange={(e) => setSelectedPreference(e.value)} 
-                                options={preferences} placeholder="Select" optionLabel="name" optionValue="val"/>
-                        </div>
-                </Modal.Body>
+              {formik.errors.durationQuantity && (
+                <small className="p-error field-validation-note">
+                  {formik.errors.durationQuantity}
+                </small>
+              )}
+            </fieldset>
 
-                <Modal.Footer>
-                    <Button type="button" id="cancelButton" onClick={() => handleClose()}>Cancel</Button>
-                    <Button type="submit">Save</Button>
-                </Modal.Footer>
-            </form>
-        </Modal>
-    );
+            <div>
+              <label htmlFor="preference">Preference</label>
+              <Dropdown
+                id="preference" name="preference"
+                options={preferences} optionLabel="name" optionValue="val"
+                placeholder="Select"
+                className={classNames({
+                  "user-form-text-input": true,
+                  "p-invalid": formik.errors.preference,
+                })}
+                value={formik.values.preference}
+                onChange={(e) => {
+                  formik.setFieldValue('preference', e.value);
+                }}
+              />
+
+              {formik.errors.preference && (
+                <small className="p-error field-validation-note">
+                  {formik.errors.preference}
+                </small>
+              )}
+            </div>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button type="button" id="cancelButton" onClick={() => handleClose()}>Cancel</Button>
+            <Button type="submit">Save</Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
+    </div>
+  );
 }
 
 export default CreateChore;
