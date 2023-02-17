@@ -27,21 +27,21 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
     validate: (values) => {
       const errors = {};
       if (values.choreName === "") {
-        errors.choreName = "Chore name is required";
+        errors.choreName = "Chore name is required.";
       }
 
-      if (values.frequencyQuantity === "" || values.frequencyTimePeriod === "") {
-        errors.frequencyQuantity = "Chore frequency is required";
-        errors.frequencyTimePeriod = "Chore frequency is required";
+      if (values.frequencyQuantity <= 0 || values.frequencyTimePeriod === "") {
+        errors.frequencyQuantity = "Chore frequency is required.";
+        errors.frequencyTimePeriod = "Chore frequency is required.";
       }
 
-      if (values.durationQuantity === "" || values.durationTimePeriod === "") {
-        errors.durationQuantity = "Chore duration is required";
-        errors.durationTimePeriod = "Chore duration is required";
+      if (values.durationQuantity <= 0 || values.durationTimePeriod === "") {
+        errors.durationQuantity = "Chore duration is required.";
+        errors.durationTimePeriod = "Chore duration is required.";
       }
 
       if (values.preference === "") {
-        errors.preference = "Chore preference is required";
+        errors.preference = "Chore preference is required.";
       }
 
       return errors;
@@ -86,7 +86,9 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
           showServerErrorsToast(error.response.data.message);
         });
       }
-    }
+    },
+    validateOnBlur: false,
+    validateOnChange: false,
   });
 
   const showServerErrorsToast = (message) => {
@@ -99,9 +101,7 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
   };
 
   const handleClose = () => {
-    formik.setFieldValue('frequencyTimePeriod', '');
-    formik.setFieldValue('durationTimePeriod', '');
-    formik.setFieldValue('preference', '');
+    formik.resetForm();
     onHide();
   }
 
@@ -129,10 +129,10 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
       let durInterval = (currChore.duration < HOUR_TO_SEC) ? "Minutes" : "Hours";
 
       document.getElementById("choreName").value = currChore.name;
-      document.getElementById("frequencyQuantity").value = currChore.frequency.quantity;
+      formik.setFieldValue('frequencyQuantity', currChore.frequency.quantity);
       formik.setFieldValue('frequencyTimePeriod', currChore.frequency.interval);
       document.getElementById("location").value = currChore.location;
-      document.getElementById("durationQuantity").value = durQuantity;
+      formik.setFieldValue('durationQuantity', durQuantity);
       formik.setFieldValue('durationTimePeriod', durInterval);
       formik.setFieldValue('preference', currChore.preference);
 
@@ -172,15 +172,17 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
             <fieldset>
               <legend>Frequency</legend>
 
-              <InputText
-                type="number" min="0" step="0.01"
+              <InputNumber
                 id="frequencyQuantity" name="frequencyQuantity"
+                useGrouping={false}
                 className={classNames({
                   "user-form-text-input": true,
                   "p-invalid": formik.errors.frequencyQuantity,
                 })}
                 value={formik.values.frequencyQuantity}
-                onChange={formik.handleChange}
+                onValueChange={(e) => {
+                  formik.setFieldValue('frequencyQuantity', e.value);
+                }}
               />
 
               <Dropdown
@@ -206,21 +208,28 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
 
             <div>
               <label htmlFor="location">Location</label>
-              <InputText type="text" id="location" name="location" />
+              <InputText
+                type="text" id="location" name="location"
+                value={formik.values.location}
+                onChange={formik.handleChange}
+              />
             </div>
 
             <fieldset>
               <legend>Duration</legend>
 
-              <InputText
-                type="number" min="0" step="0.01"
+              <InputNumber
                 id="durationQuantity" name="durationQuantity"
+                useGrouping={false}
+                minFractionDigits={0} maxFractionDigits={2}
                 className={classNames({
                   "user-form-text-input": true,
                   "p-invalid": formik.errors.durationQuantity,
                 })}
                 value={formik.values.durationQuantity}
-                onChange={formik.handleChange}
+                onValueChange={(e) => {
+                  formik.setFieldValue('durationQuantity', e.value);
+                }}
               />
 
               <Dropdown
