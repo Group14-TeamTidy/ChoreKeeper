@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +31,172 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+html, html body {
+  background-color: #fafafa;
+}
+
+.header {
+  margin: 24px;
+}
+
+.content {
+  margin: auto;
+  max-width: 1225px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#main-content {
+  padding: 0px;
+  margin: 0px auto;
+  width: 90%;
+}
+
+#dropdownMenuContainer {
+  float: right;
+}
+
+.p-menu {
+  width: max-content !important;
+}
+
+#choreListManipulation:after {
+  content: "";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+#newChore {
+  float: right;
+}
+
+#choresList {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid black;
+  border-radius: 16px;
+  box-shadow: 2px 2px 8px -1px lightgray;
+  margin: 16px auto;
+  width: 100%;
+  overflow: hidden;
+}
+
+#choresList thead {
+  background-color: #dedede;
+  border-bottom: 1px solid black;
+}
+
+#choresList tbody {
+  background-color: white;
+}
+
+#choresList > tbody > tr:not(:last-child) > td, #choresList > thead > tr > th {
+  border-bottom: 1px solid black;
+}
+
+#choresList tr {
+  height: 50px;
+}
+
+#choresList td, #choresList th {
+  padding-left: 24px;
+}
+
+#choresList td:last-child, #choresList th:last-child, #choresList td:nth-last-child(2), #choresList th:nth-last-child(2) {
+  width: 1%;
+  white-space: nowrap;
+  padding-left: 12px;
+}
+
+#choresList td:last-child, #choresList th:last-child {
+  padding-left: 0px;
+  padding-right: 12px;
+}
+
+.editButton, .deleteButton {
+  border: none;
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px 16px;
+}
+
+.editButton:hover, .deleteButton:hover {
+  background-color: #ededed;
+}
+
+#paginationButtons {
+  text-align: center;
+}
+
+#paginationButtons button:not(.currentPage) {
+  background-color: #fafafa;
+  border: none;
+  color: black;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+#paginationButtons button:not(.currentPage):hover {
+  background-color: #ededed;
+  border-color: #ededed;
+}
+
+#paginationButtons button {
+  border: none;
+  margin: 0px 2px;
+}
+
+#paginationButtons button:focus {
+  box-shadow: none;
+}
+
+#paginationButtons button:disabled {
+  visibility: hidden;
+}
+
+form label {
+  font-size: calc(1rem + .3vw);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+form legend {
+  font-size: calc(1rem + .3vw);
+}
+
+form div, form fieldset {
+  margin-bottom: 10px;
+}
+
+form .p-inputtext {
+  margin-right: 12px;
+}
+
+form .p-dropdown, form .p-inputtext {
+  width: 100%;
+}
+
+.p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
+@media screen and (min-width: 500px) {
+  form .p-dropdown, form .p-inputtext {
+    width: 250px;
+  }
+}
+
+#cancelButton, #declineButton {
+  margin-right: 12px;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+#cancelButton:focus, #declineButton:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6c757d, 0 1px 2px 0 rgb(0 0 0 / 0%);
 }

@@ -1,0 +1,19 @@
+services:
+
+  server:
+    env_file:
+      "./server/.env"
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    image: chorekeeper/chorekeeper-express-backend:latest
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    image: chorekeeper/chorekeeper-react-frontend:latest
+    ports:
+      - "3000:3000"

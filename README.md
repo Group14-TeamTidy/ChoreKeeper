@@ -42,7 +42,7 @@ We want our application to be a vehicle for behavior change. Many people find it
 - [Confluence](https://keepers.atlassian.net/wiki/spaces/CK/pages/524292/Meeting+Notes)
 
 #### Version Control and CI/CD
-- [Github](https://github.com/JoshuaDueck/ChoreKeeper)
+- [Github](https://github.com/Group14-TeamTidy/ChoreKeeper)
 - Github Actions
 
 ## User Stories
