@@ -132,13 +132,13 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
       let durQuantity = (currChore.duration < HOUR_TO_SEC) ? currChore.duration / MIN_TO_SEC : currChore.duration / HOUR_TO_SEC;
       let durInterval = (currChore.duration < HOUR_TO_SEC) ? "Minutes" : "Hours";
 
-      formik.setFieldValue('choreName', currChore.name);
-      formik.setFieldValue('frequencyQuantity', currChore.frequency.quantity);
-      formik.setFieldValue('frequencyTimePeriod', currChore.frequency.interval);
-      formik.setFieldValue('location', currChore.location);
-      formik.setFieldValue('durationQuantity', durQuantity);
-      formik.setFieldValue('durationTimePeriod', durInterval);
-      formik.setFieldValue('preference', currChore.preference);
+      formik.setFieldValue('choreName', currChore.name, false);
+      formik.setFieldValue('frequencyQuantity', currChore.frequency.quantity, false);
+      formik.setFieldValue('frequencyTimePeriod', currChore.frequency.interval, false);
+      formik.setFieldValue('location', currChore.location, false);
+      formik.setFieldValue('durationQuantity', durQuantity, false);
+      formik.setFieldValue('durationTimePeriod', durInterval, false);
+      formik.setFieldValue('preference', currChore.preference, false);
 
       document.getElementById('contained-modal-title-vcenter').innerHTML = "Edit Chore";
     }
