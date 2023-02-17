@@ -91,8 +91,8 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
         });
       }
     },
-    validateOnBlur: false,
-    validateOnChange: false,
+    validateOnBlur: true,
+    validateOnChange: true,
   });
 
   const showServerErrorsToast = (message) => {
@@ -127,8 +127,6 @@ const CreateChore = ({show, onHide, onSave, currChore}) => {
   const handlePopulation = () => {
     const MIN_TO_SEC = 60;
     const HOUR_TO_SEC = 3600;
-
-    formik.resetForm();
 
     if(currChore != null && currChore._id !== -1) {
       let durQuantity = (currChore.duration < HOUR_TO_SEC) ? currChore.duration / MIN_TO_SEC : currChore.duration / HOUR_TO_SEC;
