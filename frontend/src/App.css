@@ -37,10 +37,6 @@ html, html body {
   background-color: #fafafa;
 }
 
-.hidden {
-  display: none;
-}
-
 .header {
   margin: 24px;
 }
@@ -157,6 +153,10 @@ html, html body {
 
 #paginationButtons button:focus {
   box-shadow: none;
+}
+
+#paginationButtons button:disabled {
+  visibility: hidden;
 }
 
 form label {

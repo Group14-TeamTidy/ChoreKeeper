@@ -321,20 +321,20 @@ const ChoresPage = () => {
             </table>
 
             <div id="paginationButtons">
-              {canPreviousPage && <Button onClick={() => previousPage()}>
+              <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1.5em" fill="currentColor" className="bi bi-chevron-left" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
                 </svg>
-              </Button>}
+              </Button>
               {pageCount > 1 && pageCount >= setPageButton(1, pageIndex) && <Button className={setPageButton(1, pageIndex) === pageIndex + 1 ? "currentPage" : ""} onClick={() => {gotoPage(setPageButton(1, pageIndex) - 1)}}>{setPageButton(1, pageIndex)}</Button>}
               {pageCount > 1 && pageCount >= setPageButton(2, pageIndex) && <Button className={setPageButton(2, pageIndex) === pageIndex + 1 ? "currentPage" : ""} onClick={() => {gotoPage(setPageButton(2, pageIndex) - 1)}}>{setPageButton(2, pageIndex)}</Button>}
               {pageCount >= setPageButton(3, pageIndex) && <Button className={setPageButton(3, pageIndex) === pageIndex + 1 ? "currentPage" : ""} onClick={() => {gotoPage(setPageButton(3, pageIndex) - 1)}}>{setPageButton(3, pageIndex)}</Button>}
               {pageCount >= setPageButton(4, pageIndex) && <Button className={setPageButton(4, pageIndex) === pageIndex + 1 ? "currentPage" : ""} onClick={() => {gotoPage(setPageButton(4, pageIndex) - 1)}}>{setPageButton(4, pageIndex)}</Button>}
-              {canNextPage && <Button onClick={() => nextPage()} disabled={!canNextPage}>
+              <Button onClick={() => nextPage()} disabled={!canNextPage}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1.5em" fill="currentColor" className="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                 </svg>
-              </Button>}
+              </Button>
             </div>
           </div>
         </div>
