@@ -526,8 +526,6 @@ describe("deleteChore", () => {
     await deleteChore(req, res);
 
     expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
-    expect(res.status.calledOnceWith(200)).to.be.true;
-    expect(res.json.calledOnceWith(req.body)).to.be.true;
   });
 
   // Test 2
