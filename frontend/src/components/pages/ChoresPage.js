@@ -1,26 +1,32 @@
 import { React, useState, useEffect, useMemo, useRef } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useTable, usePagination } from "react-table";
-import Modal from 'react-bootstrap/Modal';
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "primereact/button";
-import { Menu } from 'primereact/menu';
+import { Menu } from "primereact/menu";
+import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useMutation, useQuery } from "react-query";
-import CreateChore from "../CreateChore";
+import ChoreCreateModal from "../ChoreCreateModal";
 import AuthService from "../../services/AuthService";
 import ChoreService from "../../services/ChoreService";
 import { queryClient } from "../../App";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Dialog } from "primereact/dialog";
 
 const ChoresPage = () => {
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
+  const serverErrorsToast = useRef(null);
 
   const { isLoading: isChoresLoading, data: choresData } = useQuery(
     "chores",
-    () => ChoreService.getChores()
+    () => ChoreService.getChores(),
+    {
+      onError: (error) => {
+        showServerErrorsToast(error.response.data.message);
+      },
+    }
   );
 
   const deleteChoreMutation = useMutation(
@@ -29,17 +35,20 @@ const ChoresPage = () => {
       onSuccess: () => {
         queryClient.invalidateQueries("chores");
       },
-    }
-  );
-
-  const editChoreMutation = useMutation(
-    (chore) => ChoreService.updateChore(chore),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("chores");
+      onError: (error) => {
+        showServerErrorsToast(error.response.data.message);
       },
     }
   );
+
+  const showServerErrorsToast = (message) => {
+    serverErrorsToast.current.show({
+      severity: "error",
+      summary: "Server Error",
+      detail: message,
+      life: 3000,
+    });
+  };
 
   // Logs out the user
   const handleLogout = () => {
@@ -286,7 +295,8 @@ const ChoresPage = () => {
     return <Navigate to="/login" />;
   } else {
     return (
-      <div className="App">
+      <>
+        <Toast ref={serverErrorsToast} />
         <div className="header">
           <div id="dropdownMenuContainer">
             <Menu model={items} popup ref={menu} />
@@ -300,39 +310,37 @@ const ChoresPage = () => {
           <ProgressSpinner className="chore-spinner" strokeWidth="8" />
         ) : (
           <div className="content">
-            <CreateChore
+            <ChoreCreateModal
               show={modalShow}
               onHide={handleClose}
               onSave={handleChores}
               currChore={currChore}
             />
-            <Modal
-              show={deleteModalShow}
+            <Dialog
+              visible={deleteModalShow}
+              header="Delete Chore"
+              footer={
+                <>
+                  <Button id="declineButton" onClick={handleDeleteModalClose}>
+                    No
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      deleteChoreMutation.mutate(currChore._id);
+                      handleDeleteModalClose();
+                    }}
+                  >
+                    Yes
+                  </Button>
+                </>
+              }
               onHide={handleDeleteModalClose}
-              centered
             >
-              <Modal.Body>
-                {currChore != null && (
-                  <p>Are you sure you want to delete chore {currChore.name}?</p>
-                )}
-                <p>This action cannot be undone.</p>
-              </Modal.Body>
-
-              <Modal.Footer>
-                <Button id="declineButton" onClick={handleDeleteModalClose}>
-                  No
-                </Button>
-                <Button
-                  onClick={() => {
-                    deleteChoreMutation.mutate(currChore._id);
-                    handleDeleteModalClose();
-                  }}
-                >
-                  Yes
-                </Button>
-              </Modal.Footer>
-            </Modal>
-
+              {currChore != null && (
+                <p>Are you sure you want to delete chore {currChore.name}?</p>
+              )}
+              <p>This action cannot be undone.</p>
+            </Dialog>
             <div id="main-content">
               <div id="choreListManipulation">
                 <Button
@@ -470,7 +478,7 @@ const ChoresPage = () => {
           </div>
         )}
         <ReactQueryDevtools />
-      </div>
+      </>
     );
   }
 };

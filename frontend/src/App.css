@@ -212,3 +212,12 @@ form .p-dropdown, form .p-inputtext {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+td {
+  font-weight: 400;
+}
