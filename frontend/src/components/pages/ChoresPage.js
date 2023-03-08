@@ -23,7 +23,6 @@ const ChoresPage = () => {
     () => ChoreService.getChores()
   );
 
-  // A mutation to delete a chore
   const deleteChoreMutation = useMutation(
     (id) => ChoreService.deleteChore(id),
     {
