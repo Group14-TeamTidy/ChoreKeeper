@@ -86,9 +86,7 @@ export const getAllChores = async (req, res) => {
     const user = await User.findOne({ _id: userID });
 
     // Get the list of chores for the user
-    const chores = await Promise.all(
-      user.chores.map((id) => Chore.findById(id))
-    );
+    const chores = await Chore.find({ _id: { $in: user.chores } });
 
     // Format the chore list for the response
     const formattedChores = chores.map(
@@ -143,9 +141,14 @@ export const editChore = async (req, res) => {
   try {
     const id = req.params.id;
 
+    console.log("req.body: ", req.body);
+
     const chore = await Chore.findByIdAndUpdate({ _id: id }, req.body, {
       new: true,
     });
+
+    console.log("chore: ", chore);
+
     if (chore === null) {
       return res
         .status(404)
