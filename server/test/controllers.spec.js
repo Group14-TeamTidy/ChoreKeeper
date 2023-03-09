@@ -245,14 +245,12 @@ describe("Testing Chores controllers", () => {
       // stub the  mongoose findOne function to return a valid null
 
       sandbox.stub(Chore, "findOne").returns(null);
-      sandbox
-        .stub(User, "findOne")
-        .returns({
-          email: "test@test.com",
-          password: "1234",
-          chores: [],
-          save: sandbox.stub().resolves(),
-        });
+      sandbox.stub(User, "findOne").returns({
+        email: "test@test.com",
+        password: "1234",
+        chores: [],
+        save: sandbox.stub().resolves(),
+      });
       sandbox.stub(Chore.prototype, "save").returns({
         _id: "chore123",
         name: "Clean the kitchen",
@@ -334,11 +332,13 @@ describe("Testing Chores controllers", () => {
         duration: 45,
         preference: "morning",
       };
-      findByIdStub
-        .withArgs("abcdef")
-        .returns(chore1)
-        .withArgs("ghijkl")
-        .returns(chore2);
+      // Create a stub for the Chore model
+      const choreStub = sinon.stub(Chore, "find");
+
+      // Set the stub to return a predefined list of chores
+      choreStub
+        .withArgs({ _id: { $in: user.chores } })
+        .returns([chore1, chore2]);
 
       await getAllChores(req, res);
 
@@ -540,7 +540,8 @@ describe("deleteChore", () => {
 
     expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
     expect(res.status.calledOnceWith(500)).to.be.true;
-    expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to.be.true;
+    expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to.be
+      .true;
   });
 });
 //-------------------------------------------------------------TESTS FOR DELETE CHORE ENDED-----------------------------------------------------------------------------

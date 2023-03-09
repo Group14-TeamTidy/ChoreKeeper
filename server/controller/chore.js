@@ -17,7 +17,7 @@ export const createChore = async (req, res) => {
 
   try {
     const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
-    // console.log(req.body);
+
     console.log(
       `Task Name: ${name},\nFrequency Quantity & Interval: Every ${frequency.quantity} ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`
     );
@@ -86,9 +86,7 @@ export const getAllChores = async (req, res) => {
     const user = await User.findOne({ _id: userID });
 
     // Get the list of chores for the user
-    const chores = await Promise.all(
-      user.chores.map((id) => Chore.findById(id))
-    );
+    const chores = await Chore.find({ _id: { $in: user.chores } });
 
     // Format the chore list for the response
     const formattedChores = chores.map(
@@ -146,6 +144,7 @@ export const editChore = async (req, res) => {
     const chore = await Chore.findByIdAndUpdate({ _id: id }, req.body, {
       new: true,
     });
+
     if (chore === null) {
       return res
         .status(404)
