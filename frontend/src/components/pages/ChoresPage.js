@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useMemo, useRef } from "react";
+import { React, useState, useMemo, useRef } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useTable, usePagination } from "react-table";
 import { Button } from "primereact/button";
@@ -259,11 +259,11 @@ const ChoresPage = () => {
         },
       },
     ],
-    [choresData]
+    [choresData, isChoresLoading]
   );
 
   // Chore data and table setup
-  const data = useMemo(() => formatChoreData(), [choresData]);
+  const data = useMemo(formatChoreData, [choresData, isChoresLoading]);
   const {
     getTableProps,
     getTableBodyProps,
