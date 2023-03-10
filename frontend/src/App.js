@@ -3,7 +3,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import "./App.css";
 import LogIn from "./components/pages/LogIn";
 import SignUp from "./components/pages/SignUp";
-import ChoresPage from "./components/pages/ChoresPage";
+import HomePage from "./components/pages/HomePage"
 import ChoreService from "./services/ChoreService";
 
 const queryClient = new QueryClient();
@@ -15,16 +15,9 @@ function App() {
       <Router
         location={location}
         routes={[
-          { path: "/", element: <ChoresPage /> },
-          {
-            path: "chores",
-            element: <ChoresPage />,
-            loader: () =>
-              queryClient.getQueryData("chores") ??
-              queryClient
-                .fetchQuery("chores", ChoreService.getChores)
-                .then(() => ({})),
-          },
+          { path: "/", element: <HomePage /> },
+          { path: "chores", element: <HomePage /> },
+          { path: "schedule", element: <HomePage /> },
           { path: "login", element: <LogIn /> },
           { path: "signup", element: <SignUp /> },
         ]}

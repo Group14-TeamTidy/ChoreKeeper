@@ -94,6 +94,10 @@ html, html body {
   background-color: white;
 }
 
+#choresList th {
+  text-align: left;
+}
+
 #choresList > tbody > tr:not(:last-child) > td, #choresList > thead > tr > th {
   border-bottom: 1px solid black;
 }
