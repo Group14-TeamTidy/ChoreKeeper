@@ -297,17 +297,6 @@ const ChoresPage = () => {
             <p>This action cannot be undone.</p>
           </Dialog>
           <div id="main-content">
-            <div id="choreListManipulation">
-              <Button
-                id="newChore"
-                onClick={() => {
-                  setCurrChore(null);
-                  handleShow();
-                }}
-              >
-                New Chore
-              </Button>
-            </div>
             <table id="choresList" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (

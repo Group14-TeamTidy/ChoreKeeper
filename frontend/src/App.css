@@ -37,8 +37,24 @@ html, html body {
   background-color: #fafafa;
 }
 
-.header {
+#header {
   margin: 24px;
+}
+
+#headerButtons {
+  float: right;
+}
+
+#dropdownMenuContainer {
+  float: right;
+}
+
+#newChore {
+  margin-right: 15px;
+}
+
+.p-menu {
+  width: max-content !important;
 }
 
 .content {
@@ -52,26 +68,6 @@ html, html body {
   padding: 0px;
   margin: 0px auto;
   width: 90%;
-}
-
-#dropdownMenuContainer {
-  float: right;
-}
-
-.p-menu {
-  width: max-content !important;
-}
-
-#choreListManipulation:after {
-  content: "";
-  visibility: hidden;
-  display: block;
-  height: 0;
-  clear: both;
-}
-
-#newChore {
-  float: right;
 }
 
 #choresList {
