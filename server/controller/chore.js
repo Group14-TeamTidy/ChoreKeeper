@@ -38,7 +38,7 @@ export const createChore = async (req, res) => {
         message: `Chore: ${name} already exists. If you want to change somthing, please use the EDIT option.`,
       });
     }
-
+    const createdAt = Date.now();  
     // creating a new chore to add to database
     const newChore = new Chore({
       name,
@@ -46,6 +46,7 @@ export const createChore = async (req, res) => {
       location,
       duration,
       preference,
+      createdAt,
     });
 
     // Save to database

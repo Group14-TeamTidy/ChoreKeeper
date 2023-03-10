@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
     min: 5,
   },
   chores: [{ type: Schema.Types.ObjectId, ref: "Chore" }],
+  schedules: [{ type: Schema.Types.ObjectId, ref: "DailySchedule"}]
 });
 
 const User = mongoose.model("User", UserSchema);
