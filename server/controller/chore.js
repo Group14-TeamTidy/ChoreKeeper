@@ -222,7 +222,7 @@ export const deleteChore = async (req, res) => {
 }; //deleteChore
 
 /*
- ** This function edits the details of an existing chore
+ ** This function checks off a chore by updating its nextOccurrence and checkedOff params
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
