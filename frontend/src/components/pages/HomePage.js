@@ -2,20 +2,18 @@ import { React, useRef ,useState } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
+import { queryClient, location } from "../../App";
+import { ReactQueryDevtools } from "react-query/devtools";
 import AuthService from "../../services/AuthService";
-import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
-import { QueryClientProvider, QueryClient } from "react-query";
 import ChoresPage from "./ChoresPage.js";
 import SchedulePage from "./SchedulePage.js";
-import ChoreService from "../../services/ChoreService";
 import ChoreCreateModal from "../ChoreCreateModal";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
-  const queryClient = new QueryClient();
-  const location = new ReactLocation();
+  let displayChoresPage = window.location.pathname == "/chores";
 
   // Logs out the user
   const handleLogout = () => {
@@ -87,26 +85,7 @@ const HomePage = () => {
           currChore={null}
         />
 
-        <QueryClientProvider client={queryClient}>
-          <Router
-            location={location}
-            routes={[
-              { path: "/", element: <SchedulePage /> },
-              {
-                path: "chores",
-                element: <ChoresPage />,
-                loader: () =>
-                  queryClient.getQueryData("chores") ??
-                  queryClient
-                    .fetchQuery("chores", ChoreService.getChores)
-                    .then(() => ({})),
-              },
-              { path: "schedule", element: <SchedulePage /> },
-            ]}
-          >
-            <Outlet />
-          </Router>
-        </QueryClientProvider>
+        {displayChoresPage ? <ChoresPage/> : <SchedulePage />}
       </>
     )
   }

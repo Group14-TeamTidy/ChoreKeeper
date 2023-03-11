@@ -16,7 +16,15 @@ function App() {
         location={location}
         routes={[
           { path: "/", element: <HomePage /> },
-          { path: "chores", element: <HomePage /> },
+          {
+            path: "chores",
+            element: <HomePage />,
+            loader: () =>
+              queryClient.getQueryData("chores") ??
+              queryClient
+                .fetchQuery("chores", ChoreService.getChores)
+                .then(() => ({})),
+          },
           { path: "schedule", element: <HomePage /> },
           { path: "login", element: <LogIn /> },
           { path: "signup", element: <SignUp /> },
