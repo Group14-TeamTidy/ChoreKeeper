@@ -37,8 +37,28 @@ html, html body {
   background-color: #fafafa;
 }
 
-.header {
+#header {
   margin: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header Button {
+  margin: 10px;
+}
+
+#navButtons Button:not(.currPage) {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+#dropdownMenuContainer {
+  float: right;
+}
+
+.p-menu {
+  width: max-content !important;
 }
 
 .content {
@@ -52,26 +72,6 @@ html, html body {
   padding: 0px;
   margin: 0px auto;
   width: 90%;
-}
-
-#dropdownMenuContainer {
-  float: right;
-}
-
-.p-menu {
-  width: max-content !important;
-}
-
-#choreListManipulation:after {
-  content: "";
-  visibility: hidden;
-  display: block;
-  height: 0;
-  clear: both;
-}
-
-#newChore {
-  float: right;
 }
 
 #choresList {
@@ -92,6 +92,10 @@ html, html body {
 
 #choresList tbody {
   background-color: white;
+}
+
+#choresList th {
+  text-align: left;
 }
 
 #choresList > tbody > tr:not(:last-child) > td, #choresList > thead > tr > th {

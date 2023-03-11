@@ -1,22 +1,16 @@
 import { React, useState, useMemo, useRef } from "react";
-import { Navigate, useNavigate } from "@tanstack/react-location";
 import { useTable, usePagination } from "react-table";
 import { Button } from "primereact/button";
-import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useMutation, useQuery } from "react-query";
 import ChoreCreateModal from "../ChoreCreateModal";
-import AuthService from "../../services/AuthService";
 import ChoreService from "../../services/ChoreService";
 import { queryClient } from "../../App";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Dialog } from "primereact/dialog";
 
 const ChoresPage = () => {
-  const navigate = useNavigate();
-  const currentUser = AuthService.getCurrentUser();
-  const token = AuthService.getToken();
   const serverErrorsToast = useRef(null);
 
   const { isLoading: isChoresLoading, data: choresData } = useQuery(
@@ -49,34 +43,6 @@ const ChoresPage = () => {
       life: 3000,
     });
   };
-
-  // Logs out the user
-  const handleLogout = () => {
-    AuthService.logout();
-    navigate({ to: "/login", replace: true });
-  };
-
-  // Dropdown menu
-  const userEmail = currentUser !== null ? currentUser.email : "";
-  const menu = useRef(null);
-  const items = [
-    {
-      label: "Account",
-      items: [
-        {
-          label: userEmail,
-        },
-      ],
-    },
-    { separator: true },
-    {
-      label: "Log Out",
-      icon: "pi pi-sign-out",
-      command: () => {
-        handleLogout();
-      },
-    },
-  ];
 
   // Modal for creating/editing chores
   const [modalShow, setModalShow] = useState(false);
@@ -291,196 +257,173 @@ const ChoresPage = () => {
     return buttonNum + (pageIndex - (pageIndex % BUTTON_ROTATION));
   };
 
-  if (!currentUser || !token) {
-    return <Navigate to="/login" />;
-  } else {
-    return (
-      <>
-        <Toast ref={serverErrorsToast} />
-        <div className="header">
-          <div id="dropdownMenuContainer">
-            <Menu model={items} popup ref={menu} />
-            <Button icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
-          </div>
+  return (
+    <>
+      <Toast ref={serverErrorsToast} />
 
-          <h1>Chore Keeper</h1>
-        </div>
-
-        {isChoresLoading ? (
-          <ProgressSpinner className="chore-spinner" strokeWidth="8" />
-        ) : (
-          <div className="content">
-            <ChoreCreateModal
-              show={modalShow}
-              onHide={handleClose}
-              onSave={handleChores}
-              currChore={currChore}
-            />
-            <Dialog
-              visible={deleteModalShow}
-              header="Delete Chore"
-              footer={
-                <>
-                  <Button id="declineButton" onClick={handleDeleteModalClose}>
-                    No
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      deleteChoreMutation.mutate(currChore._id);
-                      handleDeleteModalClose();
-                    }}
-                  >
-                    Yes
-                  </Button>
-                </>
-              }
-              onHide={handleDeleteModalClose}
-            >
-              {currChore != null && (
-                <p>Are you sure you want to delete chore {currChore.name}?</p>
-              )}
-              <p>This action cannot be undone.</p>
-            </Dialog>
-            <div id="main-content">
-              <div id="choreListManipulation">
+      {isChoresLoading ? (
+        <ProgressSpinner className="chore-spinner" strokeWidth="8" />
+      ) : (
+        <div className="content">
+          <ChoreCreateModal
+            show={modalShow}
+            onHide={handleClose}
+            onSave={handleChores}
+            currChore={currChore}
+          />
+          <Dialog
+            visible={deleteModalShow}
+            header="Delete Chore"
+            footer={
+              <>
+                <Button id="declineButton" onClick={handleDeleteModalClose}>
+                  No
+                </Button>
                 <Button
-                  id="newChore"
                   onClick={() => {
-                    setCurrChore(null);
-                    handleShow();
+                    deleteChoreMutation.mutate(currChore._id);
+                    handleDeleteModalClose();
                   }}
                 >
-                  New Chore
+                  Yes
                 </Button>
-              </div>
-              <table id="choresList" {...getTableProps()}>
-                <thead>
-                  {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                      {headerGroup.headers.map((column) => (
-                        <th {...column.getHeaderProps()}>
-                          {column.render("Header")}
-                        </th>
-                      ))}
+              </>
+            }
+            onHide={handleDeleteModalClose}
+          >
+            {currChore != null && (
+              <p>Are you sure you want to delete chore {currChore.name}?</p>
+            )}
+            <p>This action cannot be undone.</p>
+          </Dialog>
+          <div id="main-content">
+            <table id="choresList" {...getTableProps()}>
+              <thead>
+                {headerGroups.map((headerGroup) => (
+                  <tr {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column) => (
+                      <th {...column.getHeaderProps()}>
+                        {column.render("Header")}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody {...getTableBodyProps()}>
+                {page.map((row, i) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => {
+                        return (
+                          <td {...cell.getCellProps()}>
+                            {cell.render("Cell")}
+                          </td>
+                        );
+                      })}
                     </tr>
-                  ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                  {page.map((row, i) => {
-                    prepareRow(row);
-                    return (
-                      <tr {...row.getRowProps()}>
-                        {row.cells.map((cell) => {
-                          return (
-                            <td {...cell.getCellProps()}>
-                              {cell.render("Cell")}
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                  );
+                })}
+              </tbody>
+            </table>
 
-              <div id="paginationButtons">
-                <Button
-                  onClick={() => previousPage()}
-                  disabled={!canPreviousPage}
+            <div id="paginationButtons">
+              <Button
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.75em"
+                  height="1.5em"
+                  fill="currentColor"
+                  className="bi bi-chevron-left"
+                  viewBox="0 0 16 16"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.75em"
-                    height="1.5em"
-                    fill="currentColor"
-                    className="bi bi-chevron-left"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-                    />
-                  </svg>
+                  <path
+                    fillRule="evenodd"
+                    d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                  />
+                </svg>
+              </Button>
+              {pageCount > 1 && pageCount >= setPageButton(1, pageIndex) && (
+                <Button
+                  className={
+                    setPageButton(1, pageIndex) === pageIndex + 1
+                      ? "currentPage"
+                      : ""
+                  }
+                  onClick={() => {
+                    gotoPage(setPageButton(1, pageIndex) - 1);
+                  }}
+                >
+                  {setPageButton(1, pageIndex)}
                 </Button>
-                {pageCount > 1 && pageCount >= setPageButton(1, pageIndex) && (
-                  <Button
-                    className={
-                      setPageButton(1, pageIndex) === pageIndex + 1
-                        ? "currentPage"
-                        : ""
-                    }
-                    onClick={() => {
-                      gotoPage(setPageButton(1, pageIndex) - 1);
-                    }}
-                  >
-                    {setPageButton(1, pageIndex)}
-                  </Button>
-                )}
-                {pageCount > 1 && pageCount >= setPageButton(2, pageIndex) && (
-                  <Button
-                    className={
-                      setPageButton(2, pageIndex) === pageIndex + 1
-                        ? "currentPage"
-                        : ""
-                    }
-                    onClick={() => {
-                      gotoPage(setPageButton(2, pageIndex) - 1);
-                    }}
-                  >
-                    {setPageButton(2, pageIndex)}
-                  </Button>
-                )}
-                {pageCount >= setPageButton(3, pageIndex) && (
-                  <Button
-                    className={
-                      setPageButton(3, pageIndex) === pageIndex + 1
-                        ? "currentPage"
-                        : ""
-                    }
-                    onClick={() => {
-                      gotoPage(setPageButton(3, pageIndex) - 1);
-                    }}
-                  >
-                    {setPageButton(3, pageIndex)}
-                  </Button>
-                )}
-                {pageCount >= setPageButton(4, pageIndex) && (
-                  <Button
-                    className={
-                      setPageButton(4, pageIndex) === pageIndex + 1
-                        ? "currentPage"
-                        : ""
-                    }
-                    onClick={() => {
-                      gotoPage(setPageButton(4, pageIndex) - 1);
-                    }}
-                  >
-                    {setPageButton(4, pageIndex)}
-                  </Button>
-                )}
-                <Button onClick={() => nextPage()} disabled={!canNextPage}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.75em"
-                    height="1.5em"
-                    fill="currentColor"
-                    className="bi bi-chevron-right"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                    />
-                  </svg>
+              )}
+              {pageCount > 1 && pageCount >= setPageButton(2, pageIndex) && (
+                <Button
+                  className={
+                    setPageButton(2, pageIndex) === pageIndex + 1
+                      ? "currentPage"
+                      : ""
+                  }
+                  onClick={() => {
+                    gotoPage(setPageButton(2, pageIndex) - 1);
+                  }}
+                >
+                  {setPageButton(2, pageIndex)}
                 </Button>
-              </div>
+              )}
+              {pageCount >= setPageButton(3, pageIndex) && (
+                <Button
+                  className={
+                    setPageButton(3, pageIndex) === pageIndex + 1
+                      ? "currentPage"
+                      : ""
+                  }
+                  onClick={() => {
+                    gotoPage(setPageButton(3, pageIndex) - 1);
+                  }}
+                >
+                  {setPageButton(3, pageIndex)}
+                </Button>
+              )}
+              {pageCount >= setPageButton(4, pageIndex) && (
+                <Button
+                  className={
+                    setPageButton(4, pageIndex) === pageIndex + 1
+                      ? "currentPage"
+                      : ""
+                  }
+                  onClick={() => {
+                    gotoPage(setPageButton(4, pageIndex) - 1);
+                  }}
+                >
+                  {setPageButton(4, pageIndex)}
+                </Button>
+              )}
+              <Button onClick={() => nextPage()} disabled={!canNextPage}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.75em"
+                  height="1.5em"
+                  fill="currentColor"
+                  className="bi bi-chevron-right"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+                  />
+                </svg>
+              </Button>
             </div>
           </div>
-        )}
-        <ReactQueryDevtools />
-      </>
-    );
-  }
+        </div>
+      )}
+      <ReactQueryDevtools />
+    </>
+  );
 };
 
 export default ChoresPage;
