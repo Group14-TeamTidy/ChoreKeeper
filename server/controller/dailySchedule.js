@@ -53,7 +53,9 @@ import User from "../models/User.js";
             }
 
             // calculating how many days this chore is to be repeated
-            const repeatInDays = chore.frequency.quantity * intervalToDays; 
+            const repeatInDays = chore.frequency.quantity * intervalToDays;
+
+            console.log(`Repeat in days: ${repeatInDays}`);
 
             // calculating difference in days of the chore created vs now
             const diffInMs = today - chore.createdAt;
