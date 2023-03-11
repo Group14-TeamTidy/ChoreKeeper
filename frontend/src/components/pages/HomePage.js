@@ -2,8 +2,7 @@ import { React, useRef ,useState } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
-import { queryClient, location } from "../../App";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { queryClient } from "../../App";
 import AuthService from "../../services/AuthService";
 import ChoresPage from "./ChoresPage.js";
 import SchedulePage from "./SchedulePage.js";
@@ -59,7 +58,31 @@ const HomePage = () => {
     return (
       <>
         <div id="header">
-          <div id="headerButtons">
+          <h1>Chore Keeper</h1>
+
+          <div id="navButtons">
+            <Button
+              id="toSchedulePage"
+              className={ displayChoresPage ? "" : "currPage" }
+              onClick={() => {
+                navigate({ to: "/schedule", replace: true });
+              }}
+            >
+              Schedule
+            </Button>
+
+            <Button
+              id="toChoresPage"
+              className={ displayChoresPage ? "currPage" : "" }
+              onClick={() => {
+                navigate({ to: "/chores", replace: true });
+              }}
+            >
+              Chores
+            </Button>
+          </div>
+
+          <div>
             <Button
               id="newChore"
               onClick={() => {
@@ -74,8 +97,6 @@ const HomePage = () => {
               <Button icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
             </div>
           </div>
-
-          <h1>Chore Keeper</h1>
         </div>
 
         <ChoreCreateModal

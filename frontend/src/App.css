@@ -39,18 +39,22 @@ html, html body {
 
 #header {
   margin: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#headerButtons {
-  float: right;
+#header Button {
+  margin: 10px;
+}
+
+#navButtons Button:not(.currPage) {
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 
 #dropdownMenuContainer {
   float: right;
-}
-
-#newChore {
-  margin-right: 15px;
 }
 
 .p-menu {
