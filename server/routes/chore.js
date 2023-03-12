@@ -7,6 +7,7 @@ import {
   editChore,
   getSingleChore,
   deleteChore,
+  checkOffChore,
 } from "../controller/chore.js";
 // MIDDLEWARE
 import { verifyToken } from "../middleware/auth.js";
@@ -20,6 +21,7 @@ router.get("/:id", verifyToken, getSingleChore); //get a single chore
 router.put("/:id", verifyToken, editChore); //edit a chore
 router.post("/", verifyToken, createChore); //create a chore
 router.delete("/:id", verifyToken, deleteChore); //delete a chore
+router.get("/checked/:id", verifyToken, checkOffChore)
 
 // router.delete("/id", ); //delete a chore
 
