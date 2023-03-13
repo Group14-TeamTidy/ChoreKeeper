@@ -10,6 +10,7 @@ import ChoreService from "../../services/ChoreService";
 import SchedulePage from "./SchedulePage.js";
 import ChoreCreateModal from "../ChoreCreateModal";
 import { Toast } from "primereact/toast";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const HomePage = () => {
   const serverErrorsToast = useRef(null);
@@ -80,6 +81,10 @@ const HomePage = () => {
   } else {
     return (
       <>
+        {
+          // If dev environment, show React Query Dev Tools
+          process.env.NODE_ENV === "development" && <ReactQueryDevtools />
+        }
         <Toast ref={serverErrorsToast} />
         <div id="header">
           <h1>Chore Keeper</h1>
