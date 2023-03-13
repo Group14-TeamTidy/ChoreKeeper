@@ -3,11 +3,10 @@ import { useTable, usePagination } from "react-table";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import ChoreCreateModal from "../ChoreCreateModal";
 import ChoreService from "../../services/ChoreService";
 import { queryClient } from "../../App";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { Dialog } from "primereact/dialog";
 
 const ChoresPage = ({ isChoresLoading, choresData }) => {
@@ -411,7 +410,6 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
           </div>
         </div>
       )}
-      <ReactQueryDevtools />
     </>
   );
 };
