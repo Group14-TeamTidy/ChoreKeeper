@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import makeApp from "./index.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = makeApp(mongoose, process.env.MONGO_URL); // connect to databse
 // const app = makeApp(); // start without connecting to database for testing
