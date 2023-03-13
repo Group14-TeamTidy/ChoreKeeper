@@ -3,25 +3,14 @@ import { useTable, usePagination } from "react-table";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import ChoreCreateModal from "../ChoreCreateModal";
 import ChoreService from "../../services/ChoreService";
 import { queryClient } from "../../App";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { Dialog } from "primereact/dialog";
 
-const ChoresPage = () => {
+const ChoresPage = ({ isChoresLoading, choresData }) => {
   const serverErrorsToast = useRef(null);
-
-  const { isLoading: isChoresLoading, data: choresData } = useQuery(
-    "chores",
-    () => ChoreService.getChores(),
-    {
-      onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
-      },
-    }
-  );
 
   const deleteChoreMutation = useMutation(
     (id) => ChoreService.deleteChore(id),
@@ -421,7 +410,6 @@ const ChoresPage = () => {
           </div>
         </div>
       )}
-      <ReactQueryDevtools />
     </>
   );
 };

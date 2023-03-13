@@ -45,13 +45,13 @@ export const createChore = async (req, res) => {
     // mapping interval into days
     var intervalToDays;
     if (frequency.interval == "days") {
-        intervalToDays = 1;
+      intervalToDays = 1;
     } else if (frequency.interval == "weeks") {
-        intervalToDays = 7;
+      intervalToDays = 7;
     } else if (frequency.interval == "months") {
-        intervalToDays = 30; // just defaulting to 30
+      intervalToDays = 30; // just defaulting to 30
     } else {
-        intervalToDays = 365; // interval is in years
+      intervalToDays = 365; // interval is in years
     }
 
     // calculating how many days this chore is to be repeated
@@ -59,7 +59,7 @@ export const createChore = async (req, res) => {
 
     // based on this the next date this is due to occur is
     const msInDay = 24 * 60 * 60 * 1000; // number of milliseconds in a day
-    const nextOccurrence = Date.now() + (repeatInDays * msInDay); // all time to be stored in milliseconds
+    const nextOccurrence = Date.now() + repeatInDays * msInDay; // all time to be stored in milliseconds
 
     // creating a new chore to add to database
     const newChore = new Chore({
@@ -193,7 +193,7 @@ export const editChore = async (req, res) => {
   }
 }; //editChore
 
- /*
+/*
  ** This function deletes a chore from the chore database as well as user chore list
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
@@ -212,20 +212,25 @@ export const deleteChore = async (req, res) => {
     let userChores = [...user.chores];
 
     // remove chore id from the users chore array
-    const idIndex = userChores.findIndex((val) => choreId == val._id.toString());
+    const idIndex = userChores.findIndex(
+      (val) => choreId == val._id.toString()
+    );
 
-    if (idIndex > -1) { // only splice array when id is found
+    if (idIndex > -1) {
+      // only splice array when id is found
       userChores.splice(idIndex, 1);
 
       // assigning the updated array to user.chores
       user.chores = [...userChores];
       await user.save();
-      return res.status(200).json({ message: `Chore with id ${choreId} deleted successfully!`});
+      return res
+        .status(200)
+        .json({ message: `Chore with id ${choreId} deleted successfully!` });
     } else {
-      console.log("Chore ID not found in user's chore list!")
+      console.log("Chore ID not found in user's chore list!");
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }catch (error) {
+  } catch (error) {
     console.error(error);
     // Return an error message in the response in case of any unexpected errors
     res.status(500).json({ message: "Internal Server Error" });
@@ -237,7 +242,7 @@ export const deleteChore = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
- export const checkOffChore = async (req, res) => {
+export const checkOffChore = async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -252,13 +257,13 @@ export const deleteChore = async (req, res) => {
     // mapping interval into days
     var intervalToDays;
     if (chore.frequency.interval == "days") {
-        intervalToDays = 1;
+      intervalToDays = 1;
     } else if (chore.frequency.interval == "weeks") {
-        intervalToDays = 7;
+      intervalToDays = 7;
     } else if (chore.frequency.interval == "months") {
-        intervalToDays = 30; // just defaulting to 30
+      intervalToDays = 30; // just defaulting to 30
     } else {
-        intervalToDays = 365; // interval is in years
+      intervalToDays = 365; // interval is in years
     }
 
     // calculating how many days this chore is to be repeated
@@ -272,7 +277,7 @@ export const deleteChore = async (req, res) => {
 
     // updating next occurrence
     const msInDay = 24 * 60 * 60 * 1000; // number of milliseconds in a day
-    const nextOccurrence = checkOffTime + (repeatInDays * msInDay); // all time to be stored in milliseconds
+    const nextOccurrence = checkOffTime + repeatInDays * msInDay; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;
     chore.save();
 

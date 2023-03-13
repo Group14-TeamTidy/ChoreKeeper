@@ -1,19 +1,19 @@
-import { React, useState, useMemo, useRef } from "react";
-import { Button } from "primereact/button";
+import { React } from "react";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { useMutation, useQuery } from "react-query";
-import { queryClient } from "../../App";
-import { ReactQueryDevtools } from "react-query/devtools";
-import ChoreService from "../../services/ChoreService";
+import ScheduleList from "../ScheduleList";
 
-const SchedulePage = () => {
+const SchedulePage = ({ isChoresLoading, choresData }) => {
   return (
     <>
-    <div className="content">
-      <h2>Schedule Page</h2>
-    </div>
+      <div className="content">
+        {isChoresLoading ? (
+          <ProgressSpinner />
+        ) : (
+          <ScheduleList chores={choresData.data} />
+        )}
+      </div>
     </>
-  )
+  );
 };
 
 export default SchedulePage;
