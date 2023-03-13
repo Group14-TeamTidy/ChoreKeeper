@@ -114,13 +114,24 @@ export const getAllChores = async (req, res) => {
 
     // Format the chore list for the response
     const formattedChores = chores.map(
-      ({ _id, name, frequency, location, duration, preference }) => ({
+      ({
         _id,
         name,
         frequency,
         location,
         duration,
         preference,
+        lastCheckedOff,
+        nextOccurrence,
+      }) => ({
+        _id,
+        name,
+        frequency,
+        location,
+        duration,
+        preference,
+        lastCheckedOff,
+        nextOccurrence,
       })
     );
 

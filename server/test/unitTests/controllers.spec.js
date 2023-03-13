@@ -333,6 +333,8 @@ describe("Testing Chores controllers", () => {
         location: "kitchen",
         duration: 30,
         preference: "after dinner",
+        lastCheckedOff: [],
+        nextOccurrence: 987654321,
       };
       const chore2 = {
         _id: "ghijkl",
@@ -341,6 +343,8 @@ describe("Testing Chores controllers", () => {
         location: "living room",
         duration: 45,
         preference: "morning",
+        lastCheckedOff: [],
+        nextOccurrence: 123456789,
       };
       // Create a stub for the Chore model
       const choreStub = sinon.stub(Chore, "find");
@@ -363,6 +367,8 @@ describe("Testing Chores controllers", () => {
           location: "kitchen",
           duration: 30,
           preference: "after dinner",
+          lastCheckedOff: [],
+          nextOccurrence: 987654321,
         },
         {
           _id: "ghijkl",
@@ -371,6 +377,8 @@ describe("Testing Chores controllers", () => {
           location: "living room",
           duration: 45,
           preference: "morning",
+          lastCheckedOff: [],
+          nextOccurrence: 123456789,
         },
       ]);
     });
