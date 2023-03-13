@@ -193,7 +193,7 @@ export const editChore = async (req, res) => {
   }
 }; //editChore
 
- /*
+/*
  ** This function deletes a chore from the chore database as well as user chore list
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
@@ -212,20 +212,25 @@ export const deleteChore = async (req, res) => {
     let userChores = [...user.chores];
 
     // remove chore id from the users chore array
-    const idIndex = userChores.findIndex((val) => choreId == val._id.toString());
+    const idIndex = userChores.findIndex(
+      (val) => choreId == val._id.toString()
+    );
 
-    if (idIndex > -1) { // only splice array when id is found
+    if (idIndex > -1) {
+      // only splice array when id is found
       userChores.splice(idIndex, 1);
 
       // assigning the updated array to user.chores
       user.chores = [...userChores];
       await user.save();
-      return res.status(200).json({ message: `Chore with id ${choreId} deleted successfully!`});
+      return res
+        .status(200)
+        .json({ message: `Chore with id ${choreId} deleted successfully!` });
     } else {
-      console.log("Chore ID not found in user's chore list!")
+      // console.log("Chore ID not found in user's chore list!")
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }catch (error) {
+  } catch (error) {
     console.error(error);
     // Return an error message in the response in case of any unexpected errors
     res.status(500).json({ message: "Internal Server Error" });

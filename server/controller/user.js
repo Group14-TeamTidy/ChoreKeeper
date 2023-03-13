@@ -40,9 +40,10 @@ export const register = async (req, res) => {
     const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
 
     // Don't send password
-    delete savedUser.password;
+    const user = { ...savedUser.toObject() };
+    delete user.password;
 
-    return res.status(201).json({ token, user: savedUser });
+    return res.status(201).json({ token, user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "User could not be created" });
@@ -82,9 +83,10 @@ export const login = async (req, res) => {
     //sign the user in
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     // Don't send password
-    delete user.password;
+    const loggedInUser = { ...user.toObject() };
+    delete loggedInUser.password;
 
-    res.status(200).json({ token, user: user });
+    res.status(200).json({ token, user: loggedInUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -111,7 +113,9 @@ export const getUser = async (req, res) => {
       return res.status(401).json({ message: `This User does not exist` });
     }
     // Don't send password
-    delete user.password;
-    res.status(200).json({ token, user: user });
+    const loggedInUser = { ...user.toObject() };
+    delete loggedInUser.password;
+
+    res.status(200).json({ user: user });
   } catch (error) {}
 };
