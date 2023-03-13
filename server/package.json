@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "mocha test --recursive ",
+    "test": "mocha test/unitTests",
+    "testAll": "mocha test --recursive",
     "coverage": "nyc --all  npm run test",
     "start": "nodemon server.js",
     "dev": "nodemon --watch server server.js"
