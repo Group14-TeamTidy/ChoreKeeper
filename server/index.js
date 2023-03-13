@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import userRoute from "./routes/user.js";
 import choreRoute from "./routes/chore.js";
+import scheduleRoute from "./routes/schedule.js";
 import { register, login } from "./controller/user.js";
 
 /*
@@ -24,6 +25,7 @@ export default function makeApp(database) {
 
   app.use("/api/user", userRoute);
   app.use("/api/chores", choreRoute);
+  app.use("/api/schedule", scheduleRoute);
 
   app.post("/api/login", login);
   app.post("/api/signup", register);
