@@ -10,18 +10,8 @@ import { queryClient } from "../../App";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Dialog } from "primereact/dialog";
 
-const ChoresPage = () => {
+const ChoresPage = ({ isChoresLoading, choresData }) => {
   const serverErrorsToast = useRef(null);
-
-  const { isLoading: isChoresLoading, data: choresData } = useQuery(
-    "chores",
-    () => ChoreService.getChores(),
-    {
-      onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
-      },
-    }
-  );
 
   const deleteChoreMutation = useMutation(
     (id) => ChoreService.deleteChore(id),

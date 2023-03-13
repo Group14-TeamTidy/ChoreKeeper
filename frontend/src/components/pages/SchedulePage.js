@@ -6,14 +6,14 @@ import { queryClient } from "../../App";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ChoreService from "../../services/ChoreService";
 
-const SchedulePage = () => {
+const SchedulePage = ({ isChoresLoading, choresData }) => {
   return (
     <>
-    <div className="content">
-      <h2>Schedule Page</h2>
-    </div>
+      <div className="content">
+        <h2>Schedule Page</h2>
+      </div>
     </>
-  )
+  );
 };
 
 export default SchedulePage;

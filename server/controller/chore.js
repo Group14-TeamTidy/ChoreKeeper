@@ -8,25 +8,24 @@ import User from "../models/User.js";
  ** @param Number quantity - frequncy.quantity of a chore
  ** @param String interval - frequncy.interval of a chore
  */
- function repeatInMs(quantity, interval) {
-
+function repeatInMs(quantity, interval) {
   // mapping interval into days
   var intervalToDays;
   if (interval == "days") {
-      intervalToDays = 1;
+    intervalToDays = 1;
   } else if (interval == "weeks") {
-      intervalToDays = 7;
+    intervalToDays = 7;
   } else if (interval == "months") {
-      intervalToDays = 30; // just defaulting to 30
+    intervalToDays = 30; // just defaulting to 30
   } else {
-      intervalToDays = 365; // interval is in years
+    intervalToDays = 365; // interval is in years
   }
 
   // calculating how many days this chore is to be repeated
   const repeatInDays = quantity * intervalToDays;
   const msInDay = 24 * 60 * 60 * 1000; // number of milliseconds in a day
   return repeatInDays * msInDay;
-}; // repeatInDays
+} // repeatInDays
 
 /*
  ** This function creates new chore
@@ -250,7 +249,7 @@ export const deleteChore = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
- export const checkOffChore = async (req, res) => {
+export const checkOffChore = async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -266,7 +265,7 @@ export const deleteChore = async (req, res) => {
     // adding the check off time in the array of chores last checked off list
     chore.lastCheckedOff.push(checkOffTime);
 
-    const repeatMs = repeatInMs(chore.quantity, chore.interval); 
+    const repeatMs = repeatInMs(chore.quantity, chore.interval);
     // updating next occurrence
     const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;

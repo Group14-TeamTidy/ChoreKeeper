@@ -3,12 +3,16 @@ import { Navigate, useNavigate } from "@tanstack/react-location";
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 import { queryClient } from "../../App";
+import { useQuery } from "react-query";
 import AuthService from "../../services/AuthService";
 import ChoresPage from "./ChoresPage.js";
+import ChoreService from "../../services/ChoreService";
 import SchedulePage from "./SchedulePage.js";
 import ChoreCreateModal from "../ChoreCreateModal";
+import { Toast } from "primereact/toast";
 
 const HomePage = () => {
+  const serverErrorsToast = useRef(null);
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
@@ -18,6 +22,25 @@ const HomePage = () => {
   const handleLogout = () => {
     AuthService.logout();
     navigate({ to: "/login", replace: true });
+  };
+
+  const { isLoading: isChoresLoading, data: choresData } = useQuery(
+    "chores",
+    () => ChoreService.getChores(),
+    {
+      onError: (error) => {
+        showServerErrorsToast(error.response.data.message);
+      },
+    }
+  );
+
+  const showServerErrorsToast = (message) => {
+    serverErrorsToast.current.show({
+      severity: "error",
+      summary: "Server Error",
+      detail: message,
+      life: 3000,
+    });
   };
 
   // Dropdown menu
@@ -57,13 +80,14 @@ const HomePage = () => {
   } else {
     return (
       <>
+        <Toast ref={serverErrorsToast} />
         <div id="header">
           <h1>Chore Keeper</h1>
 
           <div id="navButtons">
             <Button
               id="toSchedulePage"
-              className={ displayChoresPage ? "" : "currPage" }
+              className={displayChoresPage ? "" : "currPage"}
               onClick={() => {
                 navigate({ to: "/schedule", replace: true });
               }}
@@ -73,7 +97,7 @@ const HomePage = () => {
 
             <Button
               id="toChoresPage"
-              className={ displayChoresPage ? "currPage" : "" }
+              className={displayChoresPage ? "currPage" : ""}
               onClick={() => {
                 navigate({ to: "/chores", replace: true });
               }}
@@ -94,7 +118,10 @@ const HomePage = () => {
 
             <div id="dropdownMenuContainer">
               <Menu model={items} popup ref={menu} />
-              <Button icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
+              <Button
+                icon="pi pi-bars"
+                onClick={(e) => menu.current.toggle(e)}
+              />
             </div>
           </div>
         </div>
@@ -106,11 +133,17 @@ const HomePage = () => {
           currChore={null}
         />
 
-        {displayChoresPage ? <ChoresPage/> : <SchedulePage />}
+        {displayChoresPage ? (
+          <ChoresPage isChoresLoading={false} choresData={choresData} />
+        ) : (
+          <SchedulePage
+            isChoresLoading={isChoresLoading}
+            choresData={choresData}
+          />
+        )}
       </>
-    )
+    );
   }
-
 };
 
 export default HomePage;
