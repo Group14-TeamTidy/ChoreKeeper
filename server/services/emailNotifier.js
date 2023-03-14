@@ -6,7 +6,7 @@ import Chore from "../models/Chore.js";
 
 dotenv.config();
 
-export async function startEmailService() {
+export const startEmailService = async () => {
   const today = new Date(); // get today's date
   let config = {
     service: "gmail",
@@ -114,7 +114,7 @@ export async function startEmailService() {
         console.error(error);
       });
   }
-}
+};
 
 async function test() {
   // testing account
@@ -145,4 +145,4 @@ async function test() {
     });
 }
 
-startMailService();
+// startMailService();
