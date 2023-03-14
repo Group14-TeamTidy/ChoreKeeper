@@ -31,17 +31,14 @@ import User from "../models/User.js";
         // get the user that is requesting the schedule
         const userID = req.user.id;
         const user = await User.findOne({ _id: userID }); // search for the user
-        const choreList = user.chores;
-        
-        console.log("Printing chore ids for this user")
+        const choreIdList = user.chores;
+        const choreList = await Chore.find({_id: {$in: choreIdList}});
+        if (!choreList) {
+            return res.status(404).json({ message: "Unable to receive chores from the database." });
+        }
+        console.log("Printing chores for this user returned in the choreList object")
 
-        for (const choreId of choreList) {
-            // console.log(choreId);
-            const chore = await Chore.findOne({ _id: choreId });
-
-            if (!chore) {
-                return res.status(404).json({ message: "Chore not found" });
-            }
+        for (const chore of choreList) {
 
             // mapping interval into days
             var intervalToDays;
