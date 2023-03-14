@@ -2,9 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
+import cron from "node-cron";
 import userRoute from "./routes/user.js";
 import choreRoute from "./routes/chore.js";
 import { register, login } from "./controller/user.js";
+import { startEmailService } from "./services/emailNotifier.js";
 
 /*
  ** @params database: the database the application will connect to
@@ -44,6 +46,10 @@ export default function makeApp(database) {
       useUnifiedTopology: true,
     });
     database.set("strictQuery", true);
+    // start email notifier to run at 12am everyday
+    cron.schedule("0 0 * * *", () => {
+      startEmailService();
+    });
   }
 
   return app;
