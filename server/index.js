@@ -12,7 +12,7 @@ import { startEmailService } from "./services/emailNotifier.js";
  ** @params database: the database the application will connect to
  ** This function connects the appalication to the database specified
  */
-export default function makeApp(database) {
+export default function makeApp(database, connectionURL) {
   // CONFIGURATIONS
   const app = express();
   dotenv.config();
@@ -41,7 +41,7 @@ export default function makeApp(database) {
 
   //DB CONNECTION -- for testing purposes, db can be disconnected by passing no arguments to makeApp
   if (database != undefined) {
-    database.connect(process.env.MONGO_URL, {
+    database.connect(connectionURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
