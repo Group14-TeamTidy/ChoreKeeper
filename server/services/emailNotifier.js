@@ -112,7 +112,7 @@ export const startEmailService = async () => {
       let mail = MailGenerator.generate(response);
       let message = {
         from: process.env.EMAIL,
-        to: "altosintiams@gmail.com", //user.email,
+        to: user.email,
         subject: "Your Chores For Today",
         html: mail,
       };
