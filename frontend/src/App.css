@@ -53,6 +53,10 @@ html, html body {
   border-color: #6c757d;
 }
 
+#toggleNotifs {
+  padding: 0.75em 0.8em;
+}
+
 #dropdownMenuContainer {
   float: right;
 }
