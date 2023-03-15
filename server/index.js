@@ -5,6 +5,7 @@ import cors from "cors";
 import cron from "node-cron";
 import userRoute from "./routes/user.js";
 import choreRoute from "./routes/chore.js";
+import scheduleRoute from "./routes/schedule.js";
 import { register, login } from "./controller/user.js";
 import { startEmailService } from "./services/emailNotifier.js";
 
@@ -26,6 +27,7 @@ export default function makeApp(database, connectionURL) {
 
   app.use("/api/user", userRoute);
   app.use("/api/chores", choreRoute);
+  app.use("/api/schedule", scheduleRoute);
 
   app.post("/api/login", login);
   app.post("/api/signup", register);
