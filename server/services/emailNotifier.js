@@ -7,7 +7,21 @@ import Chore from "../models/Chore.js";
 dotenv.config();
 
 export const startEmailService = async () => {
-  const today = new Date(); // get today's date
+  let today = new Date(); // get today's date
+
+  // set the UTS to 12am
+  const millisecondsPerDay = 86400000;
+  const unixEpochMilliseconds = Date.parse("1970-01-01T00:00:00Z");
+  today =
+    Math.floor((today * 1000) / millisecondsPerDay) * millisecondsPerDay +
+    unixEpochMilliseconds;
+
+  const toDaysSelector = { days: 1, weeks: 7, month: 30, year: 365 };
+
+  const dateSelector = {
+    today: today,
+    nextOccurrence: undefined,
+  };
 
   let config = {
     service: "gmail",
@@ -29,21 +43,31 @@ export const startEmailService = async () => {
   try {
     //get user
     let users = await User.find({});
-    // let users = [{ email: "altosintiams@gmail.com" }];
 
     // for loop to loop through all the users
     for (let i = 0; i < users.length; i++) {
       let user = users[i];
       //collect user chores
-      let chores = await Chore.find({ _id: { $in: user.chores } });
+      let chores = await Chore.find({
+        _id: { $in: user.chores },
+        nextOccurrence: { $exists: true },
+      });
 
       //select todays chores
       let tempChores = chores.filter((chore) => {
-        const nextOccurrence = new Date(chore.nextOccurrence);
+        let timeframeIndays =
+          toDaysSelector[chore.frequency.interval] * chore.frequency.quantity;
+
+        //approximate next occurrence to nextOccurrence at 12am
+        dateSelector.nextOccurrence =
+          Math.floor((chore.nextOccurrence * 1000) / millisecondsPerDay) *
+            millisecondsPerDay +
+          unixEpochMilliseconds;
+
         return (
-          nextOccurrence.getFullYear() === today.getFullYear() &&
-          nextOccurrence.getMonth() === today.getMonth() &&
-          nextOccurrence.getDate() === today.getDate()
+          (dateSelector.today - dateSelector.nextOccurrence) %
+            timeframeIndays ===
+          0
         );
       });
       let todaysChores = tempChores.map((chore) => {
@@ -51,18 +75,17 @@ export const startEmailService = async () => {
           Chore: chore.name,
           Location: chore.location,
           "Duration(minutes)": chore.duration / 60,
-          // Preference: chore.preference,
         };
       });
 
       //select overdue chores
       let overChores = chores.filter((chore) => {
-        const nextOccurrence = new Date(chore.nextOccurrence);
-        return (
-          nextOccurrence.getFullYear() < today.getFullYear() &&
-          nextOccurrence.getMonth() < today.getMonth() &&
-          nextOccurrence.getDate() < today.getDate()
-        );
+        //approximate next occurrence to nextOccurrence at 12am
+        dateSelector.nextOccurrence =
+          Math.floor((chore.nextOccurrence * 1000) / millisecondsPerDay) *
+            millisecondsPerDay +
+          unixEpochMilliseconds;
+        return dateSelector.nextOccurrence < dateSelector.today;
       });
       let overdueChores = overChores.map((chore) => {
         return {
