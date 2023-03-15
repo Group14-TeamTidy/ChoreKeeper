@@ -17,7 +17,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
-  let displayChoresPage = window.location.pathname == "/chores";
+  let displayChoresPage = window.location.pathname === "/chores";
 
   // Logs out the user
   const handleLogout = () => {

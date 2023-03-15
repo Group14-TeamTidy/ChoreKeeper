@@ -36,11 +36,15 @@ const ScheduleList = ({ chores }) => {
             />
             <div className="schedule-chore-details">
               <p className="schedule-chore-name">
-                <strong>{chore.name}</strong>, <em>{chore.location}</em>
+                <strong>{chore.name}</strong>
+                {chore.location && <em>, {chore.location}</em>}
               </p>
-              <p className="schedule-chore-next">
-                Next Due: {new Date(chore.nextOccurrence).toLocaleDateString()}
-              </p>
+              {chore.frequency && (
+                <p className="schedule-chore-next">
+                  Next Due:{" "}
+                  {new Date(chore.nextOccurrence).toLocaleDateString()}
+                </p>
+              )}
             </div>
           </Card>
         </div>
