@@ -2,30 +2,7 @@ import { check, validationResult } from "express-validator";
 // MODELS
 import Chore from "../models/Chore.js";
 import User from "../models/User.js";
-
-/*
- ** This function returns the interval a chore is to be repeated in ms
- ** @param Number quantity - frequncy.quantity of a chore
- ** @param String interval - frequncy.interval of a chore
- */
-function repeatInMs(quantity, interval) {
-  // mapping interval into days
-  var intervalToDays;
-  if (interval == "days") {
-    intervalToDays = 1;
-  } else if (interval == "weeks") {
-    intervalToDays = 7;
-  } else if (interval == "months") {
-    intervalToDays = 30; // just defaulting to 30
-  } else {
-    intervalToDays = 365; // interval is in years
-  }
-
-  // calculating how many days this chore is to be repeated
-  const repeatInDays = quantity * intervalToDays;
-  const msInDay = 24 * 60 * 60 * 1000; // number of milliseconds in a day
-  return repeatInDays * msInDay;
-} // repeatInDays
+import { repeatInMs } from "../services/utils.js";
 
 /*
  ** This function creates new chore

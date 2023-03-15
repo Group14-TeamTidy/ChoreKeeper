@@ -3,109 +3,122 @@ import Mailgen from "mailgen";
 import dotenv from "dotenv";
 import User from "../models/User.js";
 import Chore from "../models/Chore.js";
-
+import { repeatInMs } from "./utils.js";
 dotenv.config();
 
-export const startEmailService = async () => {
-  let today = new Date(); // get today's date
+/*
+ ** This function gets the current day
+ ** and returns a time in Unix timestamp formatted to 12am
+ */
+const getToday = () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return toUTCFormat(today);
+};
 
-  // set the UTS to 12am
+/*
+ ** This function formats a date to 12am at the start of that day
+ ** @params date, date in UTC format
+ */
+const toUTCFormat = (date) => {
   const millisecondsPerDay = 86400000;
-  const unixEpochMilliseconds = Date.parse("1970-01-01T00:00:00Z");
-  today =
-    Math.floor((today * 1000) / millisecondsPerDay) * millisecondsPerDay +
-    unixEpochMilliseconds;
+  const unixEpochMilliseconds = 0;
+  return (
+    Math.floor((date * 1000) / millisecondsPerDay) * millisecondsPerDay +
+    unixEpochMilliseconds
+  );
+};
 
-  const toDaysSelector = { days: 1, weeks: 7, month: 30, year: 365 };
+/*
+ ** This function gets the chores for that need to be emailed to a user
+ ** @params user,  a user object
+ ** It returns an object that contains the chores the user needs to do today, and the overdue chores the user has
+ */
+export const getChoresForUser = async (user) => {
+  const today = getToday();
 
-  const dateSelector = {
-    today: today,
-    nextOccurrence: undefined,
-  };
+  const chores = await Chore.find({
+    _id: { $in: user.chores },
+    nextOccurrence: { $exists: true },
+  });
 
-  let config = {
+  // get the chores for today
+  const todaysChores = chores
+    .filter((chore) => {
+      const timeframeIndays = repeatInMs(
+        chore.frequency.quantity,
+        chore.frequency.interval
+      );
+      const nextOccurrence = toUTCFormat(chore.nextOccurrence);
+
+      return (today - nextOccurrence) % timeframeIndays === 0;
+    })
+    .map((chore) => {
+      return {
+        Chore: chore.name,
+        Location: chore.location,
+        "Duration(minutes)": chore.duration / 60,
+      };
+    });
+
+  // get all over due chores
+  // over due chores would have a timestamp older than today's date
+  const overdueChores = chores
+    .filter((chore) => {
+      const nextOccurrence = toUTCFormat(chore.nextOccurrence);
+
+      return nextOccurrence < today;
+    })
+    .map((chore) => {
+      return {
+        Chore: chore.name,
+        Location: chore.location,
+        "Duration(minutes)": chore.duration / 60,
+        From: new Date(chore.nextOccurrence).toLocaleDateString(),
+      };
+    });
+
+  return { todaysChores, overdueChores };
+};
+
+/*
+ ** This function sends emails to all the users that are subscribed to notifications
+ */
+export const startEmailService = async () => {
+  const config = {
     service: "gmail",
     auth: {
       user: process.env.EMAIL,
       pass: process.env.EMAIL_PASSWORD,
     },
   };
-
-  let transporter = nodemailer.createTransport(config);
-  let MailGenerator = new Mailgen({
+  const transporter = nodemailer.createTransport(config);
+  const MailGenerator = new Mailgen({
     theme: "cerberus",
     product: {
       name: "Chorekeeper",
-      link: process.env.FRONTEND, //add frontend link
+      link: process.env.FRONTEND,
     },
   });
 
   try {
-    //get user
-    let users = await User.find({});
+    const users = await User.find({});
 
-    // for loop to loop through all the users
-    for (let i = 0; i < users.length; i++) {
-      let user = users[i];
-      //collect user chores
-      let chores = await Chore.find({
-        _id: { $in: user.chores },
-        nextOccurrence: { $exists: true },
-      });
-
-      //select todays chores
-      let tempChores = chores.filter((chore) => {
-        let timeframeIndays =
-          toDaysSelector[chore.frequency.interval] * chore.frequency.quantity;
-
-        //approximate next occurrence to nextOccurrence at 12am
-        dateSelector.nextOccurrence =
-          Math.floor((chore.nextOccurrence * 1000) / millisecondsPerDay) *
-            millisecondsPerDay +
-          unixEpochMilliseconds;
-
-        return (
-          (dateSelector.today - dateSelector.nextOccurrence) %
-            timeframeIndays ===
-          0
-        );
-      });
-      let todaysChores = tempChores.map((chore) => {
-        return {
-          Chore: chore.name,
-          Location: chore.location,
-          "Duration(minutes)": chore.duration / 60,
-        };
-      });
-
-      //select overdue chores
-      let overChores = chores.filter((chore) => {
-        //approximate next occurrence to nextOccurrence at 12am
-        dateSelector.nextOccurrence =
-          Math.floor((chore.nextOccurrence * 1000) / millisecondsPerDay) *
-            millisecondsPerDay +
-          unixEpochMilliseconds;
-        return dateSelector.nextOccurrence < dateSelector.today;
-      });
-      let overdueChores = overChores.map((chore) => {
-        return {
-          Chore: chore.name,
-          Location: chore.location,
-          "Duration(minutes)": chore.duration / 60,
-          // Preference: chore.preference,
-          From: new Date(chore.nextOccurrence).toLocaleDateString("en-US"),
-        };
-      });
-
-      //build body
-      let response = {
+    for (const user of users) {
+      //skip users that don't want notifications
+      if (!user.receiveNotifs) {
+        continue;
+      }
+      const { todaysChores, overdueChores } = await getChoresForUser(user);
+      const intro =
+        todaysChores.length === 0 && overdueChores.length === 0
+          ? "You have no chores to do today!"
+          : "Here are your chores for today!";
+      const response = {
         body: {
           greeting: "Hello",
           name: "",
-          intro:
-            todaysChores.length === 0 && overdueChores.length === 0
-              ? "You have no chores to do today!"
-              : "Here are your chores for today!",
+          intro,
           table: [
             {
               title: todaysChores.length !== 0 ? "Today's Chores" : undefined,
@@ -143,7 +156,7 @@ export const startEmailService = async () => {
       //send mail
       transporter
         .sendMail(message)
-        .then(console.log(`email sent to${message.to}`))
+        .then(console.log(`email sent to ${message.to}`))
         .catch((error) => {
           console.error(error);
         });
