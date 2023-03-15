@@ -116,6 +116,47 @@ export const getUser = async (req, res) => {
     const loggedInUser = { ...user.toObject() };
     delete loggedInUser.password;
 
-    res.status(200).json({ user: user });
+    res.status(200).json({ user: loggedInUser });
   } catch (error) {}
+};
+
+/*
+ ** This function sets the notification settings for the user
+ ** @param {Object} req - The request object
+ ** @param {Object} res - The response object
+ */
+ export const setNotifs = async (req, res) => {
+  // Sanitize data
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(409).json();
+  }
+
+  try {
+    const receiveNotifs = req.body.receiveNotifs;
+    const userID = req.user.id;
+    const user = await User.findOne({ _id: userID }); // search for the user
+
+    if (!user) {
+      return res.status(401).json({ message: `This User does not exist` });
+    }
+
+    if(receiveNotifs != false && receiveNotifs != true) {
+      return res.status(400).json({ message: `Cannot set notifications to ${receiveNotifs}`})
+    }
+
+    user.receiveNotifs = receiveNotifs;
+    console.log("Receive Notifications: " + user.receiveNotifs);
+    user.save();
+
+    // Don't send password
+    const loggedInUser = { ...user.toObject() };
+    delete loggedInUser.password;
+
+    return res.status(201).json({ user: loggedInUser });
+  } catch (error) {
+    console.error(error);
+    // Return an error message in the response in case of any unexpected errors
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
