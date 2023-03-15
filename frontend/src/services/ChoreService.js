@@ -76,6 +76,15 @@ const ChoreService = {
         console.log(res.data.message);
       });
   },
+
+  checkChore: (id) => {
+    let config = setConfig(AuthService.getToken());
+    return axios.put(
+      `${process.env.REACT_APP_API_BASE_URL}/chores/${id}/checked/`,
+      {},
+      config
+    );
+  },
 };
 
 export default ChoreService;
