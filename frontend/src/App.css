@@ -271,7 +271,6 @@ td {
   overflow-y: auto;
 }
 
-/* A centered column layout */
 .schedule-item {
   width: 100%;
 }
@@ -290,4 +289,20 @@ td {
   box-shadow: inset 0 0 10px 10px #c0c0c0;
   border-radius: 10px;
   border: solid 3px transparent;
+}
+.overdue-chore-text {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.schedule-item-button {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.schedule-item-button:hover {
+  background-color: #22C55E !important;
+  background: #22C55E !important;
+  color: white !important;
+  outline: #22C55E !important;
 }

@@ -1,17 +1,22 @@
-import { Checkbox } from "primereact/checkbox";
 import { Card } from "primereact/card";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { Button } from "primereact/button";
+import { useMutation } from "react-query";
+import ChoreService from "../services/ChoreService";
+import { queryClient } from "../App";
 
 const ScheduleList = ({ chores }) => {
-  const [checkedChores, setCheckedChores] = useState([]);
-
-  const setChecked = (e, choreId) => {
-    if (e.checked) {
-      setCheckedChores([...checkedChores, choreId]);
-    } else {
-      setCheckedChores(checkedChores.filter((id) => id !== choreId));
+  const checkChoreMutation = useMutation(
+    (choreId) => ChoreService.checkChore(choreId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("chores");
+      },
+      onError: (error) => {
+        console.log(error);
+      },
     }
-  };
+  );
 
   const sortChoresByNextOccurrence = (chores) => {
     return chores.sort((a, b) => {
@@ -29,10 +34,10 @@ const ScheduleList = ({ chores }) => {
       {choresList.map((chore) => (
         <div key={chore._id} className="schedule-item">
           <Card className="schedule-item-card">
-            <Checkbox
-              className="schedule-item-checkbox"
-              onChange={(e) => setChecked(e, chore._id)}
-              checked={checkedChores.includes(chore._id)}
+            <Button
+              className="schedule-item-button p-button-icon-only p-button-outlined p-button-rounded p-button-success"
+              icon="pi pi-check"
+              onClick={() => checkChoreMutation.mutate(chore._id)}
             />
             <div className="schedule-chore-details">
               <p className="schedule-chore-name">
@@ -40,7 +45,14 @@ const ScheduleList = ({ chores }) => {
                 {chore.location && <em>, {chore.location}</em>}
               </p>
               {chore.frequency && (
-                <p className="schedule-chore-next">
+                <p
+                  className={
+                    "schedule-chore-next " +
+                    (chore.nextOccurrence < Date.now()
+                      ? "overdue-chore-text"
+                      : "")
+                  }
+                >
                   Next Due:{" "}
                   {new Date(chore.nextOccurrence).toLocaleDateString()}
                 </p>
