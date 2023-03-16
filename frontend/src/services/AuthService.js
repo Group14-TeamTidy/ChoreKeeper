@@ -55,6 +55,31 @@ const AuthService = {
       return {};
     }
   },
+
+  getUser: () => {
+    return axios
+    .get(`${process.env.REACT_APP_API_BASE_URL}/user/email`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem("token"),
+      }
+    });
+  },
+
+  setUserNotifications: (receiveNotifs) => {
+    return axios
+    .put(`${process.env.REACT_APP_API_BASE_URL}/user/notifs`,
+      {
+        receiveNotifs: receiveNotifs,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem("token"),
+        }
+      }
+    );
+  }
 };
 
 export default AuthService;
