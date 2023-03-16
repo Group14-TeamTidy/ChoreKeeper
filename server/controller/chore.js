@@ -270,8 +270,8 @@ export const checkOffChore = async (req, res) => {
     const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;
     chore.save();
-
-    return res.status(201).json(chore);
+    
+    return res.status(201).json({ message: `Chore checked off successfully!`});;
   } catch (error) {
     console.error(error);
     // Return an error message in the response in case of any unexpected errors

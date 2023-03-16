@@ -79,7 +79,11 @@ const ChoreService = {
 
   checkChore: (id) => {
     let config = setConfig(AuthService.getToken());
-    return axios.get(`${process.env.REACT_APP_API_BASE_URL}/chores/checked/${id}/`, config);
+    return axios.put(
+      `${process.env.REACT_APP_API_BASE_URL}/chores/${id}/checked/`,
+      {},
+      config
+    );
   },
 };
 
