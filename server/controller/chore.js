@@ -158,17 +158,44 @@ export const getSingleChore = async (req, res) => {
  */
 export const editChore = async (req, res) => {
   try {
-    const id = req.params.id;
-
-    const chore = await Chore.findByIdAndUpdate({ _id: id }, req.body, {
-      new: true,
-    });
+    const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
+    const chore = await Chore.findOne({ _id: req.params.id });
 
     if (chore === null) {
       return res
         .status(404)
         .json({ message: `Chore with id ${id} was not found` });
     }
+
+    if ((chore.frequency.interval != frequency.interval) || (chore.frequency.quantity != frequency.quantity)) {
+      // get time in ms from req.frequency
+      const repeatMs = repeatInMs(frequency.quantity, frequency.interval);
+
+      // get the last checked off time (last item in lastCheckedOff Array) 
+      // if it is empty, use the date it was created at
+      var referenceTime;
+      const lastCheckArray = chore.lastCheckedOff;
+      if ( lastCheckArray.length === 0 ) {
+        const choreCreationTimestam = chore._id.getTimestamp();
+        const choreCreationDate = new Date(choreCreationTimestam);
+        referenceTime = choreCreationDate.getTime(); // in ms
+      } else {
+        referenceTime = lastCheckArray[lastCheckArray.length - 1];
+      }
+
+      // calculate the new nextOccurrence
+      chore.nextOccurrence = referenceTime + repeatMs;
+    }
+
+    // update the remaining chore fields
+    chore.name = name;
+    chore.frequency.quantity = frequency.quantity;
+    chore.frequency.interval = frequency.interval;
+    chore.location = location;
+    chore.duration = duration;
+    chore.preference = preference;
+
+    await chore.save();
     return res.status(201).json(chore);
   } catch (error) {
     console.error(error);
