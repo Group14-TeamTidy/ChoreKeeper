@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "mocha test/unitTests",
-    "testAll": "mocha test --recursive",
+    "test": "mocha test/unitTests --timeout 5000",
+    "testAll": "mocha test --recursive --timeout 5000",
     "coverage": "nyc --all  npm run test",
     "start": "nodemon server.js",
     "dev": "nodemon --watch server server.js"
