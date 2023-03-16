@@ -48,11 +48,13 @@ describe("Integration Test", function () {
       expect(res.status).to.equal(201);
       expect(res.body).to.have.property("token");
       expect(res.body.user).to.have.property("email", "test@example.com");
+      expect(res.body.user).to.have.property("receiveNotifs", false);
       expect(res.body.user).to.not.have.property("password");
 
       const user = await User.findOne({ email: "test@example.com" });
       expect(user.email).to.equal("test@example.com");
       expect(user.password).to.not.equal("testpassword");
+      expect(user.receiveNotifs).to.equal(false);
     });
     it("should send user already exists response", async () => {
       const body = { email: "test@example.com", password: "password123" };
@@ -92,6 +94,7 @@ describe("Integration Test", function () {
       expect(res.status).to.equal(200);
       expect(res.body).to.have.property("token");
       expect(res.body.user).to.have.property("email", "user1@iamarealuser.com");
+      expect(res.body.user).to.have.property("receiveNotifs", false);
       expect(res.body.user).to.not.have.property("password");
     });
 
