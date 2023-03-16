@@ -261,11 +261,11 @@ export const checkOffChore = async (req, res) => {
         .json({ message: `Chore with id ${id} was not found` });
     }
 
-    checkOffTime = Date.now();
+    const checkOffTime = Date.now();
     // adding the check off time in the array of chores last checked off list
     chore.lastCheckedOff.push(checkOffTime);
 
-    const repeatMs = repeatInMs(chore.quantity, chore.interval);
+    const repeatMs = repeatInMs(chore.frequency.quantity, chore.frequency.interval);
     // updating next occurrence
     const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;

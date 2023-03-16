@@ -21,7 +21,7 @@ router.get("/:id", verifyToken, getSingleChore); //get a single chore
 router.put("/:id", verifyToken, editChore); //edit a chore
 router.post("/", verifyToken, createChore); //create a chore
 router.delete("/:id", verifyToken, deleteChore); //delete a chore
-router.get("/checked/:id", verifyToken, checkOffChore)
+router.get("/checked/:id", verifyToken, checkOffChore) //check off a chore
 
 // router.delete("/id", ); //delete a chore
 
