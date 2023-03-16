@@ -19,9 +19,9 @@ const router = express.Router();
 router.get("/", verifyToken, getAllChores); //get all chores for a user
 router.get("/:id", verifyToken, getSingleChore); //get a single chore
 router.put("/:id", verifyToken, editChore); //edit a chore
+router.put("/:id/checked/", verifyToken, checkOffChore); //check off a chore
 router.post("/", verifyToken, createChore); //create a chore
 router.delete("/:id", verifyToken, deleteChore); //delete a chore
-router.get("/checked/:id", verifyToken, checkOffChore)
 
 // router.delete("/id", ); //delete a chore
 
