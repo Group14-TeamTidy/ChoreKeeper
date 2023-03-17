@@ -23,6 +23,4 @@ router.put("/:id/checked/", verifyToken, checkOffChore); //check off a chore
 router.post("/", verifyToken, createChore); //create a chore
 router.delete("/:id", verifyToken, deleteChore); //delete a chore
 
-// router.delete("/id", ); //delete a chore
-
 export default router;
