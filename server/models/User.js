@@ -12,6 +12,11 @@ const UserSchema = new mongoose.Schema({
     required: true,
     min: 5,
   },
+  receiveNotifs: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   chores: [{ type: Schema.Types.ObjectId, ref: "Chore" }],
 });
 

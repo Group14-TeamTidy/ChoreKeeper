@@ -2,6 +2,7 @@ import { check, validationResult } from "express-validator";
 // MODELS
 import Chore from "../models/Chore.js";
 import User from "../models/User.js";
+import { repeatInMs } from "../services/utils.js";
 
 /*
  ** This function creates new chore
@@ -17,7 +18,7 @@ export const createChore = async (req, res) => {
 
   try {
     const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
-    // console.log(req.body);
+
     console.log(
       `Task Name: ${name},\nFrequency Quantity & Interval: Every ${frequency.quantity} ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`
     );
@@ -39,6 +40,11 @@ export const createChore = async (req, res) => {
       });
     }
 
+    const lastCheckedOff = []; // this array will contain all time stamps when the chore was last checked off by the user
+
+    const repeatMs = repeatInMs(frequency.quantity, frequency.interval);
+    const nextOccurrence = Date.now() + repeatMs; // all time to be stored in milliseconds
+
     // creating a new chore to add to database
     const newChore = new Chore({
       name,
@@ -46,6 +52,8 @@ export const createChore = async (req, res) => {
       location,
       duration,
       preference,
+      lastCheckedOff,
+      nextOccurrence,
     });
 
     // Save to database
@@ -86,19 +94,28 @@ export const getAllChores = async (req, res) => {
     const user = await User.findOne({ _id: userID });
 
     // Get the list of chores for the user
-    const chores = await Promise.all(
-      user.chores.map((id) => Chore.findById(id))
-    );
+    const chores = await Chore.find({ _id: { $in: user.chores } });
 
     // Format the chore list for the response
     const formattedChores = chores.map(
-      ({ _id, name, frequency, location, duration, preference }) => ({
+      ({
         _id,
         name,
         frequency,
         location,
         duration,
         preference,
+        lastCheckedOff,
+        nextOccurrence,
+      }) => ({
+        _id,
+        name,
+        frequency,
+        location,
+        duration,
+        preference,
+        lastCheckedOff,
+        nextOccurrence,
       })
     );
 
@@ -141,16 +158,44 @@ export const getSingleChore = async (req, res) => {
  */
 export const editChore = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
+    const chore = await Chore.findOne({ _id: req.params.id });
 
-    const chore = await Chore.findByIdAndUpdate({ _id: id }, req.body, {
-      new: true,
-    });
     if (chore === null) {
       return res
         .status(404)
-        .json({ message: `Chore with id ${id} was not found` });
+        .json({ message: `Chore with id ${req.params.id} was not found` });
     }
+
+    if ((chore.frequency.interval != frequency.interval) || (chore.frequency.quantity != frequency.quantity)) {
+      // get time in ms from req.frequency
+      const repeatMs = repeatInMs(frequency.quantity, frequency.interval);
+
+      // get the last checked off time (last item in lastCheckedOff Array) 
+      // if it is empty, use the date it was created at
+      var referenceTime;
+      const lastCheckArray = chore.lastCheckedOff;
+      if ( lastCheckArray.length === 0 ) {
+        const choreCreationTimestam = chore._id.getTimestamp();
+        const choreCreationDate = new Date(choreCreationTimestam);
+        referenceTime = choreCreationDate.getTime(); // in ms
+      } else {
+        referenceTime = lastCheckArray[lastCheckArray.length - 1];
+      }
+
+      // calculate the new nextOccurrence
+      chore.nextOccurrence = referenceTime + repeatMs;
+    }
+
+    // update the remaining chore fields
+    chore.name = name;
+    chore.frequency.quantity = frequency.quantity;
+    chore.frequency.interval = frequency.interval;
+    chore.location = location;
+    chore.duration = duration;
+    chore.preference = preference;
+
+    await chore.save();
     return res.status(201).json(chore);
   } catch (error) {
     console.error(error);
@@ -159,7 +204,7 @@ export const editChore = async (req, res) => {
   }
 }; //editChore
 
- /*
+/*
  ** This function deletes a chore from the chore database as well as user chore list
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
@@ -178,22 +223,65 @@ export const deleteChore = async (req, res) => {
     let userChores = [...user.chores];
 
     // remove chore id from the users chore array
-    const idIndex = userChores.findIndex((val) => choreId == val._id.toString());
+    const idIndex = userChores.findIndex(
+      (val) => choreId == val._id.toString()
+    );
 
-    if (idIndex > -1) { // only splice array when id is found
+    if (idIndex > -1) {
+      // only splice array when id is found
       userChores.splice(idIndex, 1);
 
       // assigning the updated array to user.chores
       user.chores = [...userChores];
       await user.save();
-      return res.status(200).json({ message: `Chore with id ${choreId} deleted successfully!`});
+      return res
+        .status(200)
+        .json({ message: `Chore with id ${choreId} deleted successfully!` });
     } else {
-      console.log("Chore ID not found in user's chore list!")
+      // console.log("Chore ID not found in user's chore list!")
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }catch (error) {
+  } catch (error) {
     console.error(error);
     // Return an error message in the response in case of any unexpected errors
     res.status(500).json({ message: "Internal Server Error" });
   }
 }; //deleteChore
+
+/*
+ ** This function checks off a chore by updating its nextOccurrence and checkedOff params
+ ** @param {Object} req - The request object
+ ** @param {Object} res - The response object
+ */
+export const checkOffChore = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const chore = await Chore.findById({ _id: id });
+
+    if (chore === null) {
+      return res
+        .status(404)
+        .json({ message: `Chore with id ${id} was not found` });
+    }
+
+    const checkOffTime = Date.now();
+    // adding the check off time in the array of chores last checked off list
+    chore.lastCheckedOff.push(checkOffTime);
+
+    const repeatMs = repeatInMs(
+      chore.frequency.quantity,
+      chore.frequency.interval
+    );
+    // updating next occurrence
+    const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
+    chore.nextOccurrence = nextOccurrence;
+    chore.save();
+
+    return res.status(201).json({ message: `Chore checked off successfully!` });
+  } catch (error) {
+    console.error(error);
+    // Return an error message in the response in case of any unexpected errors
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}; //checkOffChore

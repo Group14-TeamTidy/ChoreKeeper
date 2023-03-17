@@ -2,15 +2,18 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
+import cron from "node-cron";
 import userRoute from "./routes/user.js";
 import choreRoute from "./routes/chore.js";
+import scheduleRoute from "./routes/schedule.js";
 import { register, login } from "./controller/user.js";
+import { startEmailService } from "./services/emailNotifier.js";
 
 /*
  ** @params database: the database the application will connect to
  ** This function connects the appalication to the database specified
  */
-export default function makeApp(database) {
+export default function makeApp(database, connectionURL) {
   // CONFIGURATIONS
   const app = express();
   dotenv.config();
@@ -24,6 +27,7 @@ export default function makeApp(database) {
 
   app.use("/api/user", userRoute);
   app.use("/api/chores", choreRoute);
+  app.use("/api/schedule", scheduleRoute);
 
   app.post("/api/login", login);
   app.post("/api/signup", register);
@@ -39,11 +43,15 @@ export default function makeApp(database) {
 
   //DB CONNECTION -- for testing purposes, db can be disconnected by passing no arguments to makeApp
   if (database != undefined) {
-    database.connect(process.env.MONGO_URL, {
+    database.connect(connectionURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     database.set("strictQuery", true);
+    // start email notifier to run at 12am everyday
+    cron.schedule("0 0 * * *", () => {
+      startEmailService();
+    });
   }
 
   return app;

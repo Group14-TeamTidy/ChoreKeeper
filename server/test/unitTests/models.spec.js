@@ -2,8 +2,8 @@ import Mocha from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
 import sinonChai from "sinon-chai";
-import Chore from "../models/Chore.js";
-import User from "../models/User.js";
+import Chore from "../../models/Chore.js";
+import User from "../../models/User.js";
 
 chai.use(chaiHttp);
 chai.use(sinonChai);
@@ -12,10 +12,11 @@ const expect = chai.expect;
 
 // MODEL TESTS
 describe("Testing the User model", () => {
-  it("should have a property `email`and `password`", () => {
+  it("should have a property `email`, `password`, and `receiveNotifs`", () => {
     const user = new User();
     expect(user).to.have.property("email");
     expect(user).to.have.property("password");
+    expect(user).to.have.property("receiveNotifs");
     expect(user).to.have.property("chores");
   });
   it("`email` property should be 'testemail@chores.com'", () => {
@@ -26,10 +27,18 @@ describe("Testing the User model", () => {
     const user = new User({ password: "testpassword" });
     expect(user.password).to.equal("testpassword");
   });
+  it("`receiveNotifs` property should be false", () => {
+    const user = new User({ email: "testemail@chores.com", password: "testpassword" });
+    expect(user.receiveNotifs).to.equal(false);
+  });
+  it("`receiveNotifs` property should be false", () => {
+    const user = new User({ receiveNotifs: true });
+    expect(user.receiveNotifs).to.equal(true);
+  });
 });
 
 describe("Testing the Chores model", () => {
-  it("should have a property name, frequency,location, location,duration,preference", () => {
+  it("should have a property name, frequency, quantity, interval, location, duration, preference", () => {
     const chore = new Chore();
     expect(chore).to.have.property("name");
     expect(chore).to.have.property("frequency");

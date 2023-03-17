@@ -40,9 +40,10 @@ export const register = async (req, res) => {
     const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
 
     // Don't send password
-    delete savedUser.password;
+    const user = { ...savedUser.toObject() };
+    delete user.password;
 
-    return res.status(201).json({ token, user: savedUser });
+    return res.status(201).json({ token, user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "User could not be created" });
@@ -82,9 +83,10 @@ export const login = async (req, res) => {
     //sign the user in
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     // Don't send password
-    delete user.password;
+    const loggedInUser = { ...user.toObject() };
+    delete loggedInUser.password;
 
-    res.status(200).json({ token, user: user });
+    res.status(200).json({ token, user: loggedInUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -111,7 +113,50 @@ export const getUser = async (req, res) => {
       return res.status(401).json({ message: `This User does not exist` });
     }
     // Don't send password
-    delete user.password;
-    res.status(200).json({ token, user: user });
+    const loggedInUser = { ...user.toObject() };
+    delete loggedInUser.password;
+
+    res.status(200).json({ user: loggedInUser });
   } catch (error) {}
+};
+
+/*
+ ** This function sets the notification settings for the user
+ ** @param {Object} req - The request object
+ ** @param {Object} res - The response object
+ */
+ export const setNotifs = async (req, res) => {
+  // Sanitize data
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(409).json();
+  }
+
+  try {
+    const receiveNotifs = req.body.receiveNotifs;
+    const userID = req.user.id;
+    const user = await User.findOne({ _id: userID }); // search for the user
+
+    if (!user) {
+      return res.status(401).json({ message: `This User does not exist` });
+    }
+
+    if(receiveNotifs != false && receiveNotifs != true) {
+      return res.status(400).json({ message: `Cannot set notifications to ${receiveNotifs}`})
+    }
+
+    user.receiveNotifs = receiveNotifs;
+    console.log("Receive Notifications: " + user.receiveNotifs);
+    user.save();
+
+    // Don't send password
+    const loggedInUser = { ...user.toObject() };
+    delete loggedInUser.password;
+
+    return res.status(201).json({ user: loggedInUser });
+  } catch (error) {
+    console.error(error);
+    // Return an error message in the response in case of any unexpected errors
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
