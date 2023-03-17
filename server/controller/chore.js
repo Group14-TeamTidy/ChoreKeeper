@@ -269,13 +269,16 @@ export const checkOffChore = async (req, res) => {
     // adding the check off time in the array of chores last checked off list
     chore.lastCheckedOff.push(checkOffTime);
 
-    const repeatMs = repeatInMs(chore.frequency.quantity, chore.frequency.interval);
+    const repeatMs = repeatInMs(
+      chore.frequency.quantity,
+      chore.frequency.interval
+    );
     // updating next occurrence
     const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;
     chore.save();
-    
-    return res.status(201).json({ message: `Chore checked off successfully!`});;
+
+    return res.status(201).json({ message: `Chore checked off successfully!` });
   } catch (error) {
     console.error(error);
     // Return an error message in the response in case of any unexpected errors
