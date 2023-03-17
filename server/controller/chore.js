@@ -164,7 +164,7 @@ export const editChore = async (req, res) => {
     if (chore === null) {
       return res
         .status(404)
-        .json({ message: `Chore with id ${id} was not found` });
+        .json({ message: `Chore with id ${req.params.id} was not found` });
     }
 
     if ((chore.frequency.interval != frequency.interval) || (chore.frequency.quantity != frequency.quantity)) {
