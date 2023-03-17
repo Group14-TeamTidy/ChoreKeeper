@@ -459,4 +459,171 @@ describe("Integration Test", function () {
       expect(res.status).to.equal(409);
     });
   });
+
+  describe("GET /api/schedule/", () => {
+    let token;
+    let token2;
+    let choreId;
+    let today = new Date();
+
+    before(async function () {
+      const yesterday = today.getTime() - 86400000;
+      const tomorrow = today.getTime() + 86400000;
+      const twoDaysAgo = today.getTime() - 2 * 86400000;
+
+      // user 1
+      const salt = await bcrypt.genSalt();
+      const pwdHash = await bcrypt.hash("1234567", salt);
+      const newUser = new User({
+        email: "user1@iamarealuser.com",
+        password: pwdHash,
+      });
+      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      await newUser.save();
+
+      //user 2
+      const pwdHash2 = await bcrypt.hash("1234567", salt);
+      const newUser2 = new User({
+        email: "user2@iamarealuser.com",
+        password: pwdHash2,
+        chores: ["640ab1e7823cae42437b3c92"],
+      });
+      token2 = jwt.sign({ id: newUser2._id }, process.env.JWT_SECRET);
+      await newUser2.save();
+
+      //chore1
+      let newChore = new Chore({
+        name: "Sweep the floor",
+        frequency: { quantity: 2, interval: "days" },
+        location: "TestLocation",
+        duration: 3000,
+        preference: "high",
+        nextOccurrence: yesterday,
+      });
+      let savedChore = await newChore.save();
+      newUser.chores.push(savedChore._id);
+      await newUser.save();
+
+      //chore2
+      newChore = new Chore({
+        name: "Mop the floor",
+        frequency: { quantity: 2, interval: "weeks" },
+        location: "TestLocation",
+        duration: 3000,
+        preference: "high",
+        nextOccurrence: today.getTime(),
+      });
+      savedChore = await newChore.save();
+      newUser.chores.push(savedChore._id);
+      await newUser.save();
+
+      //chore3
+      newChore = new Chore({
+        name: "Mop the other floor",
+        frequency: { quantity: 2, interval: "months" },
+        location: "TestLocation",
+        duration: 3000,
+        preference: "high",
+        nextOccurrence: tomorrow,
+      });
+      savedChore = await newChore.save();
+      newUser.chores.push(savedChore._id);
+      await newUser.save();
+
+      //chore4
+      newChore = new Chore({
+        name: "Clean the other floor",
+        frequency: { quantity: 3, interval: "years" },
+        location: "TestLocation",
+        duration: 3000,
+        preference: "high",
+        nextOccurrence: twoDaysAgo,
+      });
+      savedChore = await newChore.save();
+      newUser.chores.push(savedChore._id);
+      await newUser.save();
+    });
+
+    after(async function () {
+      await User.deleteOne({ email: "user1@iamarealuser.com" });
+      await User.deleteOne({ email: "user2@iamarealuser.com" });
+
+      await Chore.deleteMany({ location: "TestLocation" });
+    });
+
+    // Test case for generating schedule with default timeframe (today's date)
+    it("should generate a schedule for today's date", async () => {
+      const res = await chai
+        .request(app)
+        .get("/api/schedule/")
+        .set("Authorization", `Bearer ${token}`); // assuming that the authToken variable holds a valid JWT token
+      expect(res.status).to.equal(201);
+      expect(res.body.requestedSchedule).to.be.an("array");
+      expect(res.body.requestedSchedule.length).to.equal(1);
+      expect(res.body.requestedSchedule[0].name).to.equal("Mop the floor");
+    });
+  });
+
+  describe("PUT /api/chores/:id/checked/", function () {
+    let token;
+    let choreId;
+    let today = new Date();
+
+    before(async function () {
+      // user 1
+      const salt = await bcrypt.genSalt();
+      const pwdHash = await bcrypt.hash("1234567", salt);
+      const newUser = new User({
+        email: "user1@iamarealuser.com",
+        password: pwdHash,
+      });
+      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      await newUser.save();
+      //chore1
+      let newChore = new Chore({
+        name: "Sweep the floor",
+        frequency: { quantity: 2, interval: "days" },
+        location: "TestLocation",
+        duration: 3000,
+        preference: "high",
+        nextOccurrence: today,
+      });
+      let savedChore = await newChore.save();
+      choreId = savedChore._id;
+      newUser.chores.push(savedChore._id);
+      await newUser.save();
+    });
+    after(async function () {
+      await User.deleteOne({ email: "user1@iamarealuser.com" });
+      await Chore.deleteMany({ location: "TestLocation" });
+    });
+
+    // Test case for checking off a valid chore
+    it("should check off a chore with a valid id", async function () {
+      const res = await chai
+        .request(app)
+        .put(`/api/chores/${choreId}/checked/`)
+        .set("Authorization", `Bearer ${token}`);
+
+      const chore = await Chore.findOne({ _id: choreId });
+      expect(res.status).to.equal(201);
+      expect(res.body).to.deep.equal({
+        message: "Chore checked off successfully!",
+      });
+      expect(chore.lastCheckedOff).to.have.lengthOf(1);
+      expect(chore.nextOccurrence).to.be.greaterThan(Date.now());
+    });
+
+    // Test case for checking off an invalid chore
+    it("should return a 404 error for checking off a chore with an invalid id", async function () {
+      const res = await chai
+        .request(app)
+        .put("/api/chores/640ab1e7823cae42437b3c92/checked")
+        .set("Authorization", `Bearer ${token}`);
+      expect(res).to.have.status(404);
+      expect(res.body).to.deep.equal({
+        message: "Chore with id 640ab1e7823cae42437b3c92 was not found",
+      });
+    });
+  });
 });
