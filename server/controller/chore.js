@@ -167,15 +167,18 @@ export const editChore = async (req, res) => {
         .json({ message: `Chore with id ${req.params.id} was not found` });
     }
 
-    if ((chore.frequency.interval != frequency.interval) || (chore.frequency.quantity != frequency.quantity)) {
+    if (
+      chore.frequency.interval != frequency.interval ||
+      chore.frequency.quantity != frequency.quantity
+    ) {
       // get time in ms from req.frequency
       const repeatMs = repeatInMs(frequency.quantity, frequency.interval);
 
-      // get the last checked off time (last item in lastCheckedOff Array) 
+      // get the last checked off time (last item in lastCheckedOff Array)
       // if it is empty, use the date it was created at
       var referenceTime;
       const lastCheckArray = chore.lastCheckedOff;
-      if ( lastCheckArray.length === 0 ) {
+      if (lastCheckArray.length === 0) {
         const choreCreationTimestam = chore._id.getTimestamp();
         const choreCreationDate = new Date(choreCreationTimestam);
         referenceTime = choreCreationDate.getTime(); // in ms

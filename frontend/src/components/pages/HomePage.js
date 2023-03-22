@@ -1,4 +1,4 @@
-import { React, useRef ,useState } from "react";
+import { React, useRef, useState } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
@@ -41,7 +41,7 @@ const HomePage = () => {
     {
       onError: (error) => {
         showServerErrorsToast(error.response.data.message);
-      }
+      },
     }
   );
 
@@ -145,23 +145,37 @@ const HomePage = () => {
 
             <Button
               id="toggleNotifs"
-              onClick={
-                () => {
-                  if(!isUserLoading) {
-                    updateUserNotifsMutation.mutate(!userData.data.user.receiveNotifs);
-                  }
+              onClick={() => {
+                if (!isUserLoading) {
+                  updateUserNotifsMutation.mutate(
+                    !userData.data.user.receiveNotifs
+                  );
                 }
-              }
+              }}
             >
-              {!isUserLoading && userData.data.user.receiveNotifs ?
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" className="bi bi-bell-fill" viewBox="0 0 16 16">
-                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+              {!isUserLoading && userData.data.user.receiveNotifs ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="21"
+                  height="21"
+                  fill="currentColor"
+                  className="bi bi-bell-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
                 </svg>
-                :
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" className="bi bi-bell-slash-fill" viewBox="0 0 16 16">
-                  <path d="M5.164 14H15c-1.5-1-2-5.902-2-7 0-.264-.02-.523-.06-.776L5.164 14zm6.288-10.617A4.988 4.988 0 0 0 8.995 2.1a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 7c0 .898-.335 4.342-1.278 6.113l9.73-9.73zM10 15a2 2 0 1 1-4 0h4zm-9.375.625a.53.53 0 0 0 .75.75l14.75-14.75a.53.53 0 0 0-.75-.75L.625 15.625z"/>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="21"
+                  height="21"
+                  fill="currentColor"
+                  className="bi bi-bell-slash-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M5.164 14H15c-1.5-1-2-5.902-2-7 0-.264-.02-.523-.06-.776L5.164 14zm6.288-10.617A4.988 4.988 0 0 0 8.995 2.1a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 7c0 .898-.335 4.342-1.278 6.113l9.73-9.73zM10 15a2 2 0 1 1-4 0h4zm-9.375.625a.53.53 0 0 0 .75.75l14.75-14.75a.53.53 0 0 0-.75-.75L.625 15.625z" />
                 </svg>
-              }
+              )}
             </Button>
 
             <div id="dropdownMenuContainer">

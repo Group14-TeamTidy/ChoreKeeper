@@ -4,10 +4,10 @@ import AuthService from "./AuthService";
 const setConfig = (token) => {
   return {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: token,
-    }
-  }
+    },
+  };
 };
 
 const ChoreService = {
