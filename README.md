@@ -45,6 +45,10 @@ We want our application to be a vehicle for behavior change. Many people find it
 - [Github](https://github.com/Group14-TeamTidy/ChoreKeeper)
 - Github Actions
 
+## Naming convention
+- Camelcase for variables, functions and file names.
+- Pascalcase for Objects.
+
 ## User Stories
 
 ### Create, update, and delete chores
