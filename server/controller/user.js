@@ -125,7 +125,7 @@ export const getUser = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
- export const setNotifs = async (req, res) => {
+export const setNotifs = async (req, res) => {
   // Sanitize data
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -141,8 +141,10 @@ export const getUser = async (req, res) => {
       return res.status(401).json({ message: `This User does not exist` });
     }
 
-    if(receiveNotifs != false && receiveNotifs != true) {
-      return res.status(400).json({ message: `Cannot set notifications to ${receiveNotifs}`})
+    if (receiveNotifs != false && receiveNotifs != true) {
+      return res
+        .status(400)
+        .json({ message: `Cannot set notifications to ${receiveNotifs}` });
     }
 
     user.receiveNotifs = receiveNotifs;

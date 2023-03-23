@@ -28,7 +28,10 @@ describe("Testing the User model", () => {
     expect(user.password).to.equal("testpassword");
   });
   it("`receiveNotifs` property should be false", () => {
-    const user = new User({ email: "testemail@chores.com", password: "testpassword" });
+    const user = new User({
+      email: "testemail@chores.com",
+      password: "testpassword",
+    });
     expect(user.receiveNotifs).to.equal(false);
   });
   it("`receiveNotifs` property should be false", () => {

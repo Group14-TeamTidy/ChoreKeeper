@@ -3,7 +3,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import "./App.css";
 import LogIn from "./components/pages/LogIn";
 import SignUp from "./components/pages/SignUp";
-import HomePage from "./components/pages/HomePage"
+import HomePage from "./components/pages/HomePage";
 import ChoreService from "./services/ChoreService";
 
 const queryClient = new QueryClient();

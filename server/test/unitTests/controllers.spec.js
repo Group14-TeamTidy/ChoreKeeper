@@ -416,7 +416,7 @@ describe("Testing Chores controllers", () => {
         params: { id },
         body: {
           name: "Clean the kitchen",
-          frequency: {quantity: 2, interval: "days"},
+          frequency: { quantity: 2, interval: "days" },
           location: "kitchen",
           duration: "30",
           preference: "low",
@@ -426,13 +426,13 @@ describe("Testing Chores controllers", () => {
       const expectedResponse = {
         _id: "chore123",
         name: "Clean the kitchen",
-        frequency: { quantity: 2, interval: "days"},
+        frequency: { quantity: 2, interval: "days" },
         location: "kitchen",
         duration: 30,
         preference: "low",
         lastCheckedOff: [9484839483],
         nextOccurrence: 847578493,
-      }
+      };
 
       findOneStub.resolves(req.body);
 
@@ -441,7 +441,6 @@ describe("Testing Chores controllers", () => {
       expect(findOneStub.calledOnceWith({ _id: id })).to.be.true;
       expect(res.status().json.calledOnce).to.be.true;
     });
-
 
     it("returns 201 status code and the saved chore object if the chore is successfully edited", async () => {
       // stub the  mongoose findOne function to return a valid null
@@ -568,12 +567,12 @@ describe("Testing Chores controllers", () => {
       };
       findByIdAndDelete = sinon.stub(Chore, "findByIdAndDelete");
     });
-  
+
     afterEach(() => {
       findByIdAndDelete.restore();
       sinon.restore();
     });
-  
+
     // Test 1
     it("should return message containing deleted chore id", async () => {
       const id = "123";
@@ -581,29 +580,29 @@ describe("Testing Chores controllers", () => {
         params: { id },
         user: { id: "123456" },
       };
-  
+
       findByIdAndDelete.resolves(req.params);
-  
+
       await deleteChore(req, res);
-  
+
       expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
       expect(res.status().json.calledOnce).to.be.true;
     });
-  
+
     // Test 2
     it("should return 500 if an unexpected error occurs", async () => {
       const id = "789";
       const req = { params: { id }, user: { id: "123456" } };
-  
+
       const error = new Error("Unexpected error");
       findByIdAndDelete.throws(error);
-  
+
       await deleteChore(req, res);
-  
+
       expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
       expect(res.status.calledOnceWith(500)).to.be.true;
-      expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to.be
-        .true;
+      expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to
+        .be.true;
     });
   });
 });
