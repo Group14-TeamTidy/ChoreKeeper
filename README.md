@@ -47,7 +47,18 @@ We want our application to be a vehicle for behavior change. Many people find it
 
 ## Naming convention
 - Camelcase for variables, functions and file names.
-- Pascalcase for Objects.
+- UpperCamelCase for Objects.
+
+## Coding style
+- 2 Spaces for indentation
+- No trailing whitespace
+- Use Semicolons
+- Use double quotes
+- Opening braces go on the same line
+- Declare one variable per statement
+- Return early from functions
+- Use block comment for function description
+- Use slashes for inline comments
 
 ## User Stories
 
