@@ -47,7 +47,7 @@ We want our application to be a vehicle for behavior change. Many people find it
 
 ## Naming convention
 - Camelcase for variables, functions and file names.
-- UpperCamelCase for Objects.
+- UpperCamelCase for Class/Component names.
 
 ## Coding style
 - 2 Spaces for indentation
