@@ -579,15 +579,6 @@ describe("Testing Chores controllers", () => {
     });
   });
 
-
-
-
-
-
-
-
-
-
   describe("checkOffChore", () => {
     let req, res, findByIdStub, sandbox;
 
@@ -669,20 +660,5 @@ describe("Testing Chores controllers", () => {
     });
 
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });
