@@ -242,7 +242,7 @@ export const deleteChore = async (req, res) => {
         .json({ message: `Chore with id ${choreId} deleted successfully!` });
     } else {
       // console.log("Chore ID not found in user's chore list!")
-      return res.status(500).json({ message: "Internal Server Error" });
+      return res.status(404).json({ message: "Could not delete the given chore as chore was not found" });
     }
   } catch (error) {
     console.error(error);
@@ -279,7 +279,7 @@ export const checkOffChore = async (req, res) => {
     // updating next occurrence
     const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;
-    chore.save();
+    await chore.save();
 
     return res.status(201).json({ message: `Chore checked off successfully!` });
   } catch (error) {
