@@ -24,6 +24,8 @@ describe("startEmailService", function () {
   const twoDaysAgo = today.getTime() - 2 * 86400000;
 
   let sandbox;
+  let userFindStub;
+  let choreFindStub;
 
   let testChores = [
     {
@@ -140,6 +142,9 @@ describe("startEmailService", function () {
   });
 
   it("should throw an error", async function () {
+    const transporterStub = sandbox
+      .stub(nodemailer, "createTransport")
+      .returns({});
     // stub the Mailgen constructor to return a fake MailGenerator instance
     const MailGeneratorStub = sandbox
       .stub(Mailgen.prototype, "generate")

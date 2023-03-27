@@ -176,7 +176,7 @@ export const editChore = async (req, res) => {
 
       // get the last checked off time (last item in lastCheckedOff Array)
       // if it is empty, use the date it was created at
-      var referenceTime;
+      let referenceTime;
       const lastCheckArray = chore.lastCheckedOff;
       if (lastCheckArray.length === 0) {
         const choreCreationTimestam = chore._id.getTimestamp();
