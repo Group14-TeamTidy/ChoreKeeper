@@ -19,10 +19,6 @@ export const createChore = async (req, res) => {
   try {
     const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
 
-    console.log(
-      `Task Name: ${name},\nFrequency Quantity & Interval: Every ${frequency.quantity} ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`
-    );
-
     // check if this chore already exists
     const existingChore = await Chore.findOne({
       name: name,
@@ -279,7 +275,7 @@ export const checkOffChore = async (req, res) => {
     // updating next occurrence
     const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;
-    chore.save();
+    await chore.save();
 
     return res.status(201).json({ message: `Chore checked off successfully!` });
   } catch (error) {
