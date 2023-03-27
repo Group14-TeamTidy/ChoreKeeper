@@ -1,7 +1,7 @@
 name: SonarCloud Action
 on:
   push:
-    branches: [ "develop", "main", "CK-108-Add-Sonarcloud" ]
+    branches: [ "develop", "main" ]
 
   pull_request:
     types: [opened, synchronize, reopened]
