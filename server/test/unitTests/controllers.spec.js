@@ -1,12 +1,10 @@
-import Mocha from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
-import express from "express";
 import User from "../../models/User.js";
 import Chore from "../../models/Chore.js";
-import { register, login, getUser } from "../../controller/user.js";
+import { register, login } from "../../controller/user.js";
 import {
   getAllChores,
   createChore,
@@ -15,7 +13,6 @@ import {
   deleteChore,
 } from "../../controller/chore.js";
 
-import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
