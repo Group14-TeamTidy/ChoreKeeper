@@ -604,7 +604,6 @@ describe("Testing Chores controllers", () => {
         lastCheckedOff: [9484839483],
         nextOccurrence: 847578493,
       });
-      // repeatInMsStub = sinon.stub(choreController, "repeatInMs")
     });
 
     afterEach(() => {
