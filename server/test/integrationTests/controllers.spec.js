@@ -339,7 +339,7 @@ describe("Integration Test", function () {
     it("should return an error for chores that don't exist", async () => {
       const res = await chai
         .request(app)
-        .delete(`/api/chores/63e43b73f26f0a96062d489e`)
+        .delete(`/api/chores/63e43b73f26f0a96062d489e8`)
         .set("Authorization", `Bearer ${token}`);
       expect(res.status).to.equal(500);
       expect(res.body).to.have.property("message");
