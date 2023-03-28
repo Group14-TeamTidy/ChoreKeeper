@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { useMutation } from "react-query";
 import ChoreService from "../services/ChoreService";
 import { queryClient } from "../App";
+import { motion } from "framer-motion";
 
 const ScheduleList = ({ chores }) => {
   const checkChoreMutation = useMutation(
@@ -31,8 +32,14 @@ const ScheduleList = ({ chores }) => {
 
   return (
     <div className="schedule-list">
-      {choresList.map((chore) => (
-        <div key={chore._id} className="schedule-item">
+      {choresList.map((chore, index) => (
+        <motion.div
+          key={chore._id}
+          className="schedule-item"
+          initial={{ opacity: 0, translateX: -50 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+        >
           <Card className="schedule-item-card">
             <Button
               className="schedule-item-button p-button-icon-only p-button-outlined p-button-rounded p-button-success"
@@ -59,7 +66,7 @@ const ScheduleList = ({ chores }) => {
               )}
             </div>
           </Card>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
