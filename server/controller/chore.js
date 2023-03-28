@@ -19,10 +19,6 @@ export const createChore = async (req, res) => {
   try {
     const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
 
-    console.log(
-      `Task Name: ${name},\nFrequency Quantity & Interval: Every ${frequency.quantity} ${frequency.interval},\nLocation: ${location},\nDuration (s): ${duration},\nPreference: ${preference}`
-    );
-
     // check if this chore already exists
     const existingChore = await Chore.findOne({
       name: name,
@@ -241,8 +237,8 @@ export const deleteChore = async (req, res) => {
         .status(200)
         .json({ message: `Chore with id ${choreId} deleted successfully!` });
     } else {
-      // console.log("Chore ID not found in user's chore list!")
-      return res.status(500).json({ message: "Internal Server Error" });
+      // Chore ID not found in user's chore list
+      return res.status(404).json({ message: "Could not delete the given chore as chore was not found" });
     }
   } catch (error) {
     console.error(error);
@@ -279,7 +275,7 @@ export const checkOffChore = async (req, res) => {
     // updating next occurrence
     const nextOccurrence = checkOffTime + repeatMs; // all time to be stored in milliseconds
     chore.nextOccurrence = nextOccurrence;
-    chore.save();
+    await chore.save();
 
     return res.status(201).json({ message: `Chore checked off successfully!` });
   } catch (error) {
