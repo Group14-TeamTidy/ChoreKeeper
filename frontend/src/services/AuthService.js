@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// AuthService to handle all authentication related requests
 const AuthService = {
   login: (email, password) => {
     return axios

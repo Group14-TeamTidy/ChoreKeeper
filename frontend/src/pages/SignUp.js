@@ -1,15 +1,16 @@
-import { React, useRef } from "react";
+import { React } from "react";
 import { Navigate, useNavigate, Link } from "@tanstack/react-location";
-import AuthService from "../../services/AuthService";
+import AuthService from "../services/AuthService";
 import { useFormik } from "formik";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { classNames } from "primereact/utils";
+import useServerMessageToast from "../hooks/useServerMessageToast";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const serverErrorsToast = useRef(null);
+  const [toast, showServerMessageToast] = useServerMessageToast();
 
   const formik = useFormik({
     initialValues: {
@@ -39,28 +40,19 @@ const SignUp = () => {
           navigate({ to: "/", replace: true });
         })
         .catch((error) => {
-          showServerErrorsToast(error.response.data.message);
+          showServerMessageToast(error.response.data.message, "error");
         });
     },
     validateOnChange: false,
     validateOnBlur: false,
   });
 
-  const showServerErrorsToast = (message) => {
-    serverErrorsToast.current.show({
-      severity: "error",
-      summary: "Server Error",
-      detail: message,
-      life: 3000,
-    });
-  };
-
   if (AuthService.getCurrentUser() && AuthService.getToken()) {
     return <Navigate to="/" />;
   } else {
     return (
       <>
-        <Toast ref={serverErrorsToast} />
+        <Toast ref={toast} />
         <div className="grid">
           <div className="centered-block">
             <h1>Chore Keeper</h1>

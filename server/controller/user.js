@@ -1,4 +1,4 @@
-import { check, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -158,7 +158,8 @@ export const setNotifs = async (req, res) => {
     return res.status(201).json({ user: loggedInUser });
   } catch (error) {
     console.error(error);
-    // Return an error message in the response in case of any unexpected errors
-    res.status(500).json({ message: "Internal Server Error" });
+    res
+      .status(500)
+      .json({ message: "Could not change notification settings." });
   }
 };

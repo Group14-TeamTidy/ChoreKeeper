@@ -4,7 +4,7 @@ import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import User from "../../models/User.js";
 import Chore from "../../models/Chore.js";
-import { register, login, getUser } from "../../controller/user.js";
+import { register, login } from "../../controller/user.js";
 import {
   getAllChores,
   createChore,
@@ -30,36 +30,36 @@ describe("Testing User controllers", function () {
     let jwtSignStub;
 
     beforeEach(() => {
-      //create a request
+      // Create a request
       req = {
         body: {
           email: "test@test.com",
           password: "test123",
         },
-        //mock the validation result to always return true
+        // Mock the validation result to always return true
         validationResult: sinon
           .stub()
           .returns({ isEmpty: sinon.stub().returns(true) }),
       };
-      // create a response for the request
+      // Create a response for the request
       res = {
         status: sinon.stub().returnsThis(),
         json: sinon.stub().returnsThis(),
       };
 
-      // stubbing the encryption functions
+      // Stubbing the encryption functions
       bcryptStub = sinon.stub(bcrypt, "genSalt").resolves("salt");
       bcryptStub = sinon.stub(bcrypt, "hash").resolves("hashed_password");
       jwtSignStub = sinon.stub(jwt, "sign").returns("token");
     });
 
     afterEach(() => {
-      // restore all the stubed functions
+      // Restore all the stubbed functions
       sinon.restore();
     });
 
     it("should return 409 if email is already in use", async function () {
-      // stub the mongoose findOne functoin to always return true
+      // Stub the mongoose findOne functoin to always return true
       sinon.stub(User, "findOne").resolves({});
 
       await register(req, res);
@@ -70,10 +70,10 @@ describe("Testing User controllers", function () {
     });
 
     it("should return 201 if user creation is successful", async function () {
-      // stub the mongoose findOne functoin to always return null
+      // Stub the mongoose findOne function to always return null
       sinon.stub(User, "findOne").resolves(null);
 
-      // stub the mongoose save function to return a new user
+      // Stub the mongoose save function to return a new user
       sinon.stub(User.prototype, "save").resolves({
         email: "test@test.com",
         password: "hashed_password",
@@ -103,7 +103,7 @@ describe("Testing User controllers", function () {
     let req, res;
 
     beforeEach(function () {
-      //create a request
+      // Create a request
 
       req = {
         body: {
@@ -111,7 +111,7 @@ describe("Testing User controllers", function () {
           password: "password123",
         },
       };
-      //mock the validation result to always return true
+      // Mock the validation result to always return true
 
       res = {
         status: sinon.stub().returnsThis(),
@@ -120,15 +120,15 @@ describe("Testing User controllers", function () {
     });
 
     afterEach(function () {
-      //restore all the stubbed functions
+      // Restore all the stubbed functions
       sinon.restore();
     });
 
     it("should return a user does not exist if the email does not exist", async function () {
-      // stub the mongoose findOne functoin to return null
+      // Stub the mongoose findOne functoin to return null
       sinon.stub(User, "findOne").returns(null);
 
-      // call the function we are testing
+      // Call the function we are testing
       await login(req, res);
 
       expect(res.status.calledWith(400)).to.be.true;
@@ -140,11 +140,11 @@ describe("Testing User controllers", function () {
     });
 
     it("should return an error if the password is invalid", async function () {
-      // stub the mongoose findOne functoin to return an invalid passsword
+      // Stub the mongoose findOne functoin to return an invalid passsword
 
       sinon.stub(User, "findOne").returns({ password: "hashedpassword" });
 
-      //stub the btcrypt to make it return false
+      // Stub the btcrypt to make it return false
       sinon.stub(bcrypt, "compare").resolves(false);
 
       await login(req, res);
@@ -164,9 +164,9 @@ describe("Testing User controllers", function () {
 
       sinon.stub(User, "findOne").returns(user);
 
-      //stub the btcrypt to make it return true
+      // Stub the btcrypt to make it return true
       sinon.stub(bcrypt, "compare").resolves(true);
-      // fake a return token
+      // Fake a return token
       sinon.stub(jwt, "sign").returns("token");
 
       await login(req, res);
@@ -177,9 +177,9 @@ describe("Testing User controllers", function () {
     });
 
     it("should return an error if there is an exception thrown", async function () {
-      //testing error handling
+      // Testing error handling
 
-      sinon.stub(User, "findOne").throws(); // not sure why this is also printing out the error
+      sinon.stub(User, "findOne").throws();
 
       await login(req, res);
 
@@ -196,10 +196,10 @@ describe("Testing Chores controllers", () => {
     let res;
     let sandbox;
     beforeEach(() => {
-      //using createSandbox so that I can easily stub functions
+      // Using createSandbox so that I can easily stub functions
       sandbox = sinon.createSandbox();
 
-      //create the request
+      // Create the request
       req = {
         body: {
           name: "Clean the kitchen",
@@ -211,7 +211,7 @@ describe("Testing Chores controllers", () => {
         user: { id: "user123" },
       };
 
-      //create the response object
+      // Create the response object
       res = {
         status: sinon.stub().returnsThis(),
         json: sinon.stub(),
@@ -226,7 +226,7 @@ describe("Testing Chores controllers", () => {
       sandbox.stub(Chore, "findOne").returns({});
 
       await createChore(req, res);
-      //checks
+      // Checks
       expect(res.status.calledWith(409)).to.be.true;
       expect(
         res.json.calledWith({
@@ -237,10 +237,10 @@ describe("Testing Chores controllers", () => {
     });
 
     it("returns 500 status code if an error occurs while saving chore", async () => {
-      // stub the  mongoose findOne function to return an invalid response
+      // Stub the  mongoose findOne function to return an invalid response
       sandbox.stub(Chore, "findOne").returns(null);
 
-      //testing error handling
+      // Testing error handling
       sandbox.stub(Chore.prototype, "save").throws();
       await createChore(req, res);
       expect(res.status.calledWith(500)).to.be.true;
@@ -249,7 +249,7 @@ describe("Testing Chores controllers", () => {
     });
 
     it("returns 201 status code and the saved chore object if the chore is successfully created", async () => {
-      // stub the  mongoose findOne function to return a valid null
+      // Stub the  mongoose findOne function to return a valid null
 
       sandbox.stub(Chore, "findOne").returns(null);
       sandbox.stub(User, "findOne").returns({
@@ -602,7 +602,6 @@ describe("Testing Chores controllers", () => {
 
     afterEach(() => {
       findByIdStub.restore();
-      // repeatInMsStub.restore();
       sinon.restore();
       sandbox.restore();
     });
@@ -638,7 +637,7 @@ describe("Testing Chores controllers", () => {
 
       expect(res.status.calledOnceWith(404)).to.be.true;
       expect(res.json.firstCall.args[0]).to.deep.equal({
-        message: `Chore with id ${id} was not found`,
+        message: `Chore with id ${id} was not found.`,
       });
     });
 
