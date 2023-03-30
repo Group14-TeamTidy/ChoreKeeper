@@ -313,7 +313,7 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
                       animate={{
                         opacity: 1,
                         translateY: 0,
-                        transition: { duration: 0.3, delay: i * 0.2 },
+                        transition: { duration: 0.15, delay: i * 0.05 },
                       }}
                       whileHover={{ scale: 1.02 }}
                     >
