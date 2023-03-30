@@ -149,7 +149,6 @@ describe("startEmailService", function () {
     const MailGeneratorStub = sandbox
       .stub(Mailgen.prototype, "generate")
       .throws(new Error("Unexpected error"));
-    // expect(transporterStub).to.have.not.been.called;
     expect(MailGeneratorStub).to.have.not.been.called;
   });
 
@@ -157,10 +156,6 @@ describe("startEmailService", function () {
     const res0 = await getChoresForUser(testUsers[0]);
     expect(res0.todaysChores).to.deep.equal([]);
     expect(res0.overdueChores).to.deep.equal([]);
-
-    // const res1 = await getChoresForUser(testUsers[1]);
-    // expect(res1.todaysChores.length).to.equal(2);
-    // expect(res1.overdueChores.length).to.equal(2);
   });
 
   it("should return the correct number of milliseconds for days", () => {

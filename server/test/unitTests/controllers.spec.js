@@ -4,7 +4,7 @@ import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import User from "../../models/User.js";
 import Chore from "../../models/Chore.js";
-import { register, login, getUser } from "../../controller/user.js";
+import { register, login } from "../../controller/user.js";
 import {
   getAllChores,
   createChore,
@@ -638,7 +638,7 @@ describe("Testing Chores controllers", () => {
 
       expect(res.status.calledOnceWith(404)).to.be.true;
       expect(res.json.firstCall.args[0]).to.deep.equal({
-        message: `Chore with id ${id} was not found`,
+        message: `Chore with id ${id} was not found.`,
       });
     });
 
