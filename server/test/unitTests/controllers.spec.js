@@ -4,7 +4,6 @@ import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import User from "../../models/User.js";
 import Chore from "../../models/Chore.js";
-// import choreController, { checkOffChore } from "../../controller/chore.js"
 import { register, login, getUser } from "../../controller/user.js";
 import {
   getAllChores,
@@ -552,7 +551,6 @@ describe("Testing Chores controllers", () => {
 
     // Test 1
     it("should return message containing deleted chore id", async () => {
-
       findByIdAndDelete.resolves(req.params);
 
       await deleteChore(req, res);
@@ -610,7 +608,6 @@ describe("Testing Chores controllers", () => {
     });
 
     it("should return a 201 response with the chore if it is found", async () => {
-
       findByIdStub.returns({
         _id: "chore123",
         name: "Clean the kitchen",
@@ -625,7 +622,9 @@ describe("Testing Chores controllers", () => {
       await checkOffChore(req, res);
 
       expect(res.status.calledWith(201)).to.be.true;
-      expect(res.json.calledOnceWith({ message: `Chore checked off successfully!` })).to.be.true;
+      expect(
+        res.json.calledOnceWith({ message: `Chore checked off successfully!` })
+      ).to.be.true;
     });
 
     it("should return a 404 response with an error message if the chore is not found", async () => {
@@ -653,7 +652,5 @@ describe("Testing Chores controllers", () => {
       expect(res.json.calledWith({ message: "Internal Server Error" })).to.be
         .true;
     });
-
   });
-
 });

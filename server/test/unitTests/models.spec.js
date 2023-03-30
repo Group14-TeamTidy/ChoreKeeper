@@ -1,11 +1,8 @@
-import Mocha from "mocha";
 import chai from "chai";
-import chaiHttp from "chai-http";
 import sinonChai from "sinon-chai";
 import Chore from "../../models/Chore.js";
 import User from "../../models/User.js";
 
-chai.use(chaiHttp);
 chai.use(sinonChai);
 chai.should();
 const expect = chai.expect;

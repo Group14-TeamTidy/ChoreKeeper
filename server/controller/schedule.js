@@ -1,4 +1,3 @@
-import { check, validationResult } from "express-validator";
 // MODELS
 import Chore from "../models/Chore.js";
 import User from "../models/User.js";
@@ -19,7 +18,7 @@ export const createSchedule = async (req, res) => {
     //   timeframeInMs = Date.parse(req.query.timeframe);
     // } Future sprint
 
-    var requestedSchedule = []; // will add chores for the day in here
+    const requestedSchedule = []; // will add chores for the day in here
 
     // get the user that is requesting the schedule
     const userID = req.user.id;
@@ -29,7 +28,7 @@ export const createSchedule = async (req, res) => {
 
     for (const chore of choreList) {
       // mapping interval into days
-      var intervalToDays;
+      let intervalToDays;
       if (chore.frequency.interval == "days") {
         intervalToDays = 1;
       } else if (chore.frequency.interval == "weeks") {
