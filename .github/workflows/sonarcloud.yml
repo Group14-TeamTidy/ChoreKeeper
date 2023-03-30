@@ -19,5 +19,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          coverage: 'server/test/**/*spec.js'
-
+          args: >
+            -Dsonar.coverage.exclusions=test/**/*
