@@ -2,49 +2,53 @@ import { React, useRef, useState } from "react";
 import { Navigate, useNavigate } from "@tanstack/react-location";
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
-import { queryClient } from "../../App";
+import { queryClient } from "../App";
 import { useQuery, useMutation } from "react-query";
-import AuthService from "../../services/AuthService";
+import AuthService from "../services/AuthService";
 import ChoresPage from "./ChoresPage.js";
-import ChoreService from "../../services/ChoreService";
+import ChoreService from "../services/ChoreService";
 import SchedulePage from "./SchedulePage.js";
-import ChoreCreateModal from "../ChoreCreateModal";
+import ChoreCreateModal from "../components/ChoreCreateModal";
 import { Toast } from "primereact/toast";
 import { ReactQueryDevtools } from "react-query/devtools";
+import useServerMessageToast from "../hooks/useServerMessageToast";
 
 const HomePage = () => {
-  const serverErrorsToast = useRef(null);
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const token = AuthService.getToken();
-  let displayChoresPage = window.location.pathname === "/chores";
+  const [toast, showServerMessageToast] = useServerMessageToast();
+  const [modalShow, setModalShow] = useState(false);
 
-  // Logs out the user
-  const handleLogout = () => {
-    AuthService.logout();
-    navigate({ to: "/login", replace: true });
-  };
+  // Modal for creating/editing chores
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
 
+  let displayChoresPage = window.location.pathname === "/chores"; // Determine if the user is on the chores page
+
+  // Get the user's chores
   const { isLoading: isChoresLoading, data: choresData } = useQuery(
     "chores",
     () => ChoreService.getChores(),
     {
       onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
+        showServerMessageToast(error.response.data.message, "error");
       },
     }
   );
 
+  // Get the user's data
   const { isLoading: isUserLoading, data: userData } = useQuery(
     "user",
     () => AuthService.getUser(),
     {
       onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
+        showServerMessageToast(error.response.data.message, "error");
       },
     }
   );
 
+  // Update the user's notification settings
   const updateUserNotifsMutation = useMutation(
     (receiveNotifs) => AuthService.setUserNotifications(receiveNotifs),
     {
@@ -52,18 +56,15 @@ const HomePage = () => {
         queryClient.invalidateQueries("user");
       },
       onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
+        showServerMessageToast(error.response.data.message, "error");
       },
     }
   );
 
-  const showServerErrorsToast = (message) => {
-    serverErrorsToast.current.show({
-      severity: "error",
-      summary: "Server Error",
-      detail: message,
-      life: 3000,
-    });
+  // Logs out the user
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate({ to: "/login", replace: true });
   };
 
   // Dropdown menu
@@ -88,16 +89,12 @@ const HomePage = () => {
     },
   ];
 
-  // Modal for creating/editing chores
-  const [modalShow, setModalShow] = useState(false);
-  const handleClose = () => setModalShow(false);
-  const handleShow = () => setModalShow(true);
-
-  // Get the user's chores
+  // Invalidates the chores query to update the chores list
   const handleChores = () => {
     queryClient.invalidateQueries("chores");
   };
 
+  // Must be logged in to view this page, otherwise redirect to login page
   if (!currentUser || !token) {
     return <Navigate to="/login" />;
   } else {
@@ -107,7 +104,7 @@ const HomePage = () => {
           // If dev environment, show React Query Dev Tools
           process.env.NODE_ENV === "development" && <ReactQueryDevtools />
         }
-        <Toast ref={serverErrorsToast} />
+        <Toast ref={toast} />
         <div id="header">
           <h1>Chore Keeper</h1>
 

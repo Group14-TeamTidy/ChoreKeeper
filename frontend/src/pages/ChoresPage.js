@@ -1,17 +1,32 @@
-import { React, useState, useMemo, useRef } from "react";
+import { React, useState, useMemo } from "react";
 import { useTable, usePagination } from "react-table";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useMutation } from "react-query";
-import ChoreCreateModal from "../ChoreCreateModal";
-import ChoreService from "../../services/ChoreService";
-import { queryClient } from "../../App";
+import ChoreCreateModal from "../components/ChoreCreateModal";
+import ChoreService from "../services/ChoreService";
+import { queryClient } from "../App";
 import { Dialog } from "primereact/dialog";
+import useServerMessageToast from "../hooks/useServerMessageToast";
 
 const ChoresPage = ({ isChoresLoading, choresData }) => {
-  const serverErrorsToast = useRef(null);
+  const MIN_TO_SEC = 60;
+  const HOUR_TO_SEC = 3600;
+  const PAGE_SIZE = 8; // Number of rows displayed in each page of the table, not including the header
 
+  const [toast, showServerMessageToast] = useServerMessageToast(); // Custom hook for showing server messages
+  const [currChore, setCurrChore] = useState(null); // Current chore being updated
+  const [modalShow, setModalShow] = useState(false); // Modal for creating/editing chores
+  const [deleteModalShow, setDeleteModalShow] = useState(false); // Modal for deleting chores
+
+  // Modal functions
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
+  const handleDeleteModalClose = () => setDeleteModalShow(false);
+  const handleDeleteModalShow = () => setDeleteModalShow(true);
+
+  // Mutation for deleting a chore
   const deleteChoreMutation = useMutation(
     (id) => ChoreService.deleteChore(id),
     {
@@ -19,50 +34,23 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
         queryClient.invalidateQueries("chores");
       },
       onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
+        showServerMessageToast(error.response.data.message, "error");
       },
     }
   );
 
-  const showServerErrorsToast = (message) => {
-    serverErrorsToast.current.show({
-      severity: "error",
-      summary: "Server Error",
-      detail: message,
-      life: 3000,
-    });
-  };
-
-  // Modal for creating/editing chores
-  const [modalShow, setModalShow] = useState(false);
-  const handleClose = () => setModalShow(false);
-  const handleShow = () => setModalShow(true);
-
-  // Modal for deleting chores
-  const [deleteModalShow, setDeleteModalShow] = useState(false);
-  const handleDeleteModalClose = () => setDeleteModalShow(false);
-  const handleDeleteModalShow = () => setDeleteModalShow(true);
-
-  // Get the user's chores
-  const handleChores = () => {
-    queryClient.invalidateQueries("chores");
-  };
-
-  // Current chore being updated
-  const [currChore, setCurrChore] = useState(null);
-
-  const PAGE_SIZE = 8; //Number of rows displayed in each page of the table, not including the header
+  // Mutation for updating a chore
+  const handleChores = () => queryClient.invalidateQueries("chores");
 
   // Format the information for each chore in order to display in the table
   const formatChoreData = () => {
-    const MIN_TO_SEC = 60;
-    const HOUR_TO_SEC = 3600;
     let choreData = [];
 
     if (isChoresLoading) {
       return choreData;
     }
 
+    // Map the chore data to the format needed for the table
     choresData.data.forEach((val) => {
       let freqInterval =
         val.frequency.interval.charAt(0).toUpperCase() +
@@ -80,6 +68,12 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
         val.duration < HOUR_TO_SEC
           ? val.duration / MIN_TO_SEC
           : val.duration / HOUR_TO_SEC;
+
+      // If duration is not a whole number, round to 2 decimal places
+      if (durQuantity % 1 !== 0) {
+        durQuantity = durQuantity.toFixed(2);
+      }
+
       let durInterval = val.duration < HOUR_TO_SEC ? "minutes" : "hours";
       durInterval =
         durQuantity === 1
@@ -248,7 +242,7 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
 
   return (
     <>
-      <Toast ref={serverErrorsToast} />
+      <Toast ref={toast} />
 
       {isChoresLoading ? (
         <ProgressSpinner className="chore-spinner" strokeWidth="8" />

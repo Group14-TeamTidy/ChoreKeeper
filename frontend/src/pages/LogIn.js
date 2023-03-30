@@ -1,16 +1,19 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link, Navigate } from "@tanstack/react-location";
 import { useNavigate } from "@tanstack/react-location";
-import AuthService from "../../services/AuthService";
+import AuthService from "../services/AuthService";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useFormik } from "formik";
 import { Toast } from "primereact/toast";
 import { classNames } from "primereact/utils";
+import useServerMessageToast from "../hooks/useServerMessageToast";
 
 const LogIn = () => {
   const navigate = useNavigate();
+  const [toast, showServerMessageToast] = useServerMessageToast();
 
+  // Log-in form
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -33,28 +36,18 @@ const LogIn = () => {
           navigate({ to: "/", replace: true });
         })
         .catch((error) => {
-          showServerErrorsToast(error.response.data.message);
+          showServerMessageToast(error.response.data.message, "error");
         });
     },
   });
 
-  const serverErrorsToast = useRef(null);
-
-  const showServerErrorsToast = (message) => {
-    serverErrorsToast.current.show({
-      severity: "error",
-      summary: "Server Error",
-      detail: message,
-      life: 3000,
-    });
-  };
-
+  // If the user is already logged in, redirect to the home page
   if (AuthService.getCurrentUser() && AuthService.getToken()) {
     return <Navigate to="/" />;
   } else {
     return (
       <>
-        <Toast ref={serverErrorsToast} />
+        <Toast ref={toast} />
         <div className="grid">
           <div className="centered-block">
             <h1>Chore Keeper</h1>
