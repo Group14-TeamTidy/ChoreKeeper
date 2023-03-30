@@ -18,6 +18,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_TESTS: 'server/test'  # Set the sonar.tests property to point to the test directory
-          SONAR_JUNIT_REPORTPATHS: server/test/**/*.spec.xml
+        with:
+          coverage: 'server/test/**/*spec.js'
 
