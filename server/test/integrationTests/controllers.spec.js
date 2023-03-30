@@ -42,7 +42,7 @@ describe("Integration Test", function () {
   };
   const tearDown = async () => {
     await User.deleteOne({ email: "user1@iamarealuser.com" });
-    await Chore.deleteOne({ name: "Sweep the floor" });
+    await Chore.deleteMany({ name: "Sweep the floor" });
   };
 
   before(async function () {

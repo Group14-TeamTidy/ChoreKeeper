@@ -306,7 +306,6 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
                   return (
                     <motion.tr
                       {...row.getRowProps()}
-                      key={i}
                       initial={{
                         opacity: 0,
                         translateY: -50,
