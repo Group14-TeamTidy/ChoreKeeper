@@ -1,5 +1,5 @@
 import express from "express";
-import { body } from "express-validator";
+
 // CONTROLLER FUNCTIONS
 import {
   createChore,
@@ -9,18 +9,18 @@ import {
   deleteChore,
   checkOffChore,
 } from "../controller/chore.js";
+
 // MIDDLEWARE
 import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
 //ROUTES
-
-router.get("/", verifyToken, getAllChores); //get all chores for a user
-router.get("/:id", verifyToken, getSingleChore); //get a single chore
-router.put("/:id", verifyToken, editChore); //edit a chore
-router.put("/:id/checked/", verifyToken, checkOffChore); //check off a chore
-router.post("/", verifyToken, createChore); //create a chore
-router.delete("/:id", verifyToken, deleteChore); //delete a chore
+router.get("/", verifyToken, getAllChores); // Get all chores for a user
+router.get("/:id", verifyToken, getSingleChore); // Get a single chore
+router.put("/:id", verifyToken, editChore); // Edit a chore
+router.put("/:id/checked/", verifyToken, checkOffChore); // Check off a chore
+router.post("/", verifyToken, createChore); // Create a chore
+router.delete("/:id", verifyToken, deleteChore); // Delete a chore
 
 export default router;
