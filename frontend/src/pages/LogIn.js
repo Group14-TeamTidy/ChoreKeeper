@@ -1,6 +1,5 @@
 import React from "react";
-import { Link, Navigate } from "@tanstack/react-location";
-import { useNavigate } from "@tanstack/react-location";
+import { Link, Navigate, useNavigate } from "@tanstack/react-location";
 import AuthService from "../services/AuthService";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
