@@ -13,7 +13,6 @@ import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
 dotenv.config();
-
 chai.use(sinonChai);
 chai.should();
 const expect = chai.expect;

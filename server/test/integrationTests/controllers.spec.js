@@ -8,7 +8,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { response } from "express";
 
 dotenv.config();
 chai.use(chaiHttp);
@@ -20,6 +19,33 @@ const app = makeApp(mongoose, process.env.TEST_MONGO_URL); // connect to databse
 
 //USERS CONTROLLER
 describe("Integration Test", function () {
+  const setup = async () => {
+    // Encrypt password
+    const password = "1234567";
+    const email = "user1@iamarealuser.com";
+    const salt = await bcrypt.genSalt();
+    const pwdHash = await bcrypt.hash(password, salt);
+    const newUser = new User({ email, password: pwdHash });
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+    const newChore = new Chore({
+      name: "Sweep the floor",
+      frequency: { quantity: 2, interval: "weeks" },
+      location: "Kitchen",
+      duration: 3000,
+      preference: "high",
+      nextOccurrence: new Date(),
+    });
+    const savedChore = await newChore.save();
+    const choreId = savedChore._id;
+    newUser.chores.push(savedChore._id);
+    await newUser.save();
+    return { token, choreId };
+  };
+  const tearDown = async () => {
+    await User.deleteOne({ email: "user1@iamarealuser.com" });
+    await Chore.deleteOne({ name: "Sweep the floor" });
+  };
+
   before(async function () {
     app.listen(80, function () {
       console.log(`Server running on port 80`);
@@ -29,8 +55,6 @@ describe("Integration Test", function () {
     setTimeout(() => {
       process.exit();
     }, 2000);
-    // app.close();
-    // done();
   });
   describe("POST /api/signup", function () {
     /*
@@ -61,7 +85,6 @@ describe("Integration Test", function () {
 
       const res = await chai.request(app).post("/api/signup").send(body);
 
-      //   console.log(res.body.user);
       expect(res.status).to.equal(409);
       expect(res.body.message).to.equal("test@example.com is already in use");
     });
@@ -132,18 +155,12 @@ describe("Integration Test", function () {
      */
     let token;
     before(async function () {
-      // Encrypt password
-      const password = "1234567";
-      const email = "user1@iamarealuser.com";
-      const salt = await bcrypt.genSalt();
-      const pwdHash = await bcrypt.hash(password, salt);
-      const newUser = new User({ email, password: pwdHash });
-      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-      await newUser.save();
+      const res = await setup();
+      token = res.token;
     });
 
     after(async function () {
-      await User.deleteOne({ email: "user1@iamarealuser.com" });
+      await tearDown();
     });
 
     it("should return a valid user", async () => {
@@ -186,28 +203,12 @@ describe("Integration Test", function () {
   describe("GET /api/chores/", function () {
     let token;
     before(async function () {
-      // Encrypt password
-      const password = "1234567";
-      const email = "user1@iamarealuser.com";
-      const salt = await bcrypt.genSalt();
-      const pwdHash = await bcrypt.hash(password, salt);
-      const newUser = new User({ email, password: pwdHash });
-      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-      const newChore = new Chore({
-        name: "Sweep the floor",
-        frequency: { quantity: 2, interval: "weeks" },
-        location: "Kitchen",
-        duration: 3000,
-        preference: "high",
-      });
-      const savedChore = await newChore.save();
-      newUser.chores.push(savedChore._id);
-      await newUser.save();
+      const res = await setup();
+      token = res.token;
     });
 
     after(async function () {
-      await User.deleteOne({ email: "user1@iamarealuser.com" });
-      await Chore.deleteOne({ name: "Sweep the floor" });
+      await tearDown();
     });
 
     it("should return a list of the users chores", async () => {
@@ -231,28 +232,13 @@ describe("Integration Test", function () {
     let choreId;
     before(async function () {
       // Encrypt password
-      const password = "1234567";
-      const email = "user1@iamarealuser.com";
-      const salt = await bcrypt.genSalt();
-      const pwdHash = await bcrypt.hash(password, salt);
-      const newUser = new User({ email, password: pwdHash });
-      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-      const newChore = new Chore({
-        name: "Sweep the floor",
-        frequency: { quantity: 2, interval: "weeks" },
-        location: "Kitchen",
-        duration: 3000,
-        preference: "high",
-      });
-      const savedChore = await newChore.save();
-      choreId = savedChore._id;
-      newUser.chores.push(savedChore._id);
-      await newUser.save();
+      const res = await setup();
+      token = res.token;
+      choreId = res.choreId;
     });
 
     after(async function () {
-      await User.deleteOne({ email: "user1@iamarealuser.com" });
-      await Chore.deleteOne({ name: "Sweep the floor" });
+      await tearDown();
     });
 
     it("should return a single chore", async () => {
@@ -282,29 +268,13 @@ describe("Integration Test", function () {
     let token;
     let choreId;
     before(async function () {
-      // Encrypt password
-      const password = "1234567";
-      const email = "user1@iamarealuser.com";
-      const salt = await bcrypt.genSalt();
-      const pwdHash = await bcrypt.hash(password, salt);
-      const newUser = new User({ email, password: pwdHash });
-      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-      const newChore = new Chore({
-        name: "Sweep the floor",
-        frequency: { quantity: 2, interval: "weeks" },
-        location: "Kitchen",
-        duration: 3000,
-        preference: "high",
-      });
-      const savedChore = await newChore.save();
-      choreId = savedChore._id;
-      newUser.chores.push(savedChore._id);
-      await newUser.save();
+      const res = await setup();
+      token = res.token;
+      choreId = res.choreId;
     });
 
     after(async function () {
-      await User.deleteOne({ email: "user1@iamarealuser.com" });
-      await Chore.deleteOne({ name: "Sweep the floor" });
+      await tearDown();
     });
 
     it("should an updated chore", async () => {
@@ -344,28 +314,13 @@ describe("Integration Test", function () {
     let token;
     let choreId;
     before(async function () {
-      // Encrypt password
-      const password = "1234567";
-      const email = "user1@iamarealuser.com";
-      const salt = await bcrypt.genSalt();
-      const pwdHash = await bcrypt.hash(password, salt);
-      const newUser = new User({ email, password: pwdHash });
-      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-      const newChore = new Chore({
-        name: "Sweep the floor",
-        frequency: { quantity: 2, interval: "weeks" },
-        location: "Kitchen",
-        duration: 3000,
-        preference: "high",
-      });
-      const savedChore = await newChore.save();
-      choreId = savedChore._id;
-      newUser.chores.push(savedChore._id);
-      await newUser.save();
+      const res = await setup();
+      token = res.token;
+      choreId = res.choreId;
     });
 
     after(async function () {
-      await User.deleteOne({ email: "user1@iamarealuser.com" });
+      await tearDown();
     });
 
     it("should delete an existing chore", async () => {
@@ -384,7 +339,7 @@ describe("Integration Test", function () {
     it("should return an error for chores that don't exist", async () => {
       const res = await chai
         .request(app)
-        .delete(`/api/chores/63e43b73f26f0a96062d489e`)
+        .delete(`/api/chores/63e43b73f26f0a96062d489e8`)
         .set("Authorization", `Bearer ${token}`);
       expect(res.status).to.equal(500);
       expect(res.body).to.have.property("message");
@@ -394,31 +349,13 @@ describe("Integration Test", function () {
 
   describe("POST /api/chores/", function () {
     let token;
-    let choreId;
     before(async function () {
-      // Encrypt password
-      const password = "1234567";
-      const email = "user1@iamarealuser.com";
-      const salt = await bcrypt.genSalt();
-      const pwdHash = await bcrypt.hash(password, salt);
-      const newUser = new User({ email, password: pwdHash });
-      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-      const newChore = new Chore({
-        name: "Sweep the floor",
-        frequency: { quantity: 2, interval: "weeks" },
-        location: "Kitchen",
-        duration: 3000,
-        preference: "high",
-      });
-      const savedChore = await newChore.save();
-      choreId = savedChore._id;
-      newUser.chores.push(savedChore._id);
-      await newUser.save();
+      const res = await setup();
+      token = res.token;
     });
 
     after(async function () {
-      await User.deleteOne({ email: "user1@iamarealuser.com" });
-      await Chore.deleteOne({ name: "Sweep the floor" });
+      await tearDown();
     });
 
     it("should create a new chore", async () => {
@@ -462,8 +399,6 @@ describe("Integration Test", function () {
 
   describe("GET /api/schedule/", () => {
     let token;
-    let token2;
-    let choreId;
     let today = new Date();
 
     before(async function () {
@@ -488,7 +423,6 @@ describe("Integration Test", function () {
         password: pwdHash2,
         chores: ["640ab1e7823cae42437b3c92"],
       });
-      token2 = jwt.sign({ id: newUser2._id }, process.env.JWT_SECRET);
       await newUser2.save();
 
       //chore1
@@ -567,35 +501,14 @@ describe("Integration Test", function () {
   describe("PUT /api/chores/:id/checked/", function () {
     let token;
     let choreId;
-    let today = new Date();
 
     before(async function () {
-      // user 1
-      const salt = await bcrypt.genSalt();
-      const pwdHash = await bcrypt.hash("1234567", salt);
-      const newUser = new User({
-        email: "user1@iamarealuser.com",
-        password: pwdHash,
-      });
-      token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-      await newUser.save();
-      //chore1
-      let newChore = new Chore({
-        name: "Sweep the floor",
-        frequency: { quantity: 2, interval: "days" },
-        location: "TestLocation",
-        duration: 3000,
-        preference: "high",
-        nextOccurrence: today,
-      });
-      let savedChore = await newChore.save();
-      choreId = savedChore._id;
-      newUser.chores.push(savedChore._id);
-      await newUser.save();
+      const res = await setup();
+      token = res.token;
+      choreId = res.choreId;
     });
     after(async function () {
-      await User.deleteOne({ email: "user1@iamarealuser.com" });
-      await Chore.deleteMany({ location: "TestLocation" });
+      await tearDown();
     });
 
     // Test case for checking off a valid chore
