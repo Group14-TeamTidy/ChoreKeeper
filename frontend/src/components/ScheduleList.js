@@ -37,8 +37,12 @@ const ScheduleList = ({ chores }) => {
           key={chore._id}
           className="schedule-item"
           initial={{ opacity: 0, translateX: -50 }}
-          animate={{ opacity: 1, translateX: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.2 }}
+          animate={{
+            opacity: 1,
+            translateX: 0,
+            transition: { duration: 0.5, delay: index * 0.25 },
+          }}
+          whileHover={{ scale: 1.05 }}
         >
           <Card className="schedule-item-card">
             <Button
