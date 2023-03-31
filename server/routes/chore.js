@@ -1,17 +1,15 @@
-import express from "express";
-
+const express = require("express");
 // CONTROLLER FUNCTIONS
-import {
+const {
   createChore,
   getAllChores,
   editChore,
   getSingleChore,
   deleteChore,
   checkOffChore,
-} from "../controller/chore.js";
-
+} = require("../controller/chore.js");
 // MIDDLEWARE
-import { verifyToken } from "../middleware/auth.js";
+const { verifyToken } = require("../middleware/auth.js");
 
 const router = express.Router();
 
@@ -23,4 +21,4 @@ router.put("/:id/checked/", verifyToken, checkOffChore); // Check off a chore
 router.post("/", verifyToken, createChore); // Create a chore
 router.delete("/:id", verifyToken, deleteChore); // Delete a chore
 
-export default router;
+module.exports = router;

@@ -1,7 +1,7 @@
-import chai from "chai";
-import sinonChai from "sinon-chai";
-import Chore from "../../models/Chore.js";
-import User from "../../models/User.js";
+const chai = require("chai");
+const sinonChai = require("sinon-chai");
+const Chore = require("../../models/Chore");
+const User = require("../../models/User");
 
 chai.use(sinonChai);
 chai.should();

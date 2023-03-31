@@ -1,16 +1,16 @@
-import nodemailer from "nodemailer";
-import Mailgen from "mailgen";
-import dotenv from "dotenv";
-import User from "../../models/User.js";
-import Chore from "../../models/Chore.js";
-import {
+const nodemailer = require("nodemailer");
+const Mailgen = require("mailgen");
+const dotenv = require("dotenv");
+const User = require("../../models/User");
+const Chore = require("../../models/Chore");
+const {
   startEmailService,
   getChoresForUser,
-} from "../../services/emailNotifier.js";
-import { repeatInMs } from "../../services/utils.js";
-import chai from "chai";
-import sinon from "sinon";
-import sinonChai from "sinon-chai";
+} = require("../../services/emailNotifier");
+const { repeatInMs } = require("../../services/utils");
+const chai = require("chai");
+const sinon = require("sinon");
+const sinonChai = require("sinon-chai");
 
 dotenv.config();
 chai.use(sinonChai);

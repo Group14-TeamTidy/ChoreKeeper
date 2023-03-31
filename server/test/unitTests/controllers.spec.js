@@ -1,20 +1,20 @@
-import chai from "chai";
-import chaiHttp from "chai-http";
-import sinon from "sinon";
-import sinonChai from "sinon-chai";
-import User from "../../models/User.js";
-import Chore from "../../models/Chore.js";
-import { register, login } from "../../controller/user.js";
-import {
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const sinon = require("sinon");
+const sinonChai = require("sinon-chai");
+const User = require("../../models/User");
+const Chore = require("../../models/Chore");
+const { register, login } = require("../../controller/user");
+const {
   getAllChores,
   createChore,
   editChore,
   getSingleChore,
   deleteChore,
   checkOffChore,
-} from "../../controller/chore.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+} = require("../../controller/chore");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 chai.use(chaiHttp);
 chai.use(sinonChai);

@@ -1,13 +1,13 @@
 // MODELS
-import Chore from "../models/Chore.js";
-import User from "../models/User.js";
+const Chore = require("../models/Chore.js");
+const User = require("../models/User.js");
 
 /*
  ** This function creates a new schedule for the given date
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const createSchedule = async (req, res) => {
+module.exports.createSchedule = async (req, res) => {
   try {
     // By default, time requested is set to the current time (which will return today's schedule)
     let timeframeInMs = Date.now();

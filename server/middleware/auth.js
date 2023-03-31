@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
 // Middleware to verify the token
-export const verifyToken = async (req, res, next) => {
+module.exports.verifyToken = async (req, res, next) => {
   try {
     let token = req.header("Authorization");
 

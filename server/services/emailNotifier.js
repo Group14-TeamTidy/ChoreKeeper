@@ -1,9 +1,10 @@
-import nodemailer from "nodemailer";
-import Mailgen from "mailgen";
-import dotenv from "dotenv";
-import User from "../models/User.js";
-import Chore from "../models/Chore.js";
-import { repeatInMs } from "./utils.js";
+const nodemailer = require("nodemailer");
+const Mailgen = require("mailgen");
+const dotenv = require("dotenv");
+const User = require("../models/User");
+const Chore = require("../models/Chore");
+const { repeatInMs } = require("./utils");
+
 dotenv.config();
 
 /*
@@ -34,9 +35,8 @@ const toUTCFormat = (date) => {
  ** @params user,  a user object
  ** It returns an object that contains the chores the user needs to do today, and the overdue chores the user has
  */
-export const getChoresForUser = async (user) => {
+module.exports.getChoresForUser = async (user) => {
   const today = getToday();
-
   const chores = await Chore.find({
     _id: { $in: user.chores },
     nextOccurrence: { $exists: true },
@@ -84,7 +84,7 @@ export const getChoresForUser = async (user) => {
 /*
  ** This function sends emails to all the users that are subscribed to notifications
  */
-export const startEmailService = async () => {
+module.exports.startEmailService = async () => {
   const config = {
     service: "gmail",
     auth: {
@@ -109,7 +109,8 @@ export const startEmailService = async () => {
       if (!user.receiveNotifs) {
         continue;
       }
-      const { todaysChores, overdueChores } = await getChoresForUser(user);
+      const { todaysChores, overdueChores } =
+        await module.exports.getChoresForUser(user);
       const intro =
         todaysChores.length === 0 && overdueChores.length === 0
           ? "You have no chores to do today!"

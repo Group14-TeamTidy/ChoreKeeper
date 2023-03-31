@@ -1,22 +1,15 @@
-import { validationResult } from "express-validator";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // MODELS
-import User from "../models/User.js";
+const User = require("../models/User");
 
 /*
  ** This function creates an account for a new user
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const register = async (req, res) => {
-  // Sanitize data
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
+module.exports.register = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -55,13 +48,7 @@ export const register = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const login = async (req, res) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
+module.exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email }); // search for the user
@@ -98,13 +85,7 @@ export const login = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const getUser = async (req, res) => {
-  // Sanitize data
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(409).json();
-  }
-
+module.exports.getUser = async (req, res) => {
   try {
     const userID = req.user.id;
     const user = await User.findOne({ _id: userID }); // search for the user
@@ -125,13 +106,7 @@ export const getUser = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const setNotifs = async (req, res) => {
-  // Sanitize data
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(409).json();
-  }
-
+module.exports.setNotifs = async (req, res) => {
   try {
     const receiveNotifs = req.body.receiveNotifs;
     const userID = req.user.id;
