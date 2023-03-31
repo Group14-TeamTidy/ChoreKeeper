@@ -8,6 +8,7 @@ import ChoreCreateModal from "../components/ChoreCreateModal";
 import ChoreService from "../services/ChoreService";
 import { queryClient } from "../App";
 import { Dialog } from "primereact/dialog";
+import { motion } from "framer-motion";
 import useServerMessageToast from "../hooks/useServerMessageToast";
 
 const ChoresPage = ({ isChoresLoading, choresData }) => {
@@ -155,8 +156,8 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
+                  width="1.5em"
+                  height="1.5em"
                   fill="currentColor"
                   className="bi bi-pencil-square"
                   viewBox="0 0 16 16"
@@ -192,11 +193,12 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
+                  width="1.5em"
+                  height="1.5em"
                   fill="currentColor"
                   className="bi bi-trash3-fill"
                   viewBox="0 0 16 16"
+                  color="red"
                 >
                   <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                 </svg>
@@ -280,7 +282,7 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
             <p>This action cannot be undone.</p>
           </Dialog>
           <div id="main-content">
-            <table id="choresList" {...getTableProps()}>
+            <motion.table id="choresList" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
@@ -296,7 +298,19 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
                 {page.map((row, i) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <motion.tr
+                      {...row.getRowProps()}
+                      initial={{
+                        opacity: 0,
+                        translateY: -50,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        translateY: 0,
+                        transition: { duration: 0.15, delay: i * 0.05 },
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                    >
                       {row.cells.map((cell) => {
                         return (
                           <td {...cell.getCellProps()}>
@@ -304,11 +318,11 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
                           </td>
                         );
                       })}
-                    </tr>
+                    </motion.tr>
                   );
                 })}
               </tbody>
-            </table>
+            </motion.table>
 
             <div id="paginationButtons">
               <Button

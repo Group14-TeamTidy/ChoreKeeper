@@ -137,6 +137,7 @@ html body {
   border: none;
   background-color: white;
   border-radius: 6px;
+  cursor: pointer;
   padding: 10px 16px;
 }
 
@@ -290,7 +291,7 @@ td {
 }
 
 .schedule-item {
-  width: 100%;
+  width: 90%;
 }
 
 .schedule-list::-webkit-scrollbar {

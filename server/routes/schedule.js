@@ -7,6 +7,6 @@ const { verifyToken } = require("../middleware/auth.js");
 const router = express.Router();
 
 //ROUTES
-router.get("/", verifyToken, createSchedule); // Get the daily schedule for the user
+router.get("/:timeframe", verifyToken, createSchedule); // Get the daily schedule for the user
 
 module.exports = router;
