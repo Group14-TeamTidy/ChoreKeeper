@@ -9,8 +9,9 @@ import User from "../models/User.js";
  */
 export const createSchedule = async (req, res) => {
   try {
-    // By default, time requested is set to the current time (which will return today's schedule)
-    let timeframeInMs = Date.now();
+    // Extracting date of the schedule requested
+    const dateString = req.params.timeframe;
+    const timeframeInMs = new Date(dateString).getTime();
 
     const requestedSchedule = []; // Will add chores for the day in here
 
