@@ -13,6 +13,7 @@ import {
   deleteChore,
   checkOffChore,
 } from "../../controller/chore.js";
+import { createSchedule } from "../../controller/schedule.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -652,4 +653,115 @@ describe("Testing Chores controllers", () => {
         .true;
     });
   });
+});
+
+
+//SCHEDULES CONTROLLER
+
+describe("Testing Schedule controllers", function () {
+  describe(" testing register function", function () {
+    let req, res, findOneStub, findStub;
+
+    beforeEach(() => {
+      // Create a request
+      req = {
+        params: {
+          timeframe: "2023-02-12",
+        },
+        user: { id: "user123" },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy(),
+      };
+      findOneStub = sinon.stub(User, "findOne");
+      findStub = sinon.stub(Chore, "find")
+    });
+
+    afterEach(() => {
+      // Restore all the stubbed functions
+      sinon.restore();
+    });
+
+    it("should return a 201 response with the requested schedule", async () => {
+      const chore = { name: "Clean the dishes", location: "kitchen" };
+      findOneStub.returns({
+        email: "test@test.com",
+        password: "1234",
+        chores: [],
+      });
+
+      findStub.returns([
+        {
+          _id: 'dadd',
+          name: 'chore 1',
+          frequency: {
+            quantity: 2,
+            interval: 'days'
+          },
+          location: 'Home',
+          duration: 40,
+          preference: 'high',
+          lastCheckedOff: [2343554, 23343545],
+          nextOccurrence: 12324343,
+        },
+        {
+          _id: '23434',
+          name: 'chore 2',
+          frequency: {
+            quantity: 2,
+            interval: 'weeks'
+          },
+          location: 'Home',
+          duration: 4,
+          preference: 'low',
+          lastCheckedOff: [42343554, 2334324545],
+          nextOccurrence: 123324343,
+        },
+        {
+          _id: '2343424',
+          name: 'chore 3',
+          frequency: {
+            quantity: 2,
+            interval: 'months'
+          },
+          location: 'School',
+          duration: 4,
+          preference: 'medium',
+          lastCheckedOff: [423454, 23324545],
+          nextOccurrence: 124343,
+        },
+        {
+          _id: '23434',
+          name: 'chore 2',
+          frequency: {
+            quantity: 2,
+            interval: 'years'
+          },
+          location: 'Home',
+          duration: 4,
+          preference: 'low',
+          lastCheckedOff: [42343554, 2334324545],
+          nextOccurrence: 123324343,
+        },
+      ]);
+
+      await createSchedule(req, res);
+
+      expect(res.status.calledWith(201)).to.be.true;
+    });
+
+    it("should return a 500 response with an error message if there is an unexpected error", async () => {
+      const error = new Error("Unexpected error");
+      findOneStub.rejects(error);
+      findStub.rejects(error);
+
+      await createSchedule(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWith({ message: "Schedule could not be created." })).to.be
+        .true;
+    });
+  });
+
 });
