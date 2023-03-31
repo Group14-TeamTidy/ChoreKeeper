@@ -13,7 +13,6 @@ import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
 dotenv.config();
-
 chai.use(sinonChai);
 chai.should();
 const expect = chai.expect;
@@ -74,10 +73,10 @@ describe("startEmailService", function () {
   ];
 
   beforeEach(function () {
-    // create a sandbox to stub functions
+    // Create a sandbox to stub functions
     sandbox = sinon.createSandbox();
     let pos = 0;
-    // stub the User and Chore models
+    // Stub the User and Chore models
     userFindStub = sandbox.stub(User, "find").resolves(testUsers);
     choreFindStub = sandbox.stub(Chore, "find").callsFake(() => {
       const userChores = testUsers[pos].chores;
@@ -88,27 +87,27 @@ describe("startEmailService", function () {
   });
 
   afterEach(function () {
-    // restore the sandbox to its original state
+    // Restore the sandbox to its original state
     sandbox.restore();
   });
 
   it("should send an email to each user with their chores for the day", async function () {
-    // stub the nodemailer createTransport method to return a fake transporter
+    // Stub the nodemailer createTransport method to return a fake transporter
     const transporterStub = sandbox
       .stub(nodemailer, "createTransport")
       .returns({
         sendMail: sandbox.stub().resolves(),
       });
 
-    // stub the Mailgen constructor to return a fake MailGenerator instance
+    // Stub the Mailgen constructor to return a fake MailGenerator instance
     const MailGeneratorStub = sandbox
       .stub(Mailgen.prototype, "generate")
       .returns("<html></html>");
 
-    // call the function and wait for it to complete
+    // Call the function and wait for it to complete
     await startEmailService();
 
-    // assert that the User and Chore models were called with the correct arguments
+    // Assert that the User and Chore models were called with the correct arguments
     expect(User.find).to.have.been.calledOnce;
     expect(User.find).to.have.been.calledWith({});
 
@@ -128,7 +127,7 @@ describe("startEmailService", function () {
       nextOccurrence: { $exists: true },
     });
 
-    // assert that the nodemailer createTransport method was called with the correct configuration
+    // Assert that the nodemailer createTransport method was called with the correct configuration
     expect(transporterStub).to.have.been.calledOnce;
     expect(transporterStub).to.have.been.calledWith({
       service: "gmail",
@@ -138,7 +137,7 @@ describe("startEmailService", function () {
       },
     });
 
-    // assert that the Mailgen constructor was called with the correct configuration
+    // Assert that the Mailgen constructor was called with the correct configuration
     expect(MailGeneratorStub).to.have.been.calledThrice;
   });
 
@@ -146,11 +145,10 @@ describe("startEmailService", function () {
     const transporterStub = sandbox
       .stub(nodemailer, "createTransport")
       .returns({});
-    // stub the Mailgen constructor to return a fake MailGenerator instance
+    // Stub the Mailgen constructor to return a fake MailGenerator instance
     const MailGeneratorStub = sandbox
       .stub(Mailgen.prototype, "generate")
       .throws(new Error("Unexpected error"));
-    // expect(transporterStub).to.have.not.been.called;
     expect(MailGeneratorStub).to.have.not.been.called;
   });
 
@@ -158,10 +156,6 @@ describe("startEmailService", function () {
     const res0 = await getChoresForUser(testUsers[0]);
     expect(res0.todaysChores).to.deep.equal([]);
     expect(res0.overdueChores).to.deep.equal([]);
-
-    // const res1 = await getChoresForUser(testUsers[1]);
-    // expect(res1.todaysChores.length).to.equal(2);
-    // expect(res1.overdueChores.length).to.equal(2);
   });
 
   it("should return the correct number of milliseconds for days", () => {

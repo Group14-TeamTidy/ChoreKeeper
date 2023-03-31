@@ -1,11 +1,8 @@
-import Mocha from "mocha";
 import chai from "chai";
-import chaiHttp from "chai-http";
 import sinonChai from "sinon-chai";
 import Chore from "../../models/Chore.js";
 import User from "../../models/User.js";
 
-chai.use(chaiHttp);
 chai.use(sinonChai);
 chai.should();
 const expect = chai.expect;
@@ -28,7 +25,10 @@ describe("Testing the User model", () => {
     expect(user.password).to.equal("testpassword");
   });
   it("`receiveNotifs` property should be false", () => {
-    const user = new User({ email: "testemail@chores.com", password: "testpassword" });
+    const user = new User({
+      email: "testemail@chores.com",
+      password: "testpassword",
+    });
     expect(user.receiveNotifs).to.equal(false);
   });
   it("`receiveNotifs` property should be false", () => {

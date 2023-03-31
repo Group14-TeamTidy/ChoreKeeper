@@ -1,15 +1,17 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 
+// Configuration for chore requests
 const setConfig = (token) => {
   return {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: token,
-    }
-  }
+    },
+  };
 };
 
+// The ChoreService object contains all the functions that make chore-related requests
 const ChoreService = {
   createChore: (
     choreName,

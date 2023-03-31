@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const ChoreSchema = new mongoose.Schema({
   name: { type: String, require: true },

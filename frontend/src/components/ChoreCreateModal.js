@@ -1,4 +1,4 @@
-import { React, useRef } from "react";
+import { React } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
@@ -10,10 +10,12 @@ import { classNames } from "primereact/utils";
 import ChoreService from "../services/ChoreService";
 import { useMutation } from "react-query";
 import { queryClient } from "../App";
+import useServerMessageToast from "../hooks/useServerMessageToast";
 
 const ChoreCreateModal = ({ show, onHide, onSave, currChore }) => {
-  const serverErrorsToast = useRef(null);
+  const [toast, showServerMessageToast] = useServerMessageToast();
 
+  // Updates the chore
   const updateChoreMutation = useMutation(
     (variables) =>
       ChoreService.updateChore(
@@ -32,11 +34,12 @@ const ChoreCreateModal = ({ show, onHide, onSave, currChore }) => {
         handleClose();
       },
       onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
+        showServerMessageToast(error.response.data.message, "error");
       },
     }
   );
 
+  // Creates the chore
   const createChoreMutation = useMutation(
     (variables) =>
       ChoreService.createChore(
@@ -54,7 +57,7 @@ const ChoreCreateModal = ({ show, onHide, onSave, currChore }) => {
         handleClose();
       },
       onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
+        showServerMessageToast(error.response.data.message, "error");
       },
     }
   );
@@ -145,15 +148,6 @@ const ChoreCreateModal = ({ show, onHide, onSave, currChore }) => {
     validateOnChange: true,
   });
 
-  const showServerErrorsToast = (message) => {
-    serverErrorsToast.current.show({
-      severity: "error",
-      summary: "Server Error",
-      detail: message,
-      life: 3000,
-    });
-  };
-
   const handleClose = () => {
     formik.resetForm();
     onHide();
@@ -214,7 +208,7 @@ const ChoreCreateModal = ({ show, onHide, onSave, currChore }) => {
 
   return (
     <div>
-      <Toast ref={serverErrorsToast} />
+      <Toast ref={toast} />
       <Dialog
         visible={show}
         header={

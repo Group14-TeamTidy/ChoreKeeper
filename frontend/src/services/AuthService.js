@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// AuthService to handle all authentication related requests
 const AuthService = {
   login: (email, password) => {
     return axios
@@ -57,29 +58,28 @@ const AuthService = {
   },
 
   getUser: () => {
-    return axios
-    .get(`${process.env.REACT_APP_API_BASE_URL}/user/email`, {
+    return axios.get(`${process.env.REACT_APP_API_BASE_URL}/user/email`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
-      }
+      },
     });
   },
 
   setUserNotifications: (receiveNotifs) => {
-    return axios
-    .put(`${process.env.REACT_APP_API_BASE_URL}/user/notifs`,
+    return axios.put(
+      `${process.env.REACT_APP_API_BASE_URL}/user/notifs`,
       {
         receiveNotifs: receiveNotifs,
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
-        }
+        },
       }
     );
-  }
+  },
 };
 
 export default AuthService;

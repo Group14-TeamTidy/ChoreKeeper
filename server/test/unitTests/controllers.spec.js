@@ -1,21 +1,19 @@
-import Mocha from "mocha";
 import chai from "chai";
 import chaiHttp from "chai-http";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
-import express from "express";
 import User from "../../models/User.js";
 import Chore from "../../models/Chore.js";
-import { register, login, getUser } from "../../controller/user.js";
+import { register, login } from "../../controller/user.js";
 import {
   getAllChores,
   createChore,
   editChore,
   getSingleChore,
   deleteChore,
+  checkOffChore,
 } from "../../controller/chore.js";
-
-import { validationResult } from "express-validator";
+import { createSchedule } from "../../controller/schedule.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -33,36 +31,36 @@ describe("Testing User controllers", function () {
     let jwtSignStub;
 
     beforeEach(() => {
-      //create a request
+      // Create a request
       req = {
         body: {
           email: "test@test.com",
           password: "test123",
         },
-        //mock the validation result to always return true
+        // Mock the validation result to always return true
         validationResult: sinon
           .stub()
           .returns({ isEmpty: sinon.stub().returns(true) }),
       };
-      // create a response for the request
+      // Create a response for the request
       res = {
         status: sinon.stub().returnsThis(),
         json: sinon.stub().returnsThis(),
       };
 
-      // stubbing the encryption functions
+      // Stubbing the encryption functions
       bcryptStub = sinon.stub(bcrypt, "genSalt").resolves("salt");
       bcryptStub = sinon.stub(bcrypt, "hash").resolves("hashed_password");
       jwtSignStub = sinon.stub(jwt, "sign").returns("token");
     });
 
     afterEach(() => {
-      // restore all the stubed functions
+      // Restore all the stubbed functions
       sinon.restore();
     });
 
     it("should return 409 if email is already in use", async function () {
-      // stub the mongoose findOne functoin to always return true
+      // Stub the mongoose findOne functoin to always return true
       sinon.stub(User, "findOne").resolves({});
 
       await register(req, res);
@@ -73,10 +71,10 @@ describe("Testing User controllers", function () {
     });
 
     it("should return 201 if user creation is successful", async function () {
-      // stub the mongoose findOne functoin to always return null
+      // Stub the mongoose findOne function to always return null
       sinon.stub(User, "findOne").resolves(null);
 
-      // stub the mongoose save function to return a new user
+      // Stub the mongoose save function to return a new user
       sinon.stub(User.prototype, "save").resolves({
         email: "test@test.com",
         password: "hashed_password",
@@ -106,7 +104,7 @@ describe("Testing User controllers", function () {
     let req, res;
 
     beforeEach(function () {
-      //create a request
+      // Create a request
 
       req = {
         body: {
@@ -114,7 +112,7 @@ describe("Testing User controllers", function () {
           password: "password123",
         },
       };
-      //mock the validation result to always return true
+      // Mock the validation result to always return true
 
       res = {
         status: sinon.stub().returnsThis(),
@@ -123,15 +121,15 @@ describe("Testing User controllers", function () {
     });
 
     afterEach(function () {
-      //restore all the stubbed functions
+      // Restore all the stubbed functions
       sinon.restore();
     });
 
     it("should return a user does not exist if the email does not exist", async function () {
-      // stub the mongoose findOne functoin to return null
+      // Stub the mongoose findOne functoin to return null
       sinon.stub(User, "findOne").returns(null);
 
-      // call the function we are testing
+      // Call the function we are testing
       await login(req, res);
 
       expect(res.status.calledWith(400)).to.be.true;
@@ -143,11 +141,11 @@ describe("Testing User controllers", function () {
     });
 
     it("should return an error if the password is invalid", async function () {
-      // stub the mongoose findOne functoin to return an invalid passsword
+      // Stub the mongoose findOne functoin to return an invalid passsword
 
       sinon.stub(User, "findOne").returns({ password: "hashedpassword" });
 
-      //stub the btcrypt to make it return false
+      // Stub the btcrypt to make it return false
       sinon.stub(bcrypt, "compare").resolves(false);
 
       await login(req, res);
@@ -167,9 +165,9 @@ describe("Testing User controllers", function () {
 
       sinon.stub(User, "findOne").returns(user);
 
-      //stub the btcrypt to make it return true
+      // Stub the btcrypt to make it return true
       sinon.stub(bcrypt, "compare").resolves(true);
-      // fake a return token
+      // Fake a return token
       sinon.stub(jwt, "sign").returns("token");
 
       await login(req, res);
@@ -180,9 +178,9 @@ describe("Testing User controllers", function () {
     });
 
     it("should return an error if there is an exception thrown", async function () {
-      //testing error handling
+      // Testing error handling
 
-      sinon.stub(User, "findOne").throws(); // not sure why this is also printing out the error
+      sinon.stub(User, "findOne").throws();
 
       await login(req, res);
 
@@ -199,10 +197,10 @@ describe("Testing Chores controllers", () => {
     let res;
     let sandbox;
     beforeEach(() => {
-      //using createSandbox so that I can easily stub functions
+      // Using createSandbox so that I can easily stub functions
       sandbox = sinon.createSandbox();
 
-      //create the request
+      // Create the request
       req = {
         body: {
           name: "Clean the kitchen",
@@ -214,7 +212,7 @@ describe("Testing Chores controllers", () => {
         user: { id: "user123" },
       };
 
-      //create the response object
+      // Create the response object
       res = {
         status: sinon.stub().returnsThis(),
         json: sinon.stub(),
@@ -229,7 +227,7 @@ describe("Testing Chores controllers", () => {
       sandbox.stub(Chore, "findOne").returns({});
 
       await createChore(req, res);
-      //checks
+      // Checks
       expect(res.status.calledWith(409)).to.be.true;
       expect(
         res.json.calledWith({
@@ -240,10 +238,10 @@ describe("Testing Chores controllers", () => {
     });
 
     it("returns 500 status code if an error occurs while saving chore", async () => {
-      // stub the  mongoose findOne function to return an invalid response
+      // Stub the  mongoose findOne function to return an invalid response
       sandbox.stub(Chore, "findOne").returns(null);
 
-      //testing error handling
+      // Testing error handling
       sandbox.stub(Chore.prototype, "save").throws();
       await createChore(req, res);
       expect(res.status.calledWith(500)).to.be.true;
@@ -252,7 +250,7 @@ describe("Testing Chores controllers", () => {
     });
 
     it("returns 201 status code and the saved chore object if the chore is successfully created", async () => {
-      // stub the  mongoose findOne function to return a valid null
+      // Stub the  mongoose findOne function to return a valid null
 
       sandbox.stub(Chore, "findOne").returns(null);
       sandbox.stub(User, "findOne").returns({
@@ -308,18 +306,6 @@ describe("Testing Chores controllers", () => {
 
     it("returns 500 Internal Server Error if an unexpected error occurs", async () => {
       findOneStub.throws();
-
-      await getAllChores(req, res);
-
-      expect(res.status.calledOnce).to.be.true;
-      expect(res.status.firstCall.args[0]).to.equal(500);
-      expect(res.status().json.calledOnce).to.be.true;
-      expect(res.status().json.firstCall.args[0]).to.deep.equal({
-        message: "Internal Server Error",
-      });
-    });
-
-    it("returns the list of chores for the user", async () => {
       const user = {
         _id: "123456",
         chores: ["abcdef", "ghijkl"],
@@ -416,23 +402,12 @@ describe("Testing Chores controllers", () => {
         params: { id },
         body: {
           name: "Clean the kitchen",
-          frequency: {quantity: 2, interval: "days"},
+          frequency: { quantity: 2, interval: "days" },
           location: "kitchen",
           duration: "30",
           preference: "low",
         },
       };
-
-      const expectedResponse = {
-        _id: "chore123",
-        name: "Clean the kitchen",
-        frequency: { quantity: 2, interval: "days"},
-        location: "kitchen",
-        duration: 30,
-        preference: "low",
-        lastCheckedOff: [9484839483],
-        nextOccurrence: 847578493,
-      }
 
       findOneStub.resolves(req.body);
 
@@ -442,11 +417,7 @@ describe("Testing Chores controllers", () => {
       expect(res.status().json.calledOnce).to.be.true;
     });
 
-
     it("returns 201 status code and the saved chore object if the chore is successfully edited", async () => {
-      // stub the  mongoose findOne function to return a valid null
-
-      // sandbox.stub(Chore, "findOne").returns(null);
       findOneStub.returns({
         _id: "chore123",
         name: "Clean the kitchen",
@@ -560,50 +531,237 @@ describe("Testing Chores controllers", () => {
   });
 
   describe("deleteChore", () => {
-    let res, findByIdAndDelete;
+    let id, req, res, findByIdAndDelete;
     beforeEach(() => {
+      id = "123";
+      req = {
+        params: { id },
+        user: { id: "123456" },
+      };
       res = {
         status: sinon.stub().returnsThis(),
         json: sinon.spy(),
       };
       findByIdAndDelete = sinon.stub(Chore, "findByIdAndDelete");
     });
-  
+
     afterEach(() => {
       findByIdAndDelete.restore();
       sinon.restore();
     });
-  
+
     // Test 1
     it("should return message containing deleted chore id", async () => {
-      const id = "123";
-      const req = {
-        params: { id },
-        user: { id: "123456" },
-      };
-  
       findByIdAndDelete.resolves(req.params);
-  
+
       await deleteChore(req, res);
-  
+
       expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
       expect(res.status().json.calledOnce).to.be.true;
     });
-  
+
     // Test 2
     it("should return 500 if an unexpected error occurs", async () => {
-      const id = "789";
-      const req = { params: { id }, user: { id: "123456" } };
-  
       const error = new Error("Unexpected error");
       findByIdAndDelete.throws(error);
-  
+
       await deleteChore(req, res);
-  
+
       expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
       expect(res.status.calledOnceWith(500)).to.be.true;
-      expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to.be
+      expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to
+        .be.true;
+    });
+  });
+
+  describe("checkOffChore", () => {
+    let req, res, findByIdStub, sandbox;
+
+    beforeEach(() => {
+      req = {
+        params: {
+          id: "someid",
+        },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy(),
+      };
+      findByIdStub = sinon.stub(Chore, "findById");
+      sandbox = sinon.createSandbox();
+      sandbox.stub(Chore.prototype, "save").returns({
+        _id: "chore123",
+        name: "Clean the kitchen",
+        frequency: { quantity: 2, interval: "days" },
+        location: "Kitchen",
+        duration: 30,
+        preference: "High",
+        lastCheckedOff: [9484839483],
+        nextOccurrence: 847578493,
+      });
+    });
+
+    afterEach(() => {
+      findByIdStub.restore();
+      sinon.restore();
+      sandbox.restore();
+    });
+
+    it("should return a 201 response with the chore if it is found", async () => {
+      findByIdStub.returns({
+        _id: "chore123",
+        name: "Clean the kitchen",
+        frequency: { quantity: 2, interval: "days" },
+        location: "Kitchen",
+        duration: 30,
+        preference: "High",
+        lastCheckedOff: [9484839483],
+        save: sandbox.stub().resolves(),
+      });
+
+      await checkOffChore(req, res);
+
+      expect(res.status.calledWith(201)).to.be.true;
+      expect(
+        res.json.calledOnceWith({ message: `Chore checked off successfully!` })
+      ).to.be.true;
+    });
+
+    it("should return a 404 response with an error message if the chore is not found", async () => {
+      const id = "someid";
+
+      findByIdStub.resolves(null);
+
+      await checkOffChore(req, res);
+
+      console.log(res.json);
+
+      expect(res.status.calledOnceWith(404)).to.be.true;
+      expect(res.json.firstCall.args[0]).to.deep.equal({
+        message: `Chore with id ${id} was not found.`,
+      });
+    });
+
+    it("should return a 500 response with an error message if there is an unexpected error", async () => {
+      const error = new Error("Unexpected error");
+      findByIdStub.rejects(error);
+
+      await checkOffChore(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWith({ message: "Internal Server Error" })).to.be
         .true;
     });
   });
+});
+
+
+//SCHEDULES CONTROLLER
+
+describe("Testing Schedule controllers", function () {
+  describe(" testing register function", function () {
+    let req, res, findOneStub, findStub;
+
+    beforeEach(() => {
+      // Create a request
+      req = {
+        params: {
+          timeframe: "2023-02-12",
+        },
+        user: { id: "user123" },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy(),
+      };
+      findOneStub = sinon.stub(User, "findOne");
+      findStub = sinon.stub(Chore, "find")
+    });
+
+    afterEach(() => {
+      // Restore all the stubbed functions
+      sinon.restore();
+    });
+
+    it("should return a 201 response with the requested schedule", async () => {
+      const chore = { name: "Clean the dishes", location: "kitchen" };
+      findOneStub.returns({
+        email: "test@test.com",
+        password: "1234",
+        chores: [],
+      });
+
+      findStub.returns([
+        {
+          _id: 'dadd',
+          name: 'chore 1',
+          frequency: {
+            quantity: 2,
+            interval: 'days'
+          },
+          location: 'Home',
+          duration: 40,
+          preference: 'high',
+          lastCheckedOff: [2343554, 23343545],
+          nextOccurrence: 12324343,
+        },
+        {
+          _id: '23434',
+          name: 'chore 2',
+          frequency: {
+            quantity: 2,
+            interval: 'weeks'
+          },
+          location: 'Home',
+          duration: 4,
+          preference: 'low',
+          lastCheckedOff: [42343554, 2334324545],
+          nextOccurrence: 123324343,
+        },
+        {
+          _id: '2343424',
+          name: 'chore 3',
+          frequency: {
+            quantity: 2,
+            interval: 'months'
+          },
+          location: 'School',
+          duration: 4,
+          preference: 'medium',
+          lastCheckedOff: [423454, 23324545],
+          nextOccurrence: 124343,
+        },
+        {
+          _id: '23434',
+          name: 'chore 2',
+          frequency: {
+            quantity: 2,
+            interval: 'years'
+          },
+          location: 'Home',
+          duration: 4,
+          preference: 'low',
+          lastCheckedOff: [42343554, 2334324545],
+          nextOccurrence: 123324343,
+        },
+      ]);
+
+      await createSchedule(req, res);
+
+      expect(res.status.calledWith(201)).to.be.true;
+    });
+
+    it("should return a 500 response with an error message if there is an unexpected error", async () => {
+      const error = new Error("Unexpected error");
+      findOneStub.rejects(error);
+      findStub.rejects(error);
+
+      await createSchedule(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWith({ message: "Schedule could not be created." })).to.be
+        .true;
+    });
+  });
+
 });

@@ -1,0 +1,1001 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1679701030711,565,Login,200,OK,Thread Group 1-16,text,true,,539,493,100,100,http://localhost:4000/api/login,565,0,14
+1679701030713,570,Login,200,OK,Thread Group 1-22,text,true,,540,495,100,100,http://localhost:4000/api/login,570,0,17
+1679701030712,571,Login,200,OK,Thread Group 1-3,text,true,,539,495,100,100,http://localhost:4000/api/login,571,0,18
+1679701030754,536,Login,200,OK,Thread Group 1-47,text,true,,540,495,100,100,http://localhost:4000/api/login,536,0,4
+1679701030711,580,Login,200,OK,Thread Group 1-19,text,true,,539,493,100,100,http://localhost:4000/api/login,580,0,18
+1679701030713,582,Login,200,OK,Thread Group 1-25,text,true,,540,495,100,100,http://localhost:4000/api/login,582,0,17
+1679701030711,584,Login,200,OK,Thread Group 1-18,text,true,,539,495,100,100,http://localhost:4000/api/login,584,0,18
+1679701030711,589,Login,200,OK,Thread Group 1-11,text,true,,539,493,100,100,http://localhost:4000/api/login,589,0,15
+1679701030713,605,Login,200,OK,Thread Group 1-7,text,true,,540,495,100,100,http://localhost:4000/api/login,605,0,18
+1679701030728,626,Login,200,OK,Thread Group 1-29,text,true,,539,495,100,100,http://localhost:4000/api/login,626,0,20
+1679701030712,644,Login,200,OK,Thread Group 1-6,text,true,,540,495,100,100,http://localhost:4000/api/login,644,0,19
+1679701030714,645,Login,200,OK,Thread Group 1-10,text,true,,539,493,100,100,http://localhost:4000/api/login,645,0,22
+1679701030724,663,Login,200,OK,Thread Group 1-27,text,true,,540,495,100,100,http://localhost:4000/api/login,663,0,21
+1679701030721,667,Login,200,OK,Thread Group 1-26,text,true,,540,495,100,100,http://localhost:4000/api/login,667,0,10
+1679701030716,674,Login,200,OK,Thread Group 1-2,text,true,,540,495,100,100,http://localhost:4000/api/login,674,0,27
+1679701030715,683,Login,200,OK,Thread Group 1-9,text,true,,539,493,100,100,http://localhost:4000/api/login,683,0,32
+1679701031319,142,Get all user chores,200,OK,Thread Group 1-7,text,true,,267,596,100,100,http://localhost:4000/api/chores/,142,0,0
+1679701030716,745,Login,200,OK,Thread Group 1-4,text,true,,539,495,100,100,http://localhost:4000/api/login,745,0,31
+1679701031295,169,Get all user chores,200,OK,Thread Group 1-18,text,true,,267,596,100,100,http://localhost:4000/api/chores/,169,0,0
+1679701031283,182,Get all user chores,200,OK,Thread Group 1-3,text,true,,267,596,100,100,http://localhost:4000/api/chores/,182,0,0
+1679701031295,170,Get all user chores,200,OK,Thread Group 1-25,text,true,,267,596,100,100,http://localhost:4000/api/chores/,170,0,0
+1679701030716,770,Login,200,OK,Thread Group 1-12,text,true,,540,495,100,100,http://localhost:4000/api/login,770,0,30
+1679701030711,775,Login,200,OK,Thread Group 1-23,text,true,,540,495,100,100,http://localhost:4000/api/login,775,0,21
+1679701030710,776,Login,200,OK,Thread Group 1-17,text,true,,540,495,100,100,http://localhost:4000/api/login,776,0,21
+1679701031291,214,Get all user chores,200,OK,Thread Group 1-47,text,true,,267,596,100,100,http://localhost:4000/api/chores/,214,0,0
+1679701031291,214,Get all user chores,200,OK,Thread Group 1-19,text,true,,267,596,100,100,http://localhost:4000/api/chores/,214,0,0
+1679701031283,223,Get all user chores,200,OK,Thread Group 1-22,text,true,,267,596,100,100,http://localhost:4000/api/chores/,223,0,0
+1679701031360,155,Get all user chores,200,OK,Thread Group 1-10,text,true,,267,596,100,100,http://localhost:4000/api/chores/,155,0,0
+1679701031277,240,Get all user chores,200,OK,Thread Group 1-16,text,true,,267,596,100,100,http://localhost:4000/api/chores/,240,0,0
+1679701031354,167,Get all user chores,200,OK,Thread Group 1-29,text,true,,267,596,100,100,http://localhost:4000/api/chores/,166,0,0
+1679701031301,220,Get all user chores,200,OK,Thread Group 1-11,text,true,,267,596,100,100,http://localhost:4000/api/chores/,220,0,0
+1679701031357,164,Get all user chores,200,OK,Thread Group 1-6,text,true,,267,596,100,100,http://localhost:4000/api/chores/,164,0,0
+1679701031387,135,Get all user chores,200,OK,Thread Group 1-27,text,true,,267,596,100,100,http://localhost:4000/api/chores/,135,0,0
+1679701031390,144,Get all user chores,200,OK,Thread Group 1-2,text,true,,267,596,100,100,http://localhost:4000/api/chores/,144,0,0
+1679701031388,149,Get all user chores,200,OK,Thread Group 1-26,text,true,,267,596,100,100,http://localhost:4000/api/chores/,149,0,0
+1679701031399,140,Get all user chores,200,OK,Thread Group 1-9,text,true,,267,596,100,100,http://localhost:4000/api/chores/,140,0,0
+1679701030715,886,Login,200,OK,Thread Group 1-20,text,true,,540,495,100,100,http://localhost:4000/api/login,886,0,32
+1679701030715,898,Login,200,OK,Thread Group 1-13,text,true,,539,493,100,100,http://localhost:4000/api/login,898,0,18
+1679701030720,892,Login,200,OK,Thread Group 1-14,text,true,,541,495,100,100,http://localhost:4000/api/login,892,0,12
+1679701030715,898,Login,200,OK,Thread Group 1-8,text,true,,540,495,100,100,http://localhost:4000/api/login,898,0,18
+1679701030714,977,Login,200,OK,Thread Group 1-1,text,true,,539,495,100,100,http://localhost:4000/api/login,977,0,20
+1679701030720,971,Login,200,OK,Thread Group 1-5,text,true,,539,495,100,100,http://localhost:4000/api/login,971,0,12
+1679701031461,260,Get all user chores,200,OK,Thread Group 1-4,text,true,,267,596,100,100,http://localhost:4000/api/chores/,260,0,0
+1679701030729,992,Login,200,OK,Thread Group 1-30,text,true,,540,495,100,100,http://localhost:4000/api/login,992,0,19
+1679701030714,1007,Login,200,OK,Thread Group 1-24,text,true,,540,495,100,100,http://localhost:4000/api/login,1007,0,34
+1679701031487,267,Get all user chores,200,OK,Thread Group 1-23,text,true,,267,596,100,100,http://localhost:4000/api/chores/,267,0,0
+1679701030730,1025,Login,200,OK,Thread Group 1-15,text,true,,541,495,100,100,http://localhost:4000/api/login,1025,0,18
+1679701030743,1012,Login,200,OK,Thread Group 1-49,text,true,,539,495,100,100,http://localhost:4000/api/login,1012,0,11
+1679701031487,277,Get all user chores,200,OK,Thread Group 1-17,text,true,,267,596,100,100,http://localhost:4000/api/chores/,277,0,0
+1679701031487,277,Get all user chores,200,OK,Thread Group 1-12,text,true,,267,596,100,100,http://localhost:4000/api/chores/,277,0,0
+1679701031612,189,Get all user chores,200,OK,Thread Group 1-14,text,true,,267,596,100,100,http://localhost:4000/api/chores/,189,0,0
+1679701031612,219,Get all user chores,200,OK,Thread Group 1-13,text,true,,267,596,100,100,http://localhost:4000/api/chores/,219,0,0
+1679701030739,1093,Login,200,OK,Thread Group 1-40,text,true,,540,495,100,100,http://localhost:4000/api/login,1093,0,12
+1679701031600,231,Get all user chores,200,OK,Thread Group 1-20,text,true,,267,596,100,100,http://localhost:4000/api/chores/,231,0,0
+1679701031615,216,Get all user chores,200,OK,Thread Group 1-8,text,true,,267,596,100,100,http://localhost:4000/api/chores/,216,0,0
+1679701030744,1088,Login,200,OK,Thread Group 1-37,text,true,,540,495,100,100,http://localhost:4000/api/login,1088,0,12
+1679701030742,1092,Login,200,OK,Thread Group 1-43,text,true,,540,495,100,100,http://localhost:4000/api/login,1092,0,12
+1679701030743,1124,Login,200,OK,Thread Group 1-52,text,true,,540,495,100,100,http://localhost:4000/api/login,1124,0,12
+1679701031461,450,Create a chore,201,Created,Thread Group 1-7,text,true,,500,793,100,100,http://localhost:4000/api/chores/,450,0,0
+1679701030744,1181,Login,200,OK,Thread Group 1-48,text,true,,540,495,100,100,http://localhost:4000/api/login,1181,0,12
+1679701030737,1188,Login,200,OK,Thread Group 1-34,text,true,,540,495,100,100,http://localhost:4000/api/login,1188,0,13
+1679701030739,1215,Login,200,OK,Thread Group 1-42,text,true,,540,495,100,100,http://localhost:4000/api/login,1215,0,14
+1679701030736,1222,Login,200,OK,Thread Group 1-33,text,true,,540,495,100,100,http://localhost:4000/api/login,1222,0,14
+1679701030794,1188,Login,200,OK,Thread Group 1-70,text,true,,540,495,100,100,http://localhost:4000/api/login,1188,0,9
+1679701030801,1184,Login,200,OK,Thread Group 1-81,text,true,,540,495,100,100,http://localhost:4000/api/login,1184,0,11
+1679701030774,1251,Login,200,OK,Thread Group 1-62,text,true,,540,495,100,100,http://localhost:4000/api/login,1251,0,5
+1679701030823,1207,Login,200,OK,Thread Group 1-96,text,true,,540,495,100,100,http://localhost:4000/api/login,1207,0,16
+1679701030799,1254,Login,200,OK,Thread Group 1-78,text,true,,540,495,100,100,http://localhost:4000/api/login,1254,0,12
+1679701030796,1266,Login,200,OK,Thread Group 1-69,text,true,,540,495,100,100,http://localhost:4000/api/login,1266,0,5
+1679701030795,1312,Login,200,OK,Thread Group 1-75,text,true,,540,495,100,100,http://localhost:4000/api/login,1312,0,4
+1679701030771,1342,Login,200,OK,Thread Group 1-60,text,true,,540,495,100,100,http://localhost:4000/api/login,1342,0,2
+1679701030767,1366,Login,200,OK,Thread Group 1-57,text,true,,540,495,100,100,http://localhost:4000/api/login,1366,0,5
+1679701030774,1363,Login,200,OK,Thread Group 1-61,text,true,,540,495,100,100,http://localhost:4000/api/login,1363,0,4
+1679701030769,1408,Login,200,OK,Thread Group 1-58,text,true,,540,495,100,100,http://localhost:4000/api/login,1408,0,3
+1679701030775,1413,Login,200,OK,Thread Group 1-64,text,true,,540,495,100,100,http://localhost:4000/api/login,1413,0,3
+1679701030763,1445,Login,200,OK,Thread Group 1-56,text,true,,540,495,100,100,http://localhost:4000/api/login,1445,0,2
+1679701030765,1447,Login,200,OK,Thread Group 1-54,text,true,,540,495,100,100,http://localhost:4000/api/login,1447,0,6
+1679701030765,1491,Login,200,OK,Thread Group 1-55,text,true,,540,495,100,100,http://localhost:4000/api/login,1491,0,5
+1679701030769,1494,Login,200,OK,Thread Group 1-59,text,true,,539,495,100,100,http://localhost:4000/api/login,1494,0,3
+1679701030758,1522,Login,200,OK,Thread Group 1-44,text,true,,540,495,100,100,http://localhost:4000/api/login,1522,0,6
+1679701030739,1547,Login,200,OK,Thread Group 1-41,text,true,,540,495,100,100,http://localhost:4000/api/login,1547,0,13
+1679701030733,1593,Login,200,OK,Thread Group 1-31,text,true,,539,495,100,100,http://localhost:4000/api/login,1593,0,16
+1679701030751,1585,Login,200,OK,Thread Group 1-45,text,true,,539,495,100,100,http://localhost:4000/api/login,1585,0,6
+1679701030748,1603,Login,200,OK,Thread Group 1-39,text,true,,540,495,100,100,http://localhost:4000/api/login,1603,0,9
+1679701030754,1607,Login,200,OK,Thread Group 1-46,text,true,,540,495,100,100,http://localhost:4000/api/login,1607,0,3
+1679701030736,1664,Login,200,OK,Thread Group 1-28,text,true,,540,495,100,100,http://localhost:4000/api/login,1664,0,13
+1679701030734,1673,Login,200,OK,Thread Group 1-32,text,true,,539,495,100,100,http://localhost:4000/api/login,1673,0,15
+1679701030739,1698,Login,200,OK,Thread Group 1-35,text,true,,540,495,100,100,http://localhost:4000/api/login,1698,0,14
+1679701031690,748,Get all user chores,200,OK,Thread Group 1-1,text,true,,267,596,100,100,http://localhost:4000/api/chores/,748,0,0
+1679701031721,720,Get all user chores,200,OK,Thread Group 1-30,text,true,,267,596,100,100,http://localhost:4000/api/chores/,720,0,0
+1679701030716,1765,Login,200,OK,Thread Group 1-21,text,true,,539,493,100,100,http://localhost:4000/api/login,1765,0,33
+1679701031466,1039,Create a chore,201,Created,Thread Group 1-3,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1039,0,0
+1679701031466,1045,Create a chore,201,Created,Thread Group 1-25,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1045,0,0
+1679701031691,823,Get all user chores,200,OK,Thread Group 1-5,text,true,,267,596,100,100,http://localhost:4000/api/chores/,823,0,0
+1679701030759,1769,Login,200,OK,Thread Group 1-51,text,true,,540,495,100,100,http://localhost:4000/api/login,1769,0,3
+1679701030758,1772,Login,200,OK,Thread Group 1-50,text,true,,540,495,100,100,http://localhost:4000/api/login,1772,0,3
+1679701030762,1770,Login,200,OK,Thread Group 1-36,text,true,,540,495,100,100,http://localhost:4000/api/login,1770,0,2
+1679701030759,1774,Login,200,OK,Thread Group 1-38,text,true,,540,495,100,100,http://localhost:4000/api/login,1774,0,4
+1679701031505,1048,Create a chore,201,Created,Thread Group 1-47,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1048,0,0
+1679701031522,1030,Create a chore,201,Created,Thread Group 1-27,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1030,0,0
+1679701031520,1033,Create a chore,201,Created,Thread Group 1-29,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1033,0,0
+1679701031514,1045,Create a chore,201,Created,Thread Group 1-10,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1045,0,0
+1679701031754,813,Get all user chores,200,OK,Thread Group 1-15,text,true,,267,596,100,100,http://localhost:4000/api/chores/,813,0,0
+1679701031721,848,Get all user chores,200,OK,Thread Group 1-24,text,true,,267,596,100,100,http://localhost:4000/api/chores/,848,0,0
+1679701031754,819,Get all user chores,200,OK,Thread Group 1-49,text,true,,267,596,100,100,http://localhost:4000/api/chores/,819,0,0
+1679701031516,1063,Create a chore,201,Created,Thread Group 1-16,text,true,,497,790,100,100,http://localhost:4000/api/chores/,1063,0,0
+1679701031465,1115,Create a chore,201,Created,Thread Group 1-18,text,true,,497,790,100,100,http://localhost:4000/api/chores/,1115,0,0
+1679701031520,1059,Create a chore,201,Created,Thread Group 1-11,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1059,0,0
+1679701031505,1080,Create a chore,201,Created,Thread Group 1-19,text,true,,497,790,100,100,http://localhost:4000/api/chores/,1080,0,0
+1679701030784,1853,Login,200,OK,Thread Group 1-66,text,true,,540,495,100,100,http://localhost:4000/api/login,1853,0,2
+1679701030797,1843,Login,200,OK,Thread Group 1-73,text,true,,540,495,100,100,http://localhost:4000/api/login,1843,0,7
+1679701030785,1860,Login,200,OK,Thread Group 1-53,text,true,,540,495,100,100,http://localhost:4000/api/login,1860,0,2
+1679701030801,1846,Login,200,OK,Thread Group 1-76,text,true,,540,495,100,100,http://localhost:4000/api/login,1846,0,13
+1679701031833,881,Get all user chores,200,OK,Thread Group 1-43,text,true,,267,596,100,100,http://localhost:4000/api/chores/,881,0,0
+1679701031953,773,Get all user chores,200,OK,Thread Group 1-42,text,true,,267,596,100,100,http://localhost:4000/api/chores/,773,0,0
+1679701032106,621,Get all user chores,200,OK,Thread Group 1-75,text,true,,267,596,100,100,http://localhost:4000/api/chores/,621,0,0
+1679701032137,591,Get all user chores,200,OK,Thread Group 1-61,text,true,,267,596,100,100,http://localhost:4000/api/chores/,591,0,0
+1679701031985,745,Get all user chores,200,OK,Thread Group 1-81,text,true,,267,596,100,100,http://localhost:4000/api/chores/,745,0,0
+1679701032024,708,Get all user chores,200,OK,Thread Group 1-62,text,true,,267,596,100,100,http://localhost:4000/api/chores/,708,0,0
+1679701032351,384,Get all user chores,200,OK,Thread Group 1-39,text,true,,267,596,100,100,http://localhost:4000/api/chores/,384,0,0
+1679701032360,375,Get all user chores,200,OK,Thread Group 1-46,text,true,,267,596,100,100,http://localhost:4000/api/chores/,375,0,0
+1679701032112,628,Get all user chores,200,OK,Thread Group 1-60,text,true,,267,596,100,100,http://localhost:4000/api/chores/,628,0,0
+1679701032133,615,Get all user chores,200,OK,Thread Group 1-57,text,true,,267,596,100,100,http://localhost:4000/api/chores/,615,0,0
+1679701031925,823,Get all user chores,200,OK,Thread Group 1-34,text,true,,267,596,100,100,http://localhost:4000/api/chores/,823,0,0
+1679701032061,687,Get all user chores,200,OK,Thread Group 1-69,text,true,,267,596,100,100,http://localhost:4000/api/chores/,687,0,0
+1679701032030,721,Get all user chores,200,OK,Thread Group 1-96,text,true,,267,596,100,100,http://localhost:4000/api/chores/,721,0,0
+1679701032326,425,Get all user chores,200,OK,Thread Group 1-31,text,true,,267,596,100,100,http://localhost:4000/api/chores/,425,0,0
+1679701031832,924,Get all user chores,200,OK,Thread Group 1-40,text,true,,267,596,100,100,http://localhost:4000/api/chores/,924,0,0
+1679701031533,1232,Create a chore,201,Created,Thread Group 1-2,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1232,0,0
+1679701031981,785,Get all user chores,200,OK,Thread Group 1-70,text,true,,267,596,100,100,http://localhost:4000/api/chores/,785,0,0
+1679701032336,432,Get all user chores,200,OK,Thread Group 1-45,text,true,,267,596,100,100,http://localhost:4000/api/chores/,432,0,0
+1679701031506,1279,Create a chore,201,Created,Thread Group 1-22,text,true,,497,790,100,100,http://localhost:4000/api/chores/,1279,0,0
+1679701031520,1264,Create a chore,201,Created,Thread Group 1-6,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1264,0,0
+1679701031957,831,Get all user chores,200,OK,Thread Group 1-33,text,true,,267,596,100,100,http://localhost:4000/api/chores/,831,0,0
+1679701032052,736,Get all user chores,200,OK,Thread Group 1-78,text,true,,267,596,100,100,http://localhost:4000/api/chores/,736,0,0
+1679701031538,1293,Create a chore,201,Created,Thread Group 1-9,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1293,0,0
+1679701030797,2065,Login,200,OK,Thread Group 1-74,text,true,,540,495,100,100,http://localhost:4000/api/login,2065,0,7
+1679701030803,2060,Login,200,OK,Thread Group 1-77,text,true,,540,495,100,100,http://localhost:4000/api/login,2060,0,11
+1679701030783,2089,Login,200,OK,Thread Group 1-63,text,true,,540,495,100,100,http://localhost:4000/api/login,2089,0,4
+1679701030798,2074,Login,200,OK,Thread Group 1-68,text,true,,540,495,100,100,http://localhost:4000/api/login,2074,0,8
+1679701030800,2077,Login,200,OK,Thread Group 1-80,text,true,,540,495,100,100,http://localhost:4000/api/login,2077,0,11
+1679701030805,2073,Login,200,OK,Thread Group 1-82,text,true,,540,495,100,100,http://localhost:4000/api/login,2073,0,10
+1679701030803,2078,Login,200,OK,Thread Group 1-79,text,true,,540,495,100,100,http://localhost:4000/api/login,2078,0,12
+1679701030776,2110,Login,200,OK,Thread Group 1-65,text,true,,540,495,100,100,http://localhost:4000/api/login,2110,0,2
+1679701032255,649,Get all user chores,200,OK,Thread Group 1-55,text,true,,267,596,100,100,http://localhost:4000/api/chores/,649,0,0
+1679701031832,1086,Get all user chores,200,OK,Thread Group 1-37,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1086,0,0
+1679701031866,1052,Get all user chores,200,OK,Thread Group 1-52,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1052,0,0
+1679701032262,657,Get all user chores,200,OK,Thread Group 1-59,text,true,,267,596,100,100,http://localhost:4000/api/chores/,657,0,0
+1679701032211,711,Get all user chores,200,OK,Thread Group 1-54,text,true,,267,596,100,100,http://localhost:4000/api/chores/,711,0,0
+1679701032280,642,Get all user chores,200,OK,Thread Group 1-44,text,true,,267,596,100,100,http://localhost:4000/api/chores/,642,0,0
+1679701032285,637,Get all user chores,200,OK,Thread Group 1-41,text,true,,267,596,100,100,http://localhost:4000/api/chores/,637,0,0
+1679701031910,1015,Edit a chore,201,Created,Thread Group 1-7,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6609/,1015,0,0
+1679701032207,723,Get all user chores,200,OK,Thread Group 1-56,text,true,,267,596,100,100,http://localhost:4000/api/chores/,723,0,0
+1679701032188,745,Get all user chores,200,OK,Thread Group 1-64,text,true,,267,596,100,100,http://localhost:4000/api/chores/,745,0,0
+1679701031924,1010,Get all user chores,200,OK,Thread Group 1-48,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1010,0,0
+1679701032187,748,Get all user chores,200,OK,Thread Group 1-58,text,true,,267,596,100,100,http://localhost:4000/api/chores/,748,0,0
+1679701031537,1399,Create a chore,201,Created,Thread Group 1-26,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1399,0,0
+1679701030794,2321,Login,200,OK,Thread Group 1-72,text,true,,540,495,100,100,http://localhost:4000/api/login,2321,0,3
+1679701030808,2307,Login,200,OK,Thread Group 1-89,text,true,,540,495,100,100,http://localhost:4000/api/login,2307,0,8
+1679701030807,2308,Login,200,OK,Thread Group 1-83,text,true,,539,495,100,100,http://localhost:4000/api/login,2308,0,9
+1679701030784,2331,Login,200,OK,Thread Group 1-67,text,true,,540,495,100,100,http://localhost:4000/api/login,2331,0,4
+1679701030794,2327,Login,200,OK,Thread Group 1-71,text,true,,540,495,100,100,http://localhost:4000/api/login,2327,0,4
+1679701030808,2317,Login,200,OK,Thread Group 1-88,text,true,,540,495,100,100,http://localhost:4000/api/login,2317,0,9
+1679701030808,2323,Login,200,OK,Thread Group 1-86,text,true,,540,495,100,100,http://localhost:4000/api/login,2323,0,13
+1679701030808,2323,Login,200,OK,Thread Group 1-84,text,true,,540,495,100,100,http://localhost:4000/api/login,2323,0,17
+1679701030809,2322,Login,200,OK,Thread Group 1-90,text,true,,540,495,100,100,http://localhost:4000/api/login,2322,0,14
+1679701030821,2312,Login,200,OK,Thread Group 1-97,text,true,,540,495,100,100,http://localhost:4000/api/login,2312,0,9
+1679701031721,1439,Create a chore,201,Created,Thread Group 1-4,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1439,0,0
+1679701032406,760,Get all user chores,200,OK,Thread Group 1-32,text,true,,267,596,100,100,http://localhost:4000/api/chores/,760,0,0
+1679701031764,1404,Create a chore,201,Created,Thread Group 1-17,text,true,,497,790,100,100,http://localhost:4000/api/chores/,1404,0,0
+1679701030808,2484,Login,200,OK,Thread Group 1-85,text,true,,540,495,100,100,http://localhost:4000/api/login,2484,0,21
+1679701030821,2477,Login,200,OK,Thread Group 1-91,text,true,,540,495,100,100,http://localhost:4000/api/login,2477,0,10
+1679701030821,2478,Login,200,OK,Thread Group 1-92,text,true,,540,495,100,100,http://localhost:4000/api/login,2478,0,11
+1679701030821,2481,Login,200,OK,Thread Group 1-93,text,true,,540,495,100,100,http://localhost:4000/api/login,2481,0,12
+1679701030822,2484,Login,200,OK,Thread Group 1-95,text,true,,540,495,100,100,http://localhost:4000/api/login,2484,0,12
+1679701030822,2487,Login,200,OK,Thread Group 1-94,text,true,,540,495,100,100,http://localhost:4000/api/login,2487,0,12
+1679701030824,2490,Login,200,OK,Thread Group 1-98,text,true,,540,495,100,100,http://localhost:4000/api/login,2490,0,12
+1679701030825,2489,Login,200,OK,Thread Group 1-99,text,true,,540,495,100,100,http://localhost:4000/api/login,2489,0,11
+1679701030823,2546,Login,200,OK,Thread Group 1-87,text,true,,540,495,100,100,http://localhost:4000/api/login,2546,0,13
+1679701030825,2549,Login,200,OK,Thread Group 1-100,text,true,,540,497,100,100,http://localhost:4000/api/login,2549,0,13
+1679701032529,931,Get all user chores,200,OK,Thread Group 1-50,text,true,,267,596,100,100,http://localhost:4000/api/chores/,931,0,0
+1679701032533,927,Get all user chores,200,OK,Thread Group 1-38,text,true,,267,596,100,100,http://localhost:4000/api/chores/,927,0,0
+1679701032527,936,Get all user chores,200,OK,Thread Group 1-51,text,true,,267,596,100,100,http://localhost:4000/api/chores/,936,0,0
+1679701032531,959,Get all user chores,200,OK,Thread Group 1-36,text,true,,267,596,100,100,http://localhost:4000/api/chores/,959,0,0
+1679701032480,1013,Get all user chores,200,OK,Thread Group 1-21,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1013,0,0
+1679701032436,1061,Get all user chores,200,OK,Thread Group 1-35,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1061,0,0
+1679701031832,1684,Create a chore,201,Created,Thread Group 1-13,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1684,0,0
+1679701031754,1766,Create a chore,201,Created,Thread Group 1-23,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1766,0,0
+1679701032585,940,Edit a chore,201,Created,Thread Group 1-19,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d661a/,940,0,0
+1679701032560,968,Edit a chore,201,Created,Thread Group 1-10,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6620/,968,0,0
+1679701032579,951,Edit a chore,201,Created,Thread Group 1-18,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6613/,951,0,0
+1679701031764,1768,Create a chore,201,Created,Thread Group 1-12,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1768,0,0
+1679701032504,1031,Edit a chore,201,Created,Thread Group 1-3,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6617/,1031,0,0
+1679701032552,987,Edit a chore,201,Created,Thread Group 1-47,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6622/,987,0,0
+1679701031802,1786,Create a chore,201,Created,Thread Group 1-14,text,true,,497,790,100,100,http://localhost:4000/api/chores/,1786,0,0
+1679701031832,1761,Create a chore,201,Created,Thread Group 1-8,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1761,0,0
+1679701032886,717,Get all user chores,200,OK,Thread Group 1-65,text,true,,267,596,100,100,http://localhost:4000/api/chores/,717,0,0
+1679701032937,667,Edit a chore,201,Created,Thread Group 1-26,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6631/,667,0,0
+1679701032863,742,Get all user chores,200,OK,Thread Group 1-77,text,true,,267,596,100,100,http://localhost:4000/api/chores/,742,0,0
+1679701032644,964,Get all user chores,200,OK,Thread Group 1-53,text,true,,267,596,100,100,http://localhost:4000/api/chores/,964,0,0
+1679701032553,1059,Edit a chore,201,Created,Thread Group 1-27,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d662a/,1059,0,0
+1679701031832,1785,Create a chore,201,Created,Thread Group 1-20,text,true,,497,790,100,100,http://localhost:4000/api/chores/,1785,0,0
+1679701032579,1089,Edit a chore,201,Created,Thread Group 1-11,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6628/,1089,0,0
+1679701032400,1273,Get all user chores,200,OK,Thread Group 1-28,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1273,0,0
+1679701032554,1128,Edit a chore,201,Created,Thread Group 1-29,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6611/,1128,0,0
+1679701032579,1101,Edit a chore,201,Created,Thread Group 1-16,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6624/,1101,0,0
+1679701032510,1170,Edit a chore,201,Created,Thread Group 1-25,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6615/,1170,0,0
+1679701032871,937,Get all user chores,200,OK,Thread Group 1-63,text,true,,267,596,100,100,http://localhost:4000/api/chores/,937,0,0
+1679701032881,930,Get all user chores,200,OK,Thread Group 1-79,text,true,,267,596,100,100,http://localhost:4000/api/chores/,930,0,0
+1679701032876,950,Get all user chores,200,OK,Thread Group 1-80,text,true,,267,596,100,100,http://localhost:4000/api/chores/,950,0,0
+1679701032877,958,Get all user chores,200,OK,Thread Group 1-82,text,true,,267,596,100,100,http://localhost:4000/api/chores/,958,0,0
+1679701032784,1052,Edit a chore,201,Created,Thread Group 1-22,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d661e/,1052,0,0
+1679701032639,1226,Get all user chores,200,OK,Thread Group 1-73,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1226,0,0
+1679701032831,1046,Edit a chore,201,Created,Thread Group 1-9,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6633/,1046,0,0
+1679701032766,1111,Edit a chore,201,Created,Thread Group 1-2,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d662c/,1111,0,0
+1679701033120,1304,Get all user chores,200,OK,Thread Group 1-71,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1304,0,0
+1679701033131,1296,Get all user chores,200,OK,Thread Group 1-86,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1296,0,0
+1679701032637,1824,Get all user chores,200,OK,Thread Group 1-66,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1824,0,0
+1679701033299,1162,Get all user chores,200,OK,Thread Group 1-92,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1162,0,0
+1679701033168,1315,Edit a chore,201,Created,Thread Group 1-17,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6670/,1315,0,0
+1679701033160,1326,Edit a chore,201,Created,Thread Group 1-4,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d665e/,1326,0,0
+1679701032925,1565,Get all user chores,200,OK,Thread Group 1-7,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1565,0,0
+1679701033313,1186,Get all user chores,200,OK,Thread Group 1-99,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1186,0,0
+1679701033115,1414,Get all user chores,200,OK,Thread Group 1-89,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1414,0,0
+1679701033373,1160,Get all user chores,200,OK,Thread Group 1-100,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1160,0,0
+1679701033131,1403,Get all user chores,200,OK,Thread Group 1-84,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1403,0,0
+1679701033309,1228,Get all user chores,200,OK,Thread Group 1-94,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1228,0,0
+1679701033298,1241,Get all user chores,200,OK,Thread Group 1-91,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1241,0,0
+1679701033131,1409,Get all user chores,200,OK,Thread Group 1-90,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1409,0,0
+1679701033132,1413,Get all user chores,200,OK,Thread Group 1-97,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1413,0,0
+1679701033305,1242,Get all user chores,200,OK,Thread Group 1-95,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1242,0,0
+1679701032861,1691,Get all user chores,200,OK,Thread Group 1-74,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1691,0,0
+1679701033368,1186,Get all user chores,200,OK,Thread Group 1-87,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1186,0,0
+1679701032784,1773,Edit a chore,201,Created,Thread Group 1-6,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6626/,1773,0,0
+1679701032871,1707,Get all user chores,200,OK,Thread Group 1-68,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1707,0,0
+1679701033313,1276,Get all user chores,200,OK,Thread Group 1-98,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1276,0,0
+1679701033124,1467,Get all user chores,200,OK,Thread Group 1-88,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1467,0,0
+1679701033302,1292,Get all user chores,200,OK,Thread Group 1-93,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1292,0,0
+1679701033291,1320,Get all user chores,200,OK,Thread Group 1-85,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1320,0,0
+1679701033115,1498,Get all user chores,200,OK,Thread Group 1-67,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1498,0,0
+1679701032647,1968,Get all user chores,200,OK,Thread Group 1-76,text,true,,267,596,100,100,http://localhost:4000/api/chores/,1968,0,0
+1679701032767,1860,Create a chore,201,Created,Thread Group 1-70,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1860,0,0
+1679701032741,1889,Create a chore,201,Created,Thread Group 1-60,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1889,0,0
+1679701032570,2097,Create a chore,201,Created,Thread Group 1-24,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2097,0,0
+1679701032730,1943,Create a chore,201,Created,Thread Group 1-81,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1943,0,0
+1679701032567,2109,Create a chore,201,Created,Thread Group 1-15,text,true,,497,790,100,100,http://localhost:4000/api/chores/,2109,0,0
+1679701032918,1758,Create a chore,201,Created,Thread Group 1-37,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1758,0,0
+1679701032732,1946,Create a chore,201,Created,Thread Group 1-62,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1946,0,0
+1679701032573,2108,Create a chore,201,Created,Thread Group 1-49,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2108,0,0
+1679701033613,1124,Get all user chores,200,OK,Thread Group 1-27,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1124,0,0
+1679701033526,1212,Get all user chores,200,OK,Thread Group 1-19,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1212,0,0
+1679701033530,1210,Get all user chores,200,OK,Thread Group 1-18,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1210,0,0
+1679701033539,1210,Get all user chores,200,OK,Thread Group 1-47,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1210,0,0
+1679701033532,1221,Edit a chore,201,Created,Thread Group 1-12,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6672/,1220,0,0
+1679701032714,2041,Create a chore,201,Created,Thread Group 1-43,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2041,0,0
+1679701032728,2033,Create a chore,201,Created,Thread Group 1-75,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2033,0,0
+1679701032930,1832,Create a chore,201,Created,Thread Group 1-56,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1832,0,0
+1679701032748,2014,Create a chore,201,Created,Thread Group 1-69,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2014,0,0
+1679701032751,2014,Create a chore,201,Created,Thread Group 1-96,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2014,0,0
+1679701033618,1150,Edit a chore,201,Created,Thread Group 1-20,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d6697/,1150,0,0
+1679701032727,2045,Create a chore,201,Created,Thread Group 1-42,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2045,0,0
+1679701032789,1984,Create a chore,201,Created,Thread Group 1-78,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1984,0,0
+1679701032735,2044,Create a chore,201,Created,Thread Group 1-39,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2044,0,0
+1679701032729,2059,Create a chore,201,Created,Thread Group 1-61,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2059,0,0
+1679701033516,1274,Edit a chore,201,Created,Thread Group 1-13,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66a9/,1274,0,0
+1679701033588,1208,Edit a chore,201,Created,Thread Group 1-14,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66b3/,1208,0,0
+1679701032922,1875,Create a chore,201,Created,Thread Group 1-41,text,true,,500,793,100,100,http://localhost:4000/api/chores/,1875,0,0
+1679701033594,1205,Edit a chore,201,Created,Thread Group 1-8,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66bd/,1205,0,0
+1679701033529,1275,Get all user chores,200,OK,Thread Group 1-10,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1275,0,0
+1679701033604,1201,Get all user chores,200,OK,Thread Group 1-26,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1201,0,0
+1679701033535,1272,Get all user chores,200,OK,Thread Group 1-3,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1272,0,0
+1679701033521,1300,Edit a chore,201,Created,Thread Group 1-23,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6663/,1300,0,0
+1679701032439,2384,Create a chore,201,Created,Thread Group 1-1,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2384,0,0
+1679701032515,2309,Create a chore,201,Created,Thread Group 1-5,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2309,0,0
+1679701033698,1756,Get all user chores,200,OK,Thread Group 1-25,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1756,0,0
+1679701033698,1762,Get all user chores,200,OK,Thread Group 1-29,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1762,0,0
+1679701033668,1796,Get all user chores,200,OK,Thread Group 1-11,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1796,0,0
+1679701033698,1827,Get all user chores,200,OK,Thread Group 1-16,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1827,0,0
+1679701033837,1705,Get all user chores,200,OK,Thread Group 1-22,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1705,0,0
+1679701033877,1667,Get all user chores,200,OK,Thread Group 1-2,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1667,0,0
+1679701032934,2612,Create a chore,201,Created,Thread Group 1-48,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2612,0,0
+1679701033877,1670,Get all user chores,200,OK,Thread Group 1-9,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1670,0,0
+1679701033166,2391,Create a chore,201,Created,Thread Group 1-32,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2391,0,0
+1679701032789,2773,Create a chore,201,Created,Thread Group 1-33,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2773,0,0
+1679701032933,2631,Create a chore,201,Created,Thread Group 1-64,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2631,0,0
+1679701032441,3125,Create a chore,201,Created,Thread Group 1-30,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3125,0,0
+1679701032748,2819,Create a chore,201,Created,Thread Group 1-34,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2819,0,0
+1679701032904,2670,Create a chore,201,Created,Thread Group 1-55,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2670,0,0
+1679701032756,2820,Create a chore,201,Created,Thread Group 1-40,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2820,0,0
+1679701034557,1109,Get all user chores,200,OK,Thread Group 1-6,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1109,0,0
+1679701034483,1188,Get all user chores,200,OK,Thread Group 1-17,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1188,0,0
+1679701034668,1007,Edit a chore,201,Created,Thread Group 1-24,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6709/,1007,0,0
+1679701032920,2757,Create a chore,201,Created,Thread Group 1-59,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2757,0,0
+1679701034676,1005,Edit a chore,201,Created,Thread Group 1-37,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d674e/,1005,0,0
+1679701032768,2917,Create a chore,201,Created,Thread Group 1-45,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2917,0,0
+1679701034681,1006,Edit a chore,201,Created,Thread Group 1-49,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6706/,1006,0,0
+1679701034630,1059,Edit a chore,201,Created,Thread Group 1-60,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6746/,1059,0,0
+1679701033494,2196,Create a chore,201,Created,Thread Group 1-21,text,true,,497,790,100,100,http://localhost:4000/api/chores/,2196,0,0
+1679701032918,2774,Create a chore,201,Created,Thread Group 1-52,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2774,0,0
+1679701033603,2096,Create a chore,201,Created,Thread Group 1-65,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2096,0,0
+1679701034739,963,Checkoff a chore,201,Created,Thread Group 1-19,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d661a/checked/,963,0,0
+1679701032748,2955,Create a chore,201,Created,Thread Group 1-57,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2955,0,0
+1679701032751,2954,Create a chore,201,Created,Thread Group 1-31,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2954,0,0
+1679701034741,965,Checkoff a chore,201,Created,Thread Group 1-18,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6613/checked/,965,0,0
+1679701032922,2786,Create a chore,201,Created,Thread Group 1-54,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2786,0,0
+1679701034628,1098,Edit a chore,201,Created,Thread Group 1-70,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6751/,1098,0,0
+1679701034750,973,Checkoff a chore,201,Created,Thread Group 1-47,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6622/checked/,973,0,0
+1679701034674,1047,Edit a chore,201,Created,Thread Group 1-81,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6744/,1047,0,0
+1679701034800,1649,Get all user chores,200,OK,Thread Group 1-8,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1649,0,0
+1679701034461,2011,Create a chore,201,Created,Thread Group 1-66,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2011,0,0
+1679701033460,3016,Create a chore,201,Created,Thread Group 1-50,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3016,0,0
+1679701034676,1808,Edit a chore,201,Created,Thread Group 1-15,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d670b/,1808,0,0
+1679701033606,2879,Create a chore,201,Created,Thread Group 1-77,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2879,0,0
+1679701033835,2652,Create a chore,201,Created,Thread Group 1-82,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2652,0,0
+1679701034765,1727,Edit a chore,201,Created,Thread Group 1-96,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d676e/,1727,0,0
+1679701034772,1722,Edit a chore,201,Created,Thread Group 1-42,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6764/,1722,0,0
+1679701033865,2629,Create a chore,201,Created,Thread Group 1-73,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2629,0,0
+1679701034796,1702,Get all user chores,200,OK,Thread Group 1-14,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1702,0,0
+1679701034822,1676,Get all user chores,200,OK,Thread Group 1-23,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1676,0,0
+1679701033115,3395,Get all user chores,200,OK,Thread Group 1-83,text,true,,267,596,100,100,http://localhost:4000/api/chores/,3395,0,0
+1679701034768,1745,Get all user chores,200,OK,Thread Group 1-20,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1745,0,0
+1679701034788,1734,Edit a chore,201,Created,Thread Group 1-61,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d675a/,1734,0,0
+1679701033826,2698,Create a chore,201,Created,Thread Group 1-80,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2698,0,0
+1679701033674,2851,Create a chore,201,Created,Thread Group 1-28,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2851,0,0
+1679701033491,3036,Create a chore,201,Created,Thread Group 1-36,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3036,0,0
+1679701034679,1849,Edit a chore,201,Created,Thread Group 1-62,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6749/,1849,0,0
+1679701032936,3594,Create a chore,201,Created,Thread Group 1-58,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3594,0,0
+1679701034825,1706,Edit a chore,201,Created,Thread Group 1-5,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6710/,1706,0,0
+1679701034774,1765,Edit a chore,201,Created,Thread Group 1-78,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6762/,1765,0,0
+1679701034737,1811,Checkoff a chore,201,Created,Thread Group 1-27,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d662a/checked/,1811,0,0
+1679701035461,1090,Checkoff a chore,201,Created,Thread Group 1-29,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6611/checked/,1090,0,0
+1679701033115,3437,Get all user chores,200,OK,Thread Group 1-72,text,true,,267,596,100,100,http://localhost:4000/api/chores/,3437,0,0
+1679701034487,2067,Get all user chores,200,OK,Thread Group 1-4,text,true,,479,646,100,100,http://localhost:4000/api/chores/,2067,0,0
+1679701033809,2747,Create a chore,201,Created,Thread Group 1-63,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2747,0,0
+1679701035455,1109,Checkoff a chore,201,Created,Thread Group 1-25,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6615/checked/,1109,0,0
+1679701034823,1752,Edit a chore,201,Created,Thread Group 1-1,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66de/,1752,0,0
+1679701034790,1787,Get all user chores,200,OK,Thread Group 1-13,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1787,0,0
+1679701034490,2088,Checkoff a chore,201,Created,Thread Group 1-7,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6609/checked/,2088,0,0
+1679701034779,1801,Edit a chore,201,Created,Thread Group 1-39,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6767/,1801,0,0
+1679701034804,1782,Checkoff a chore,201,Created,Thread Group 1-10,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6620/checked/,1782,0,0
+1679701034763,1832,Edit a chore,201,Created,Thread Group 1-56,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6772/,1832,0,0
+1679701034807,1790,Checkoff a chore,201,Created,Thread Group 1-3,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6617/checked/,1790,0,0
+1679701034762,1837,Edit a chore,201,Created,Thread Group 1-75,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d676a/,1837,0,0
+1679701034805,1797,Checkoff a chore,201,Created,Thread Group 1-26,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6631/checked/,1797,0,0
+1679701033498,3106,Create a chore,201,Created,Thread Group 1-35,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3106,0,0
+1679701034764,1842,Edit a chore,201,Created,Thread Group 1-69,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6770/,1842,0,0
+1679701033460,3147,Create a chore,201,Created,Thread Group 1-38,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3147,0,0
+1679701034461,2150,Create a chore,201,Created,Thread Group 1-92,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2150,0,0
+1679701033811,2812,Create a chore,201,Created,Thread Group 1-79,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2812,0,0
+1679701035464,1167,Checkoff a chore,201,Created,Thread Group 1-11,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6628/checked/,1167,0,0
+1679701033463,3173,Create a chore,201,Created,Thread Group 1-51,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3173,0,0
+1679701032735,3905,Create a chore,201,Created,Thread Group 1-46,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3905,0,0
+1679701032922,3722,Create a chore,201,Created,Thread Group 1-44,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3722,0,0
+1679701034798,1847,Edit a chore,201,Created,Thread Group 1-41,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d675e/,1847,0,0
+1679701035577,1080,Edit a chore,201,Created,Thread Group 1-40,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d679c/,1080,0,0
+1679701035562,1096,Edit a chore,201,Created,Thread Group 1-33,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6758/,1096,0,0
+1679701034537,2164,Create a chore,201,Created,Thread Group 1-94,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2164,0,0
+1679701035566,1136,Edit a chore,201,Created,Thread Group 1-30,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66dc/,1136,0,0
+1679701034529,2174,Create a chore,201,Created,Thread Group 1-89,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2174,0,0
+1679701034546,2162,Create a chore,201,Created,Thread Group 1-97,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2162,0,0
+1679701035558,1153,Edit a chore,201,Created,Thread Group 1-32,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67c1/,1153,0,0
+1679701035546,1166,Edit a chore,201,Created,Thread Group 1-48,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67b7/,1166,0,0
+1679701035547,1166,Checkoff a chore,201,Created,Thread Group 1-9,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6633/checked/,1166,0,0
+1679701035545,1172,Checkoff a chore,201,Created,Thread Group 1-2,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d662c/checked/,1172,0,0
+1679701034613,2106,Create a chore,201,Created,Thread Group 1-67,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2106,0,0
+1679701034616,2104,Create a chore,201,Created,Thread Group 1-76,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2104,0,0
+1679701034591,2148,Create a chore,201,Created,Thread Group 1-88,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2148,0,0
+1679701035568,1208,Edit a chore,201,Created,Thread Group 1-34,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67a0/,1208,0,0
+1679701035543,1225,Checkoff a chore,201,Created,Thread Group 1-22,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d661e/checked/,1225,0,0
+1679701035740,1688,Get all user chores,200,OK,Thread Group 1-81,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1688,0,0
+1679701035689,1770,Get all user chores,200,OK,Thread Group 1-60,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1770,0,0
+1679701036493,966,Get all user chores,200,OK,Thread Group 1-96,text,true,,479,646,100,100,http://localhost:4000/api/chores/,966,0,0
+1679701035681,1778,Get all user chores,200,OK,Thread Group 1-37,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1778,0,0
+1679701036495,971,Get all user chores,200,OK,Thread Group 1-42,text,true,,479,646,100,100,http://localhost:4000/api/chores/,971,0,0
+1679701034554,2921,Create a chore,201,Created,Thread Group 1-87,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2921,0,0
+1679701034539,2939,Create a chore,201,Created,Thread Group 1-91,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2939,0,0
+1679701036499,980,Checkoff a chore,201,Created,Thread Group 1-14,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66b3/checked/,980,0,0
+1679701035671,1810,Checkoff a chore,201,Created,Thread Group 1-17,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6670/checked/,1810,0,0
+1679701035677,1806,Edit a chore,201,Created,Thread Group 1-59,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67aa/,1806,0,0
+1679701036495,991,Edit a chore,201,Created,Thread Group 1-73,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d684a/,991,0,0
+1679701036514,974,Checkoff a chore,201,Created,Thread Group 1-20,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d6697/checked/,974,0,0
+1679701035526,1963,Checkoff a chore,201,Created,Thread Group 1-16,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6624/checked/,1963,0,0
+1679701034533,2958,Create a chore,201,Created,Thread Group 1-100,text,true,,503,796,100,100,http://localhost:4000/api/chores/,2958,0,0
+1679701035709,1784,Edit a chore,201,Created,Thread Group 1-54,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d679e/,1784,0,0
+1679701035700,1795,Edit a chore,201,Created,Thread Group 1-65,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d67f0/,1795,0,0
+1679701034535,2961,Create a chore,201,Created,Thread Group 1-84,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2961,0,0
+1679701035574,1925,Edit a chore,201,Created,Thread Group 1-55,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67ad/,1925,0,0
+1679701035666,1834,Checkoff a chore,201,Created,Thread Group 1-6,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6626/checked/,1834,0,0
+1679701035693,1808,Edit a chore,201,Created,Thread Group 1-52,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67af/,1808,0,0
+1679701033609,3896,Create a chore,201,Created,Thread Group 1-53,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3896,0,0
+1679701035740,1770,Get all user chores,200,OK,Thread Group 1-70,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1770,0,0
+1679701036523,990,Get all user chores,200,OK,Thread Group 1-61,text,true,,479,646,100,100,http://localhost:4000/api/chores/,990,0,0
+1679701035676,1838,Get all user chores,200,OK,Thread Group 1-24,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1838,0,0
+1679701036596,959,Get all user chores,200,OK,Thread Group 1-56,text,true,,479,646,100,100,http://localhost:4000/api/chores/,959,0,0
+1679701036658,899,Get all user chores,200,OK,Thread Group 1-40,text,true,,479,646,100,100,http://localhost:4000/api/chores/,899,0,0
+1679701036600,959,Get all user chores,200,OK,Thread Group 1-75,text,true,,479,646,100,100,http://localhost:4000/api/chores/,959,0,0
+1679701034424,3185,Create a chore,201,Created,Thread Group 1-71,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3185,0,0
+1679701035691,1919,Edit a chore,201,Created,Thread Group 1-21,text,true,,487,764,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6812/,1919,0,0
+1679701035687,1932,Get all user chores,200,OK,Thread Group 1-49,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1932,0,0
+1679701034541,3087,Create a chore,201,Created,Thread Group 1-90,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3087,0,0
+1679701036484,1148,Get all user chores,200,OK,Thread Group 1-15,text,true,,476,646,100,100,http://localhost:4000/api/chores/,1148,0,0
+1679701035565,2071,Edit a chore,201,Created,Thread Group 1-64,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67b9/,2071,0,0
+1679701036488,1149,Edit a chore,201,Created,Thread Group 1-82,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d684c/,1149,0,0
+1679701036499,1152,Checkoff a chore,201,Created,Thread Group 1-23,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6663/checked/,1152,0,0
+1679701035685,1967,Edit a chore,201,Created,Thread Group 1-45,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6799/,1967,0,0
+1679701034499,3154,Create a chore,201,Created,Thread Group 1-99,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3154,0,0
+1679701035705,1949,Edit a chore,201,Created,Thread Group 1-31,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67b2/,1949,0,0
+1679701034547,3109,Create a chore,201,Created,Thread Group 1-95,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3109,0,0
+1679701035704,1953,Edit a chore,201,Created,Thread Group 1-57,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67a8/,1953,0,0
+1679701034589,3069,Create a chore,201,Created,Thread Group 1-98,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3069,0,0
+1679701036477,1182,Edit a chore,201,Created,Thread Group 1-50,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6793/,1182,0,0
+1679701034611,3051,Create a chore,201,Created,Thread Group 1-85,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3051,0,0
+1679701036449,1216,Checkoff a chore,201,Created,Thread Group 1-8,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66bd/checked/,1216,0,0
+1679701036581,1122,Get all user chores,200,OK,Thread Group 1-39,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1122,0,0
+1679701034753,2951,Get all user chores,200,OK,Thread Group 1-12,text,true,,479,646,100,100,http://localhost:4000/api/chores/,2951,0,0
+1679701036473,1232,Edit a chore,201,Created,Thread Group 1-66,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6869/,1232,0,0
+1679701034427,3283,Create a chore,201,Created,Thread Group 1-86,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3283,0,0
+1679701036486,1226,Edit a chore,201,Created,Thread Group 1-77,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6819/,1226,0,0
+1679701036609,1112,Edit a chore,201,Created,Thread Group 1-38,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6791/,1112,0,0
+1679701035740,1981,Delete chore,200,OK,Thread Group 1-47,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6622/,1981,0,0
+1679701036607,1117,Get all user chores,200,OK,Thread Group 1-69,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1117,0,0
+1679701036541,1185,Get all user chores,200,OK,Thread Group 1-78,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1185,0,0
+1679701036557,1170,Edit a chore,201,Created,Thread Group 1-63,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d684f/,1170,0,0
+1679701036556,1172,Checkoff a chore,201,Created,Thread Group 1-4,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d665e/checked/,1172,0,0
+1679701036613,1116,Edit a chore,201,Created,Thread Group 1-92,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d686d/,1116,0,0
+1679701036624,1106,Edit a chore,201,Created,Thread Group 1-79,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6844/,1106,0,0
+1679701036659,1072,Get all user chores,200,OK,Thread Group 1-33,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1072,0,0
+1679701035707,2025,Delete chore,200,OK,Thread Group 1-18,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6613/,2025,0,0
+1679701035703,2032,Delete chore,200,OK,Thread Group 1-19,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d661a/,2032,0,0
+1679701036533,1205,Get all user chores,200,OK,Thread Group 1-5,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1205,0,0
+1679701036646,1093,Get all user chores,200,OK,Thread Group 1-41,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1093,0,0
+1679701036645,1096,Edit a chore,201,Created,Thread Group 1-44,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67a3/,1096,0,0
+1679701036525,1218,Edit a chore,201,Created,Thread Group 1-80,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6847/,1218,0,0
+1679701036528,1219,Edit a chore,201,Created,Thread Group 1-36,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d683e/,1219,0,0
+1679701036532,1218,Edit a chore,201,Created,Thread Group 1-58,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67a6/,1218,0,0
+1679701036638,1113,Edit a chore,201,Created,Thread Group 1-51,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6795/,1113,0,0
+1679701036527,1226,Edit a chore,201,Created,Thread Group 1-28,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d683a/,1226,0,0
+1679701036579,1177,Checkoff a chore,201,Created,Thread Group 1-13,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66a9/checked/,1177,0,0
+1679701036703,1732,Get all user chores,200,OK,Thread Group 1-30,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1732,0,0
+1679701036713,1740,Get all user chores,200,OK,Thread Group 1-48,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1740,0,0
+1679701036801,1663,Get all user chores,200,OK,Thread Group 1-34,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1663,0,0
+1679701037487,1001,Get all user chores,200,OK,Thread Group 1-73,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1001,0,0
+1679701037461,1044,Checkoff a chore,201,Created,Thread Group 1-60,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6746/checked/,1044,0,0
+1679701036606,1902,Edit a chore,201,Created,Thread Group 1-35,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6814/,1902,0,0
+1679701037480,1029,Edit a chore,201,Created,Thread Group 1-91,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68d7/,1029,0,0
+1679701036741,1770,Edit a chore,201,Created,Thread Group 1-88,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68a4/,1770,0,0
+1679701036702,1810,Edit a chore,201,Created,Thread Group 1-94,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68a1/,1810,0,0
+1679701037637,911,Get all user chores,200,OK,Thread Group 1-64,text,true,,479,646,100,100,http://localhost:4000/api/chores/,911,0,0
+1679701037654,896,Edit a chore,201,Created,Thread Group 1-99,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68d9/,896,0,0
+1679701037655,896,Get all user chores,200,OK,Thread Group 1-31,text,true,,479,646,100,100,http://localhost:4000/api/chores/,896,0,0
+1679701037557,996,Checkoff a chore,201,Created,Thread Group 1-40,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d679c/checked/,996,0,0
+1679701037498,1057,Edit a chore,201,Created,Thread Group 1-84,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d688e/,1057,0,0
+1679701037653,904,Get all user chores,200,OK,Thread Group 1-45,text,true,,479,646,100,100,http://localhost:4000/api/chores/,904,0,0
+1679701037488,1071,Delete chore,200,OK,Thread Group 1-20,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d6697/,1071,0,0
+1679701036801,1760,Delete chore,200,OK,Thread Group 1-22,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d661e/,1760,0,0
+1679701037611,953,Get all user chores,200,OK,Thread Group 1-21,text,true,,476,646,100,100,http://localhost:4000/api/chores/,953,0,0
+1679701037722,844,Get all user chores,304,Not Modified,Thread Group 1-47,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701036721,1847,Edit a chore,201,Created,Thread Group 1-67,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d6895/,1847,0,0
+1679701036642,1927,Edit a chore,201,Created,Thread Group 1-46,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6797/,1927,0,0
+1679701034755,3814,Edit a chore,201,Created,Thread Group 1-43,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d676c/,3814,0,0
+1679701036710,1861,Edit a chore,201,Created,Thread Group 1-97,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d6898/,1861,0,0
+1679701036530,2044,Get all user chores,200,OK,Thread Group 1-62,text,true,,479,646,100,100,http://localhost:4000/api/chores/,2044,0,0
+1679701036576,1999,Get all user chores,200,OK,Thread Group 1-1,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1999,0,0
+1679701036712,1866,Get all user chores,200,OK,Thread Group 1-32,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1866,0,0
+1679701037484,1098,Get all user chores,200,OK,Thread Group 1-59,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1098,0,0
+1679701036721,1862,Edit a chore,201,Created,Thread Group 1-76,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d6891/,1862,0,0
+1679701037468,1117,Checkoff a chore,201,Created,Thread Group 1-42,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6764/checked/,1117,0,0
+1679701036704,1885,Edit a chore,201,Created,Thread Group 1-89,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d689d/,1885,0,0
+1679701037460,1130,Checkoff a chore,201,Created,Thread Group 1-37,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d674e/checked/,1130,0,0
+1679701034594,3996,Create a chore,201,Created,Thread Group 1-93,text,true,,500,793,100,100,http://localhost:4000/api/chores/,3996,0,0
+1679701037492,1101,Edit a chore,201,Created,Thread Group 1-100,text,true,,493,770,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d689b/,1101,0,0
+1679701037477,1120,Edit a chore,201,Created,Thread Group 1-87,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68e4/,1120,0,0
+1679701037429,1171,Checkoff a chore,201,Created,Thread Group 1-81,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6744/checked/,1171,0,0
+1679701036510,2094,Create a chore,201,Created,Thread Group 1-83,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2094,0,0
+1679701037460,1146,Checkoff a chore,201,Created,Thread Group 1-96,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d676e/checked/,1146,0,0
+1679701037713,895,Get all user chores,200,OK,Thread Group 1-77,text,true,,479,646,100,100,http://localhost:4000/api/chores/,895,0,0
+1679701036604,2014,Delete chore,200,OK,Thread Group 1-26,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6631/,2014,0,0
+1679701037657,962,Edit a chore,201,Created,Thread Group 1-95,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68cb/,962,0,0
+1679701037658,963,Get all user chores,200,OK,Thread Group 1-57,text,true,,479,646,100,100,http://localhost:4000/api/chores/,963,0,0
+1679701037661,962,Get all user chores,200,OK,Thread Group 1-50,text,true,,479,646,100,100,http://localhost:4000/api/chores/,962,0,0
+1679701036587,2037,Delete chore,200,OK,Thread Group 1-10,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6620/,2037,0,0
+1679701037481,1144,Delete chore,200,OK,Thread Group 1-14,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66b3/,1144,0,0
+1679701037712,914,Edit a chore,201,Created,Thread Group 1-86,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6837/,914,0,0
+1679701037705,922,Checkoff a chore,201,Created,Thread Group 1-12,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6672/checked/,922,0,0
+1679701037638,1021,Get all user chores,200,OK,Thread Group 1-82,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1021,0,0
+1679701036714,1946,Delete chore,200,OK,Thread Group 1-9,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6633/,1946,0,0
+1679701036549,2113,Delete chore,200,OK,Thread Group 1-27,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d662a/,2112,0,0
+1679701037659,1004,Edit a chore,201,Created,Thread Group 1-98,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68df/,1004,0,0
+1679701036632,2032,Delete chore,200,OK,Thread Group 1-11,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6628/,2032,0,0
+1679701037560,1111,Checkoff a chore,201,Created,Thread Group 1-75,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d676a/checked/,1111,0,0
+1679701037707,975,Get all user chores,200,OK,Thread Group 1-66,text,true,,479,646,100,100,http://localhost:4000/api/chores/,975,0,0
+1679701034579,4103,Create a chore,201,Created,Thread Group 1-68,text,true,,500,793,100,100,http://localhost:4000/api/chores/,4103,0,0
+1679701037496,1190,Get all user chores,200,OK,Thread Group 1-65,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1190,0,0
+1679701037663,1026,Edit a chore,201,Created,Thread Group 1-85,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68e2/,1026,0,0
+1679701037512,1183,Checkoff a chore,201,Created,Thread Group 1-70,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6751/checked/,1183,0,0
+1679701037633,1063,Checkoff a chore,201,Created,Thread Group 1-15,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d670b/checked/,1063,0,0
+1679701036719,1988,Delete chore,200,OK,Thread Group 1-2,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d662c/,1988,0,0
+1679701036580,2131,Delete chore,200,OK,Thread Group 1-7,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6609/,2131,0,0
+1679701037513,1216,Checkoff a chore,201,Created,Thread Group 1-61,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d675a/checked/,1216,0,0
+1679701037483,1247,Delete chore,200,OK,Thread Group 1-17,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6670/,1247,0,0
+1679701037621,1110,Checkoff a chore,201,Created,Thread Group 1-49,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6706/checked/,1110,0,0
+1679701037490,1241,Delete chore,200,OK,Thread Group 1-16,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6624/,1241,0,0
+1679701037752,1681,Get all user chores,200,OK,Thread Group 1-51,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1681,0,0
+1679701037753,1690,Get all user chores,200,OK,Thread Group 1-28,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1690,0,0
+1679701037730,1717,Get all user chores,200,OK,Thread Group 1-79,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1717,0,0
+1679701037743,1708,Get all user chores,200,OK,Thread Group 1-80,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1708,0,0
+1679701037736,1719,Get all user chores,304,Not Modified,Thread Group 1-19,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701037733,1733,Get all user chores,304,Not Modified,Thread Group 1-18,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701037750,1720,Get all user chores,200,OK,Thread Group 1-58,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1720,0,0
+1679701037727,1744,Get all user chores,200,OK,Thread Group 1-63,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1744,0,0
+1679701037747,1726,Get all user chores,200,OK,Thread Group 1-36,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1726,0,0
+1679701037741,1759,Get all user chores,200,OK,Thread Group 1-44,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1759,0,0
+1679701037494,2015,Get all user chores,200,OK,Thread Group 1-54,text,true,,479,646,100,100,http://localhost:4000/api/chores/,2015,0,0
+1679701037503,2007,Get all user chores,200,OK,Thread Group 1-52,text,true,,479,646,100,100,http://localhost:4000/api/chores/,2007,0,0
+1679701037729,1783,Get all user chores,200,OK,Thread Group 1-92,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1783,0,0
+1679701037721,1796,Get all user chores,200,OK,Thread Group 1-38,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1796,0,0
+1679701037500,2020,Get all user chores,200,OK,Thread Group 1-55,text,true,,479,646,100,100,http://localhost:4000/api/chores/,2020,0,0
+1679701038435,1097,Checkoff a chore,201,Created,Thread Group 1-30,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66dc/checked/,1097,0,0
+1679701037726,1807,Checkoff a chore,201,Created,Thread Group 1-78,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6762/checked/,1807,0,0
+1679701037732,1802,Checkoff a chore,201,Created,Thread Group 1-33,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6758/checked/,1802,0,0
+1679701037727,1812,Checkoff a chore,201,Created,Thread Group 1-69,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6770/checked/,1812,0,0
+1679701037740,1803,Checkoff a chore,201,Created,Thread Group 1-41,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d675e/checked/,1803,0,0
+1679701037556,1988,Checkoff a chore,201,Created,Thread Group 1-56,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6772/checked/,1988,0,0
+1679701037515,2032,Checkoff a chore,201,Created,Thread Group 1-24,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6709/checked/,2032,0,0
+1679701037738,1810,Checkoff a chore,201,Created,Thread Group 1-5,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6710/checked/,1810,0,0
+1679701036552,2998,Delete chore,200,OK,Thread Group 1-29,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6611/,2998,0,0
+1679701036553,2997,Create a chore,201,Created,Thread Group 1-72,text,true,,500,793,100,100,http://localhost:4000/api/chores/,2997,0,0
+1679701037507,2044,Edit a chore,201,Created,Thread Group 1-53,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6842/,2044,0,0
+1679701038566,1012,Turn on notifications,201,Created,Thread Group 1-47,text,true,,384,642,100,100,http://localhost:4000/api/user/notifs,1012,0,0
+1679701038568,1028,Get all user chores,200,OK,Thread Group 1-67,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1028,0,0
+1679701038621,977,Checkoff a chore,201,Created,Thread Group 1-57,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67a8/checked/,977,0,0
+1679701038508,1092,Get all user chores,200,OK,Thread Group 1-35,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1092,0,0
+1679701038555,1047,Get all user chores,200,OK,Thread Group 1-84,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1047,0,0
+1679701038575,1028,Checkoff a chore,201,Created,Thread Group 1-1,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66de/checked/,1028,0,0
+1679701037666,1938,Delete chore,200,OK,Thread Group 1-8,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34285e6a750df21d66bd/,1938,0,0
+1679701038571,1035,Get all user chores,200,OK,Thread Group 1-97,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1035,0,0
+1679701038569,1038,Get all user chores,200,OK,Thread Group 1-46,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1038,0,0
+1679701038454,1158,Checkoff a chore,201,Created,Thread Group 1-48,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67b7/checked/,1158,0,0
+1679701037704,1911,Checkoff a chore,201,Created,Thread Group 1-39,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6767/checked/,1911,0,0
+1679701036598,3020,Delete chore,200,OK,Thread Group 1-3,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6617/,3020,0,0
+1679701037610,2010,Edit a chore,201,Created,Thread Group 1-71,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6863/,2010,0,0
+1679701037630,1991,Edit a chore,201,Created,Thread Group 1-90,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342b5e6a750df21d68d1/,1991,0,0
+1679701038464,1158,Checkoff a chore,201,Created,Thread Group 1-34,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67a0/checked/,1158,0,0
+1679701034553,5070,Create a chore,201,Created,Thread Group 1-74,text,true,,500,793,100,100,http://localhost:4000/api/chores/,5070,0,0
+1679701038574,1073,Checkoff a chore,201,Created,Thread Group 1-62,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6749/checked/,1073,0,0
+1679701038548,1100,Checkoff a chore,201,Created,Thread Group 1-64,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67b9/checked/,1100,0,0
+1679701038570,1080,Get all user chores,200,OK,Thread Group 1-43,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1080,0,0
+1679701038552,1099,Checkoff a chore,201,Created,Thread Group 1-31,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67b2/checked/,1099,0,0
+1679701038605,1048,Edit a chore,201,Created,Thread Group 1-83,text,true,,490,767,100,100,http://localhost:4000/api/chores/641e342c5e6a750df21d6990/,1048,0,0
+1679701038558,1096,Checkoff a chore,201,Created,Thread Group 1-45,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d6799/checked/,1096,0,0
+1679701037652,2013,Delete chore,200,OK,Thread Group 1-23,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d6663/,2013,0,0
+1679701039455,234,Turn on notifications,201,Created,Thread Group 1-19,text,true,,383,642,100,100,http://localhost:4000/api/user/notifs,234,0,0
+1679701039466,234,Turn on notifications,201,Created,Thread Group 1-18,text,true,,384,642,100,100,http://localhost:4000/api/user/notifs,233,0,0
+1679701038511,1224,Get all user chores,200,OK,Thread Group 1-88,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1224,0,0
+1679701038512,1224,Get all user chores,200,OK,Thread Group 1-94,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1224,0,0
+1679701038660,1077,Get all user chores,304,Not Modified,Thread Group 1-9,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701038584,1161,Get all user chores,200,OK,Thread Group 1-76,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1161,0,0
+1679701038582,1172,Checkoff a chore,201,Created,Thread Group 1-59,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67aa/checked/,1172,0,0
+1679701038626,1130,Get all user chores,304,Not Modified,Thread Group 1-14,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701038578,1178,Checkoff a chore,201,Created,Thread Group 1-32,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e34295e6a750df21d67c1/checked/,1178,0,0
+1679701038620,1137,Get all user chores,200,OK,Thread Group 1-95,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1137,0,0
+1679701038625,1133,Get all user chores,304,Not Modified,Thread Group 1-10,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701038608,1154,Checkoff a chore,201,Created,Thread Group 1-77,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d6819/checked/,1154,0,0
+1679701038559,1204,Get all user chores,304,Not Modified,Thread Group 1-20,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701038488,1279,Checkoff a chore,201,Created,Thread Group 1-73,text,true,,317,650,100,100,http://localhost:4000/api/chores/641e342a5e6a750df21d684a/checked/,1279,0,0
+1679701037728,2043,Delete chore,200,OK,Thread Group 1-4,text,true,,341,643,100,100,http://localhost:4000/api/chores/641e34275e6a750df21d665e/,2043,0,0
+1679701038550,1883,Get all user chores,200,OK,Thread Group 1-99,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1883,0,0
+1679701038627,1810,Get all user chores,200,OK,Thread Group 1-86,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1810,0,0
+1679701038663,1775,Get all user chores,200,OK,Thread Group 1-98,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1775,0,0
+1679701038618,1828,Get all user chores,304,Not Modified,Thread Group 1-26,,true,,209,646,100,100,http://localhost:4000/api/chores/,0,0,0
+1679701038690,1759,Get all user chores,200,OK,Thread Group 1-85,text,true,,479,646,100,100,http://localhost:4000/api/chores/,1759,0,0
+1679701039578,880,Turn off notifications,201,Created,Thread Group 1-47,text,true,,385,643,100,100,http://localhost:4000/api/user/notifs,880,0,0
+1679701038597,1878,Get all user chores,200,OK,Thread Group 1-87,text,true,,479,646,99,99,http://localhost:4000/api/chores/,1878,0,0
+1679701038664,1815,Get all user chores,304,Not Modified,Thread Group 1-11,,true,,209,646,99,99,http://localhost:4000/api/chores/,0,0,0
+1679701038732,1756,Get all user chores,304,Not Modified,Thread Group 1-16,,true,,209,646,99,99,http://localhost:4000/api/chores/,0,0,0
+1679701038593,1897,Get all user chores,200,OK,Thread Group 1-100,text,true,,482,646,99,99,http://localhost:4000/api/chores/,1897,0,0
+1679701038730,1768,Get all user chores,304,Not Modified,Thread Group 1-17,,true,,209,646,99,99,http://localhost:4000/api/chores/,0,0,0
+1679701038562,1949,Get all user chores,304,Not Modified,Thread Group 1-22,,true,,209,646,99,99,http://localhost:4000/api/chores/,0,0,0
+1679701037756,2778,Delete chore,200,OK,Thread Group 1-13,text,true,,341,643,99,99,http://localhost:4000/api/chores/641e34285e6a750df21d66a9/,2778,0,0
+1679701037501,3038,Delete chore,200,OK,Thread Group 1-6,text,true,,341,643,99,99,http://localhost:4000/api/chores/641e34275e6a750df21d6626/,3038,0,0
+1679701038564,1979,Checkoff a chore,201,Created,Thread Group 1-21,text,true,,317,650,99,99,http://localhost:4000/api/chores/641e342a5e6a750df21d6812/checked/,1979,0,0
+1679701038682,1864,Checkoff a chore,201,Created,Thread Group 1-66,text,true,,317,650,99,99,http://localhost:4000/api/chores/641e342a5e6a750df21d6869/checked/,1864,0,0
+1679701038590,1959,Delete chore,200,OK,Thread Group 1-37,text,true,,341,643,99,99,http://localhost:4000/api/chores/641e34295e6a750df21d674e/,1959,0,0
+1679701039443,1109,Checkoff a chore,201,Created,Thread Group 1-28,text,true,,317,650,99,99,http://localhost:4000/api/chores/641e342a5e6a750df21d683a/checked/,1109,0,0
+1679701038628,1930,Delete chore,200,OK,Thread Group 1-12,text,true,,341,643,99,99,http://localhost:4000/api/chores/641e34275e6a750df21d6672/,1930,0,0
+1679701039470,1092,Checkoff a chore,201,Created,Thread Group 1-58,text,true,,317,650,99,99,http://localhost:4000/api/chores/641e34295e6a750df21d67a6/checked/,1092,0,0
+1679701039473,1095,Checkoff a chore,201,Created,Thread Group 1-36,text,true,,317,650,99,99,http://localhost:4000/api/chores/641e342a5e6a750df21d683e/checked/,1095,0,0
+1679701038708,1863,Get all user chores,304,Not Modified,Thread Group 1-2,,true,,209,646,99,99,http://localhost:4000/api/chores/,0,0,0
+1679701038510,2062,Get all user chores,200,OK,Thread Group 1-91,text,true,,479,646,99,99,http://localhost:4000/api/chores/,2062,0,0
+1679701038711,1864,Get all user chores,304,Not Modified,Thread Group 1-7,,true,,209,646,99,99,http://localhost:4000/api/chores/,0,0,0
+1679701038686,1890,Checkoff a chore,201,Created,Thread Group 1-65,text,true,,317,650,99,99,http://localhost:4000/api/chores/641e342a5e6a750df21d67f0/checked/,1890,0,0
+1679701038589,1996,Get all user chores,200,OK,Thread Group 1-89,text,true,,479,646,99,99,http://localhost:4000/api/chores/,1996,0,0
+1679701039689,915,Turn off notifications,201,Created,Thread Group 1-19,text,true,,384,643,99,99,http://localhost:4000/api/user/notifs,915,0,0
+1679701039737,875,Turn on notifications,201,Created,Thread Group 1-9,text,true,,383,642,98,98,http://localhost:4000/api/user/notifs,875,0,0
+1679701039756,875,Turn on notifications,201,Created,Thread Group 1-14,text,true,,385,642,98,98,http://localhost:4000/api/user/notifs,875,0,0
+1679701039759,879,Turn on notifications,201,Created,Thread Group 1-10,text,true,,383,642,98,98,http://localhost:4000/api/user/notifs,879,0,0
+1679701039517,1123,Checkoff a chore,201,Created,Thread Group 1-38,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d6791/checked/,1123,0,0
+1679701038731,1910,Delete chore,200,OK,Thread Group 1-49,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d6706/,1910,0,0
+1679701039603,1040,Checkoff a chore,201,Created,Thread Group 1-84,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342b5e6a750df21d688e/checked/,1040,0,0
+1679701039600,1044,Checkoff a chore,201,Created,Thread Group 1-35,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342a5e6a750df21d6814/checked/,1044,0,0
+1679701039619,1026,Get all user chores,304,Not Modified,Thread Group 1-3,,true,,209,646,98,98,http://localhost:4000/api/chores/,0,0,0
+1679701039606,1041,Checkoff a chore,201,Created,Thread Group 1-97,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342b5e6a750df21d6898/checked/,1041,0,0
+1679701039510,1138,Checkoff a chore,201,Created,Thread Group 1-52,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d67af/checked/,1138,0,0
+1679701039596,1053,Checkoff a chore,201,Created,Thread Group 1-67,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342b5e6a750df21d6895/checked/,1053,0,0
+1679701038607,2044,Delete chore,200,OK,Thread Group 1-96,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d676e/,2044,0,0
+1679701039605,1050,Get all user chores,304,Not Modified,Thread Group 1-8,,true,,209,646,98,98,http://localhost:4000/api/chores/,0,0,0
+1679701039620,1039,Get all user chores,200,OK,Thread Group 1-71,text,true,,479,646,98,98,http://localhost:4000/api/chores/,1039,0,0
+1679701038591,2072,Edit a chore,201,Created,Thread Group 1-93,text,true,,490,767,98,98,http://localhost:4000/api/chores/641e342b5e6a750df21d68db/,2072,0,0
+1679701038659,2006,Checkoff a chore,201,Created,Thread Group 1-82,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342a5e6a750df21d684c/checked/,2006,0,0
+1679701038624,2044,Checkoff a chore,201,Created,Thread Group 1-50,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d6793/checked/,2044,0,0
+1679701039452,1217,Checkoff a chore,201,Created,Thread Group 1-80,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342a5e6a750df21d6847/checked/,1217,0,0
+1679701039434,1237,Checkoff a chore,201,Created,Thread Group 1-51,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d6795/checked/,1237,0,0
+1679701039448,1224,Checkoff a chore,201,Created,Thread Group 1-79,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342a5e6a750df21d6844/checked/,1224,0,0
+1679701038601,2083,Delete chore,200,OK,Thread Group 1-81,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d6744/,2083,0,0
+1679701039472,1218,Checkoff a chore,201,Created,Thread Group 1-63,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342a5e6a750df21d684f/checked/,1218,0,0
+1679701038683,2009,Edit a chore,201,Created,Thread Group 1-68,text,true,,490,767,98,98,http://localhost:4000/api/chores/641e342b5e6a750df21d68bb/,2009,0,0
+1679701038553,2149,Delete chore,200,OK,Thread Group 1-40,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d679c/,2149,0,0
+1679701036566,4141,Delete chore,200,OK,Thread Group 1-25,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34275e6a750df21d6615/,4141,0,0
+1679701039624,1084,Edit a chore,201,Created,Thread Group 1-74,text,true,,490,767,98,98,http://localhost:4000/api/chores/641e342b5e6a750df21d68d5/,1084,0,0
+1679701039520,1191,Checkoff a chore,201,Created,Thread Group 1-55,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d67ad/checked/,1191,0,0
+1679701039512,1200,Checkoff a chore,201,Created,Thread Group 1-92,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e342a5e6a750df21d686d/checked/,1200,0,0
+1679701038729,1986,Delete chore,200,OK,Thread Group 1-61,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d675a/,1986,0,0
+1679701039650,1066,Checkoff a chore,201,Created,Thread Group 1-43,text,true,,317,650,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d676c/checked/,1066,0,0
+1679701038695,2022,Delete chore,200,OK,Thread Group 1-70,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d6751/,2022,0,0
+1679701038672,2048,Delete chore,200,OK,Thread Group 1-75,text,true,,341,643,98,98,http://localhost:4000/api/chores/641e34295e6a750df21d676a/,2048,0,0
+1679701039550,1178,Edit a chore,201,Created,Thread Group 1-72,text,true,,490,767,98,98,http://localhost:4000/api/chores/641e342d5e6a750df21d69c0/,1178,0,0
+1679701040480,270,Turn on notifications,201,Created,Thread Group 1-11,text,true,,383,642,98,98,http://localhost:4000/api/user/notifs,270,0,0
+1679701040488,270,Turn on notifications,201,Created,Thread Group 1-16,text,true,,383,642,98,98,http://localhost:4000/api/user/notifs,270,0,0
+1679701040499,277,Turn on notifications,201,Created,Thread Group 1-17,text,true,,384,642,98,98,http://localhost:4000/api/user/notifs,277,0,0
+1679701039764,1015,Turn on notifications,201,Created,Thread Group 1-20,text,true,,384,642,98,98,http://localhost:4000/api/user/notifs,1015,0,0
+1679701040446,349,Turn on notifications,201,Created,Thread Group 1-26,text,true,,384,642,98,98,http://localhost:4000/api/user/notifs,349,0,0
+1679701040632,817,Turn off notifications,201,Created,Thread Group 1-14,text,true,,386,643,98,98,http://localhost:4000/api/user/notifs,817,0,0
+1679701039552,1904,Get all user chores,200,OK,Thread Group 1-53,text,true,,479,646,97,97,http://localhost:4000/api/chores/,1904,0,0
+1679701039772,1692,Get all user chores,304,Not Modified,Thread Group 1-4,,true,,209,646,97,97,http://localhost:4000/api/chores/,0,0,0
+1679701039550,1931,Get all user chores,304,Not Modified,Thread Group 1-29,,true,,209,646,97,97,http://localhost:4000/api/chores/,0,0,0
+1679701039621,1866,Get all user chores,200,OK,Thread Group 1-90,text,true,,479,646,97,97,http://localhost:4000/api/chores/,1866,0,0
+1679701040571,920,Turn on notifications,201,Created,Thread Group 1-2,text,true,,384,642,97,97,http://localhost:4000/api/user/notifs,920,0,0
+1679701040638,859,Turn off notifications,201,Created,Thread Group 1-10,text,true,,384,643,97,97,http://localhost:4000/api/user/notifs,859,0,0
+1679701040576,939,Turn on notifications,201,Created,Thread Group 1-7,text,true,,384,642,96,96,http://localhost:4000/api/user/notifs,939,0,0
+1679701039665,1865,Get all user chores,304,Not Modified,Thread Group 1-23,,true,,209,646,96,96,http://localhost:4000/api/chores/,0,0,0
+1679701039545,1992,Delete chore,200,OK,Thread Group 1-56,text,true,,341,643,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d6772/,1992,0,0
+1679701039548,1989,Delete chore,200,OK,Thread Group 1-5,text,true,,341,643,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d6710/,1989,0,0
+1679701039533,2009,Delete chore,200,OK,Thread Group 1-78,text,true,,341,643,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d6762/,2009,0,0
+1679701038697,2851,Delete chore,200,OK,Thread Group 1-15,text,true,,341,643,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d670b/,2851,0,0
+1679701040433,1120,Checkoff a chore,201,Created,Thread Group 1-99,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e342b5e6a750df21d68d9/checked/,1120,0,0
+1679701040490,1065,Checkoff a chore,201,Created,Thread Group 1-100,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e342b5e6a750df21d689b/checked/,1065,0,0
+1679701040450,1107,Checkoff a chore,201,Created,Thread Group 1-85,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e342b5e6a750df21d68e2/checked/,1107,0,0
+1679701039615,1948,Delete chore,200,OK,Thread Group 1-39,text,true,,341,643,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d6767/,1948,0,0
+1679701039509,2055,Checkoff a chore,201,Created,Thread Group 1-54,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d679e/checked/,2055,0,0
+1679701040438,1128,Checkoff a chore,201,Created,Thread Group 1-86,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e342a5e6a750df21d6837/checked/,1127,0,0
+1679701039735,1832,Checkoff a chore,201,Created,Thread Group 1-88,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e342b5e6a750df21d68a4/checked/,1832,0,0
+1679701039737,1841,Checkoff a chore,201,Created,Thread Group 1-94,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e342b5e6a750df21d68a1/checked/,1841,0,0
+1679701039607,1973,Checkoff a chore,201,Created,Thread Group 1-46,text,true,,317,650,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d6797/checked/,1973,0,0
+1679701039540,2042,Delete chore,200,OK,Thread Group 1-69,text,true,,341,643,96,96,http://localhost:4000/api/chores/641e34295e6a750df21d6770/,2042,0,0
+1679701039653,1934,Get all user chores,200,OK,Thread Group 1-83,text,true,,479,646,96,96,http://localhost:4000/api/chores/,1934,0,0
+1679701040655,942,Turn on notifications,201,Created,Thread Group 1-8,text,true,,384,642,96,96,http://localhost:4000/api/user/notifs,942,0,0
+1679701040612,988,Turn off notifications,201,Created,Thread Group 1-9,text,true,,384,643,96,96,http://localhost:4000/api/user/notifs,988,0,0
+1679701040512,1095,Turn on notifications,201,Created,Thread Group 1-22,text,true,,384,642,95,95,http://localhost:4000/api/user/notifs,1095,0,0
+1679701040646,987,Turn on notifications,201,Created,Thread Group 1-3,text,true,,384,642,95,95,http://localhost:4000/api/user/notifs,987,0,0
+1679701039654,1983,Delete chore,200,OK,Thread Group 1-45,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d6799/,1983,0,0
+1679701039598,2039,Delete chore,200,OK,Thread Group 1-57,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67a8/,2039,0,0
+1679701039534,2104,Delete chore,200,OK,Thread Group 1-33,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d6758/,2104,0,0
+1679701040540,1102,Get all user chores,304,Not Modified,Thread Group 1-6,,true,,209,646,95,95,http://localhost:4000/api/chores/,0,0,0
+1679701040585,1061,Checkoff a chore,201,Created,Thread Group 1-89,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e342b5e6a750df21d689d/checked/,1061,0,0
+1679701039612,2035,Delete chore,200,OK,Thread Group 1-48,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67b7/,2035,0,0
+1679701040641,1007,Get all user chores,304,Not Modified,Thread Group 1-49,,true,,209,646,95,95,http://localhost:4000/api/chores/,0,0,0
+1679701039547,2102,Delete chore,200,OK,Thread Group 1-24,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d6709/,2102,0,0
+1679701039754,1896,Delete chore,200,OK,Thread Group 1-59,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67aa/,1896,0,0
+1679701039756,1896,Delete chore,200,OK,Thread Group 1-32,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67c1/,1896,0,0
+1679701039648,2006,Delete chore,200,OK,Thread Group 1-62,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d6749/,2006,0,0
+1679701040549,1106,Get all user chores,304,Not Modified,Thread Group 1-37,,true,,209,646,95,95,http://localhost:4000/api/chores/,0,0,0
+1679701039622,2034,Delete chore,200,OK,Thread Group 1-34,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67a0/,2034,0,0
+1679701040659,998,Checkoff a chore,201,Created,Thread Group 1-71,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e342a5e6a750df21d6863/checked/,998,0,0
+1679701039651,2015,Delete chore,200,OK,Thread Group 1-31,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67b2/,2015,0,0
+1679701039649,2021,Delete chore,200,OK,Thread Group 1-64,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67b9/,2021,0,0
+1679701040535,1140,Get all user chores,304,Not Modified,Thread Group 1-13,,true,,209,646,95,95,http://localhost:4000/api/chores/,0,0,0
+1679701040652,1024,Get all user chores,304,Not Modified,Thread Group 1-96,,true,,209,646,95,95,http://localhost:4000/api/chores/,0,0,0
+1679701039501,2185,Checkoff a chore,201,Created,Thread Group 1-44,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d67a3/checked/,2185,0,0
+1679701039758,1929,Checkoff a chore,201,Created,Thread Group 1-95,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e342b5e6a750df21d68cb/checked/,1929,0,0
+1679701038505,3185,Delete chore,200,OK,Thread Group 1-60,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d6746/,3185,0,0
+1679701040475,1216,Checkoff a chore,201,Created,Thread Group 1-87,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e342b5e6a750df21d68e4/checked/,1216,0,0
+1679701040439,1256,Checkoff a chore,201,Created,Thread Group 1-98,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e342b5e6a750df21d68df/checked/,1256,0,0
+1679701039604,2092,Delete chore,200,OK,Thread Group 1-1,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34285e6a750df21d66de/,2092,0,0
+1679701039745,1962,Checkoff a chore,201,Created,Thread Group 1-76,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e342b5e6a750df21d6891/checked/,1962,0,0
+1679701038585,3123,Delete chore,200,OK,Thread Group 1-42,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e34295e6a750df21d6764/,3123,0,0
+1679701040663,1049,Get all user chores,200,OK,Thread Group 1-93,text,true,,479,646,95,95,http://localhost:4000/api/chores/,1049,0,0
+1679701040573,1148,Checkoff a chore,201,Created,Thread Group 1-91,text,true,,317,650,95,95,http://localhost:4000/api/chores/641e342b5e6a750df21d68d7/checked/,1148,0,0
+1679701039762,1966,Delete chore,200,OK,Thread Group 1-77,text,true,,341,643,95,95,http://localhost:4000/api/chores/641e342a5e6a750df21d6819/,1966,0,0
+1679701041465,292,Turn on notifications,201,Created,Thread Group 1-4,text,true,,384,642,95,95,http://localhost:4000/api/user/notifs,292,0,0
+1679701041482,285,Turn on notifications,201,Created,Thread Group 1-29,text,true,,384,642,95,95,http://localhost:4000/api/user/notifs,285,0,0
+1679701040796,981,Turn off notifications,201,Created,Thread Group 1-26,text,true,,385,643,95,95,http://localhost:4000/api/user/notifs,981,0,0
+1679701040776,1003,Turn off notifications,201,Created,Thread Group 1-17,text,true,,385,643,94,94,http://localhost:4000/api/user/notifs,1003,0,0
+1679701040758,1026,Turn off notifications,201,Created,Thread Group 1-16,text,true,,384,643,93,93,http://localhost:4000/api/user/notifs,1026,0,0
+1679701040780,1016,Turn off notifications,201,Created,Thread Group 1-20,text,true,,385,643,92,92,http://localhost:4000/api/user/notifs,1016,0,0
+1679701040750,1049,Turn off notifications,201,Created,Thread Group 1-11,text,true,,384,643,91,91,http://localhost:4000/api/user/notifs,1049,0,0
+1679701041491,408,Turn off notifications,201,Created,Thread Group 1-2,text,true,,385,643,90,90,http://localhost:4000/api/user/notifs,408,0,0
+1679701040708,1728,Get all user chores,200,OK,Thread Group 1-74,text,true,,479,646,89,89,http://localhost:4000/api/chores/,1728,0,0
+1679701040717,1722,Get all user chores,304,Not Modified,Thread Group 1-70,,true,,209,646,89,89,http://localhost:4000/api/chores/,0,0,0
+1679701040702,1727,Get all user chores,304,Not Modified,Thread Group 1-40,,true,,209,646,89,89,http://localhost:4000/api/chores/,0,0,0
+1679701041632,813,Turn off notifications,201,Created,Thread Group 1-3,text,true,,385,643,89,89,http://localhost:4000/api/user/notifs,813,0,0
+1679701041675,781,Turn on notifications,201,Created,Thread Group 1-96,text,true,,384,642,88,88,http://localhost:4000/api/user/notifs,781,0,0
+1679701041596,863,Turn off notifications,201,Created,Thread Group 1-8,text,true,,385,643,88,88,http://localhost:4000/api/user/notifs,863,0,0
+1679701040707,1781,Get all user chores,304,Not Modified,Thread Group 1-25,,true,,209,646,87,87,http://localhost:4000/api/chores/,0,0,0
+1679701040728,1766,Get all user chores,200,OK,Thread Group 1-72,text,true,,479,646,87,87,http://localhost:4000/api/chores/,1766,0,0
+1679701040720,1776,Get all user chores,304,Not Modified,Thread Group 1-75,,true,,209,646,87,87,http://localhost:4000/api/chores/,0,0,0
+1679701040559,1938,Get all user chores,304,Not Modified,Thread Group 1-12,,true,,209,646,87,87,http://localhost:4000/api/chores/,0,0,0
+1679701038662,3836,Get all user chores,304,Not Modified,Thread Group 1-27,,true,,209,646,87,87,http://localhost:4000/api/chores/,0,0,0
+1679701041654,858,Turn on notifications,201,Created,Thread Group 1-37,text,true,,384,642,87,87,http://localhost:4000/api/user/notifs,858,0,0
+1679701039700,2816,Turn off notifications,201,Created,Thread Group 1-18,text,true,,385,643,87,87,http://localhost:4000/api/user/notifs,2816,0,0
+1679701041650,889,Get all user chores,304,Not Modified,Thread Group 1-59,,true,,209,646,86,86,http://localhost:4000/api/chores/,0,0,0
+1679701041652,895,Get all user chores,304,Not Modified,Thread Group 1-32,,true,,209,646,86,86,http://localhost:4000/api/chores/,0,0,0
+1679701041646,906,Get all user chores,304,Not Modified,Thread Group 1-48,,true,,209,646,86,86,http://localhost:4000/api/chores/,0,0,0
+1679701040693,1874,Get all user chores,200,OK,Thread Group 1-68,text,true,,479,646,86,86,http://localhost:4000/api/chores/,1874,0,0
+1679701040716,1852,Get all user chores,304,Not Modified,Thread Group 1-61,,true,,209,646,86,86,http://localhost:4000/api/chores/,0,0,0
+1679701040641,1928,Delete chore,200,OK,Thread Group 1-38,text,true,,341,643,86,86,http://localhost:4000/api/chores/641e34295e6a750df21d6791/,1928,0,0
+1679701039767,2818,Delete chore,200,OK,Thread Group 1-73,text,true,,341,643,86,86,http://localhost:4000/api/chores/641e342a5e6a750df21d684a/,2818,0,0
+1679701040685,1903,Get all user chores,304,Not Modified,Thread Group 1-81,,true,,209,646,86,86,http://localhost:4000/api/chores/,0,0,0
+1679701040563,2028,Delete chore,200,OK,Thread Group 1-58,text,true,,341,643,86,86,http://localhost:4000/api/chores/641e34295e6a750df21d67a6/,2028,0,0
+1679701039544,3048,Delete chore,200,OK,Thread Group 1-41,text,true,,341,643,86,86,http://localhost:4000/api/chores/641e34295e6a750df21d675e/,3048,0,0
+1679701039532,3068,Delete chore,200,OK,Thread Group 1-30,text,true,,341,643,86,86,http://localhost:4000/api/chores/641e34285e6a750df21d66dc/,3068,0,0
+1679701040650,1952,Delete chore,200,OK,Thread Group 1-67,text,true,,341,643,86,86,http://localhost:4000/api/chores/641e342b5e6a750df21d6895/,1952,0,0
+1679701041530,1085,Turn on notifications,201,Created,Thread Group 1-23,text,true,,384,642,86,86,http://localhost:4000/api/user/notifs,1085,0,0
+1679701041647,975,Turn on notifications,201,Created,Thread Group 1-49,text,true,,384,642,86,86,http://localhost:4000/api/user/notifs,975,0,0
+1679701041515,1132,Turn off notifications,201,Created,Thread Group 1-7,text,true,,385,643,86,86,http://localhost:4000/api/user/notifs,1132,0,0
+1679701041641,1019,Turn on notifications,201,Created,Thread Group 1-6,text,true,,384,642,85,85,http://localhost:4000/api/user/notifs,1019,0,0
+1679701041674,992,Turn on notifications,201,Created,Thread Group 1-13,text,true,,383,642,85,85,http://localhost:4000/api/user/notifs,992,0,0
+1679701041756,917,Turn off notifications,201,Created,Thread Group 1-4,text,true,,385,643,85,85,http://localhost:4000/api/user/notifs,917,0,0
+1679701041606,1074,Turn off notifications,201,Created,Thread Group 1-22,text,true,,385,643,84,84,http://localhost:4000/api/user/notifs,1074,0,0
+1679701041638,1077,Get all user chores,304,Not Modified,Thread Group 1-33,,true,,209,646,83,83,http://localhost:4000/api/chores/,0,0,0
+1679701040712,2007,Delete chore,200,OK,Thread Group 1-92,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e342a5e6a750df21d686d/,2007,0,0
+1679701040648,2073,Delete chore,200,OK,Thread Group 1-52,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e34295e6a750df21d67af/,2073,0,0
+1679701040546,2176,Delete chore,200,OK,Thread Group 1-66,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e342a5e6a750df21d6869/,2176,0,0
+1679701040716,2008,Delete chore,200,OK,Thread Group 1-43,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e34295e6a750df21d676c/,2008,0,0
+1679701041669,1057,Get all user chores,304,Not Modified,Thread Group 1-64,,true,,209,646,83,83,http://localhost:4000/api/chores/,0,0,0
+1679701041637,1092,Get all user chores,304,Not Modified,Thread Group 1-57,,true,,209,646,83,83,http://localhost:4000/api/chores/,0,0,0
+1679701040669,2070,Delete chore,200,OK,Thread Group 1-50,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e34295e6a750df21d6793/,2070,0,0
+1679701041456,1285,Checkoff a chore,201,Created,Thread Group 1-53,text,true,,317,650,83,83,http://localhost:4000/api/chores/641e342a5e6a750df21d6842/checked/,1285,0,0
+1679701040576,2189,Delete chore,200,OK,Thread Group 1-65,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e342a5e6a750df21d67f0/,2189,0,0
+1679701040711,2061,Delete chore,200,OK,Thread Group 1-55,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e34295e6a750df21d67ad/,2061,0,0
+1679701040643,2134,Delete chore,200,OK,Thread Group 1-84,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e342b5e6a750df21d688e/,2134,0,0
+1679701040647,2143,Delete chore,200,OK,Thread Group 1-97,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e342b5e6a750df21d6898/,2143,0,0
+1679701041537,1270,Get all user chores,304,Not Modified,Thread Group 1-5,,true,,209,646,83,83,http://localhost:4000/api/chores/,0,0,0
+1679701041487,1322,Checkoff a chore,201,Created,Thread Group 1-90,text,true,,317,650,83,83,http://localhost:4000/api/chores/641e342b5e6a750df21d68d1/checked/,1322,0,0
+1679701041582,1228,Get all user chores,304,Not Modified,Thread Group 1-69,,true,,209,646,83,83,http://localhost:4000/api/chores/,0,0,0
+1679701041648,1164,Get all user chores,304,Not Modified,Thread Group 1-24,,true,,209,646,83,83,http://localhost:4000/api/chores/,0,0,0
+1679701041562,1251,Get all user chores,304,Not Modified,Thread Group 1-39,,true,,209,646,83,83,http://localhost:4000/api/chores/,0,0,0
+1679701040672,2154,Delete chore,200,OK,Thread Group 1-79,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e342a5e6a750df21d6844/,2154,0,0
+1679701040665,2162,Delete chore,200,OK,Thread Group 1-82,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e342a5e6a750df21d684c/,2162,0,0
+1679701040671,2157,Delete chore,200,OK,Thread Group 1-51,text,true,,341,643,83,83,http://localhost:4000/api/chores/641e34295e6a750df21d6795/,2157,0,0
+1679701041586,1242,Checkoff a chore,201,Created,Thread Group 1-83,text,true,,317,650,83,83,http://localhost:4000/api/chores/641e342c5e6a750df21d6990/checked/,1242,0,0
+1679701042497,360,Turn on notifications,201,Created,Thread Group 1-27,text,true,,384,642,83,83,http://localhost:4000/api/user/notifs,360,0,0
+1679701042488,373,Turn on notifications,201,Created,Thread Group 1-25,text,true,,384,642,83,83,http://localhost:4000/api/user/notifs,373,0,0
+1679701042513,356,Turn off notifications,201,Created,Thread Group 1-37,text,true,,385,643,83,83,http://localhost:4000/api/user/notifs,356,0,0
+1679701042495,370,Turn on notifications,201,Created,Thread Group 1-75,text,true,,384,642,83,83,http://localhost:4000/api/user/notifs,370,0,0
+1679701042496,366,Turn on notifications,201,Created,Thread Group 1-12,text,true,,384,642,83,83,http://localhost:4000/api/user/notifs,366,0,0
+1679701042439,446,Turn on notifications,201,Created,Thread Group 1-40,text,true,,384,642,82,82,http://localhost:4000/api/user/notifs,446,0,0
+1679701042439,448,Turn on notifications,201,Created,Thread Group 1-70,text,true,,384,642,82,82,http://localhost:4000/api/user/notifs,448,0,0
+1679701041767,1136,Turn off notifications,201,Created,Thread Group 1-29,text,true,,385,643,82,82,http://localhost:4000/api/user/notifs,1136,0,0
+1679701042456,451,Turn off notifications,201,Created,Thread Group 1-96,text,true,,385,643,81,81,http://localhost:4000/api/user/notifs,451,0,0
+1679701041636,1799,Get all user chores,304,Not Modified,Thread Group 1-45,,true,,209,646,80,80,http://localhost:4000/api/chores/,0,0,0
+1679701041727,1709,Get all user chores,304,Not Modified,Thread Group 1-77,,true,,209,646,80,80,http://localhost:4000/api/chores/,0,0,0
+1679701042553,886,Turn on notifications,201,Created,Thread Group 1-48,text,true,,384,642,80,80,http://localhost:4000/api/user/notifs,886,0,0
+1679701042616,825,Turn off notifications,201,Created,Thread Group 1-23,text,true,,385,643,80,80,http://localhost:4000/api/user/notifs,825,0,0
+1679701042812,632,Turn on notifications,201,Created,Thread Group 1-24,text,true,,384,642,79,79,http://localhost:4000/api/user/notifs,632,0,0
+1679701041708,1742,Get all user chores,304,Not Modified,Thread Group 1-42,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701042807,663,Turn on notifications,201,Created,Thread Group 1-5,text,true,,384,642,79,79,http://localhost:4000/api/user/notifs,663,0,0
+1679701041542,1937,Get all user chores,304,Not Modified,Thread Group 1-78,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701041536,1951,Get all user chores,304,Not Modified,Thread Group 1-56,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701041653,1838,Get all user chores,304,Not Modified,Thread Group 1-62,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701041655,1841,Get all user chores,304,Not Modified,Thread Group 1-34,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701041548,1951,Get all user chores,304,Not Modified,Thread Group 1-15,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701041665,1835,Get all user chores,304,Not Modified,Thread Group 1-31,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701041695,1808,Get all user chores,304,Not Modified,Thread Group 1-1,,true,,209,646,79,79,http://localhost:4000/api/chores/,0,0,0
+1679701041554,1951,Delete chore,200,OK,Thread Group 1-100,text,true,,341,643,79,79,http://localhost:4000/api/chores/641e342b5e6a750df21d689b/,1951,0,0
+1679701040691,2816,Delete chore,200,OK,Thread Group 1-63,text,true,,341,643,79,79,http://localhost:4000/api/chores/641e342a5e6a750df21d684f/,2816,0,0
+1679701040543,2965,Delete chore,200,OK,Thread Group 1-21,text,true,,341,643,79,79,http://localhost:4000/api/chores/641e342a5e6a750df21d6812/,2965,0,0
+1679701040568,2942,Delete chore,200,OK,Thread Group 1-36,text,true,,341,643,79,79,http://localhost:4000/api/chores/641e342a5e6a750df21d683e/,2942,0,0
+1679701042439,1072,Checkoff a chore,201,Created,Thread Group 1-74,text,true,,317,650,79,79,http://localhost:4000/api/chores/641e342b5e6a750df21d68d5/checked/,1072,0,0
+1679701042493,1020,Checkoff a chore,201,Created,Thread Group 1-72,text,true,,317,650,79,79,http://localhost:4000/api/chores/641e342d5e6a750df21d69c0/checked/,1020,0,0
+1679701041645,1873,Delete chore,200,OK,Thread Group 1-89,text,true,,341,643,79,79,http://localhost:4000/api/chores/641e342b5e6a750df21d689d/,1873,0,0
+1679701042588,943,Turn on notifications,201,Created,Thread Group 1-81,text,true,,384,642,79,79,http://localhost:4000/api/user/notifs,943,0,0
+1679701042727,810,Turn on notifications,201,Created,Thread Group 1-64,text,true,,384,642,79,79,http://localhost:4000/api/user/notifs,810,0,0
+1679701042811,736,Turn on notifications,201,Created,Thread Group 1-69,text,true,,384,642,79,79,http://localhost:4000/api/user/notifs,736,0,0
+1679701042716,834,Turn on notifications,201,Created,Thread Group 1-33,text,true,,384,642,79,79,http://localhost:4000/api/user/notifs,834,0,0
+1679701042622,931,Turn off notifications,201,Created,Thread Group 1-49,text,true,,385,643,79,79,http://localhost:4000/api/user/notifs,931,0,0
+1679701042813,761,Turn on notifications,201,Created,Thread Group 1-39,text,true,,384,642,78,78,http://localhost:4000/api/user/notifs,761,0,0
+1679701042549,1029,Turn on notifications,201,Created,Thread Group 1-59,text,true,,384,642,78,78,http://localhost:4000/api/user/notifs,1029,0,0
+1679701042567,1020,Turn on notifications,201,Created,Thread Group 1-61,text,true,,384,642,78,78,http://localhost:4000/api/user/notifs,1020,0,0
+1679701042547,1042,Turn on notifications,201,Created,Thread Group 1-32,text,true,,384,642,78,78,http://localhost:4000/api/user/notifs,1042,0,0
+1679701042661,932,Turn off notifications,201,Created,Thread Group 1-6,text,true,,385,643,78,78,http://localhost:4000/api/user/notifs,932,0,0
+1679701042667,939,Turn off notifications,201,Created,Thread Group 1-13,text,true,,384,643,77,77,http://localhost:4000/api/user/notifs,939,0,0
+1679701042730,931,Turn on notifications,201,Created,Thread Group 1-57,text,true,,384,642,76,76,http://localhost:4000/api/user/notifs,931,0,0
+1679701042590,1071,Get all user chores,304,Not Modified,Thread Group 1-58,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701042825,837,Get all user chores,304,Not Modified,Thread Group 1-79,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701042826,836,Get all user chores,304,Not Modified,Thread Group 1-82,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701042739,923,Get all user chores,304,Not Modified,Thread Group 1-50,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701042721,941,Get all user chores,304,Not Modified,Thread Group 1-66,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701041553,2109,Delete chore,200,OK,Thread Group 1-99,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68d9/,2109,0,0
+1679701042566,1097,Checkoff a chore,201,Created,Thread Group 1-68,text,true,,317,650,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68bb/checked/,1097,0,0
+1679701041690,1973,Delete chore,200,OK,Thread Group 1-87,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68e4/,1973,0,0
+1679701042591,1072,Get all user chores,304,Not Modified,Thread Group 1-41,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701041556,2108,Delete chore,200,OK,Thread Group 1-85,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68e2/,2108,0,0
+1679701041706,1958,Delete chore,200,OK,Thread Group 1-76,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d6891/,1958,0,0
+1679701041564,2100,Delete chore,200,OK,Thread Group 1-54,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e34295e6a750df21d679e/,2100,0,0
+1679701041565,2099,Delete chore,200,OK,Thread Group 1-86,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342a5e6a750df21d6837/,2099,0,0
+1679701042604,1060,Get all user chores,304,Not Modified,Thread Group 1-67,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701041566,2098,Delete chore,200,OK,Thread Group 1-88,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68a4/,2098,0,0
+1679701042569,1095,Get all user chores,304,Not Modified,Thread Group 1-38,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701042600,1065,Get all user chores,304,Not Modified,Thread Group 1-30,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701042772,892,Get all user chores,304,Not Modified,Thread Group 1-55,,true,,209,646,76,76,http://localhost:4000/api/chores/,0,0,0
+1679701041579,2090,Delete chore,200,OK,Thread Group 1-46,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e34295e6a750df21d6797/,2090,0,0
+1679701040553,3119,Delete chore,200,OK,Thread Group 1-28,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342a5e6a750df21d683a/,3119,0,0
+1679701041577,2095,Delete chore,200,OK,Thread Group 1-94,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68a1/,2095,0,0
+1679701041712,1969,Checkoff a chore,201,Created,Thread Group 1-93,text,true,,317,650,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68db/checked/,1969,0,0
+1679701040645,3051,Delete chore,200,OK,Thread Group 1-35,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342a5e6a750df21d6814/,3051,0,0
+1679701041694,2005,Delete chore,200,OK,Thread Group 1-98,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e342b5e6a750df21d68df/,2005,0,0
+1679701041685,2025,Delete chore,200,OK,Thread Group 1-44,text,true,,341,643,76,76,http://localhost:4000/api/chores/641e34295e6a750df21d67a3/,2025,0,0
+1679701043437,304,Turn on notifications,201,Created,Thread Group 1-77,text,true,,384,642,76,76,http://localhost:4000/api/user/notifs,304,0,0
+1679701043439,304,Turn off notifications,201,Created,Thread Group 1-48,text,true,,385,643,76,76,http://localhost:4000/api/user/notifs,304,0,0
+1679701043445,302,Turn off notifications,201,Created,Thread Group 1-24,text,true,,385,643,75,75,http://localhost:4000/api/user/notifs,302,0,0
+1679701043451,302,Turn on notifications,201,Created,Thread Group 1-42,text,true,,384,642,74,74,http://localhost:4000/api/user/notifs,302,0,0
+1679701043471,289,Turn off notifications,201,Created,Thread Group 1-5,text,true,,385,643,74,74,http://localhost:4000/api/user/notifs,289,0,0
+1679701042861,910,Turn off notifications,201,Created,Thread Group 1-25,text,true,,385,643,73,73,http://localhost:4000/api/user/notifs,910,0,0
+1679701042888,888,Turn off notifications,201,Created,Thread Group 1-70,text,true,,385,643,72,72,http://localhost:4000/api/user/notifs,888,0,0
+1679701042882,899,Turn off notifications,201,Created,Thread Group 1-12,text,true,,385,643,71,71,http://localhost:4000/api/user/notifs,899,0,0
+1679701042886,904,Turn off notifications,201,Created,Thread Group 1-40,text,true,,385,643,70,70,http://localhost:4000/api/user/notifs,904,0,0
+1679701042857,939,Turn off notifications,201,Created,Thread Group 1-27,text,true,,385,643,69,69,http://localhost:4000/api/user/notifs,939,0,0
+1679701042882,917,Turn off notifications,201,Created,Thread Group 1-75,text,true,,385,643,68,68,http://localhost:4000/api/user/notifs,917,0,0
+1679701043435,373,Turn on notifications,201,Created,Thread Group 1-45,text,true,,384,642,67,67,http://localhost:4000/api/user/notifs,373,0,0
+1679701042789,1027,Get all user chores,304,Not Modified,Thread Group 1-97,,true,,209,646,67,67,http://localhost:4000/api/chores/,0,0,0
+1679701041657,2160,Delete chore,200,OK,Thread Group 1-71,text,true,,341,643,67,67,http://localhost:4000/api/chores/641e342a5e6a750df21d6863/,2160,0,0
+1679701042776,1046,Get all user chores,304,Not Modified,Thread Group 1-84,,true,,209,646,67,67,http://localhost:4000/api/chores/,0,0,0
+1679701041689,2138,Get all user chores,304,Not Modified,Thread Group 1-60,,true,,209,646,67,67,http://localhost:4000/api/chores/,0,0,0
+1679701042720,1108,Get all user chores,304,Not Modified,Thread Group 1-52,,true,,209,646,67,67,http://localhost:4000/api/chores/,0,0,0
+1679701042723,1107,Get all user chores,304,Not Modified,Thread Group 1-43,,true,,209,646,67,67,http://localhost:4000/api/chores/,0,0,0
+1679701042718,1113,Get all user chores,304,Not Modified,Thread Group 1-92,,true,,209,646,67,67,http://localhost:4000/api/chores/,0,0,0
+1679701043551,883,Turn off notifications,201,Created,Thread Group 1-33,text,true,,385,643,67,67,http://localhost:4000/api/user/notifs,883,0,0
+1679701043488,961,Turn on notifications,201,Created,Thread Group 1-56,text,true,,384,642,66,66,http://localhost:4000/api/user/notifs,961,0,0
+1679701043662,790,Turn on notifications,201,Created,Thread Group 1-79,text,true,,384,642,66,66,http://localhost:4000/api/user/notifs,790,0,0
+1679701043665,793,Turn on notifications,201,Created,Thread Group 1-30,text,true,,384,642,66,66,http://localhost:4000/api/user/notifs,793,0,0
+1679701043663,812,Turn on notifications,201,Created,Thread Group 1-41,text,true,,384,642,66,66,http://localhost:4000/api/user/notifs,812,0,0
+1679701043547,929,Turn off notifications,201,Created,Thread Group 1-69,text,true,,385,643,66,66,http://localhost:4000/api/user/notifs,929,0,0
+1679701043578,902,Turn off notifications,201,Created,Thread Group 1-59,text,true,,385,643,65,65,http://localhost:4000/api/user/notifs,902,0,0
+1679701043741,756,Turn off notifications,201,Created,Thread Group 1-77,text,true,,385,643,64,64,http://localhost:4000/api/user/notifs,756,0,0
+1679701043665,833,Turn on notifications,201,Created,Thread Group 1-55,text,true,,384,642,64,64,http://localhost:4000/api/user/notifs,833,0,0
+1679701043491,1012,Turn on notifications,201,Created,Thread Group 1-62,text,true,,384,642,63,63,http://localhost:4000/api/user/notifs,1012,0,0
+1679701043663,845,Turn on notifications,201,Created,Thread Group 1-82,text,true,,384,642,63,63,http://localhost:4000/api/user/notifs,845,0,0
+1679701043809,711,Turn off notifications,201,Created,Thread Group 1-45,text,true,,385,643,63,63,http://localhost:4000/api/user/notifs,711,0,0
+1679701043830,706,Turn on notifications,201,Created,Thread Group 1-43,text,true,,384,642,62,62,http://localhost:4000/api/user/notifs,706,0,0
+1679701043827,713,Turn on notifications,201,Created,Thread Group 1-60,text,true,,384,642,62,62,http://localhost:4000/api/user/notifs,713,0,0
+1679701043497,1046,Turn on notifications,201,Created,Thread Group 1-34,text,true,,384,642,62,62,http://localhost:4000/api/user/notifs,1046,0,0
+1679701043504,1044,Turn on notifications,201,Created,Thread Group 1-1,text,true,,384,642,62,62,http://localhost:4000/api/user/notifs,1044,0,0
+1679701043532,1021,Turn off notifications,201,Created,Thread Group 1-81,text,true,,385,643,62,62,http://localhost:4000/api/user/notifs,1021,0,0
+1679701043590,966,Turn off notifications,201,Created,Thread Group 1-32,text,true,,385,643,61,61,http://localhost:4000/api/user/notifs,966,0,0
+1679701043479,1082,Turn on notifications,201,Created,Thread Group 1-78,text,true,,384,642,60,60,http://localhost:4000/api/user/notifs,1082,0,0
+1679701043822,750,Turn on notifications,201,Created,Thread Group 1-84,text,true,,384,642,60,60,http://localhost:4000/api/user/notifs,750,0,0
+1679701043665,912,Turn on notifications,201,Created,Thread Group 1-38,text,true,,384,642,60,60,http://localhost:4000/api/user/notifs,912,0,0
+1679701043828,760,Turn on notifications,201,Created,Thread Group 1-52,text,true,,384,642,60,60,http://localhost:4000/api/user/notifs,760,0,0
+1679701043537,1053,Turn off notifications,201,Created,Thread Group 1-64,text,true,,385,643,60,60,http://localhost:4000/api/user/notifs,1053,0,0
+1679701043587,1007,Turn off notifications,201,Created,Thread Group 1-61,text,true,,385,643,59,59,http://localhost:4000/api/user/notifs,1007,0,0
+1679701043817,785,Turn on notifications,201,Created,Thread Group 1-97,text,true,,384,642,58,58,http://localhost:4000/api/user/notifs,785,0,0
+1679701043499,1112,Turn on notifications,201,Created,Thread Group 1-15,text,true,,385,642,58,58,http://localhost:4000/api/user/notifs,1112,0,0
+1679701043500,1115,Turn on notifications,201,Created,Thread Group 1-31,text,true,,384,642,58,58,http://localhost:4000/api/user/notifs,1115,0,0
+1679701043664,960,Get all user chores,304,Not Modified,Thread Group 1-88,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043509,1118,Get all user chores,304,Not Modified,Thread Group 1-36,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043518,1109,Get all user chores,304,Not Modified,Thread Group 1-89,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043663,965,Get all user chores,304,Not Modified,Thread Group 1-87,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043665,965,Get all user chores,304,Not Modified,Thread Group 1-54,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701042584,2061,Get all user chores,304,Not Modified,Thread Group 1-73,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701042764,1882,Get all user chores,304,Not Modified,Thread Group 1-65,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043663,993,Get all user chores,304,Not Modified,Thread Group 1-99,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043505,1152,Get all user chores,304,Not Modified,Thread Group 1-100,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043670,991,Get all user chores,304,Not Modified,Thread Group 1-46,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043507,1158,Get all user chores,304,Not Modified,Thread Group 1-63,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701043665,1001,Get all user chores,304,Not Modified,Thread Group 1-86,,true,,209,646,58,58,http://localhost:4000/api/chores/,0,0,0
+1679701042741,1931,Delete chore,200,OK,Thread Group 1-53,text,true,,341,643,58,58,http://localhost:4000/api/chores/641e342a5e6a750df21d6842/,1931,0,0
+1679701041720,2955,Delete chore,200,OK,Thread Group 1-91,text,true,,341,643,58,58,http://localhost:4000/api/chores/641e342b5e6a750df21d68d7/,2955,0,0
+1679701041686,2992,Delete chore,200,OK,Thread Group 1-95,text,true,,341,643,58,58,http://localhost:4000/api/chores/641e342b5e6a750df21d68cb/,2992,0,0
+1679701044450,261,Turn off notifications,201,Created,Thread Group 1-56,text,true,,385,643,58,58,http://localhost:4000/api/user/notifs,261,0,0
+1679701044453,265,Turn off notifications,201,Created,Thread Group 1-79,text,true,,385,643,57,57,http://localhost:4000/api/user/notifs,265,0,0
+1679701043574,1152,Turn off notifications,201,Created,Thread Group 1-39,text,true,,385,643,56,56,http://localhost:4000/api/user/notifs,1152,0,0
+1679701043662,1068,Turn off notifications,201,Created,Thread Group 1-57,text,true,,385,643,55,55,http://localhost:4000/api/user/notifs,1068,0,0
+1679701043663,1076,Turn on notifications,201,Created,Thread Group 1-50,text,true,,384,642,54,54,http://localhost:4000/api/user/notifs,1076,0,0
+1679701043831,917,Turn on notifications,201,Created,Thread Group 1-92,text,true,,384,642,54,54,http://localhost:4000/api/user/notifs,917,0,0
+1679701043753,1004,Turn off notifications,201,Created,Thread Group 1-42,text,true,,385,643,54,54,http://localhost:4000/api/user/notifs,1004,0,0
+1679701043663,1099,Turn on notifications,201,Created,Thread Group 1-66,text,true,,384,642,53,53,http://localhost:4000/api/user/notifs,1099,0,0
+1679701043662,1104,Turn on notifications,201,Created,Thread Group 1-58,text,true,,384,642,53,53,http://localhost:4000/api/user/notifs,1104,0,0
+1679701043664,1115,Turn on notifications,201,Created,Thread Group 1-67,text,true,,384,642,53,53,http://localhost:4000/api/user/notifs,1115,0,0
+1679701043699,1090,Get all user chores,304,Not Modified,Thread Group 1-98,,true,,209,646,53,53,http://localhost:4000/api/chores/,0,0,0
+1679701040670,4121,Delete chore,200,OK,Thread Group 1-80,text,true,,341,643,53,53,http://localhost:4000/api/chores/641e342a5e6a750df21d6847/,4121,0,0
+1679701043664,1133,Get all user chores,304,Not Modified,Thread Group 1-85,,true,,209,646,53,53,http://localhost:4000/api/chores/,0,0,0
+1679701043695,1125,Get all user chores,304,Not Modified,Thread Group 1-35,,true,,209,646,53,53,http://localhost:4000/api/chores/,0,0,0
+1679701043665,1166,Get all user chores,304,Not Modified,Thread Group 1-76,,true,,209,646,53,53,http://localhost:4000/api/chores/,0,0,0
+1679701044458,400,Turn off notifications,201,Created,Thread Group 1-30,text,true,,385,643,53,53,http://localhost:4000/api/user/notifs,400,0,0
+1679701044475,388,Turn off notifications,201,Created,Thread Group 1-41,text,true,,385,643,52,52,http://localhost:4000/api/user/notifs,388,0,0
+1679701044498,378,Turn off notifications,201,Created,Thread Group 1-55,text,true,,385,643,51,51,http://localhost:4000/api/user/notifs,378,0,0
+1679701044504,380,Turn off notifications,201,Created,Thread Group 1-62,text,true,,385,643,50,50,http://localhost:4000/api/user/notifs,380,0,0
+1679701044509,378,Turn off notifications,201,Created,Thread Group 1-82,text,true,,385,643,49,49,http://localhost:4000/api/user/notifs,378,0,0
+1679701044573,319,Turn off notifications,201,Created,Thread Group 1-84,text,true,,385,643,48,48,http://localhost:4000/api/user/notifs,319,0,0
+1679701044548,352,Turn off notifications,201,Created,Thread Group 1-1,text,true,,385,643,47,47,http://localhost:4000/api/user/notifs,352,0,0
+1679701044544,366,Turn off notifications,201,Created,Thread Group 1-34,text,true,,385,643,46,46,http://localhost:4000/api/user/notifs,366,0,0
+1679701044541,370,Turn off notifications,201,Created,Thread Group 1-60,text,true,,385,643,46,46,http://localhost:4000/api/user/notifs,370,0,0
+1679701044537,369,Turn off notifications,201,Created,Thread Group 1-43,text,true,,385,643,46,46,http://localhost:4000/api/user/notifs,369,0,0
+1679701044588,839,Turn off notifications,201,Created,Thread Group 1-52,text,true,,385,643,43,43,http://localhost:4000/api/user/notifs,839,0,0
+1679701043672,1757,Get all user chores,304,Not Modified,Thread Group 1-94,,true,,209,646,42,42,http://localhost:4000/api/chores/,0,0,0
+1679701044748,684,Turn off notifications,201,Created,Thread Group 1-92,text,true,,385,643,42,42,http://localhost:4000/api/user/notifs,684,0,0
+1679701044820,616,Turn on notifications,201,Created,Thread Group 1-35,text,true,,384,642,41,41,http://localhost:4000/api/user/notifs,616,0,0
+1679701044657,790,Turn on notifications,201,Created,Thread Group 1-100,text,true,,385,642,41,41,http://localhost:4000/api/user/notifs,790,0,0
+1679701043819,1638,Get all user chores,304,Not Modified,Thread Group 1-71,,true,,209,646,41,41,http://localhost:4000/api/chores/,0,0,0
+1679701042827,2640,Get all user chores,304,Not Modified,Thread Group 1-51,,true,,209,646,41,41,http://localhost:4000/api/chores/,0,0,0
+1679701043671,1801,Get all user chores,304,Not Modified,Thread Group 1-28,,true,,209,646,41,41,http://localhost:4000/api/chores/,0,0,0
+1679701043508,1965,Get all user chores,304,Not Modified,Thread Group 1-21,,true,,209,646,41,41,http://localhost:4000/api/chores/,0,0,0
+1679701043710,1763,Get all user chores,304,Not Modified,Thread Group 1-44,,true,,209,646,41,41,http://localhost:4000/api/chores/,0,0,0
+1679701044646,831,Turn on notifications,201,Created,Thread Group 1-65,text,true,,384,642,41,41,http://localhost:4000/api/user/notifs,831,0,0
+1679701044832,650,Turn on notifications,201,Created,Thread Group 1-76,text,true,,384,642,41,41,http://localhost:4000/api/user/notifs,650,0,0
+1679701044628,859,Turn on notifications,201,Created,Thread Group 1-87,text,true,,384,642,41,41,http://localhost:4000/api/user/notifs,859,0,0
+1679701044616,874,Turn off notifications,201,Created,Thread Group 1-31,text,true,,385,643,41,41,http://localhost:4000/api/user/notifs,874,0,0
+1679701044561,933,Turn off notifications,201,Created,Thread Group 1-78,text,true,,385,643,40,40,http://localhost:4000/api/user/notifs,933,0,0
+1679701044602,900,Turn off notifications,201,Created,Thread Group 1-97,text,true,,385,643,39,39,http://localhost:4000/api/user/notifs,900,0,0
+1679701044627,883,Turn on notifications,201,Created,Thread Group 1-89,text,true,,384,642,38,38,http://localhost:4000/api/user/notifs,883,0,0
+1679701044762,752,Turn off notifications,201,Created,Thread Group 1-66,text,true,,385,643,38,38,http://localhost:4000/api/user/notifs,752,0,0
+1679701044656,862,Turn on notifications,201,Created,Thread Group 1-99,text,true,,384,642,37,37,http://localhost:4000/api/user/notifs,862,0,0
+1679701044666,865,Turn on notifications,201,Created,Thread Group 1-86,text,true,,384,642,37,37,http://localhost:4000/api/user/notifs,865,0,0
+1679701044740,794,Turn off notifications,201,Created,Thread Group 1-50,text,true,,385,643,37,37,http://localhost:4000/api/user/notifs,794,0,0
+1679701044779,770,Turn off notifications,201,Created,Thread Group 1-67,text,true,,385,643,36,36,http://localhost:4000/api/user/notifs,770,0,0
+1679701044790,764,Turn on notifications,201,Created,Thread Group 1-98,text,true,,384,642,35,35,http://localhost:4000/api/user/notifs,764,0,0
+1679701044578,987,Turn off notifications,201,Created,Thread Group 1-38,text,true,,385,643,35,35,http://localhost:4000/api/user/notifs,987,0,0
+1679701044625,943,Turn on notifications,201,Created,Thread Group 1-88,text,true,,384,642,34,34,http://localhost:4000/api/user/notifs,943,0,0
+1679701044797,775,Turn on notifications,201,Created,Thread Group 1-85,text,true,,384,642,34,34,http://localhost:4000/api/user/notifs,775,0,0
+1679701044631,953,Turn on notifications,201,Created,Thread Group 1-54,text,true,,384,642,34,34,http://localhost:4000/api/user/notifs,953,0,0
+1679701044645,942,Turn on notifications,201,Created,Thread Group 1-73,text,true,,384,642,34,34,http://localhost:4000/api/user/notifs,942,0,0
+1679701044662,935,Turn on notifications,201,Created,Thread Group 1-46,text,true,,384,642,34,34,http://localhost:4000/api/user/notifs,935,0,0
+1679701044627,975,Turn on notifications,201,Created,Thread Group 1-36,text,true,,384,642,34,34,http://localhost:4000/api/user/notifs,975,0,0
+1679701044665,941,Turn on notifications,201,Created,Thread Group 1-63,text,true,,384,642,34,34,http://localhost:4000/api/user/notifs,941,0,0
+1679701044611,998,Turn off notifications,201,Created,Thread Group 1-15,text,true,,386,643,34,34,http://localhost:4000/api/user/notifs,998,0,0
+1679701044791,823,Get all user chores,304,Not Modified,Thread Group 1-80,,true,,209,646,33,33,http://localhost:4000/api/chores/,0,0,0
+1679701044675,941,Get all user chores,304,Not Modified,Thread Group 1-91,,true,,209,646,33,33,http://localhost:4000/api/chores/,0,0,0
+1679701044672,954,Get all user chores,304,Not Modified,Thread Group 1-53,,true,,209,646,33,33,http://localhost:4000/api/chores/,0,0,0
+1679701044679,950,Get all user chores,304,Not Modified,Thread Group 1-95,,true,,209,646,33,33,http://localhost:4000/api/chores/,0,0,0
+1679701043663,1984,Delete chore,200,OK,Thread Group 1-68,text,true,,341,643,33,33,http://localhost:4000/api/chores/641e342b5e6a750df21d68bb/,1984,0,0
+1679701042809,2847,Delete chore,200,OK,Thread Group 1-90,text,true,,341,643,33,33,http://localhost:4000/api/chores/641e342b5e6a750df21d68d1/,2847,0,0
+1679701043513,2145,Delete chore,200,OK,Thread Group 1-72,text,true,,341,643,33,33,http://localhost:4000/api/chores/641e342d5e6a750df21d69c0/,2145,0,0
+1679701043682,1978,Delete chore,200,OK,Thread Group 1-93,text,true,,341,643,33,33,http://localhost:4000/api/chores/641e342b5e6a750df21d68db/,1978,0,0
+1679701043511,2151,Delete chore,200,OK,Thread Group 1-74,text,true,,341,643,33,33,http://localhost:4000/api/chores/641e342b5e6a750df21d68d5/,2151,0,0
+1679701045429,279,Turn on notifications,201,Created,Thread Group 1-94,text,true,,384,642,33,33,http://localhost:4000/api/user/notifs,279,0,0
+1679701045437,273,Turn off notifications,201,Created,Thread Group 1-35,text,true,,385,643,33,33,http://localhost:4000/api/user/notifs,273,0,0
+1679701044767,946,Turn off notifications,201,Created,Thread Group 1-58,text,true,,385,643,32,32,http://localhost:4000/api/user/notifs,946,0,0
+1679701045458,313,Turn on notifications,201,Created,Thread Group 1-71,text,true,,384,642,31,31,http://localhost:4000/api/user/notifs,313,0,0
+1679701045482,292,Turn off notifications,201,Created,Thread Group 1-76,text,true,,385,643,31,31,http://localhost:4000/api/user/notifs,292,0,0
+1679701045474,304,Turn on notifications,201,Created,Thread Group 1-44,text,true,,384,642,30,30,http://localhost:4000/api/user/notifs,304,0,0
+1679701045478,307,Turn off notifications,201,Created,Thread Group 1-65,text,true,,385,643,30,30,http://localhost:4000/api/user/notifs,307,0,0
+1679701045488,306,Turn off notifications,201,Created,Thread Group 1-87,text,true,,385,643,29,29,http://localhost:4000/api/user/notifs,306,0,0
+1679701045629,193,Turn on notifications,201,Created,Thread Group 1-95,text,true,,384,642,28,28,http://localhost:4000/api/user/notifs,193,0,0
+1679701045627,200,Turn on notifications,201,Created,Thread Group 1-53,text,true,,384,642,28,28,http://localhost:4000/api/user/notifs,200,0,0
+1679701045616,215,Turn on notifications,201,Created,Thread Group 1-91,text,true,,384,642,28,28,http://localhost:4000/api/user/notifs,215,0,0
+1679701045614,220,Turn on notifications,201,Created,Thread Group 1-80,text,true,,384,642,28,28,http://localhost:4000/api/user/notifs,220,0,0
+1679701045511,333,Turn off notifications,201,Created,Thread Group 1-89,text,true,,385,643,28,28,http://localhost:4000/api/user/notifs,333,0,0
+1679701045519,330,Turn off notifications,201,Created,Thread Group 1-99,text,true,,385,643,27,27,http://localhost:4000/api/user/notifs,330,0,0
+1679701045531,323,Turn off notifications,201,Created,Thread Group 1-86,text,true,,385,643,26,26,http://localhost:4000/api/user/notifs,323,0,0
+1679701045554,306,Turn off notifications,201,Created,Thread Group 1-98,text,true,,385,643,25,25,http://localhost:4000/api/user/notifs,306,0,0
+1679701045568,301,Turn off notifications,201,Created,Thread Group 1-88,text,true,,385,643,24,24,http://localhost:4000/api/user/notifs,301,0,0
+1679701045573,298,Turn off notifications,201,Created,Thread Group 1-85,text,true,,385,643,23,23,http://localhost:4000/api/user/notifs,298,0,0
+1679701045586,288,Turn off notifications,201,Created,Thread Group 1-54,text,true,,385,643,22,22,http://localhost:4000/api/user/notifs,288,0,0
+1679701045588,298,Turn off notifications,201,Created,Thread Group 1-73,text,true,,385,643,21,21,http://localhost:4000/api/user/notifs,298,0,0
+1679701045597,292,Turn off notifications,201,Created,Thread Group 1-46,text,true,,385,643,20,20,http://localhost:4000/api/user/notifs,292,0,0
+1679701045603,288,Turn off notifications,201,Created,Thread Group 1-36,text,true,,385,643,19,19,http://localhost:4000/api/user/notifs,288,0,0
+1679701045606,297,Turn off notifications,201,Created,Thread Group 1-63,text,true,,385,643,18,18,http://localhost:4000/api/user/notifs,297,0,0
+1679701045472,436,Turn on notifications,201,Created,Thread Group 1-28,text,true,,384,642,17,17,http://localhost:4000/api/user/notifs,436,0,0
+1679701045467,444,Turn on notifications,201,Created,Thread Group 1-51,text,true,,384,642,17,17,http://localhost:4000/api/user/notifs,444,0,0
+1679701045447,477,Turn off notifications,201,Created,Thread Group 1-100,text,true,,386,643,17,17,http://localhost:4000/api/user/notifs,477,0,0
+1679701045473,449,Turn on notifications,201,Created,Thread Group 1-21,text,true,,383,642,17,17,http://localhost:4000/api/user/notifs,449,0,0
+1679701045708,258,Turn off notifications,201,Created,Thread Group 1-94,text,true,,385,643,16,16,http://localhost:4000/api/user/notifs,258,0,0
+1679701045832,612,Turn off notifications,201,Created,Thread Group 1-91,text,true,,385,643,15,15,http://localhost:4000/api/user/notifs,612,0,0
+1679701045912,527,Turn off notifications,201,Created,Thread Group 1-51,text,true,,385,643,15,15,http://localhost:4000/api/user/notifs,527,0,0
+1679701045828,609,Turn off notifications,201,Created,Thread Group 1-53,text,true,,385,643,15,15,http://localhost:4000/api/user/notifs,609,0,0
+1679701045662,771,Get all user chores,304,Not Modified,Thread Group 1-74,,true,,209,646,15,15,http://localhost:4000/api/chores/,0,0,0
+1679701045661,775,Get all user chores,304,Not Modified,Thread Group 1-93,,true,,209,646,15,15,http://localhost:4000/api/chores/,0,0,0
+1679701045940,509,Turn off notifications,201,Created,Thread Group 1-21,text,true,,384,643,15,15,http://localhost:4000/api/user/notifs,509,0,0
+1679701045657,777,Get all user chores,304,Not Modified,Thread Group 1-90,,true,,209,646,15,15,http://localhost:4000/api/chores/,0,0,0
+1679701045835,618,Turn off notifications,201,Created,Thread Group 1-80,text,true,,385,643,11,11,http://localhost:4000/api/user/notifs,618,0,0
+1679701045908,547,Turn off notifications,201,Created,Thread Group 1-28,text,true,,385,643,10,10,http://localhost:4000/api/user/notifs,547,0,0
+1679701045771,694,Turn off notifications,201,Created,Thread Group 1-71,text,true,,385,643,9,9,http://localhost:4000/api/user/notifs,694,0,0
+1679701045779,690,Turn off notifications,201,Created,Thread Group 1-44,text,true,,385,643,8,8,http://localhost:4000/api/user/notifs,690,0,0
+1679701045823,651,Turn off notifications,201,Created,Thread Group 1-95,text,true,,385,643,7,7,http://localhost:4000/api/user/notifs,651,0,0
+1679701045659,818,Get all user chores,304,Not Modified,Thread Group 1-72,,true,,209,646,6,6,http://localhost:4000/api/chores/,0,0,0
+1679701045647,831,Get all user chores,304,Not Modified,Thread Group 1-68,,true,,209,646,6,6,http://localhost:4000/api/chores/,0,0,0
+1679701042829,3674,Delete chore,200,OK,Thread Group 1-83,text,true,,341,643,6,6,http://localhost:4000/api/chores/641e342c5e6a750df21d6990/,3674,0,0
+1679701046449,85,Turn on notifications,201,Created,Thread Group 1-74,text,true,,384,642,6,6,http://localhost:4000/api/user/notifs,85,0,0
+1679701046449,88,Turn on notifications,201,Created,Thread Group 1-90,text,true,,384,642,6,6,http://localhost:4000/api/user/notifs,88,0,0
+1679701046449,97,Turn on notifications,201,Created,Thread Group 1-93,text,true,,384,642,6,6,http://localhost:4000/api/user/notifs,97,0,0
+1679701046478,78,Turn on notifications,201,Created,Thread Group 1-72,text,true,,384,642,6,6,http://localhost:4000/api/user/notifs,78,0,0
+1679701046478,87,Turn on notifications,201,Created,Thread Group 1-68,text,true,,384,642,6,6,http://localhost:4000/api/user/notifs,87,0,0
+1679701046534,53,Turn off notifications,201,Created,Thread Group 1-74,text,true,,385,643,6,6,http://localhost:4000/api/user/notifs,53,0,0
+1679701046537,55,Turn off notifications,201,Created,Thread Group 1-90,text,true,,385,643,5,5,http://localhost:4000/api/user/notifs,55,0,0
+1679701046546,60,Turn off notifications,201,Created,Thread Group 1-93,text,true,,385,643,4,4,http://localhost:4000/api/user/notifs,60,0,0
+1679701046503,116,Get all user chores,304,Not Modified,Thread Group 1-83,,true,,209,646,3,3,http://localhost:4000/api/chores/,0,0,0
+1679701046556,64,Turn off notifications,201,Created,Thread Group 1-72,text,true,,385,643,3,3,http://localhost:4000/api/user/notifs,64,0,0
+1679701046565,68,Turn off notifications,201,Created,Thread Group 1-68,text,true,,385,643,2,2,http://localhost:4000/api/user/notifs,68,0,0
+1679701046620,62,Turn on notifications,201,Created,Thread Group 1-83,text,true,,384,642,1,1,http://localhost:4000/api/user/notifs,62,0,0
+1679701046683,49,Turn off notifications,201,Created,Thread Group 1-83,text,true,,385,643,1,1,http://localhost:4000/api/user/notifs,49,0,0

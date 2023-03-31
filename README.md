@@ -45,6 +45,21 @@ We want our application to be a vehicle for behavior change. Many people find it
 - [Github](https://github.com/Group14-TeamTidy/ChoreKeeper)
 - Github Actions
 
+## Naming convention
+- Camelcase for variables, functions and file names.
+- UpperCamelCase for Class/Component names.
+
+## Coding style
+- 2 Spaces for indentation
+- No trailing whitespace
+- Use Semicolons
+- Use double quotes
+- Opening braces go on the same line
+- Declare one variable per statement
+- Return early from functions
+- Use block comment for function description
+- Use slashes for inline comments
+
 ## User Stories
 
 ### Create, update, and delete chores

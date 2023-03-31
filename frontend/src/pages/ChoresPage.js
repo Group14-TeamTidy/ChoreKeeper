@@ -1,17 +1,33 @@
-import { React, useState, useMemo, useRef } from "react";
+import { React, useState, useMemo } from "react";
 import { useTable, usePagination } from "react-table";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useMutation } from "react-query";
-import ChoreCreateModal from "../ChoreCreateModal";
-import ChoreService from "../../services/ChoreService";
-import { queryClient } from "../../App";
+import ChoreCreateModal from "../components/ChoreCreateModal";
+import ChoreService from "../services/ChoreService";
+import { queryClient } from "../App";
 import { Dialog } from "primereact/dialog";
+import { motion } from "framer-motion";
+import useServerMessageToast from "../hooks/useServerMessageToast";
 
 const ChoresPage = ({ isChoresLoading, choresData }) => {
-  const serverErrorsToast = useRef(null);
+  const MIN_TO_SEC = 60;
+  const HOUR_TO_SEC = 3600;
+  const PAGE_SIZE = 8; // Number of rows displayed in each page of the table, not including the header
 
+  const [toast, showServerMessageToast] = useServerMessageToast(); // Custom hook for showing server messages
+  const [currChore, setCurrChore] = useState(null); // Current chore being updated
+  const [modalShow, setModalShow] = useState(false); // Modal for creating/editing chores
+  const [deleteModalShow, setDeleteModalShow] = useState(false); // Modal for deleting chores
+
+  // Modal functions
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
+  const handleDeleteModalClose = () => setDeleteModalShow(false);
+  const handleDeleteModalShow = () => setDeleteModalShow(true);
+
+  // Mutation for deleting a chore
   const deleteChoreMutation = useMutation(
     (id) => ChoreService.deleteChore(id),
     {
@@ -19,50 +35,23 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
         queryClient.invalidateQueries("chores");
       },
       onError: (error) => {
-        showServerErrorsToast(error.response.data.message);
+        showServerMessageToast(error.response.data.message, "error");
       },
     }
   );
 
-  const showServerErrorsToast = (message) => {
-    serverErrorsToast.current.show({
-      severity: "error",
-      summary: "Server Error",
-      detail: message,
-      life: 3000,
-    });
-  };
-
-  // Modal for creating/editing chores
-  const [modalShow, setModalShow] = useState(false);
-  const handleClose = () => setModalShow(false);
-  const handleShow = () => setModalShow(true);
-
-  // Modal for deleting chores
-  const [deleteModalShow, setDeleteModalShow] = useState(false);
-  const handleDeleteModalClose = () => setDeleteModalShow(false);
-  const handleDeleteModalShow = () => setDeleteModalShow(true);
-
-  // Get the user's chores
-  const handleChores = () => {
-    queryClient.invalidateQueries("chores");
-  };
-
-  // Current chore being updated
-  const [currChore, setCurrChore] = useState(null);
-
-  const PAGE_SIZE = 8; //Number of rows displayed in each page of the table, not including the header
+  // Mutation for updating a chore
+  const handleChores = () => queryClient.invalidateQueries("chores");
 
   // Format the information for each chore in order to display in the table
   const formatChoreData = () => {
-    const MIN_TO_SEC = 60;
-    const HOUR_TO_SEC = 3600;
     let choreData = [];
 
     if (isChoresLoading) {
       return choreData;
     }
 
+    // Map the chore data to the format needed for the table
     choresData.data.forEach((val) => {
       let freqInterval =
         val.frequency.interval.charAt(0).toUpperCase() +
@@ -80,6 +69,12 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
         val.duration < HOUR_TO_SEC
           ? val.duration / MIN_TO_SEC
           : val.duration / HOUR_TO_SEC;
+
+      // If duration is not a whole number, round to 2 decimal places
+      if (durQuantity % 1 !== 0) {
+        durQuantity = durQuantity.toFixed(2);
+      }
+
       let durInterval = val.duration < HOUR_TO_SEC ? "minutes" : "hours";
       durInterval =
         durQuantity === 1
@@ -161,8 +156,8 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
+                  width="1.5em"
+                  height="1.5em"
                   fill="currentColor"
                   className="bi bi-pencil-square"
                   viewBox="0 0 16 16"
@@ -198,11 +193,12 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
+                  width="1.5em"
+                  height="1.5em"
                   fill="currentColor"
                   className="bi bi-trash3-fill"
                   viewBox="0 0 16 16"
+                  color="red"
                 >
                   <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                 </svg>
@@ -248,7 +244,7 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
 
   return (
     <>
-      <Toast ref={serverErrorsToast} />
+      <Toast ref={toast} />
 
       {isChoresLoading ? (
         <ProgressSpinner className="chore-spinner" strokeWidth="8" />
@@ -286,7 +282,7 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
             <p>This action cannot be undone.</p>
           </Dialog>
           <div id="main-content">
-            <table id="choresList" {...getTableProps()}>
+            <motion.table id="choresList" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
@@ -302,7 +298,19 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
                 {page.map((row, i) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <motion.tr
+                      {...row.getRowProps()}
+                      initial={{
+                        opacity: 0,
+                        translateY: -50,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        translateY: 0,
+                        transition: { duration: 0.15, delay: i * 0.05 },
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                    >
                       {row.cells.map((cell) => {
                         return (
                           <td {...cell.getCellProps()}>
@@ -310,11 +318,11 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
                           </td>
                         );
                       })}
-                    </tr>
+                    </motion.tr>
                   );
                 })}
               </tbody>
-            </table>
+            </motion.table>
 
             <div id="paginationButtons">
               <Button
