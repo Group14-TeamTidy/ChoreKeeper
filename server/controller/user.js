@@ -116,7 +116,7 @@ module.exports.setNotifs = async (req, res) => {
       return res.status(401).json({ message: `This User does not exist` });
     }
 
-    if (receiveNotifs != false && receiveNotifs != true) {
+    if (typeof receiveNotifs !== "boolean") {
       return res
         .status(400)
         .json({ message: `Cannot set notifications to ${receiveNotifs}` });

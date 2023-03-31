@@ -4,7 +4,8 @@ const sinon = require("sinon");
 const sinonChai = require("sinon-chai");
 const User = require("../../models/User");
 const Chore = require("../../models/Chore");
-const { register, login } = require("../../controller/user");
+const { register, login, setNotifs } = require("../../controller/user");
+
 const {
   getAllChores,
   createChore,
@@ -98,6 +99,15 @@ describe("Testing User controllers", function () {
         },
       });
     });
+    it("should return an error if there is an exception thrown", async function () {
+      // Testing error handling
+
+      sinon.stub(User, "findOne").throws();
+
+      await register(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+    });
   });
 
   describe("testing login function", function () {
@@ -185,6 +195,107 @@ describe("Testing User controllers", function () {
       await login(req, res);
 
       expect(res.status.calledWith(500)).to.be.true;
+    });
+  });
+
+  describe("setNotifs function", () => {
+    let req;
+    let res;
+
+    beforeEach(() => {
+      req = {
+        body: {
+          receiveNotifs: true,
+        },
+        user: {
+          id: "1234",
+        },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub().returnsThis(),
+      };
+    });
+
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("should set the user notifications setting and return the updated user object", async () => {
+      const user = {
+        _id: "1234",
+        name: "John",
+        email: "john@example.com",
+        receiveNotifs: false,
+        toObject: () => ({
+          _id: "1234",
+          name: "John",
+          email: "john@example.com",
+          receiveNotifs: true,
+        }),
+        save: sinon.stub(),
+      };
+
+      sinon.stub(User, "findOne").resolves(user);
+
+      await setNotifs(req, res);
+
+      expect(User.findOne.calledOnceWith({ _id: req.user.id })).to.be.true;
+      expect(user.receiveNotifs).to.be.true;
+      expect(user.save.calledOnce).to.be.true;
+      expect(res.status.calledOnceWith(201)).to.be.true;
+      expect(res.json.calledOnceWith({ user: user.toObject() })).to.be.true;
+    });
+
+    it("should return a 400 error if receiveNotifs is not a boolean value", async () => {
+      const user = {
+        _id: "123ss4",
+        name: "Nonamer",
+        email: "Nonamer@example.com",
+        receiveNotifs: false,
+      };
+      let badReq = {
+        body: {
+          receiveNotifs: "a none boolean",
+        },
+        user: {
+          id: "1234",
+        },
+      };
+      sinon.stub(User, "findOne").resolves(user);
+
+      await setNotifs(badReq, res);
+
+      expect(res.status.calledOnceWith(400)).to.be.true;
+      expect(
+        res.json.calledOnceWith({
+          message: "Cannot set notifications to a none boolean",
+        })
+      ).to.be.true;
+    });
+    it("should return a 401 error if the user does not exist", async () => {
+      sinon.stub(User, "findOne").resolves(null);
+
+      await setNotifs(req, res);
+
+      expect(User.findOne.calledOnceWith({ _id: req.user.id })).to.be.true;
+      expect(res.status.calledOnceWith(401)).to.be.true;
+      expect(res.json.calledOnceWith({ message: "This User does not exist" }))
+        .to.be.true;
+    });
+
+    it("should return a 500 error if there is an error during the process", async () => {
+      sinon.stub(User, "findOne").throws();
+
+      await setNotifs(req, res);
+
+      expect(User.findOne.calledOnceWith({ _id: req.user.id })).to.be.true;
+      expect(res.status.calledOnceWith(500)).to.be.true;
+      expect(
+        res.json.calledOnceWith({
+          message: "Could not change notification settings.",
+        })
+      ).to.be.true;
     });
   });
 });
@@ -304,8 +415,17 @@ describe("Testing Chores controllers", () => {
       sinon.restore();
     });
 
-    it("returns 500 Internal Server Error if an unexpected error occurs", async () => {
+    it("should return an error if there is an exception thrown", async function () {
+      // Testing error handling
+
       findOneStub.throws();
+
+      await getAllChores(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+    });
+
+    it("should return all chores for a user", async () => {
       const user = {
         _id: "123456",
         chores: ["abcdef", "ghijkl"],
@@ -435,8 +555,8 @@ describe("Testing Chores controllers", () => {
         body: {
           name: "Clean the kitchen",
           frequency: {
-            quantity: 2,
-            interval: "days",
+            quantity: 1,
+            interval: "weeks",
           },
           location: "kitchen",
           duration: "30",

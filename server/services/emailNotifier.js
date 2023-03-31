@@ -155,12 +155,12 @@ module.exports.startEmailService = async () => {
       };
 
       //send mail
-      transporter
-        .sendMail(message)
-        .then(console.log(`email sent to ${message.to}`))
-        .catch((error) => {
-          console.error(error);
-        });
+      try {
+        await transporter.sendMail(message);
+      } catch (error) {
+        console.log("An error occured while sending the e-mails");
+        console.error(error);
+      }
     }
   } catch (error) {
     console.log(error);

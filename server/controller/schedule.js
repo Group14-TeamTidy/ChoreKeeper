@@ -10,8 +10,8 @@ const User = require("../models/User.js");
 module.exports.createSchedule = async (req, res) => {
   try {
     // Extracting date of the schedule requested
-    const dateString = req.params.timeframe;
-    const timeframeInMs = new Date(dateString).getTime();
+    // const dateString = req.params.timeframe;
+    const timeframeInMs = new Date().getTime();
 
     const requestedSchedule = []; // Will add chores for the day in here
 
