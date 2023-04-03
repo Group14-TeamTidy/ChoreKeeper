@@ -93,6 +93,11 @@ describe("startEmailService", function () {
     // Restore the sandbox to its original state
     sandbox.restore();
   });
+  after(function () {
+    setTimeout(() => {
+      process.exit();
+    }, 2000);
+  });
   it("should return an error if there is an exception thrown before sending the mail", async function () {
     // Testing error handling
     sandbox.restore();
