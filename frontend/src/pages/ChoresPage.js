@@ -51,6 +51,17 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
       return choreData;
     }
 
+    // Sort choresData.data
+    choresData.data.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+
     // Map the chore data to the format needed for the table
     choresData.data.forEach((val) => {
       let freqInterval =
@@ -99,7 +110,7 @@ const ChoresPage = ({ isChoresLoading, choresData }) => {
 
     // Pad table with empty data to keep consistent table size
     const NUM_CHORES = choreData.length;
-    for (let i = NUM_CHORES % PAGE_SIZE; i > 0 && i < PAGE_SIZE; i++) {
+    for (let i = NUM_CHORES % PAGE_SIZE; i >= 0 && i < PAGE_SIZE; i++) {
       let chore = {
         id: -1,
         name: "",
