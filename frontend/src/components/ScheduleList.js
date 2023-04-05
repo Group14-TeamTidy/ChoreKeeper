@@ -30,50 +30,58 @@ const ScheduleList = ({ chores }) => {
     [chores]
   );
 
-  return (
-    <div className="schedule-list">
-      {choresList.map((chore, index) => (
-        <motion.div
-          key={chore._id}
-          className="schedule-item"
-          initial={{ opacity: 0, translateX: -50 }}
-          animate={{
-            opacity: 1,
-            translateX: 0,
-            transition: { duration: 0.15, delay: index * 0.05 },
-          }}
-          whileHover={{ scale: 1.05 }}
-        >
-          <Card className="schedule-item-card">
-            <Button
-              className="schedule-item-button p-button-icon-only p-button-outlined p-button-rounded p-button-success"
-              icon="pi pi-check"
-              onClick={() => checkChoreMutation.mutate(chore._id)}
-            />
-            <div className="schedule-chore-details">
-              <p className="schedule-chore-name">
-                <strong>{chore.name}</strong>
-                {chore.location && <em>, {chore.location}</em>}
-              </p>
-              {chore.frequency && (
-                <p
-                  className={
-                    "schedule-chore-next " +
-                    (chore.nextOccurrence < Date.now()
-                      ? "overdue-chore-text"
-                      : "")
-                  }
-                >
-                  Next Due:{" "}
-                  {new Date(chore.nextOccurrence).toLocaleDateString()}
+  if (chores.length > 0) {
+    return (
+      <div className="schedule-list">
+        {choresList.map((chore, index) => (
+          <motion.div
+            key={chore._id}
+            className="schedule-item"
+            initial={{ opacity: 0, translateX: -50 }}
+            animate={{
+              opacity: 1,
+              translateX: 0,
+              transition: { duration: 0.15, delay: index * 0.05 },
+            }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Card className="schedule-item-card">
+              <Button
+                className="schedule-item-button p-button-icon-only p-button-outlined p-button-rounded p-button-success"
+                icon="pi pi-check"
+                onClick={() => checkChoreMutation.mutate(chore._id)}
+              />
+              <div className="schedule-chore-details">
+                <p className="schedule-chore-name">
+                  <strong>{chore.name}</strong>
+                  {chore.location && <em>, {chore.location}</em>}
                 </p>
-              )}
-            </div>
-          </Card>
-        </motion.div>
-      ))}
-    </div>
-  );
+                {chore.frequency && (
+                  <p
+                    className={
+                      "schedule-chore-next " +
+                      (chore.nextOccurrence < Date.now()
+                        ? "overdue-chore-text"
+                        : "")
+                    }
+                  >
+                    Next Due:{" "}
+                    {new Date(chore.nextOccurrence).toLocaleDateString()}
+                  </p>
+                )}
+              </div>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    );
+  } else {
+    return (
+      <p className="schedule-list">
+        No chores scheduled. Get started by creating a chore!
+      </p>
+    );
+  }
 };
 
 export default ScheduleList;
