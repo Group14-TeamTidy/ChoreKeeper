@@ -51,7 +51,8 @@ module.exports.register = async (req, res) => {
 module.exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email }); // search for the user
+    const trimEmail = email.trim();
+    const user = await User.findOne({ email: trimEmail }); // search for the user
 
     //return no user found no user was found
     if (!user) {

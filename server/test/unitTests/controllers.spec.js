@@ -566,7 +566,39 @@ describe("Testing Chores controllers", () => {
       await editChore(req, res);
       expect(res.status.calledWith(201)).to.be.true;
     });
+    it("should use creation time as reference time if last checked off array is empty", async () => {
+      const fakeTimestamp = new Date(); // set your fake timestamp here
 
+      findOneStub.returns({
+        _id: {
+          id: "ch123",
+          getTimestamp: sandbox.stub().resolves(fakeTimestamp),
+        },
+        name: "Clean the kitchen",
+        frequency: { quantity: 2, interval: "days" },
+        location: "Kitchen",
+        duration: 30,
+        preference: "High",
+        lastCheckedOff: [],
+        save: sandbox.stub().resolves(),
+      });
+
+      const req = {
+        params: { id: "ch123" },
+        body: {
+          name: "Clean the kitchen",
+          frequency: {
+            quantity: 1,
+            interval: "weeks",
+          },
+          location: "kitchen",
+          duration: "30",
+        },
+      };
+
+      await editChore(req, res);
+      expect(res.status.calledWith(201)).to.be.true;
+    });
     it("should return 404 if chore is not found", async () => {
       const id = "456";
       const req = { params: { id }, body: {} };
@@ -651,7 +683,7 @@ describe("Testing Chores controllers", () => {
   });
 
   describe("deleteChore", () => {
-    let id, req, res, findByIdAndDelete;
+    let id, req, res, findByIdAndDelete, findOneStub, sandbox;
     beforeEach(() => {
       id = "123";
       req = {
@@ -662,22 +694,33 @@ describe("Testing Chores controllers", () => {
         status: sinon.stub().returnsThis(),
         json: sinon.spy(),
       };
-      findByIdAndDelete = sinon.stub(Chore, "findByIdAndDelete");
+      sandbox = sinon.createSandbox();
+
+      findByIdAndDelete = sandbox.stub(Chore, "findByIdAndDelete");
+      findOneStub = sandbox.stub(User, "findOne");
     });
 
     afterEach(() => {
       findByIdAndDelete.restore();
+      sandbox.restore();
       sinon.restore();
     });
 
     // Test 1
     it("should return message containing deleted chore id", async () => {
       findByIdAndDelete.resolves(req.params);
+      findOneStub.resolves({
+        id: "123456",
+        email: "noname@gmail.com",
+        chores: [{ _id: { toString: sandbox.stub().returns(id) } }],
+        save: sandbox.stub().resolves(),
+      });
 
       await deleteChore(req, res);
 
       expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
       expect(res.status().json.calledOnce).to.be.true;
+      expect(res.status.calledWith(200)).to.be.true;
     });
 
     // Test 2
@@ -691,6 +734,19 @@ describe("Testing Chores controllers", () => {
       expect(res.status.calledOnceWith(500)).to.be.true;
       expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to
         .be.true;
+    });
+
+    // Test 3
+    it("should return 404 if chore not found", async () => {
+      findOneStub.resolves({
+        email: "noname@gmail.com",
+        chores: [{ _id: { toString: sandbox.stub().returns(id + "x") } }],
+        save: sandbox.stub().resolves(),
+      });
+      await deleteChore(req, res);
+
+      expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
+      expect(res.status.calledWith(404)).to.be.true;
     });
   });
 
