@@ -1,16 +1,19 @@
-import nodemailer from "nodemailer";
-import Mailgen from "mailgen";
-import dotenv from "dotenv";
-import User from "../../models/User.js";
-import Chore from "../../models/Chore.js";
-import {
+const nodemailer = require("nodemailer");
+const Mailgen = require("mailgen");
+const dotenv = require("dotenv");
+const User = require("../../models/User");
+const Chore = require("../../models/Chore");
+const { makeApp } = require("../../index");
+const {
   startEmailService,
   getChoresForUser,
-} from "../../services/emailNotifier.js";
-import { repeatInMs } from "../../services/utils.js";
-import chai from "chai";
-import sinon from "sinon";
-import sinonChai from "sinon-chai";
+} = require("../../services/emailNotifier");
+const { repeatInMs } = require("../../services/utils");
+const chai = require("chai");
+const sinon = require("sinon");
+const sinonChai = require("sinon-chai");
+const mongoose = require("mongoose");
+const cron = require("node-cron");
 
 dotenv.config();
 chai.use(sinonChai);
@@ -90,7 +93,49 @@ describe("startEmailService", function () {
     // Restore the sandbox to its original state
     sandbox.restore();
   });
+  after(function () {
+    setTimeout(() => {
+      process.exit();
+    }, 2000);
+  });
+  it("should return an error if there is an exception thrown before sending the mail", async function () {
+    // Testing error handling
+    sandbox.restore();
+    sandbox.stub(User, "find").throws(new Error("fake error"));
 
+    // Stub the nodemailer createTransport method to return a fake transporter
+    sandbox.stub(nodemailer, "createTransport").returns({
+      sendMail: sandbox.stub().resolves(),
+    });
+
+    // Stub the Mailgen constructor to return a fake MailGenerator instance
+    sandbox.stub(Mailgen.prototype, "generate").returns("<html></html>");
+
+    // Call the function and wait for it to complete
+    await startEmailService();
+
+    // Assert that the User and Chore models were called with the correct arguments
+    expect(User.find).to.have.been.calledOnce;
+  });
+  it("should return an error if there is an exception thrown while sending the mail", async function () {
+    // Testing error handling
+    // Stub the nodemailer createTransport method to return a fake transporter
+    const transporterStub = sandbox
+      .stub(nodemailer, "createTransport")
+      .returns({
+        sendMail: sandbox.stub().throws(new Error("Fake Error")),
+      });
+
+    // Stub the Mailgen constructor to return a fake MailGenerator instance
+    sandbox.stub(Mailgen.prototype, "generate").returns("<html></html>");
+
+    // Call the function and wait for it to complete
+    await startEmailService();
+
+    // Assert that the User and Chore models were called with the correct arguments
+    expect(User.find).to.have.been.calledOnce;
+    expect(transporterStub).to.have.been.calledOnce;
+  });
   it("should send an email to each user with their chores for the day", async function () {
     // Stub the nodemailer createTransport method to return a fake transporter
     const transporterStub = sandbox
@@ -196,5 +241,21 @@ describe("startEmailService", function () {
     const actualMs = repeatInMs(quantity, interval);
 
     expect(actualMs).to.equal(expectedMs);
+  });
+
+  describe("Cron Scheduler test", () => {
+    it("should schedule email service to run at midnight", () => {
+      // const cron = {
+      //   schedule: sinon.stub(),
+      // };
+      const cronStub = sinon.stub(cron, "schedule").returns();
+      const app = makeApp(mongoose, process.env.TEST_MONGO_URL); // connect to databse
+      const scheduledFunction = cronStub.args[0][1];
+      scheduledFunction();
+
+      // Check that the cron.schedule method was called with the correct arguments
+      sinon.assert.calledWith(cron.schedule, "0 0 * * *", sinon.match.func);
+      cronStub.restore;
+    });
   });
 });

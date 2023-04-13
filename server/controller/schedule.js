@@ -1,17 +1,16 @@
 // MODELS
-import Chore from "../models/Chore.js";
-import User from "../models/User.js";
+const Chore = require("../models/Chore.js");
+const User = require("../models/User.js");
 
 /*
  ** This function creates a new schedule for the given date
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const createSchedule = async (req, res) => {
+module.exports.createSchedule = async (req, res) => {
   try {
     // Extracting date of the schedule requested
-    const dateString = req.params.timeframe;
-    const timeframeInMs = new Date(dateString).getTime();
+    const timeframeInMs = new Date().getTime();
 
     const requestedSchedule = []; // Will add chores for the day in here
 
@@ -24,11 +23,11 @@ export const createSchedule = async (req, res) => {
     for (const chore of choreList) {
       // Mapping interval into days
       let intervalToDays;
-      if (chore.frequency.interval == "days") {
+      if (chore.frequency.interval === "days") {
         intervalToDays = 1;
-      } else if (chore.frequency.interval == "weeks") {
+      } else if (chore.frequency.interval === "weeks") {
         intervalToDays = 7;
-      } else if (chore.frequency.interval == "months") {
+      } else if (chore.frequency.interval === "months") {
         intervalToDays = 30; // Just defaulting to 30
       } else {
         intervalToDays = 365; // Interval is in years
@@ -42,7 +41,7 @@ export const createSchedule = async (req, res) => {
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
       // Now if the chore is scheduled for the given date, add it to the schedule list
-      if (diffInDays % repeatInDays == 0) {
+      if (diffInDays % repeatInDays === 0) {
         requestedSchedule.push(chore);
       }
     }

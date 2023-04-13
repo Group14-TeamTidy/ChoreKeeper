@@ -1,4 +1,5 @@
-import { mongoose, Schema } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -20,5 +21,4 @@ const UserSchema = new mongoose.Schema({
   chores: [{ type: Schema.Types.ObjectId, ref: "Chore" }],
 });
 
-const User = mongoose.model("User", UserSchema);
-export default User;
+module.exports = mongoose.model("User", UserSchema);

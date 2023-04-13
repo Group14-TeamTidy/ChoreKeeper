@@ -1,21 +1,15 @@
-import { validationResult } from "express-validator";
+const { validationResult } = require("express-validator");
 // MODELS
-import Chore from "../models/Chore.js";
-import User from "../models/User.js";
-import { repeatInMs } from "../services/utils.js";
+const Chore = require("../models/Chore.js");
+const User = require("../models/User.js");
+const { repeatInMs } = require("../services/utils.js");
 
 /*
  ** This function creates new chore
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const createChore = async (req, res) => {
-  // Sanitize data
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
+module.exports.createChore = async (req, res) => {
   try {
     const { name, frequency, location, duration, preference } = req.body; // Extracting fields recieved from request
 
@@ -76,14 +70,8 @@ export const createChore = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const getAllChores = async (req, res) => {
+module.exports.getAllChores = async (req, res) => {
   try {
-    // Validate the request data
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
     // Get the user ID from the request
     const userID = req.user.id;
 
@@ -130,7 +118,7 @@ export const getAllChores = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const getSingleChore = async (req, res) => {
+module.exports.getSingleChore = async (req, res) => {
   const choreId = req.params.id;
   try {
     // Retrieve the chore from the database
@@ -152,7 +140,7 @@ export const getSingleChore = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const editChore = async (req, res) => {
+module.exports.editChore = async (req, res) => {
   try {
     const { name, frequency, location, duration, preference } = req.body; //extracting fields recieved from request
     const chore = await Chore.findOne({ _id: req.params.id });
@@ -207,7 +195,7 @@ export const editChore = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const deleteChore = async (req, res) => {
+module.exports.deleteChore = async (req, res) => {
   try {
     const choreId = req.params.id;
     // Delete chore from chores database
@@ -253,7 +241,7 @@ export const deleteChore = async (req, res) => {
  ** @param {Object} req - The request object
  ** @param {Object} res - The response object
  */
-export const checkOffChore = async (req, res) => {
+module.exports.checkOffChore = async (req, res) => {
   try {
     const id = req.params.id;
 
