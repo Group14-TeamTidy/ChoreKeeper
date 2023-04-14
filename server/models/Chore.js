@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const ChoreSchema = new mongoose.Schema({
   name: { type: String, require: true },
@@ -13,5 +13,4 @@ const ChoreSchema = new mongoose.Schema({
   nextOccurrence: Number,
 });
 
-const Chore = mongoose.model("Chore", ChoreSchema);
-export default Chore;
+module.exports = mongoose.model("Chore", ChoreSchema);

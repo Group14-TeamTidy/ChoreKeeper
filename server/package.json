@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "An application to stay on-top of the daily, monthly, and yearly routines!",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "test": "mocha test/unitTests --timeout 5000",
     "testAll": "mocha test --recursive --timeout 5000",
-    "coverage": "nyc --all  npm run test",
+    "coverage": "nyc --reporter=html  npm run testAll",
     "start": "nodemon server.js",
     "dev": "nodemon --watch server server.js"
   },

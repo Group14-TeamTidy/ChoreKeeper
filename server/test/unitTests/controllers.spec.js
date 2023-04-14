@@ -1,21 +1,22 @@
-import chai from "chai";
-import chaiHttp from "chai-http";
-import sinon from "sinon";
-import sinonChai from "sinon-chai";
-import User from "../../models/User.js";
-import Chore from "../../models/Chore.js";
-import { register, login } from "../../controller/user.js";
-import {
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const sinon = require("sinon");
+const sinonChai = require("sinon-chai");
+const User = require("../../models/User");
+const Chore = require("../../models/Chore");
+const { register, login, setNotifs } = require("../../controller/user");
+
+const {
   getAllChores,
   createChore,
   editChore,
   getSingleChore,
   deleteChore,
   checkOffChore,
-} from "../../controller/chore.js";
-import { createSchedule } from "../../controller/schedule.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+} = require("../../controller/chore");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { createSchedule } = require("../../controller/schedule.js");
 
 chai.use(chaiHttp);
 chai.use(sinonChai);
@@ -97,6 +98,15 @@ describe("Testing User controllers", function () {
           _id: "user_id",
         },
       });
+    });
+    it("should return an error if there is an exception thrown", async function () {
+      // Testing error handling
+
+      sinon.stub(User, "findOne").throws();
+
+      await register(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
     });
   });
 
@@ -185,6 +195,107 @@ describe("Testing User controllers", function () {
       await login(req, res);
 
       expect(res.status.calledWith(500)).to.be.true;
+    });
+  });
+
+  describe("setNotifs function", () => {
+    let req;
+    let res;
+
+    beforeEach(() => {
+      req = {
+        body: {
+          receiveNotifs: true,
+        },
+        user: {
+          id: "1234",
+        },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub().returnsThis(),
+      };
+    });
+
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("should set the user notifications setting and return the updated user object", async () => {
+      const user = {
+        _id: "1234",
+        name: "John",
+        email: "john@example.com",
+        receiveNotifs: false,
+        toObject: () => ({
+          _id: "1234",
+          name: "John",
+          email: "john@example.com",
+          receiveNotifs: true,
+        }),
+        save: sinon.stub(),
+      };
+
+      sinon.stub(User, "findOne").resolves(user);
+
+      await setNotifs(req, res);
+
+      expect(User.findOne.calledOnceWith({ _id: req.user.id })).to.be.true;
+      expect(user.receiveNotifs).to.be.true;
+      expect(user.save.calledOnce).to.be.true;
+      expect(res.status.calledOnceWith(201)).to.be.true;
+      expect(res.json.calledOnceWith({ user: user.toObject() })).to.be.true;
+    });
+
+    it("should return a 400 error if receiveNotifs is not a boolean value", async () => {
+      const user = {
+        _id: "123ss4",
+        name: "Nonamer",
+        email: "Nonamer@example.com",
+        receiveNotifs: false,
+      };
+      let badReq = {
+        body: {
+          receiveNotifs: "a none boolean",
+        },
+        user: {
+          id: "1234",
+        },
+      };
+      sinon.stub(User, "findOne").resolves(user);
+
+      await setNotifs(badReq, res);
+
+      expect(res.status.calledOnceWith(400)).to.be.true;
+      expect(
+        res.json.calledOnceWith({
+          message: "Cannot set notifications to a none boolean",
+        })
+      ).to.be.true;
+    });
+    it("should return a 401 error if the user does not exist", async () => {
+      sinon.stub(User, "findOne").resolves(null);
+
+      await setNotifs(req, res);
+
+      expect(User.findOne.calledOnceWith({ _id: req.user.id })).to.be.true;
+      expect(res.status.calledOnceWith(401)).to.be.true;
+      expect(res.json.calledOnceWith({ message: "This User does not exist" }))
+        .to.be.true;
+    });
+
+    it("should return a 500 error if there is an error during the process", async () => {
+      sinon.stub(User, "findOne").throws();
+
+      await setNotifs(req, res);
+
+      expect(User.findOne.calledOnceWith({ _id: req.user.id })).to.be.true;
+      expect(res.status.calledOnceWith(500)).to.be.true;
+      expect(
+        res.json.calledOnceWith({
+          message: "Could not change notification settings.",
+        })
+      ).to.be.true;
     });
   });
 });
@@ -304,8 +415,17 @@ describe("Testing Chores controllers", () => {
       sinon.restore();
     });
 
-    it("returns 500 Internal Server Error if an unexpected error occurs", async () => {
+    it("should return an error if there is an exception thrown", async function () {
+      // Testing error handling
+
       findOneStub.throws();
+
+      await getAllChores(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+    });
+
+    it("should return all chores for a user", async () => {
       const user = {
         _id: "123456",
         chores: ["abcdef", "ghijkl"],
@@ -435,8 +555,8 @@ describe("Testing Chores controllers", () => {
         body: {
           name: "Clean the kitchen",
           frequency: {
-            quantity: 2,
-            interval: "days",
+            quantity: 1,
+            interval: "weeks",
           },
           location: "kitchen",
           duration: "30",
@@ -446,7 +566,39 @@ describe("Testing Chores controllers", () => {
       await editChore(req, res);
       expect(res.status.calledWith(201)).to.be.true;
     });
+    it("should use creation time as reference time if last checked off array is empty", async () => {
+      const fakeTimestamp = new Date(); // set your fake timestamp here
 
+      findOneStub.returns({
+        _id: {
+          id: "ch123",
+          getTimestamp: sandbox.stub().resolves(fakeTimestamp),
+        },
+        name: "Clean the kitchen",
+        frequency: { quantity: 2, interval: "days" },
+        location: "Kitchen",
+        duration: 30,
+        preference: "High",
+        lastCheckedOff: [],
+        save: sandbox.stub().resolves(),
+      });
+
+      const req = {
+        params: { id: "ch123" },
+        body: {
+          name: "Clean the kitchen",
+          frequency: {
+            quantity: 1,
+            interval: "weeks",
+          },
+          location: "kitchen",
+          duration: "30",
+        },
+      };
+
+      await editChore(req, res);
+      expect(res.status.calledWith(201)).to.be.true;
+    });
     it("should return 404 if chore is not found", async () => {
       const id = "456";
       const req = { params: { id }, body: {} };
@@ -531,7 +683,7 @@ describe("Testing Chores controllers", () => {
   });
 
   describe("deleteChore", () => {
-    let id, req, res, findByIdAndDelete;
+    let id, req, res, findByIdAndDelete, findOneStub, sandbox;
     beforeEach(() => {
       id = "123";
       req = {
@@ -542,22 +694,33 @@ describe("Testing Chores controllers", () => {
         status: sinon.stub().returnsThis(),
         json: sinon.spy(),
       };
-      findByIdAndDelete = sinon.stub(Chore, "findByIdAndDelete");
+      sandbox = sinon.createSandbox();
+
+      findByIdAndDelete = sandbox.stub(Chore, "findByIdAndDelete");
+      findOneStub = sandbox.stub(User, "findOne");
     });
 
     afterEach(() => {
       findByIdAndDelete.restore();
+      sandbox.restore();
       sinon.restore();
     });
 
     // Test 1
     it("should return message containing deleted chore id", async () => {
       findByIdAndDelete.resolves(req.params);
+      findOneStub.resolves({
+        id: "123456",
+        email: "noname@gmail.com",
+        chores: [{ _id: { toString: sandbox.stub().returns(id) } }],
+        save: sandbox.stub().resolves(),
+      });
 
       await deleteChore(req, res);
 
       expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
       expect(res.status().json.calledOnce).to.be.true;
+      expect(res.status.calledWith(200)).to.be.true;
     });
 
     // Test 2
@@ -571,6 +734,19 @@ describe("Testing Chores controllers", () => {
       expect(res.status.calledOnceWith(500)).to.be.true;
       expect(res.json.calledOnceWith({ message: "Internal Server Error" })).to
         .be.true;
+    });
+
+    // Test 3
+    it("should return 404 if chore not found", async () => {
+      findOneStub.resolves({
+        email: "noname@gmail.com",
+        chores: [{ _id: { toString: sandbox.stub().returns(id + "x") } }],
+        save: sandbox.stub().resolves(),
+      });
+      await deleteChore(req, res);
+
+      expect(findByIdAndDelete.calledOnceWith({ _id: id })).to.be.true;
+      expect(res.status.calledWith(404)).to.be.true;
     });
   });
 
@@ -655,6 +831,114 @@ describe("Testing Chores controllers", () => {
   });
 });
 
+//SCHEDULES CONTROLLER
+
+describe("Testing Schedule controllers", function () {
+  describe(" testing register function", function () {
+    let req, res, findOneStub, findStub;
+
+    beforeEach(() => {
+      // Create a request
+      req = {
+        params: {
+          timeframe: "2023-02-12",
+        },
+        user: { id: "user123" },
+      };
+      res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy(),
+      };
+      findOneStub = sinon.stub(User, "findOne");
+      findStub = sinon.stub(Chore, "find");
+    });
+
+    afterEach(() => {
+      // Restore all the stubbed functions
+      sinon.restore();
+    });
+
+    it("should return a 201 response with the requested schedule", async () => {
+      const chore = { name: "Clean the dishes", location: "kitchen" };
+      findOneStub.returns({
+        email: "test@test.com",
+        password: "1234",
+        chores: [],
+      });
+
+      findStub.returns([
+        {
+          _id: "dadd",
+          name: "chore 1",
+          frequency: {
+            quantity: 2,
+            interval: "days",
+          },
+          location: "Home",
+          duration: 40,
+          preference: "high",
+          lastCheckedOff: [2343554, 23343545],
+          nextOccurrence: 12324343,
+        },
+        {
+          _id: "23434",
+          name: "chore 2",
+          frequency: {
+            quantity: 2,
+            interval: "weeks",
+          },
+          location: "Home",
+          duration: 4,
+          preference: "low",
+          lastCheckedOff: [42343554, 2334324545],
+          nextOccurrence: 123324343,
+        },
+        {
+          _id: "2343424",
+          name: "chore 3",
+          frequency: {
+            quantity: 2,
+            interval: "months",
+          },
+          location: "School",
+          duration: 4,
+          preference: "medium",
+          lastCheckedOff: [423454, 23324545],
+          nextOccurrence: 124343,
+        },
+        {
+          _id: "23434",
+          name: "chore 2",
+          frequency: {
+            quantity: 2,
+            interval: "years",
+          },
+          location: "Home",
+          duration: 4,
+          preference: "low",
+          lastCheckedOff: [42343554, 2334324545],
+          nextOccurrence: 123324343,
+        },
+      ]);
+
+      await createSchedule(req, res);
+
+      expect(res.status.calledWith(201)).to.be.true;
+    });
+
+    it("should return a 500 response with an error message if there is an unexpected error", async () => {
+      const error = new Error("Unexpected error");
+      findOneStub.rejects(error);
+      findStub.rejects(error);
+
+      await createSchedule(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWith({ message: "Schedule could not be created." }))
+        .to.be.true;
+    });
+  });
+});
 
 //SCHEDULES CONTROLLER
 
@@ -675,7 +959,7 @@ describe("Testing Schedule controllers", function () {
         json: sinon.spy(),
       };
       findOneStub = sinon.stub(User, "findOne");
-      findStub = sinon.stub(Chore, "find")
+      findStub = sinon.stub(Chore, "find");
     });
 
     afterEach(() => {
@@ -693,54 +977,54 @@ describe("Testing Schedule controllers", function () {
 
       findStub.returns([
         {
-          _id: 'dadd',
-          name: 'chore 1',
+          _id: "dadd",
+          name: "chore 1",
           frequency: {
             quantity: 2,
-            interval: 'days'
+            interval: "days",
           },
-          location: 'Home',
+          location: "Home",
           duration: 40,
-          preference: 'high',
+          preference: "high",
           lastCheckedOff: [2343554, 23343545],
           nextOccurrence: 12324343,
         },
         {
-          _id: '23434',
-          name: 'chore 2',
+          _id: "23434",
+          name: "chore 2",
           frequency: {
             quantity: 2,
-            interval: 'weeks'
+            interval: "weeks",
           },
-          location: 'Home',
+          location: "Home",
           duration: 4,
-          preference: 'low',
+          preference: "low",
           lastCheckedOff: [42343554, 2334324545],
           nextOccurrence: 123324343,
         },
         {
-          _id: '2343424',
-          name: 'chore 3',
+          _id: "2343424",
+          name: "chore 3",
           frequency: {
             quantity: 2,
-            interval: 'months'
+            interval: "months",
           },
-          location: 'School',
+          location: "School",
           duration: 4,
-          preference: 'medium',
+          preference: "medium",
           lastCheckedOff: [423454, 23324545],
           nextOccurrence: 124343,
         },
         {
-          _id: '23434',
-          name: 'chore 2',
+          _id: "23434",
+          name: "chore 2",
           frequency: {
             quantity: 2,
-            interval: 'years'
+            interval: "years",
           },
-          location: 'Home',
+          location: "Home",
           duration: 4,
-          preference: 'low',
+          preference: "low",
           lastCheckedOff: [42343554, 2334324545],
           nextOccurrence: 123324343,
         },
@@ -759,9 +1043,8 @@ describe("Testing Schedule controllers", function () {
       await createSchedule(req, res);
 
       expect(res.status.calledWith(500)).to.be.true;
-      expect(res.json.calledWith({ message: "Schedule could not be created." })).to.be
-        .true;
+      expect(res.json.calledWith({ message: "Schedule could not be created." }))
+        .to.be.true;
     });
   });
-
 });

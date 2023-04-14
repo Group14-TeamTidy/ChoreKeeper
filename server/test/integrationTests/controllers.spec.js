@@ -1,13 +1,13 @@
-import chai from "chai";
-import chaiHttp from "chai-http";
-import sinonChai from "sinon-chai";
-import User from "../../models/User.js";
-import Chore from "../../models/Chore.js";
-import makeApp from "../../index.js";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const sinonChai = require("sinon-chai");
+const User = require("../../models/User");
+const Chore = require("../../models/Chore");
+const { makeApp } = require("../../index");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 dotenv.config();
 chai.use(chaiHttp);
@@ -456,7 +456,7 @@ describe("Integration Test", function () {
         .set("Authorization", `Bearer ${token}`);
       expect(res).to.have.status(404);
       expect(res.body).to.deep.equal({
-        message: "Chore with id 640ab1e7823cae42437b3c92 was not found",
+        message: "Chore with id 640ab1e7823cae42437b3c92 was not found.",
       });
     });
   });

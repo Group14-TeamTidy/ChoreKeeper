@@ -1,14 +1,12 @@
-import express from "express";
-
+const express = require("express");
 // CONTROLLER FUNCTIONS
-import { createSchedule } from "../controller/schedule.js";
-
+const { createSchedule } = require("../controller/schedule.js");
 // MIDDLEWARE
-import { verifyToken } from "../middleware/auth.js";
+const { verifyToken } = require("../middleware/auth.js");
 
 const router = express.Router();
 
 //ROUTES
-router.get("/:timeframe", verifyToken, createSchedule); // Get the daily schedule for the user
+router.get("/", verifyToken, createSchedule); // Get the daily schedule for the user
 
-export default router;
+module.exports = router;

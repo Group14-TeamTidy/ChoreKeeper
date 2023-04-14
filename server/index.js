@@ -1,19 +1,19 @@
-import express from "express";
-import dotenv from "dotenv";
-import bodyParser from "body-parser";
-import cors from "cors";
-import cron from "node-cron";
-import userRoute from "./routes/user.js";
-import choreRoute from "./routes/chore.js";
-import scheduleRoute from "./routes/schedule.js";
-import { register, login } from "./controller/user.js";
-import { startEmailService } from "./services/emailNotifier.js";
+const express = require("express");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const cron = require("node-cron");
+const userRoute = require("./routes/user.js");
+const choreRoute = require("./routes/chore.js");
+const scheduleRoute = require("./routes/schedule.js");
+const { register, login } = require("./controller/user.js");
+const { startEmailService } = require("./services/emailNotifier.js");
 
 /*
  ** @params database: the database the application will connect to
  ** This function connects the appalication to the database specified
  */
-export default function makeApp(database, connectionURL) {
+module.exports.makeApp = (database, connectionURL) => {
   // CONFIGURATIONS
   const app = express();
   dotenv.config();
@@ -32,15 +32,6 @@ export default function makeApp(database, connectionURL) {
   app.post("/api/login", login);
   app.post("/api/signup", register);
 
-  app.use("/api", (req, res) => {
-    console.log(req.url);
-    res.status(200).send("Hello");
-  });
-  app.use("/", (req, res) => {
-    console.log(req.url);
-    res.status(200).send("Lorem Ipsum");
-  });
-
   //DB CONNECTION -- for testing purposes, db can be disconnected by passing no arguments to makeApp
   if (database != undefined) {
     database.connect(connectionURL, {
@@ -55,4 +46,4 @@ export default function makeApp(database, connectionURL) {
   }
 
   return app;
-}
+};
